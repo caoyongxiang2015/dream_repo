@@ -1,4 +1,4 @@
-
+﻿
 back-end:
 1、helloword ok 
 2、crud ok
@@ -39,7 +39,7 @@ doc:
 环境：
 1、center os
 2、nexus
-3、hundson
+3、hundson/jenkins
 4、maven
 
 message.properties放到web工程
