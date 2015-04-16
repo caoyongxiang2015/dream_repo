@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.PtRole">
+
+	<typeAlias alias="roleEntity" type="com.env.dto.PtRole" />
+	
+	<typeAlias alias="permEntity" type="com.env.dto.PtPermission" />
+	
+	<resultMap id="role" class="com.env.dto.PtRole">
+		<result property="id" column="id"  jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="roleCode" column="role_code" jdbcType="varchar" javaType="java.lang.String"/>
+		<result property="roleName" column="role_name" jdbcType="varchar" javaType="java.lang.String"/>
+		
+		<result property="version" column="version" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="disabled" column="disabled" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="createUserid" column="create_userid" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="createTime" column="create_time" jdbcType="datetime" javaType="java.util.Date"/>
+		<result property="updateUserid" column="update_userid" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="updateTime" column="update_time" jdbcType="datetime" javaType="java.util.Date"/>
+	</resultMap>
+
+<!-- many to many -->
+	<resultMap id="permissionWithRole" class="com.env.dto.PtRole" extends="role">
+		<result property="ptPermissions" column="id" select="com.env.dto.PtRole.getPermissionsByRoleid"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="role.columns">
+	    <![CDATA[
+        id, role_code, role_name
+        ,version,disabled,create_time,create_userid,update_userid,update_time
+	    ]]>
+	</sql>
+
+
+	<!-- 获取某个用户所拥有的角色列表 -->
+	<select id="getByUserid" resultMap="permissionWithRole">
+	SELECT
+		R.*
+	    <![CDATA[
+	        FROM pt_role R
+	       	LEFT JOIN pt_role_user RU ON R.ID = RU.ROLE_ID
+			WHERE EXISTS (
+				SELECT 1 FROM pt_user U 
+				WHERE RU.USER_ID=U.ID AND U.ID=#userId#
+			)
+	    ]]>
+	</select>
+	
+	<select id="getPermissionsByRoleid" parameterClass="int" resultClass="permEntity">
+		SELECT 
+		  P.ID ID
+		, P.PERMISSION_CODE PERMISSIONCODE
+		, P.PERMISSION_NAME PERMISSIONNAME
+		, P.PERMISSION_SEQUENCE PERMISSIONSEQUENCE
+		, P.RESOURCE RESOURCE
+		, P.VERSION VERSION
+		, P.APP_ID APPID
+		, P.PARENT_ID PARENTID
+		, P.TYPE TYPE
+		FROM pt_permission P,pt_role_permission RP WHERE P.ID = RP.PERMISSION_ID AND RP.ROLE_ID=#value#
+	</select>
+
+
+
+	
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="roleEntity">
+	    <![CDATA[
+	        INSERT INTO pt_role (
+	        	role_code,roleName
+	        ) VALUES (
+	        	#roleCode#,
+	        	#roleName#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="role">
+		SELECT
+		<include refid="role.columns" />
+	    <![CDATA[
+	        FROM pt_role 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="roleEntity">
+	    <![CDATA[
+	        UPDATE pt_role SET
+		        role_code=#roleCode#,
+		        roleName=#roleName#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM pt_role WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM pt_role WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="role">
+		SELECT
+		<include refid="role.columns" />
+	    <![CDATA[
+		    FROM pt_role
+	    ]]>
+	</select>
+	
+</sqlMap>

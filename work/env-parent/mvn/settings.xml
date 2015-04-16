@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	 <localRepository>/S:/springToolSuite/mvn_repository</localRepository>
+
+	<mirrors>
+		<mirror>
+      		<id>central</id>
+      		<mirrorOf>central</mirrorOf>
+      		<name>central</name>
+      		<url>http://192.168.0.248:8081/nexus/content/groups/public</url>
+   		</mirror>
+		<mirror>
+			<id>maven_server</id>
+			<mirrorOf>*</mirrorOf>
+			<name>Suning maven server</name>
+			<url>http://192.168.0.248:8081/nexus/content/groups/public</url>
+		</mirror>
+	</mirrors>
+	<profiles>
+		<profile>
+      		<id>sonar</id>
+      		<activation>
+        		<activeByDefault>true</activeByDefault>
+      		</activation>
+      		<properties>
+        		<sonar.jdbc.url>jdbc:mysql://10.23.22.197:3306/sonar?useUnicode=true&amp;characterEncoding=utf8</sonar.jdbc.url>
+        		<sonar.jdbc.password>root</sonar.jdbc.password>
+        		<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
+        		<sonar.host.url>http://10.23.22.197:9000</sonar.host.url>
+        		<sonar.jdbc.username>root</sonar.jdbc.username>
+      		</properties>
+    	</profile>
+		
+		<profile>
+			<id>dev</id>
+			<repositories>
+				<repository>
+					<id>local-nexus</id>
+					<url>http://192.168.0.248:8081/nexus/content/groups/public</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+	<activeProfiles>
+		<activeProfile>dev</activeProfile>
+	</activeProfiles>
+</settings>

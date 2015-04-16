@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!-- AOP Configuration -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:advice id="txAdvice2" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<!--<tx:method name="*" propagation="REQUIRED" timeout="1000" /> -->
+		</tx:attributes>
+	</tx:advice>
+	<!-- 表示使用cglib，而非JDK的动态代理，因为Controller没有实现接口，所以要配置这里 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- 切面，第一个负责记录公共属性， 第二个处理登陆信息 -->
+	<!-- <bean name="daoAround" class="org.env.core.dao.DaoAdvice"></bean> -->
+	<!-- <bean name="userAttributeSet" class="com.env.ws.advices.UserAttributeSetAdvice"></bean> -->
+
+	<!-- 该操作中存在一个同步锁，将明显影响系统吞吐量 <aop:config proxy-target-class="true"> <aop:advisor 
+		advice-ref="daoAround" pointcut="execution(* com.env.dao.impl.DaoImpl.*save*(..))|| 
+		execution(* com.env.dao.impl.DaoImpl.*update*(..))" /> </aop:config> <aop:config 
+		proxy-target-class="true"> <aop:advisor advice-ref="daoAround" pointcut="execution(* 
+		com.env.dao.impl.DefaultDaoImpl.*save*(..))|| execution(* com.env.dao.impl.DefaultDaoImpl.*update*(..))" 
+		/> </aop:config> <aop:config proxy-target-class="true"> <aop:advisor advice-ref="daoAround" 
+		pointcut="execution(* com.env.ws.dao.*save*(..))" /> </aop:config> -->
+
+	<!-- 事务 -->
+	<aop:config>
+		<aop:advisor id="servicesPointcut" advice-ref="txAdvice2"
+			pointcut="execution(* com.env.service..*.*(..))" order="1" />
+	</aop:config>
+
+	<!-- 设置登录用户的属性列表 -->
+	<!-- <aop:config> <aop:advisor advice-ref="userAttributeSet" pointcut="execution(* 
+		com.env.ws.service.*.impl..*(..))" order="3" /> </aop:config> -->
+</beans>

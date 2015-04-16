@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.PtUser">
+	<typeAlias alias="userEntity" type="com.env.dto.PtUser" />
+	
+	<typeAlias alias="roleEntity" type="com.env.dto.PtRole" />
+	<!-- 如果省略jdbcType,javaType，单元测试不通过 -->
+	<resultMap id="user" class="com.env.dto.PtUser">
+		<result property="id" column="id"  jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="companyId" column="company_id"  jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="username" column="username"  jdbcType="varchar" javaType="java.lang.String"/>
+		<result property="loginId" column="login_id"  jdbcType="varchar" javaType="java.lang.String"/>
+		<result property="pwd" column="pwd"  jdbcType="varchar" javaType="java.lang.String"/>
+		
+		<result property="version" column="version" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="disabled" column="disabled" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="createUserid" column="create_userid" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="createTime" column="create_time" jdbcType="datetime" javaType="java.util.Date"/>
+		<result property="updateUserid" column="update_userid" jdbcType="int" javaType="java.lang.Integer"/>
+		<result property="updateTime" column="update_time" jdbcType="datetime" javaType="java.util.Date"/>
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="user.columns">
+	    <![CDATA[
+        id, company_id, username,login_id,pwd
+        ,version,disabled,create_time,create_userid,update_userid,update_time
+	    ]]>
+	</sql>
+
+
+<!-- many to many -->
+	<resultMap id="userWithRole" class="com.env.dto.PtUser" extends="user">
+		<result property="roles" column="id" select="com.env.dto.PtUser.getRolesByUserid"/>
+	</resultMap>
+	
+	<select id="getRolesByUserid" parameterClass="int" resultClass="roleEntity">
+		select 
+			 r.id id
+			,role_code roleCode
+			,role_name roleName
+        	,version version 
+        	,disabled disabled
+        	,create_time createTime
+        	,create_userid createUserid
+	        ,update_userid updateUserid
+	        ,update_time updateTime
+	 		/* from pt_role r ,pt_role_user ru where r.id = ru.user_id and ru.role_id=1 */
+	 		from pt_role r ,pt_role_user ru where r.id = ru.role_id and ru.user_id=#value#
+	</select>
+	
+	
+	<!-- TODO 测试-->
+	<!-- <insert id="save" parameterClass="userEntity">
+	    <![CDATA[
+	        INSERT INTO cfg_field_category (
+	        	name,
+	        	field_name
+	        ) VALUES (
+	        	#username#,
+	        	#pwd#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert> -->
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="userEntity">
+	    <![CDATA[
+	        INSERT INTO pt_user (
+	        	company_id,
+	        	username
+	        ) VALUES (
+	        	#companyId#,
+	        	#username#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID查询 -->
+	<!-- <select id="getById" resultMap="user"> -->
+	<select id="getById" resultMap="userWithRole">
+		SELECT
+		<include refid="user.columns" />
+	    <![CDATA[
+	        FROM pt_user 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="user.queryPage">
+		<dynamic prepend="WHERE">
+			<isNotNull property="searchFilters">
+				<isNotEmpty prepend="AND" property="searchFilters.id">
+		            <![CDATA[
+					id $searchFilters.id.operation$ #searchFilters.id.value#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="searchFilters.username">
+		            <![CDATA[
+					username $searchFilters.username.operation$ #searchFilters.username.value#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="ORDER BY">
+			<isNotNull property="orderColumn">
+		        <![CDATA[
+				$orderColumn$
+				]]>
+				<isNotNull property="orderMode">
+					$orderMode$
+				</isNotNull>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="userEntity">
+	    <![CDATA[
+	        UPDATE pt_user SET
+		        username = #username#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM pt_user WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM pt_user WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM pt_user
+		<include refid="user.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="user">
+		SELECT
+		<include refid="user.columns" />
+	    <![CDATA[
+	        FROM pt_user 
+	    ]]>
+		<include refid="user.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="user">
+		SELECT
+		<include refid="user.columns" />
+	    <![CDATA[
+		    FROM pt_user
+	    ]]>
+	</select>
+	
+	<!-- 根据登录ID获取用户 -->
+	<select id="getByLoginid" resultMap="user">
+		SELECT
+		<include refid="user.columns" />
+	    <![CDATA[
+	        FROM pt_user 
+	        WHERE 
+		        login_id = #loginId#
+	    ]]>
+	</select>
+	
+	<!-- 登陆验证 -->
+	<select id="loginUser" resultMap="user">
+		SELECT
+		<include refid="user.columns" />
+	    <![CDATA[
+	        FROM pt_user 
+	        WHERE 
+		        login_id = #loginId#
+		    AND	pwd = #pwd#
+	    ]]>
+	</select>
+	
+	<!-- 验证登录名是否存在 -->
+	<select id="isExistLoginid" resultMap="user">
+		SELECT
+		<include refid="user.columns" />
+	    <![CDATA[
+	        FROM pt_user 
+	        WHERE 
+		        login_id = #loginId#
+	    ]]>
+	</select>
+	
+	
+</sqlMap>

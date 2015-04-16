@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urlrewrite
+    PUBLIC "-//tuckey.org//DTD UrlRewrite 2.6//EN"
+    "http://www.tuckey.org/res/dtds/urlrewrite2.6.dtd">
+
+<urlrewrite>
+	<!-- 
+	<rule>
+		<from>^/some/olddir/(.*)$</from>
+		<to type="redirect">/very/newdir/$1</to>
+	</rule> 
+	-->
+	<rule>
+		<from>^/(.*).html$</from>
+		<to type="forward">/$1</to>
+	</rule>
+	<rule>
+		<from>^/(.*)/([0-9]+).html$</from>
+		<to type="forward">/$1/$2</to>
+	</rule>
+	<!-- <rule>
+		<note>主要为restful提供</note>
+		<from>/api/(.*)</from>
+		<to type="forward">/user/$1.url</to>
+	</rule> -->
+	<rule>
+		<note>静态文件 </note>
+		<from>/static/(.*)$</from>
+		<to type="redirect">%{context-path}/$1</to>
+	</rule>
+	<!-- 
+	<rule>
+		<from>^/userSample/(.*).html$</from>
+		<to type="redirect">http://127.0.0.1:8081/env-web/userSample/$1</to>
+	</rule> 
+	 -->
+	<!-- response.encodeURL() -->
+	<!-- 将页面的超链接选项转化为伪静态化 -->
+	<!-- 
+	<outbound-rule>
+		<from>^/urlrewriteDemo/goods/company.jsp\?companyId=([0-9]+)$</from>
+		<to>/urlrewriteDemo/company/$1.html</to>
+	</outbound-rule>
+	
+	<outbound-rule>
+	    <from>^/world.jsp?country=([a-z]+)&amp;city=([a-z]+)$</from>
+	    <to>/world/$1/$2</to>
+    </outbound-rule>
+     -->
+</urlrewrite>
