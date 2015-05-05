@@ -32,7 +32,7 @@
 									%>
 									<c:choose> 
 										<c:when test="<%=(null!=user)%>">   
-											<span class="message" title="<%=user.getUsername() %>"><%=user.getUsername() %></span>
+											<span class="message" title="<%=user.getNickname() %>"><%=user.getNickname() %></span>
 										</c:when> 
 										<c:otherwise>
 											<span class="message" title="">未登录</span>

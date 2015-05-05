@@ -1,10 +1,10 @@
 /**
- * Description: PtUser控制器
+ * Description: DrmCompanyLib控制器
  * Copyright:   Copyright (c)2015
  * Company:     envbase
  * @author:     caoyx
  * @version:    1.0
- * Create at:   2015-05-05 下午 21:37:55
+ * Create at:   2015-05-05 下午 21:37:52
  *  
  * Modification History:
  * Date         Author      Version     Description
@@ -25,17 +25,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
-import org.springside.modules.web.Servlets;
-
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IPtUserService;
-import com.env.dto.PtUser;
-import com.env.vo.PtUserVo;
+import com.env.service.intf.IDrmCompanyLibService;
+
+import com.env.dto.DrmCompanyLib;
+import com.env.vo.DrmCompanyLibVo;
 
 
 /**
- * PtUser控制器<br>
+ * DrmCompanyLib控制器<br>
  * 
  * @author caoyx
  * @version 1.0, 2015-05-05
@@ -43,14 +42,14 @@ import com.env.vo.PtUserVo;
  * @since 1.0
  */
 @Controller
-@RequestMapping("/ptuser")
-public class PtUserController extends BaseController {
+@RequestMapping("/drmcompanylib")
+public class DrmCompanyLibController extends BaseController {
 
 	/**
-	 * 自动注入PtUser业务层实现
+	 * 自动注入DrmCompanyLib业务层实现
 	 */
 	@Autowired
-	private IPtUserService ptUserService;
+	private IDrmCompanyLibService drmCompanyLibService;
 
 
 	/**
@@ -62,7 +61,7 @@ public class PtUserController extends BaseController {
 	public String list(Integer number , HttpServletRequest request){
 
         // 拿到所有的入参放到map里
-        Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
+        Map<String, Object> searchParams = new HashMap<String, Object>();//Servlets.getParametersStartingWith(request, null);
         
         Page page = new Page();
         
@@ -74,54 +73,54 @@ public class PtUserController extends BaseController {
             }
         }
         
-        QueryParams<PtUser> queryParams=new QueryParams<PtUser>();
+        QueryParams<DrmCompanyLib> queryParams=new QueryParams<DrmCompanyLib>();
         queryParams.setPaging(page);
         queryParams.setSearchParams(searchParams);
         
-		List<PtUser> ptUserList = ptUserService.queryByPage(queryParams);
+		List<DrmCompanyLib> drmCompanyLibList = drmCompanyLibService.queryByPage(queryParams);
 		
 		request.setAttribute("page", page);
 		request.setAttribute("searchParams", searchParams);
-        request.setAttribute("ptUserList", ptUserList);
+        request.setAttribute("drmCompanyLibList", drmCompanyLibList);
 
-		return "ptuser/pages/list";
+		return "drmcompanylib/pages/list";
 	}
 	
 	/**
-	 * 去新增PtUser
+	 * 去新增DrmCompanyLib
 	 * 
 	 * @return 结果视图
 	 */
 	@RequestMapping(value = "toadd")
 	public String toadd(){
-		return "ptuser/pages/add";
+		return "drmcompanylib/pages/add";
 	}
 
 	/**
-	 * 新增PtUser
+	 * 新增DrmCompanyLib
 	 * 
-	 * @param ptUserVo PtUser页面表单对象
+	 * @param drmCompanyLibVo DrmCompanyLib页面表单对象
 	 * @param result 表单验证数据
 	 * @param page 分页配置
 	 * @param request 请求对象
 	 * @return 结果视图
 	 */
 	@RequestMapping(value = "save")
-	public String save (PtUserVo ptUserVo ){
+	public String save (DrmCompanyLibVo drmCompanyLibVo ){
 		Integer id = -1;
 		try{
-			id = ptUserService.save(ptUserVo.getEntity());
+			id = drmCompanyLibService.save(drmCompanyLibVo.getEntity());
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-		return "redirect:/ptuser/detail/"+id;
+		return "redirect:/drmcompanylib/detail/"+id;
 	}
 
 	/**
-	 * 删除PtUser
+	 * 删除DrmCompanyLib
 	 * 
-	 * @param id PtUser页面表单对象唯一标识
+	 * @param id DrmCompanyLib页面表单对象唯一标识
 	 * @param page 分页配置
 	 * @param request 请求对象
 	 * @return 结果视图
@@ -130,19 +129,19 @@ public class PtUserController extends BaseController {
 	public String delete (@PathVariable("id") Integer id, Page page, HttpServletRequest request){
 		try{
 			if(null != id){
-			    ptUserService.delete(id);
+			    drmCompanyLibService.delete(id);
 			}
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-		return "redirect:/ptuser/list";
+		return "redirect:/drmcompanylib/list";
 	}
 
 	/**
-	 * 去修改PtUser
+	 * 去修改DrmCompanyLib
 	 * 
-	 * @param id PtUser页面表单对象唯一标识
+	 * @param id DrmCompanyLib页面表单对象唯一标识
 	 * @param request 请求对象
 	 * @return 结果视图
 	 */
@@ -150,39 +149,39 @@ public class PtUserController extends BaseController {
 	public String toedit(@PathVariable("id") Integer id , Model model){
 		try{
 			if(null != id){
-				PtUser ptUserEntity = (PtUser) ptUserService.getById(id);
-				model.addAttribute("entity", ptUserEntity);
+				DrmCompanyLib drmCompanyLibEntity = (DrmCompanyLib) drmCompanyLibService.getById(id);
+				model.addAttribute("entity", drmCompanyLibEntity);
 			}
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-		return "ptuser/pages/update";
+		return "drmcompanylib/pages/update";
 	}
 
 	/**
-	 * 修改PtUser
+	 * 修改DrmCompanyLib
 	 * 
-	 * @param ptUserVo PtUser页面表单对象
+	 * @param drmCompanyLibVo DrmCompanyLib页面表单对象
 	 * @param result 表单验证数据
 	 * @param page 分页配置
 	 * @param request 请求对象
 	 * @return 结果视图
 	 */
 	@RequestMapping(value = "update")
-	public String update (PtUserVo ptUserVo){
+	public String update (DrmCompanyLibVo drmCompanyLibVo){
 		try{
-			ptUserService.update(ptUserVo.getEntity());
+			drmCompanyLibService.update(drmCompanyLibVo.getEntity());
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-		return "redirect:/ptuser/detail/"+ ptUserVo.getEntity().getId();
+		return "redirect:/drmcompanylib/detail/"+ drmCompanyLibVo.getEntity().getId();
 	}
 
 
 	/**
-	 * 跳转到PtUser详情页面
+	 * 跳转到DrmCompanyLib详情页面
 	 * 
 	 * @param id
 	 * @param model
@@ -190,8 +189,8 @@ public class PtUserController extends BaseController {
 	 */
 	@RequestMapping(value = "detail/{id}")
 	public String detail(@PathVariable Integer id, Model model) {
-		PtUser com = (PtUser) ptUserService.getById(id);
+		DrmCompanyLib com = (DrmCompanyLib) drmCompanyLibService.getById(id);
 		model.addAttribute("entity", com);
-		return "ptuser/pages/detail";
+		return "drmcompanylib/pages/detail";
 	}
 }

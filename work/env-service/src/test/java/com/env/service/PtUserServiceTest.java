@@ -28,8 +28,8 @@ public class PtUserServiceTest extends BaseTest {
 	@Rollback(false)// 加这句，否则不会主动commit
 	public void testSave(){
 		PtUser entity = new PtUser();
-		entity.setUsername("junit");
-		entity.setCompanyId(1);
+//		entity.setUsername("junit");
+//		entity.setCompanyId(1);
 		entity.setLoginId("junit");
 		System.out.println(ptUserService.save(entity));
 	}
@@ -49,7 +49,7 @@ public class PtUserServiceTest extends BaseTest {
 			String []str2s =strs[i].split("：");
 			
 			PtUser u = new PtUser();
-			u.setUsername(str2s[0]);
+//			u.setUsername(str2s[0]);
 			u.setPwd(str2s[1]);
 			
 			us.add(u);

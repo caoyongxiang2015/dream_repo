@@ -4,16 +4,14 @@
  * Company:     envbase
  * @author:     caoyx
  * @version:    1.0
- * Create at:   2015-01-07 下午 13:52:25
+ * Create at:   2015-05-05 下午 21:27:03
  *  
  * Modification History:
  * Date         Author      Version     Description
  * ------------------------------------------------------------------
- * 2015-01-07   caoyx   1.0         Initial
+ * 2015-05-05   caoyx   1.0         Initial
  */
 package com.env.service;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +26,7 @@ import com.env.dto.PtUser;
  * PtUser业务实现类<br>
  * 
  * @author caoyx
- * @version 1.0, 2015-01-07
+ * @version 1.0, 2015-05-05
  * @see
  * @since 1.0
  */
@@ -44,12 +42,15 @@ public class PtUserService<T extends PtUser> extends DefaultServiceImpl<T> imple
 	protected Dao<T> getDao() {
 		return (Dao<T>) ptUserDao;
 	}
+	
 
+	@Override
 	public boolean isExistLoginid(String loginId) {
 		boolean exist = ptUserDao.isExistLoginid(loginId);
 		return exist;
 	}
 
+	@Override
 	public PtUser loginUser(String loginId, String password) {
 		PtUser user = ptUserDao.loginUser(loginId, password);
 		return user;

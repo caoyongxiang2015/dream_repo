@@ -4,12 +4,12 @@
  * Company:     envbase
  * @author:     caoyx
  * @version:    1.0
- * Create at:   2015-01-07 下午 13:35:30
+ * Create at:   2015-05-05 下午 21:27:03
  *  
  * Modification History:
  * Date         Author      Version     Description
  * ------------------------------------------------------------------
- * 2015-01-07   caoyx   1.0         Initial
+ * 2015-05-05   caoyx   1.0         Initial
  */
 package com.env.dao;
 
@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.env.core.domain.DomainObject;
 import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IPtUserDao;
 import com.env.dto.PtUser;
@@ -28,22 +27,15 @@ import com.env.dto.PtUser;
  * PtUser数据访问实现类<br>
  * 
  * @author caoyx
- * @version 1.0, 2015-01-07
+ * @version 1.0, 2015-05-05
  * @see
  * @since 1.0
  */
 @Repository("ptUserDao")
 public class PtUserDao extends DefaultDaoImpl<PtUser> implements IPtUserDao<PtUser> {
 
-    //TODO 测试
-	public boolean cfg_field_category(List<PtUser> us){
-		for(PtUser u : us){
-			Integer id = this.save( u);
-			System.out.println(">>>>>"+ id);
-		}
-		return false;
-	}
 
+	@Override
 	public boolean isExistLoginid(String loginId) {
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("loginId", loginId);
@@ -52,6 +44,7 @@ public class PtUserDao extends DefaultDaoImpl<PtUser> implements IPtUserDao<PtUs
 	}
 
 
+	@Override
 	public PtUser loginUser(String loginId, String password) {
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("loginId", loginId);
@@ -67,4 +60,5 @@ public class PtUserDao extends DefaultDaoImpl<PtUser> implements IPtUserDao<PtUs
 		PtUser user = this.getEntity(getStatement(), params);
 		return user;
 	}
+	
 }

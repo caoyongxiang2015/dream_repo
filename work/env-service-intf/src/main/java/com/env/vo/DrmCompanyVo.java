@@ -1,10 +1,10 @@
 /**
- * Description: PtUser页面表单对象
+ * Description: DrmCompany页面表单对象
  * Copyright:   Copyright (c)2015
  * Company:     envbase
  * @author:     caoyx
  * @version:    1.0
- * Create at:   2015-05-05 下午 21:27:03
+ * Create at:   2015-05-05 下午 21:27:00
  *  
  * Modification History:
  * Date         Author      Version     Description
@@ -13,36 +13,36 @@
  */
 package com.env.vo;
 
-import com.env.dto.PtUser;
+import com.env.dto.DrmCompany;
 
 /**
- * PtUser页面表单对象<br>
+ * DrmCompany页面表单对象<br>
  * 
  * @author caoyx
  * @version 1.0, 2015-05-05
  * @see
  * @since 1.0
  */
-public class PtUserVo{
+public class DrmCompanyVo{
 	/**
-	 * PtUser实体
+	 * DrmCompany实体
 	 */
-	private PtUser entity;
+	private DrmCompany entity;
 	
 
 	/**
-	 * 设置PtUser实体
-	 * @param entity PtUser实体
+	 * 设置DrmCompany实体
+	 * @param entity DrmCompany实体
 	 */
-	public void setEntity(PtUser entity) {
+	public void setEntity(DrmCompany entity) {
 		this.entity = entity;
 	}
 
 	/**
-	 * 获取PtUser实体
-	 * @return PtUser实体
+	 * 获取DrmCompany实体
+	 * @return DrmCompany实体
 	 */
-	public PtUser getEntity() {
+	public DrmCompany getEntity() {
 		return this.entity;
 	}
 }

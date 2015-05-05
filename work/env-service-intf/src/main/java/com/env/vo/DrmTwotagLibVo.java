@@ -1,10 +1,10 @@
 /**
- * Description: PtUser页面表单对象
+ * Description: DrmTwotagLib页面表单对象
  * Copyright:   Copyright (c)2015
  * Company:     envbase
  * @author:     caoyx
  * @version:    1.0
- * Create at:   2015-05-05 下午 21:27:03
+ * Create at:   2015-05-05 下午 21:27:02
  *  
  * Modification History:
  * Date         Author      Version     Description
@@ -13,36 +13,36 @@
  */
 package com.env.vo;
 
-import com.env.dto.PtUser;
+import com.env.dto.DrmTwotagLib;
 
 /**
- * PtUser页面表单对象<br>
+ * DrmTwotagLib页面表单对象<br>
  * 
  * @author caoyx
  * @version 1.0, 2015-05-05
  * @see
  * @since 1.0
  */
-public class PtUserVo{
+public class DrmTwotagLibVo{
 	/**
-	 * PtUser实体
+	 * DrmTwotagLib实体
 	 */
-	private PtUser entity;
+	private DrmTwotagLib entity;
 	
 
 	/**
-	 * 设置PtUser实体
-	 * @param entity PtUser实体
+	 * 设置DrmTwotagLib实体
+	 * @param entity DrmTwotagLib实体
 	 */
-	public void setEntity(PtUser entity) {
+	public void setEntity(DrmTwotagLib entity) {
 		this.entity = entity;
 	}
 
 	/**
-	 * 获取PtUser实体
-	 * @return PtUser实体
+	 * 获取DrmTwotagLib实体
+	 * @return DrmTwotagLib实体
 	 */
-	public PtUser getEntity() {
+	public DrmTwotagLib getEntity() {
 		return this.entity;
 	}
 }

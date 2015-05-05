@@ -3,80 +3,114 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="com.env.dto.PtUser">
-	<typeAlias alias="userEntity" type="com.env.dto.PtUser" />
-	
-	<typeAlias alias="roleEntity" type="com.env.dto.PtRole" />
-	<!-- 如果省略jdbcType,javaType，单元测试不通过 -->
-	<resultMap id="user" class="com.env.dto.PtUser">
-		<result property="id" column="id"  jdbcType="int" javaType="java.lang.Integer"/>
-		<result property="companyId" column="company_id"  jdbcType="int" javaType="java.lang.Integer"/>
-		<result property="username" column="username"  jdbcType="varchar" javaType="java.lang.String"/>
-		<result property="loginId" column="login_id"  jdbcType="varchar" javaType="java.lang.String"/>
-		<result property="pwd" column="pwd"  jdbcType="varchar" javaType="java.lang.String"/>
+
+	<typeAlias alias="ptUserEntity" type="com.env.dto.PtUser" />
+	<resultMap id="ptUser" class="com.env.dto.PtUser">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="loginId" column="login_id" />
+		<result property="pwd" column="pwd" />
+		<result property="nickname" column="nickname" />
+		<result property="realname" column="realname" />
+		<result property="sex" column="sex" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="county" column="county" />
+		<result property="signature" column="signature" />
+		<result property="idcard" column="idcard" />
+		<result property="idcardfront" column="idcardfront" />
+		<result property="idcardback" column="idcardback" />
+		<result property="percent" column="percent" />
+		<result property="workyears" column="workyears" />
+		<result property="isoffline" column="isoffline" />
+		<result property="offlineprice" column="offlineprice" />
+		<result property="qq" column="qq" />
+		<result property="email" column="email" />
+		<result property="weixin" column="weixin" />
+		<result property="phone" column="phone" />
+		<result property="curCompanyId" column="cur_company_id" />
+		<result property="curCompanyName" column="cur_company_name" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
 		
-		<result property="version" column="version" jdbcType="int" javaType="java.lang.Integer"/>
-		<result property="disabled" column="disabled" jdbcType="int" javaType="java.lang.Integer"/>
-		<result property="createUserid" column="create_userid" jdbcType="int" javaType="java.lang.Integer"/>
-		<result property="createTime" column="create_time" jdbcType="datetime" javaType="java.util.Date"/>
-		<result property="updateUserid" column="update_userid" jdbcType="int" javaType="java.lang.Integer"/>
-		<result property="updateTime" column="update_time" jdbcType="datetime" javaType="java.util.Date"/>
 	</resultMap>
 
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="user.columns">
+	<sql id="ptUser.columns">
 	    <![CDATA[
-        id, company_id, username,login_id,pwd
-        ,version,disabled,create_time,create_userid,update_userid,update_time
+        id, login_id, pwd, nickname, realname, sex, province, city, county, signature, idcard, idcardfront, idcardback, percent, workyears, isoffline, offlineprice, qq, email, weixin, phone, cur_company_id, cur_company_name, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
 
-
-<!-- many to many -->
-	<resultMap id="userWithRole" class="com.env.dto.PtUser" extends="user">
-		<result property="roles" column="id" select="com.env.dto.PtUser.getRolesByUserid"/>
-	</resultMap>
-	
-	<select id="getRolesByUserid" parameterClass="int" resultClass="roleEntity">
-		select 
-			 r.id id
-			,role_code roleCode
-			,role_name roleName
-        	,version version 
-        	,disabled disabled
-        	,create_time createTime
-        	,create_userid createUserid
-	        ,update_userid updateUserid
-	        ,update_time updateTime
-	 		/* from pt_role r ,pt_role_user ru where r.id = ru.user_id and ru.role_id=1 */
-	 		from pt_role r ,pt_role_user ru where r.id = ru.role_id and ru.user_id=#value#
-	</select>
-	
-	
-	<!-- TODO 测试-->
-	<!-- <insert id="save" parameterClass="userEntity">
-	    <![CDATA[
-	        INSERT INTO cfg_field_category (
-	        	name,
-	        	field_name
-	        ) VALUES (
-	        	#username#,
-	        	#pwd#
-	        )
-	    ]]>
-		<selectKey resultClass="java.lang.Integer" type="post"
-			keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert> -->
 	<!-- 新增记录 -->
-	<insert id="save" parameterClass="userEntity">
+	<insert id="save" parameterClass="ptUserEntity">
 	    <![CDATA[
-	        INSERT INTO pt_user (
-	        	company_id,
-	        	username
+	        INSERT INTO PT_USER (
+	        	id, 
+	        	login_id, 
+	        	pwd, 
+	        	nickname, 
+	        	realname, 
+	        	sex, 
+	        	province, 
+	        	city, 
+	        	county, 
+	        	signature, 
+	        	idcard, 
+	        	idcardfront, 
+	        	idcardback, 
+	        	percent, 
+	        	workyears, 
+	        	isoffline, 
+	        	offlineprice, 
+	        	qq, 
+	        	email, 
+	        	weixin, 
+	        	phone, 
+	        	cur_company_id, 
+	        	cur_company_name, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
 	        ) VALUES (
-	        	#companyId#,
-	        	#username#
+	        	#id#, 
+	        	#loginId#, 
+	        	#pwd#, 
+	        	#nickname#, 
+	        	#realname#, 
+	        	#sex#, 
+	        	#province#, 
+	        	#city#, 
+	        	#county#, 
+	        	#signature#, 
+	        	#idcard#, 
+	        	#idcardfront#, 
+	        	#idcardback#, 
+	        	#percent#, 
+	        	#workyears#, 
+	        	#isoffline#, 
+	        	#offlineprice#, 
+	        	#qq#, 
+	        	#email#, 
+	        	#weixin#, 
+	        	#phone#, 
+	        	#curCompanyId#, 
+	        	#curCompanyName#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
 	        )
 	    ]]>
 		<selectKey resultClass="java.lang.Integer" type="post"
@@ -85,53 +119,109 @@
 		</selectKey>
 	</insert>
 
-	<!-- 通过ID查询 -->
-	<!-- <select id="getById" resultMap="user"> -->
-	<select id="getById" resultMap="userWithRole">
-		SELECT
-		<include refid="user.columns" />
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="ptUserEntity">
 	    <![CDATA[
-	        FROM pt_user 
-	        WHERE 
-		        id = #id#
+	        INSERT INTO PT_USER (
+	        	id, 
+	        	login_id, 
+	        	pwd, 
+	        	nickname, 
+	        	realname, 
+	        	sex, 
+	        	province, 
+	        	city, 
+	        	county, 
+	        	signature, 
+	        	idcard, 
+	        	idcardfront, 
+	        	idcardback, 
+	        	percent, 
+	        	workyears, 
+	        	isoffline, 
+	        	offlineprice, 
+	        	qq, 
+	        	email, 
+	        	weixin, 
+	        	phone, 
+	        	cur_company_id, 
+	        	cur_company_name, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#loginId#, 
+	        	#pwd#, 
+	        	#nickname#, 
+	        	#realname#, 
+	        	#sex#, 
+	        	#province#, 
+	        	#city#, 
+	        	#county#, 
+	        	#signature#, 
+	        	#idcard#, 
+	        	#idcardfront#, 
+	        	#idcardback#, 
+	        	#percent#, 
+	        	#workyears#, 
+	        	#isoffline#, 
+	        	#offlineprice#, 
+	        	#qq#, 
+	        	#email#, 
+	        	#weixin#, 
+	        	#phone#, 
+	        	#curCompanyId#, 
+	        	#curCompanyName#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
 	    ]]>
-	</select>
-
-	<!-- 用于分页查询抽取的公共的条件 -->
-	<sql id="user.queryPage">
-		<dynamic prepend="WHERE">
-			<isNotNull property="searchFilters">
-				<isNotEmpty prepend="AND" property="searchFilters.id">
-		            <![CDATA[
-					id $searchFilters.id.operation$ #searchFilters.id.value#
-		            ]]>
-				</isNotEmpty>
-				<isNotEmpty prepend="AND" property="searchFilters.username">
-		            <![CDATA[
-					username $searchFilters.username.operation$ #searchFilters.username.value#
-		            ]]>
-				</isNotEmpty>
-			</isNotNull>
-		</dynamic>
-		<dynamic prepend="ORDER BY">
-			<isNotNull property="orderColumn">
-		        <![CDATA[
-				$orderColumn$
-				]]>
-				<isNotNull property="orderMode">
-					$orderMode$
-				</isNotNull>
-			</isNotNull>
-		</dynamic>
-	</sql>
-
-
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 
 	<!-- 通过ID修改 -->
-	<update id="update" parameterClass="userEntity">
+	<update id="update" parameterClass="ptUserEntity">
 	    <![CDATA[
-	        UPDATE pt_user SET
-		        username = #username#
+	        UPDATE PT_USER SET
+		        login_id = #loginId#, 
+		        pwd = #pwd#, 
+		        nickname = #nickname#, 
+		        realname = #realname#, 
+		        sex = #sex#, 
+		        province = #province#, 
+		        city = #city#, 
+		        county = #county#, 
+		        signature = #signature#, 
+		        idcard = #idcard#, 
+		        idcardfront = #idcardfront#, 
+		        idcardback = #idcardback#, 
+		        percent = #percent#, 
+		        workyears = #workyears#, 
+		        isoffline = #isoffline#, 
+		        offlineprice = #offlineprice#, 
+		        qq = #qq#, 
+		        email = #email#, 
+		        weixin = #weixin#, 
+		        phone = #phone#, 
+		        cur_company_id = #curCompanyId#, 
+		        cur_company_name = #curCompanyName#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -140,7 +230,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM pt_user WHERE
+	        DELETE FROM PT_USER WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -148,44 +238,208 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM pt_user WHERE
+	        DELETE FROM PT_USER WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
 
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="ptUser">
+		SELECT
+		<include refid="ptUser.columns" />
+	    <![CDATA[
+	        FROM PT_USER 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="ptUser.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.loginId">
+		            <![CDATA[
+					login_id = #entity.loginId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.pwd">
+		            <![CDATA[
+					pwd = #entity.pwd#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.nickname">
+		            <![CDATA[
+					nickname = #entity.nickname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.realname">
+		            <![CDATA[
+					realname = #entity.realname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sex">
+		            <![CDATA[
+					sex = #entity.sex#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.province">
+		            <![CDATA[
+					province = #entity.province#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.city">
+		            <![CDATA[
+					city = #entity.city#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.county">
+		            <![CDATA[
+					county = #entity.county#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.signature">
+		            <![CDATA[
+					signature = #entity.signature#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.idcard">
+		            <![CDATA[
+					idcard = #entity.idcard#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.idcardfront">
+		            <![CDATA[
+					idcardfront = #entity.idcardfront#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.idcardback">
+		            <![CDATA[
+					idcardback = #entity.idcardback#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.percent">
+		            <![CDATA[
+					percent = #entity.percent#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.workyears">
+		            <![CDATA[
+					workyears = #entity.workyears#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.isoffline">
+		            <![CDATA[
+					isoffline = #entity.isoffline#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.offlineprice">
+		            <![CDATA[
+					offlineprice = #entity.offlineprice#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.qq">
+		            <![CDATA[
+					qq = #entity.qq#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.email">
+		            <![CDATA[
+					email = #entity.email#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.weixin">
+		            <![CDATA[
+					weixin = #entity.weixin#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.phone">
+		            <![CDATA[
+					phone = #entity.phone#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.curCompanyId">
+		            <![CDATA[
+					cur_company_id = #entity.curCompanyId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.curCompanyName">
+		            <![CDATA[
+					cur_company_name = #entity.curCompanyName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM pt_user
-		<include refid="user.queryPage" />
+		SELECT count(*) FROM PT_USER
+		<include refid="ptUser.queryPage" />
 	</select>
 
 	<!-- 分页查询指定页记录 -->
-	<select id="queryByPage" resultMap="user">
+	<select id="queryByPage" resultMap="ptUser">
 		SELECT
-		<include refid="user.columns" />
+		<include refid="ptUser.columns" />
 	    <![CDATA[
-	        FROM pt_user 
+	        FROM PT_USER 
 	    ]]>
-		<include refid="user.queryPage" />
+		<include refid="ptUser.queryPage" />
 		<![CDATA[
 		    LIMIT #paging.startRecord#, #paging.pageSize#
         ]]>
 	</select>
 
 	<!-- 查询所有记录 -->
-	<select id="queryAll" resultMap="user">
+	<select id="queryAll" resultMap="ptUser">
 		SELECT
-		<include refid="user.columns" />
+		<include refid="ptUser.columns" />
 	    <![CDATA[
-		    FROM pt_user
+		    FROM PT_USER
 	    ]]>
 	</select>
 	
+	
 	<!-- 根据登录ID获取用户 -->
-	<select id="getByLoginid" resultMap="user">
+	<select id="getByLoginid" resultMap="ptUser">
 		SELECT
-		<include refid="user.columns" />
+		<include refid="ptUser.columns" />
 	    <![CDATA[
 	        FROM pt_user 
 	        WHERE 
@@ -194,9 +448,9 @@
 	</select>
 	
 	<!-- 登陆验证 -->
-	<select id="loginUser" resultMap="user">
+	<select id="loginUser" resultMap="ptUser">
 		SELECT
-		<include refid="user.columns" />
+		<include refid="ptUser.columns" />
 	    <![CDATA[
 	        FROM pt_user 
 	        WHERE 
@@ -206,9 +460,9 @@
 	</select>
 	
 	<!-- 验证登录名是否存在 -->
-	<select id="isExistLoginid" resultMap="user">
+	<select id="isExistLoginid" resultMap="ptUser">
 		SELECT
-		<include refid="user.columns" />
+		<include refid="ptUser.columns" />
 	    <![CDATA[
 	        FROM pt_user 
 	        WHERE 

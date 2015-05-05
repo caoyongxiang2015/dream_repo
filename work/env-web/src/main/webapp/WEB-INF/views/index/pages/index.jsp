@@ -64,7 +64,7 @@
 		    <h1>工作台</h1>
 		    <c:choose> 
 				<c:when test="<%=(null!=user)%>">   
-					<h2><%=user.getUsername() %>欢迎回来...</h2>
+					<h2><%=user.getNickname() %>欢迎回来...</h2>
 				</c:when> 
 				<c:otherwise>   
 					<p class="masthead-button-links"><a href="javascript:window.location.href='${ctx}/auth/toLogin'">please login</a></p>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmTwotag">
+
+	<typeAlias alias="drmTwotagEntity" type="com.env.dto.DrmTwotag" />
+	<resultMap id="drmTwotag" class="com.env.dto.DrmTwotag">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="userid" column="userid" />
+		<result property="onetagid" column="onetagid" />
+		<result property="onetagname" column="onetagname" />
+		<result property="tagname" column="tagname" />
+		<result property="canprovide" column="canprovide" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmTwotag.columns">
+	    <![CDATA[
+        id, userid, onetagid, onetagname, tagname, canprovide, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmTwotagEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_TWOTAG (
+	        	id, 
+	        	userid, 
+	        	onetagid, 
+	        	onetagname, 
+	        	tagname, 
+	        	canprovide, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#userid#, 
+	        	#onetagid#, 
+	        	#onetagname#, 
+	        	#tagname#, 
+	        	#canprovide#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmTwotagEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_TWOTAG (
+	        	id, 
+	        	userid, 
+	        	onetagid, 
+	        	onetagname, 
+	        	tagname, 
+	        	canprovide, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#userid#, 
+	        	#onetagid#, 
+	        	#onetagname#, 
+	        	#tagname#, 
+	        	#canprovide#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmTwotagEntity">
+	    <![CDATA[
+	        UPDATE DRM_TWOTAG SET
+		        id = #id#, 
+		        userid = #userid#, 
+		        onetagid = #onetagid#, 
+		        onetagname = #onetagname#, 
+		        tagname = #tagname#, 
+		        canprovide = #canprovide#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_TWOTAG WHERE
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_TWOTAG WHERE
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmTwotag">
+		SELECT
+		<include refid="drmTwotag.columns" />
+	    <![CDATA[
+	        FROM DRM_TWOTAG 
+	        WHERE 
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmTwotag.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.userid">
+		            <![CDATA[
+					userid = #entity.userid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.onetagid">
+		            <![CDATA[
+					onetagid = #entity.onetagid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.onetagname">
+		            <![CDATA[
+					onetagname = #entity.onetagname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.tagname">
+		            <![CDATA[
+					tagname = #entity.tagname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.canprovide">
+		            <![CDATA[
+					canprovide = #entity.canprovide#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_TWOTAG
+		<include refid="drmTwotag.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmTwotag">
+		SELECT
+		<include refid="drmTwotag.columns" />
+	    <![CDATA[
+	        FROM DRM_TWOTAG 
+	    ]]>
+		<include refid="drmTwotag.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmTwotag">
+		SELECT
+		<include refid="drmTwotag.columns" />
+	    <![CDATA[
+		    FROM DRM_TWOTAG
+	    ]]>
+	</select>
+</sqlMap>

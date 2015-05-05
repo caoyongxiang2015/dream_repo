@@ -13,4 +13,13 @@
 	<sqlMap resource="ibatis/PtRole.xml" />
 	<sqlMap resource="ibatis/PtPermission.xml" />
 	<sqlMap resource="ibatis/PtRolePermission.xml" />
+	
+	<sqlMap resource="ibatis/DrmCompany.xml" />
+	<sqlMap resource="ibatis/DrmCompanyLib.xml" />
+	<sqlMap resource="ibatis/DrmDept.xml" />
+	<sqlMap resource="ibatis/DrmDeptLib.xml" />
+	<sqlMap resource="ibatis/DrmOnetag.xml" />
+	<sqlMap resource="ibatis/DrmOnetagLib.xml" />
+	<sqlMap resource="ibatis/DrmTwotag.xml" />
+	<sqlMap resource="ibatis/DrmTwotagLib.xml" />
 </sqlMapConfig>

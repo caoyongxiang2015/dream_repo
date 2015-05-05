@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmOnetagLib">
+
+	<typeAlias alias="drmOnetagLibEntity" type="com.env.dto.DrmOnetagLib" />
+	<resultMap id="drmOnetagLib" class="com.env.dto.DrmOnetagLib">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="tagname" column="tagname" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmOnetagLib.columns">
+	    <![CDATA[
+        id, tagname, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmOnetagLibEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_ONETAG_LIB (
+	        	id, 
+	        	tagname, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#tagname#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmOnetagLibEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_ONETAG_LIB (
+	        	id, 
+	        	tagname, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#tagname#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmOnetagLibEntity">
+	    <![CDATA[
+	        UPDATE DRM_ONETAG_LIB SET
+		        id = #id#, 
+		        tagname = #tagname#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_ONETAG_LIB WHERE
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_ONETAG_LIB WHERE
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmOnetagLib">
+		SELECT
+		<include refid="drmOnetagLib.columns" />
+	    <![CDATA[
+	        FROM DRM_ONETAG_LIB 
+	        WHERE 
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmOnetagLib.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.tagname">
+		            <![CDATA[
+					tagname = #entity.tagname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_ONETAG_LIB
+		<include refid="drmOnetagLib.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmOnetagLib">
+		SELECT
+		<include refid="drmOnetagLib.columns" />
+	    <![CDATA[
+	        FROM DRM_ONETAG_LIB 
+	    ]]>
+		<include refid="drmOnetagLib.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmOnetagLib">
+		SELECT
+		<include refid="drmOnetagLib.columns" />
+	    <![CDATA[
+		    FROM DRM_ONETAG_LIB
+	    ]]>
+	</select>
+</sqlMap>
