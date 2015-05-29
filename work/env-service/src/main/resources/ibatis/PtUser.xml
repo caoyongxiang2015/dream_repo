@@ -51,7 +51,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="ptUserEntity">
 	    <![CDATA[
-	        INSERT INTO PT_USER (
+	        INSERT INTO pt_user (
 	        	id, 
 	        	login_id, 
 	        	pwd, 
@@ -122,7 +122,7 @@
 	<!-- 新增记录 -->
 	<insert id="insert" parameterClass="ptUserEntity">
 	    <![CDATA[
-	        INSERT INTO PT_USER (
+	        INSERT INTO pt_user (
 	        	id, 
 	        	login_id, 
 	        	pwd, 
@@ -193,7 +193,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="ptUserEntity">
 	    <![CDATA[
-	        UPDATE PT_USER SET
+	        UPDATE pt_user SET
 		        login_id = #loginId#, 
 		        pwd = #pwd#, 
 		        nickname = #nickname#, 
@@ -230,7 +230,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM PT_USER WHERE
+	        DELETE FROM pt_user WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -238,7 +238,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM PT_USER WHERE
+	        DELETE FROM pt_user WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -248,7 +248,7 @@
 		SELECT
 		<include refid="ptUser.columns" />
 	    <![CDATA[
-	        FROM PT_USER 
+	        FROM pt_user 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -409,7 +409,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM PT_USER
+		SELECT count(*) FROM pt_user
 		<include refid="ptUser.queryPage" />
 	</select>
 
@@ -418,7 +418,7 @@
 		SELECT
 		<include refid="ptUser.columns" />
 	    <![CDATA[
-	        FROM PT_USER 
+	        FROM pt_user 
 	    ]]>
 		<include refid="ptUser.queryPage" />
 		<![CDATA[
@@ -431,7 +431,7 @@
 		SELECT
 		<include refid="ptUser.columns" />
 	    <![CDATA[
-		    FROM PT_USER
+		    FROM pt_user
 	    ]]>
 	</select>
 	

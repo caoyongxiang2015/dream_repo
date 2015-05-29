@@ -125,7 +125,7 @@ public class PtUser extends DomainObject{
 	 * 工作年限
 	 */
 	//@Length(max=50)
-	private java.lang.String workyears;
+	private java.lang.Integer workyears;
 	
 	/**
 	 * 是否提供线下服务
@@ -437,7 +437,7 @@ public class PtUser extends DomainObject{
 	 * 设置工作年限
 	 * @param workyears 工作年限
 	 */
-	public void setWorkyears(java.lang.String workyears) {
+	public void setWorkyears(java.lang.Integer workyears) {
 		this.workyears = workyears;
 	}
 
@@ -445,7 +445,7 @@ public class PtUser extends DomainObject{
 	 * 获取工作年限
 	 * @return 工作年限
 	 */
-	public java.lang.String getWorkyears() {
+	public java.lang.Integer getWorkyears() {
 		return this.workyears;
 	}
 

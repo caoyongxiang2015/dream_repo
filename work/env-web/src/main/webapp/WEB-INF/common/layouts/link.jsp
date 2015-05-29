@@ -24,3 +24,8 @@
 <!-- 自定义基础控件样式 -->
 <link href="${static_common}/customize/css/envbase-default.css"
 	type="text/css" rel="stylesheet" />
+<link href="${static_common}/customize/css/Buttons.css"
+	type="text/css" rel="stylesheet" />
+<link href="${static_common}/script/icheck/skins/square/blue.css"
+	type="text/css" rel="stylesheet" />
+	

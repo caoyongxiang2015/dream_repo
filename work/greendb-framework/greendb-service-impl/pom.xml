@@ -50,6 +50,11 @@
 			<version>${env.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
 		<!-- 内部子工程 end -->
   
     <dependency>

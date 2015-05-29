@@ -13,23 +13,25 @@
  */
 package com.env.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.env.commons.utils.UserUtils;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IDrmTwotagService;
-
 import com.env.dto.DrmTwotag;
+import com.env.dto.PtUser;
+import com.env.service.intf.IDrmTwotagService;
 import com.env.vo.DrmTwotagVo;
 
 
@@ -51,7 +53,34 @@ public class DrmTwotagController extends BaseController {
 	@Autowired
 	private IDrmTwotagService drmTwotagService;
 
+	/**
+	 * 获取二级标签列表
+	 * @param onetagid
+	 * @return
+	 */
+	@RequestMapping(value = "twotagSection/{onetagid}/{companyid}")
+	public String twotagSection(@PathVariable Integer onetagid ,@PathVariable Integer companyid , Model model){
+		
+		PtUser user = (PtUser)UserUtils.getCurrentUser();
+		List<DrmTwotag> twotags = drmTwotagService.getByUseridAndOnetagid(user.getId(), onetagid ,companyid);
+		
+		model.addAttribute("twotags", twotags);
+		
+		return "myhome/pages/twotagSection";
+	}
 
+	/**
+	 * 选择/取消二级标签
+	 * @param pk
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "toggletwotag/{pk}/{canprovide}")
+	public String toggletwotag(@PathVariable Integer pk , @PathVariable Integer canprovide){
+		drmTwotagService.toggletwotag(pk, canprovide);
+		return "1";
+	}
+	
 	/**
 	 * 去列表页面
 	 * @param model

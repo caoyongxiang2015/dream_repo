@@ -13,8 +13,9 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
 
+import com.env.dao.api.Dao;
 import com.env.dto.DrmTwotag;
 
 /**
@@ -26,4 +27,7 @@ import com.env.dto.DrmTwotag;
  * @since 1.0
  */
 public interface IDrmTwotagDao<T extends DrmTwotag> extends Dao<T> {
+
+	List<DrmTwotag> getByUseridAndOnetagid(Integer userId,Integer onetagId,Integer companyid);
+	void toggletwotag(Integer pk,Integer canprovide);
 }

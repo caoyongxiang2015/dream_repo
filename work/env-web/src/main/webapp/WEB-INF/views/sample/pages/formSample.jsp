@@ -22,8 +22,8 @@
 							<i class="pull-right icon-save icon-2x pointer" style="margin-right: 20px;"></i> 
 							<i class="pull-right icon-edit icon-2x pointer" style="margin-right: 20px;"></i> 
 							<i class="pull-right icon-plus icon-2x pointer" style="margin-right: 20px;"></i>
-							<!-- <a href="#" class="btn btn-info pull-righ">按钮</a> 
-							<a href="#" class="btn btn-info pull-righ disabled">禁用按钮</a> -->
+							<a href="#" class="btn btn-info pull-righ">按钮</a> 
+							<a href="#" class="btn btn-info pull-righ disabled">禁用按钮</a>
 						</div>
 					</div>
 				</div>

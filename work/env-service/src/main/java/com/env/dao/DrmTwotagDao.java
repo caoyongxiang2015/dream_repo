@@ -13,9 +13,13 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmTwotagDao;
 import com.env.dto.DrmTwotag;
 
@@ -29,4 +33,17 @@ import com.env.dto.DrmTwotag;
  */
 @Repository("drmTwotagDao")
 public class DrmTwotagDao extends DefaultDaoImpl<DrmTwotag> implements IDrmTwotagDao<DrmTwotag> {
+	public List<DrmTwotag> getByUseridAndOnetagid(Integer userId,Integer onetagId,Integer companyid){
+		Map params = new HashMap();
+		params.put("userId", userId);
+		params.put("onetagId", onetagId);
+		params.put("companyId", companyid);
+		return this.query(getStatement(), params);
+	}
+	public void toggletwotag(Integer pk,Integer canprovide){
+		Map params = new HashMap();
+		params.put("id", pk);
+		params.put("canprovide", canprovide);
+		this.update(getStatement(), params);
+	}
 }

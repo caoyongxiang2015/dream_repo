@@ -13,6 +13,9 @@
  */
 package com.env.service.intf;
 
+import java.util.List;
+import java.util.Map;
+
 import com.env.service.impl.Service;
 import com.env.dto.DrmOnetag;
 
@@ -25,4 +28,7 @@ import com.env.dto.DrmOnetag;
  * @since 1.0
  */
 public interface IDrmOnetagService<T extends DrmOnetag> extends Service<T> {
+	public void saveOnetagPatch(Map map);
+	
+	public List<DrmOnetag> getonetagid(Integer userid,Integer companyid);
 }

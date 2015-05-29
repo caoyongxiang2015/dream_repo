@@ -13,8 +13,11 @@
  */
 package com.env.service.intf;
 
-import com.env.service.impl.Service;
+import java.util.List;
+
 import com.env.dto.DrmCompany;
+import com.env.dto.DrmDept;
+import com.env.service.impl.Service;
 
 /**
  * DrmCompany业务接口<br>
@@ -25,4 +28,9 @@ import com.env.dto.DrmCompany;
  * @since 1.0
  */
 public interface IDrmCompanyService<T extends DrmCompany> extends Service<T> {
+	
+	Integer saveCompanyAndDept(DrmCompany drmCompany,DrmDept drmDept);
+	Integer saveCompanyAndDept(DrmCompany drmCompany, DrmDept drmDept, Integer userId);
+	void deleteCompanyAndDept(Integer companyId);
+	List<DrmCompany> queryAllByUserid(Integer userId) ;
 }

@@ -4,12 +4,12 @@
  * Company:     envbase
  * @author:     caoyx
  * @version:    1.0
- * Create at:   2015-05-05 下午 21:27:00
+ * Create at:   2015-05-28 下午 22:52:56
  *  
  * Modification History:
  * Date         Author      Version     Description
  * ------------------------------------------------------------------
- * 2015-05-05   caoyx   1.0         Initial
+ * 2015-05-28   caoyx   1.0         Initial
  */
 package com.env.dto;
 
@@ -25,7 +25,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * DrmCompany数据库实体/领域对象<br>
  * 
  * @author caoyx
- * @version 1.0, 2015-05-05
+ * @version 1.0, 2015-05-28
  * @see
  * @since 1.0
  */
@@ -37,6 +37,17 @@ public class DrmCompany extends DomainObject{
 	
 	//可以直接使用: @Length(max=50,message="用户名长度不能大于50")显示错误消息
 	//columns START
+	/**
+	 * 主键
+	 */
+	//
+	private java.lang.Integer id;
+	
+	/**
+	 * 用户ID
+	 */
+	//
+	private java.lang.Integer userId;
 	
 	/**
 	 * 公司原始库id
@@ -49,6 +60,12 @@ public class DrmCompany extends DomainObject{
 	 */
 	//@Length(max=200)
 	private java.lang.String companyName;
+	
+	/**
+	 * 部门名称
+	 */
+	//@Length(max=200)
+	private java.lang.String deptName;
 	
 	/**
 	 * 公司规模
@@ -147,10 +164,70 @@ public class DrmCompany extends DomainObject{
 	private java.lang.Integer hasbus;
 	
 	/**
+	 * 提供的信息
+	 */
+	//@Length(max=4000)
+	private java.lang.String provideContent;
+	
+	/**
 	 * 公司信息字数统计
 	 */
 	//
 	private java.lang.Integer wordCount;
+	
+	/**
+	 * 提供信息服务的方式（qq/微信/电话/平台展示/站内信/邮件）
+	 */
+	//
+	private java.lang.Integer provideType;
+	
+	/**
+	 * 是否提供QQ方式
+	 */
+	//
+	private java.lang.Integer qq;
+	
+	/**
+	 * 是否提供weixin方式
+	 */
+	//
+	private java.lang.Integer weixin;
+	
+	/**
+	 * 是否提供电话方式
+	 */
+	//
+	private java.lang.Integer phone;
+	
+	/**
+	 * 是否提供email方式
+	 */
+	//@Email
+	private java.lang.Integer email;
+	
+	/**
+	 * 是否提供站内信方式
+	 */
+	//
+	private java.lang.Integer zhanneixin;
+	
+	/**
+	 * 直接在平台展示
+	 */
+	//
+	private java.lang.Integer ptshow;
+	
+	/**
+	 * 标价
+	 */
+	//
+	private Long price;
+	
+	/**
+	 * 线下服务价格
+	 */
+	//
+	private Long faceprice;
 	
 	/**
 	 * 版本号
@@ -202,6 +279,38 @@ public class DrmCompany extends DomainObject{
     */
 
 	/**
+	 * 设置主键
+	 * @param id 主键
+	 */
+	public void setId(java.lang.Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * 获取主键
+	 * @return 主键
+	 */
+	public java.lang.Integer getId() {
+		return this.id;
+	}
+
+	/**
+	 * 设置用户ID
+	 * @param userId 用户ID
+	 */
+	public void setUserId(java.lang.Integer userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * 获取用户ID
+	 * @return 用户ID
+	 */
+	public java.lang.Integer getUserId() {
+		return this.userId;
+	}
+
+	/**
 	 * 设置公司原始库id
 	 * @param companyLibId 公司原始库id
 	 */
@@ -231,6 +340,22 @@ public class DrmCompany extends DomainObject{
 	 */
 	public java.lang.String getCompanyName() {
 		return this.companyName;
+	}
+
+	/**
+	 * 设置部门名称
+	 * @param deptName 部门名称
+	 */
+	public void setDeptName(java.lang.String deptName) {
+		this.deptName = deptName;
+	}
+
+	/**
+	 * 获取部门名称
+	 * @return 部门名称
+	 */
+	public java.lang.String getDeptName() {
+		return this.deptName;
 	}
 
 	/**
@@ -518,6 +643,22 @@ public class DrmCompany extends DomainObject{
 	}
 
 	/**
+	 * 设置提供的信息
+	 * @param provideContent 提供的信息
+	 */
+	public void setProvideContent(java.lang.String provideContent) {
+		this.provideContent = provideContent;
+	}
+
+	/**
+	 * 获取提供的信息
+	 * @return 提供的信息
+	 */
+	public java.lang.String getProvideContent() {
+		return this.provideContent;
+	}
+
+	/**
 	 * 设置公司信息字数统计
 	 * @param wordCount 公司信息字数统计
 	 */
@@ -531,6 +672,150 @@ public class DrmCompany extends DomainObject{
 	 */
 	public java.lang.Integer getWordCount() {
 		return this.wordCount;
+	}
+
+	/**
+	 * 设置提供信息服务的方式（qq/微信/电话/平台展示/站内信/邮件）
+	 * @param provideType 提供信息服务的方式（qq/微信/电话/平台展示/站内信/邮件）
+	 */
+	public void setProvideType(java.lang.Integer provideType) {
+		this.provideType = provideType;
+	}
+
+	/**
+	 * 获取提供信息服务的方式（qq/微信/电话/平台展示/站内信/邮件）
+	 * @return 提供信息服务的方式（qq/微信/电话/平台展示/站内信/邮件）
+	 */
+	public java.lang.Integer getProvideType() {
+		return this.provideType;
+	}
+
+	/**
+	 * 设置是否提供QQ方式
+	 * @param qq 是否提供QQ方式
+	 */
+	public void setQq(java.lang.Integer qq) {
+		this.qq = qq;
+	}
+
+	/**
+	 * 获取是否提供QQ方式
+	 * @return 是否提供QQ方式
+	 */
+	public java.lang.Integer getQq() {
+		return this.qq;
+	}
+
+	/**
+	 * 设置是否提供weixin方式
+	 * @param weixin 是否提供weixin方式
+	 */
+	public void setWeixin(java.lang.Integer weixin) {
+		this.weixin = weixin;
+	}
+
+	/**
+	 * 获取是否提供weixin方式
+	 * @return 是否提供weixin方式
+	 */
+	public java.lang.Integer getWeixin() {
+		return this.weixin;
+	}
+
+	/**
+	 * 设置是否提供电话方式
+	 * @param phone 是否提供电话方式
+	 */
+	public void setPhone(java.lang.Integer phone) {
+		this.phone = phone;
+	}
+
+	/**
+	 * 获取是否提供电话方式
+	 * @return 是否提供电话方式
+	 */
+	public java.lang.Integer getPhone() {
+		return this.phone;
+	}
+
+	/**
+	 * 设置是否提供email方式
+	 * @param email 是否提供email方式
+	 */
+	public void setEmail(java.lang.Integer email) {
+		this.email = email;
+	}
+
+	/**
+	 * 获取是否提供email方式
+	 * @return 是否提供email方式
+	 */
+	public java.lang.Integer getEmail() {
+		return this.email;
+	}
+
+	/**
+	 * 设置是否提供站内信方式
+	 * @param zhanneixin 是否提供站内信方式
+	 */
+	public void setZhanneixin(java.lang.Integer zhanneixin) {
+		this.zhanneixin = zhanneixin;
+	}
+
+	/**
+	 * 获取是否提供站内信方式
+	 * @return 是否提供站内信方式
+	 */
+	public java.lang.Integer getZhanneixin() {
+		return this.zhanneixin;
+	}
+
+	/**
+	 * 设置直接在平台展示
+	 * @param ptshow 直接在平台展示
+	 */
+	public void setPtshow(java.lang.Integer ptshow) {
+		this.ptshow = ptshow;
+	}
+
+	/**
+	 * 获取直接在平台展示
+	 * @return 直接在平台展示
+	 */
+	public java.lang.Integer getPtshow() {
+		return this.ptshow;
+	}
+
+	/**
+	 * 设置标价
+	 * @param price 标价
+	 */
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+
+	/**
+	 * 获取标价
+	 * @return 标价
+	 */
+	public Long getPrice() {
+		return this.price;
+	}
+
+	/**
+	 * 设置线下服务价格
+	 * @param faceprice 线下服务价格
+	 */
+	public void setFaceprice(Long faceprice) {
+		this.faceprice = faceprice;
+	}
+
+	/**
+	 * 获取线下服务价格
+	 * @return 线下服务价格
+	 */
+	public Long getFaceprice() {
+		return this.faceprice;
 	}
 
 	/**
@@ -664,8 +949,10 @@ public class DrmCompany extends DomainObject{
 	public String toString() {
 		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
 			.append("Id",getId())
+			.append("UserId",getUserId())
 			.append("CompanyLibId",getCompanyLibId())
 			.append("CompanyName",getCompanyName())
+			.append("DeptName",getDeptName())
 			.append("CompanySize",getCompanySize())
 			.append("Address",getAddress())
 			.append("Sexratio",getSexratio())
@@ -682,7 +969,17 @@ public class DrmCompany extends DomainObject{
 			.append("JobDuration",getJobDuration())
 			.append("Overtime",getOvertime())
 			.append("Hasbus",getHasbus())
+			.append("ProvideContent",getProvideContent())
 			.append("WordCount",getWordCount())
+			.append("ProvideType",getProvideType())
+			.append("Qq",getQq())
+			.append("Weixin",getWeixin())
+			.append("Phone",getPhone())
+			.append("Email",getEmail())
+			.append("Zhanneixin",getZhanneixin())
+			.append("Ptshow",getPtshow())
+			.append("Price",getPrice())
+			.append("Faceprice",getFaceprice())
 			.append("Version",getVersion())
 			.append("Disabled",getDisabled())
 			.append("CreateUserid",getCreateUserid())

@@ -25,7 +25,16 @@ public interface Service<T extends DomainObject> {
      * @exception {说明在某情况下,将发生什么异常}
      */
     public Integer save(T entity);
-
+    
+    /**
+     * {新增或者修改}
+     * 
+     * @param {引入参数名} {引入参数说明}
+     * @return {返回正数，新增成功，返回0修改成功，返回-1操作异常} {返回参数说明}
+     * @exception {说明在某情况下,将发生什么异常}
+     */
+    public Integer saveORupdate(T entity);
+    
     /**
      * {方法的功能/动作描述}
      * 

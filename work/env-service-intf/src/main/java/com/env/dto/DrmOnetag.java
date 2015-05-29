@@ -48,6 +48,7 @@ public class DrmOnetag extends DomainObject{
 	 */
 	//
 	private java.lang.Integer userid;
+	private java.lang.Integer companyid;
 	
 	/**
 	 * 一级标签库id
@@ -305,7 +306,15 @@ public class DrmOnetag extends DomainObject{
 		return this.updateTime;
 	}
 
-    /**
+    public java.lang.Integer getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(java.lang.Integer companyid) {
+		this.companyid = companyid;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */

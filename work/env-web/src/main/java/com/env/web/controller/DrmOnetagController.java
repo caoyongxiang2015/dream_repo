@@ -13,23 +13,25 @@
  */
 package com.env.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.env.commons.utils.UserUtils;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IDrmOnetagService;
-
 import com.env.dto.DrmOnetag;
+import com.env.dto.PtUser;
+import com.env.service.intf.IDrmOnetagService;
 import com.env.vo.DrmOnetagVo;
 
 
@@ -51,6 +53,23 @@ public class DrmOnetagController extends BaseController {
 	@Autowired
 	private IDrmOnetagService drmOnetagService;
 
+	@ResponseBody
+	@RequestMapping(value = "getonetagid/{companyid}")
+	public String getonetagid( @PathVariable Integer companyid){
+		
+		PtUser user = (PtUser)UserUtils.getCurrentUser();
+		List<DrmOnetag> ls = drmOnetagService.getonetagid(user.getId(), companyid);
+		
+		StringBuffer buf = new StringBuffer();
+		if(ls!=null && ls.size()>0){
+			for(int i=0;i<ls.size();i++){
+				DrmOnetag one = ls.get(i);
+				buf.append(one.getId()).append(",");
+			}
+		}
+		System.out.println(buf.toString());
+		return buf.toString();
+	}
 
 	/**
 	 * 去列表页面

@@ -13,9 +13,13 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmCompanyDao;
 import com.env.dto.DrmCompany;
 
@@ -29,4 +33,9 @@ import com.env.dto.DrmCompany;
  */
 @Repository("drmCompanyDao")
 public class DrmCompanyDao extends DefaultDaoImpl<DrmCompany> implements IDrmCompanyDao<DrmCompany> {
+	public List<DrmCompany> queryAllByUserid(Integer userId) {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("userId", userId);
+		return this.query(getStatement(), map);
+	}
 }

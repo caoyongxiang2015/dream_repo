@@ -11,6 +11,7 @@
 		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="userid" column="userid" />
+		<result property="companyid" column="companyid" />
 		<result property="onetaglibid" column="onetaglibid" />
 		<result property="tagname" column="tagname" />
 		<result property="canprovide" column="canprovide" />
@@ -26,7 +27,7 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmOnetag.columns">
 	    <![CDATA[
-        id, userid, onetaglibid, tagname, canprovide, version, disabled, create_userid, create_time, update_userid, update_time
+        id, userid,companyid, onetaglibid, tagname, canprovide, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
 
@@ -35,7 +36,7 @@
 	    <![CDATA[
 	        INSERT INTO DRM_ONETAG (
 	        	id, 
-	        	userid, 
+	        	userid, companyid,
 	        	onetaglibid, 
 	        	tagname, 
 	        	canprovide, 
@@ -48,6 +49,7 @@
 	        ) VALUES (
 	        	#id#, 
 	        	#userid#, 
+	        	#companyid#, 
 	        	#onetaglibid#, 
 	        	#tagname#, 
 	        	#canprovide#, 
@@ -71,6 +73,7 @@
 	        INSERT INTO DRM_ONETAG (
 	        	id, 
 	        	userid, 
+	        	companyid, 
 	        	onetaglibid, 
 	        	tagname, 
 	        	canprovide, 
@@ -83,6 +86,7 @@
 	        ) VALUES (
 	        	#id#, 
 	        	#userid#, 
+	        	#companyid#, 
 	        	#onetaglibid#, 
 	        	#tagname#, 
 	        	#canprovide#, 
@@ -105,6 +109,7 @@
 	    <![CDATA[
 	        UPDATE DRM_ONETAG SET
 		        userid = #userid#, 
+		        companyid = #companyid#, 
 		        onetaglibid = #onetaglibid#, 
 		        tagname = #tagname#, 
 		        canprovide = #canprovide#, 
@@ -145,6 +150,7 @@
 		        id = #id#
 	    ]]>
 	</select>
+
 
 	<!-- 用于分页查询抽取的公共的条件 -->
 	<sql id="drmOnetag.queryPage">
@@ -236,4 +242,17 @@
 		    FROM DRM_ONETAG
 	    ]]>
 	</select>
+	
+	
+	<select id="getonetagid" resultMap="drmOnetag">
+		SELECT
+		<include refid="drmOnetag.columns" />
+	    <![CDATA[
+	        FROM DRM_ONETAG 
+	        WHERE 
+		        userid = #userid#
+		    AND	companyid = #companyid#
+	    ]]>
+	</select>
+	
 </sqlMap>

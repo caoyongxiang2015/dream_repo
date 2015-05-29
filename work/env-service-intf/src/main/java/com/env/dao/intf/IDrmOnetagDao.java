@@ -13,8 +13,9 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
 
+import com.env.dao.api.Dao;
 import com.env.dto.DrmOnetag;
 
 /**
@@ -26,4 +27,5 @@ import com.env.dto.DrmOnetag;
  * @since 1.0
  */
 public interface IDrmOnetagDao<T extends DrmOnetag> extends Dao<T> {
+	public List<DrmOnetag> getonetagid(Integer userid,Integer companyid);
 }

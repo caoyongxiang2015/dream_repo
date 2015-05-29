@@ -31,4 +31,5 @@ public interface IPtUserService<T extends PtUser> extends Service<T> {
 	PtUser loginUser(String loginId, String password);
 
 	PtUser getByLoginid(String loginId);
+	
 }

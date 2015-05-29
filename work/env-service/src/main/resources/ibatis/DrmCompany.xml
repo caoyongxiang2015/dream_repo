@@ -10,8 +10,10 @@
 		<!-- jdbcType="varchar" javaType="java.lang.String" -->
 		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
+		<result property="userId" column="user_id" />
 		<result property="companyLibId" column="company_lib_id" />
 		<result property="companyName" column="company_name" />
+		<result property="deptName" column="dept_name" />
 		<result property="companySize" column="company_size" />
 		<result property="address" column="address" />
 		<result property="sexratio" column="sexratio" />
@@ -28,7 +30,17 @@
 		<result property="jobDuration" column="job_duration" />
 		<result property="overtime" column="overtime" />
 		<result property="hasbus" column="hasbus" />
+		<result property="provideContent" column="provide_content" />
 		<result property="wordCount" column="word_count" />
+		<result property="provideType" column="provide_type" />
+		<result property="qq" column="qq" />
+		<result property="weixin" column="weixin" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<result property="zhanneixin" column="zhanneixin" />
+		<result property="ptshow" column="ptshow" />
+		<result property="price" column="price" />
+		<result property="faceprice" column="faceprice" />
 		<result property="version" column="version" />
 		<result property="disabled" column="disabled" />
 		<result property="createUserid" column="create_userid" />
@@ -41,7 +53,7 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmCompany.columns">
 	    <![CDATA[
-        id, company_lib_id, company_name, company_size, address, sexratio, culture, advantage, weakness, traffic, postname, workcontent, atmosphere, boss, indate, outdate, job_duration, overtime, hasbus, word_count, version, disabled, create_userid, create_time, update_userid, update_time
+        id, user_id, company_lib_id, company_name, dept_name, company_size, address, sexratio, culture, advantage, weakness, traffic, postname, workcontent, atmosphere, boss, indate, outdate, job_duration, overtime, hasbus, provide_content, word_count, provide_type, qq, weixin, phone, email, zhanneixin, ptshow, price, faceprice, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
 
@@ -50,8 +62,10 @@
 	    <![CDATA[
 	        INSERT INTO DRM_COMPANY (
 	        	id, 
+	        	user_id, 
 	        	company_lib_id, 
 	        	company_name, 
+	        	dept_name, 
 	        	company_size, 
 	        	address, 
 	        	sexratio, 
@@ -68,7 +82,17 @@
 	        	job_duration, 
 	        	overtime, 
 	        	hasbus, 
+	        	provide_content, 
 	        	word_count, 
+	        	provide_type, 
+	        	qq, 
+	        	weixin, 
+	        	phone, 
+	        	email, 
+	        	zhanneixin, 
+	        	ptshow, 
+	        	price, 
+	        	faceprice, 
 	        	version, 
 	        	disabled, 
 	        	create_userid, 
@@ -77,8 +101,10 @@
 	        	update_time
 	        ) VALUES (
 	        	#id#, 
+	        	#userId#, 
 	        	#companyLibId#, 
 	        	#companyName#, 
+	        	#deptName#, 
 	        	#companySize#, 
 	        	#address#, 
 	        	#sexratio#, 
@@ -95,7 +121,17 @@
 	        	#jobDuration#, 
 	        	#overtime#, 
 	        	#hasbus#, 
+	        	#provideContent#, 
 	        	#wordCount#, 
+	        	#provideType#, 
+	        	#qq#, 
+	        	#weixin#, 
+	        	#phone#, 
+	        	#email#, 
+	        	#zhanneixin#, 
+	        	#ptshow#, 
+	        	#price#, 
+	        	#faceprice#, 
 	        	#version#, 
 	        	#disabled#, 
 	        	#createUserid#, 
@@ -110,13 +146,16 @@
 		</selectKey>
 	</insert>
 
+
 	<!-- 新增记录 -->
 	<insert id="insert" parameterClass="drmCompanyEntity">
 	    <![CDATA[
 	        INSERT INTO DRM_COMPANY (
 	        	id, 
+	        	user_id, 
 	        	company_lib_id, 
 	        	company_name, 
+	        	dept_name, 
 	        	company_size, 
 	        	address, 
 	        	sexratio, 
@@ -133,7 +172,17 @@
 	        	job_duration, 
 	        	overtime, 
 	        	hasbus, 
+	        	provide_content, 
 	        	word_count, 
+	        	provide_type, 
+	        	qq, 
+	        	weixin, 
+	        	phone, 
+	        	email, 
+	        	zhanneixin, 
+	        	ptshow, 
+	        	price, 
+	        	faceprice, 
 	        	version, 
 	        	disabled, 
 	        	create_userid, 
@@ -142,8 +191,10 @@
 	        	update_time
 	        ) VALUES (
 	        	#id#, 
+	        	#userId#, 
 	        	#companyLibId#, 
 	        	#companyName#, 
+	        	#deptName#, 
 	        	#companySize#, 
 	        	#address#, 
 	        	#sexratio#, 
@@ -160,7 +211,17 @@
 	        	#jobDuration#, 
 	        	#overtime#, 
 	        	#hasbus#, 
+	        	#provideContent#, 
 	        	#wordCount#, 
+	        	#provideType#, 
+	        	#qq#, 
+	        	#weixin#, 
+	        	#phone#, 
+	        	#email#, 
+	        	#zhanneixin#, 
+	        	#ptshow#, 
+	        	#price#, 
+	        	#faceprice#, 
 	        	#version#, 
 	        	#disabled#, 
 	        	#createUserid#, 
@@ -179,8 +240,10 @@
 	<update id="update" parameterClass="drmCompanyEntity">
 	    <![CDATA[
 	        UPDATE DRM_COMPANY SET
+		        user_id = #userId#, 
 		        company_lib_id = #companyLibId#, 
 		        company_name = #companyName#, 
+		        dept_name = #deptName#, 
 		        company_size = #companySize#, 
 		        address = #address#, 
 		        sexratio = #sexratio#, 
@@ -197,7 +260,17 @@
 		        job_duration = #jobDuration#, 
 		        overtime = #overtime#, 
 		        hasbus = #hasbus#, 
+		        provide_content = #provideContent#, 
 		        word_count = #wordCount#, 
+		        provide_type = #provideType#, 
+		        qq = #qq#, 
+		        weixin = #weixin#, 
+		        phone = #phone#, 
+		        email = #email#, 
+		        zhanneixin = #zhanneixin#, 
+		        ptshow = #ptshow#, 
+		        price = #price#, 
+		        faceprice = #faceprice#, 
 		        version = #version#, 
 		        disabled = #disabled#, 
 		        create_userid = #createUserid#, 
@@ -212,8 +285,11 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_COMPANY WHERE
-	        id = #id#
+	        UPDATE DRM_COMPANY SET
+		        disabled = 1, 
+		        update_time = now()
+	        WHERE 
+		        id = #id#
 	    ]]>
 	</delete>
 
@@ -243,6 +319,11 @@
 				<isNotEmpty prepend="AND" property="entity.id">
 		            <![CDATA[
 					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.userId">
+		            <![CDATA[
+					user_id,  = #entity.userId#
 		            ]]>
 				</isNotEmpty>
 				<isNotEmpty prepend="AND" property="entity.companyLibId">
@@ -399,6 +480,16 @@
 		<include refid="drmCompany.columns" />
 	    <![CDATA[
 		    FROM DRM_COMPANY
+		    WHERE disabled = 0
+	    ]]>
+	</select>
+	<select id="queryAllByUserid" resultMap="drmCompany">
+		SELECT
+		<include refid="drmCompany.columns" />
+	    <![CDATA[
+		    FROM DRM_COMPANY
+		    WHERE disabled = 0
+		    AND	  user_id = #userId#
 	    ]]>
 	</select>
 </sqlMap>

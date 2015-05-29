@@ -2,7 +2,7 @@
 <div class="container${fluid}">
 <div class="row${fluid}">
 	<div class="span10 offset1" style="margin-top: 20px;" >
-		<div class="pull-right">Copyright &copy; ENVBASE</div>
+		<div class="pull-center">Copyright &copy; ENVBASE</div>
 	</div>
 </div></div>
 

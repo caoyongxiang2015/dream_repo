@@ -1,6 +1,9 @@
 package com.env.service.impl;
 
+//import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+//import org.apache.commons.beanutils.PropertyUtils;
 
 import com.env.core.domain.DomainObject;
 import com.env.dao.api.Dao;
@@ -14,9 +17,37 @@ import com.env.dao.api.QueryParams;
 public abstract class DefaultServiceImpl<T extends DomainObject> implements
         Service<T> {
 
-    public Integer save(T entity) {
+	public Integer save(T entity) {
         return getDao().save(entity);
     }
+	
+	public Integer saveORupdate(T entity){
+//		if(null!=entity){
+//			if(null==entity.getId()){
+//				//insert
+//				return getDao().save(entity);
+//			} else {
+//				//update
+//				T old = getDao().getById(entity.getId());
+//				try {
+//					PropertyUtils.copyProperties(old, entity);
+//					getDao().update(old);
+//				} catch (IllegalAccessException e) {
+//					e.printStackTrace();
+//					return -1;
+//				} catch (InvocationTargetException e) {
+//					e.printStackTrace();
+//					return -1;
+//				} catch (NoSuchMethodException e) {
+//					e.printStackTrace();
+//					return -1;
+//				}
+//				return 0;
+//			}
+//			
+//		}
+		return 0;
+	}
 
     public void update(T entity) {
         getDao().update(entity);

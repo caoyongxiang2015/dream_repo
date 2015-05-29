@@ -48,12 +48,14 @@ public class DrmTwotag extends DomainObject{
 	 */
 	//
 	private java.lang.Integer userid;
+	private java.lang.Integer companyid;
 	
 	/**
 	 * 一级标签id
 	 */
 	//
 	private java.lang.Integer onetagid;
+	private java.lang.Integer rownum;
 	
 	/**
 	 * 一级标签名称
@@ -126,6 +128,14 @@ public class DrmTwotag extends DomainObject{
 	 */
 	public void setUserid(java.lang.Integer userid) {
 		this.userid = userid;
+	}
+
+	public java.lang.Integer getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(java.lang.Integer rownum) {
+		this.rownum = rownum;
 	}
 
 	/**
@@ -324,7 +334,15 @@ public class DrmTwotag extends DomainObject{
 		return this.updateTime;
 	}
 
-    /**
+    public java.lang.Integer getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(java.lang.Integer companyid) {
+		this.companyid = companyid;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */

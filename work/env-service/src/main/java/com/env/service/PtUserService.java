@@ -13,11 +13,14 @@
  */
 package com.env.service;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.env.dao.api.Dao;
 import com.env.service.impl.DefaultServiceImpl;
-
 import com.env.dao.intf.IPtUserDao;
 import com.env.service.intf.IPtUserService;
 import com.env.dto.PtUser;
@@ -62,4 +65,5 @@ public class PtUserService<T extends PtUser> extends DefaultServiceImpl<T> imple
 		return ptUserDao.getByLoginid(loginId);
 	}
 
+	
 }

@@ -13,9 +13,13 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmOnetagDao;
 import com.env.dto.DrmOnetag;
 
@@ -29,4 +33,13 @@ import com.env.dto.DrmOnetag;
  */
 @Repository("drmOnetagDao")
 public class DrmOnetagDao extends DefaultDaoImpl<DrmOnetag> implements IDrmOnetagDao<DrmOnetag> {
+	public List<DrmOnetag> getonetagid(Integer userid,Integer companyid){
+		
+		Map params = new HashMap();
+		params.put("userid", userid);
+		params.put("companyid", companyid);
+//		params.put("onetaglibid", onetaglibid);
+		
+		return this.query(getStatement(), params);
+	}
 }

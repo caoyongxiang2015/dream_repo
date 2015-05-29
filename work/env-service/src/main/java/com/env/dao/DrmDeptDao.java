@@ -13,9 +13,12 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmDeptDao;
 import com.env.dto.DrmDept;
 
@@ -29,4 +32,11 @@ import com.env.dto.DrmDept;
  */
 @Repository("drmDeptDao")
 public class DrmDeptDao extends DefaultDaoImpl<DrmDept> implements IDrmDeptDao<DrmDept> {
+
+	@Override
+	public void deleteByCompanyId(Integer id) {
+		Map params = new HashMap();
+		params.put("companyId", id);
+		this.delete(getStatement(), params);
+	}
 }

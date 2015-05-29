@@ -28,7 +28,10 @@ public class PtUserVo{
 	 * PtUser实体
 	 */
 	private PtUser entity;
-	
+	/**
+	 * 确认密码
+	 */
+	private String pwdconfirm;
 
 	/**
 	 * 设置PtUser实体
@@ -45,4 +48,13 @@ public class PtUserVo{
 	public PtUser getEntity() {
 		return this.entity;
 	}
+
+	public String getPwdconfirm() {
+		return pwdconfirm;
+	}
+
+	public void setPwdconfirm(String pwdconfirm) {
+		this.pwdconfirm = pwdconfirm;
+	}
+	
 }

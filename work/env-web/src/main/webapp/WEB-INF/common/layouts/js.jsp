@@ -36,6 +36,10 @@
 <!-- 自定义初始化工具 -->
 <script type="text/javascript"
 	src="${static_common}/customize/js/envbase.js"></script>
+<script type="text/javascript"
+	src="${static_common}/script/icheck/jquery.icheck.min.js?v=0.9.1"></script>
+	
+  
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		// 初始化页面

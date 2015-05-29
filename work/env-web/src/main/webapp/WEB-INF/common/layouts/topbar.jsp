@@ -13,16 +13,19 @@
 					</a>
 					<div class="nav-collapse collapse">
 						<ul class="nav" role="menu" aria-labelledby="dLabel">
-
 							<li><a href="${ctx}/">Home</a></li>
 							<li><a href="${ctx}/sample/index">Sample</a></li>
-							<li><a href="${ctx}/userSample/list">单表样例</a></li>
-							<li><a href="${ctx}/userDetailSample/userDetailList">多表样例</a></li>
-							<li><a href="${ctx}/uploadSample/uploadPage">附件样例</a></li>
-							<li><a href="${ctx}/userSample/userListALL">文档下载样例</a></li>
-							<shiro:hasPermission name="USER_ADD">
+							<li><input type="text" class="span12 input-medium search-query" style="height: 28px; margin-top: 4px;margin-bottom: 4px;" name="companyName" placeholder="请输入公司名称"></li>
+							<li><input type="button" value="搜索"></li>
+							<li><input type="button" value="发布需求"></li>
+							<li><a href="${ctx}/myhome">我的主页</a></li>
+							<li><a href="${ctx}/ptuserset">设置</a></li>
+							<li><a href="${ctx}/uploadSample/uploadPage">订单</a></li>
+							<li><a href="${ctx}/userSample/userListALL">信息</a></li>
+							<li><a href="${ctx}/userSample/userListALL">站内信</a></li>
+							<%-- <shiro:hasPermission name="USER_ADD">
 								<li><a href="#">权限加载成功</a></li>
-							</shiro:hasPermission>
+							</shiro:hasPermission> --%>
 						</ul>
 						<ul class="nav pull-right">
 							<li class="dropdown pull-right">

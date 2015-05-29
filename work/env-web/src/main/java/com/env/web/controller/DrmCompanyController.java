@@ -13,24 +13,27 @@
  */
 package com.env.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.env.commons.utils.UserUtils;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IDrmCompanyService;
-
 import com.env.dto.DrmCompany;
+import com.env.dto.PtUser;
+import com.env.service.intf.IDrmCompanyService;
 import com.env.vo.DrmCompanyVo;
+import com.env.vo.DrmDeptVo;
 
 
 /**
@@ -106,15 +109,16 @@ public class DrmCompanyController extends BaseController {
 	 * @return 结果视图
 	 */
 	@RequestMapping(value = "save")
-	public String save (DrmCompanyVo drmCompanyVo ){
-		Integer id = -1;
+	public String save (DrmCompanyVo drmCompanyVo,DrmDeptVo drmDeptVo ){
 		try{
-			id = drmCompanyService.save(drmCompanyVo.getEntity());
+			PtUser user = (PtUser)UserUtils.getCurrentUser();
+//			drmCompanyService.saveCompanyAndDept(drmCompanyVo.getEntity(), drmDeptVo.getEntity());
+			drmCompanyService.saveCompanyAndDept(drmCompanyVo.getEntity(), drmDeptVo.getEntity(), user.getId());
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-		return "redirect:/drmcompany/detail/"+id;
+		return "redirect:/myhome";
 	}
 
 	/**
@@ -125,17 +129,22 @@ public class DrmCompanyController extends BaseController {
 	 * @param request 请求对象
 	 * @return 结果视图
 	 */
+	@ResponseBody
 	@RequestMapping(value = "delete/{id}")
 	public String delete (@PathVariable("id") Integer id, Page page, HttpServletRequest request){
 		try{
 			if(null != id){
-			    drmCompanyService.delete(id);
+//			    drmCompanyService.delete(id);
+			    drmCompanyService.deleteCompanyAndDept(id);
+			}else{
+				return "0";
 			}
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
+			return "-1";
 		}
-		return "redirect:/drmcompany/list";
+		return "1";
 	}
 
 	/**

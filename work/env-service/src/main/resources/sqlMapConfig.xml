@@ -7,6 +7,7 @@
 	<settings cacheModelsEnabled="true" enhancementEnabled="true"
 		lazyLoadingEnabled="false" errorTracingEnabled="true" maxRequests="32"
 		maxSessions="20" maxTransactions="5" useStatementNamespaces="true" />
+	<sqlMap resource="ibatis/DrmTwotag.xml" />
 	
 	<sqlMap resource="ibatis/PtUser.xml" />
 	<sqlMap resource="ibatis/PtCompany.xml" />
@@ -20,6 +21,5 @@
 	<sqlMap resource="ibatis/DrmDeptLib.xml" />
 	<sqlMap resource="ibatis/DrmOnetag.xml" />
 	<sqlMap resource="ibatis/DrmOnetagLib.xml" />
-	<sqlMap resource="ibatis/DrmTwotag.xml" />
 	<sqlMap resource="ibatis/DrmTwotagLib.xml" />
 </sqlMapConfig>

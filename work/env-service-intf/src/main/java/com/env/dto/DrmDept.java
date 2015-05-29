@@ -48,7 +48,8 @@ public class DrmDept extends DomainObject{
 	 */
 	//
 	private java.lang.Integer companyLibId;
-	
+
+	private java.lang.Integer userId;
 	/**
 	 * 我的公司ID
 	 */
@@ -523,8 +524,18 @@ public class DrmDept extends DomainObject{
 	public java.util.Date getUpdateTime() {
 		return this.updateTime;
 	}
+	
+	
 
-    /**
+    public java.lang.Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(java.lang.Integer userId) {
+		this.userId = userId;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */

@@ -13,8 +13,9 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
 
+import com.env.dao.api.Dao;
 import com.env.dto.DrmCompany;
 
 /**
@@ -26,4 +27,5 @@ import com.env.dto.DrmCompany;
  * @since 1.0
  */
 public interface IDrmCompanyDao<T extends DrmCompany> extends Dao<T> {
+	List<DrmCompany> queryAllByUserid(Integer userId);
 }

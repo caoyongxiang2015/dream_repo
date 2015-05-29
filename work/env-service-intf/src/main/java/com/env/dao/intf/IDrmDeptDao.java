@@ -26,4 +26,5 @@ import com.env.dto.DrmDept;
  * @since 1.0
  */
 public interface IDrmDeptDao<T extends DrmDept> extends Dao<T> {
+	void deleteByCompanyId(Integer id);
 }
