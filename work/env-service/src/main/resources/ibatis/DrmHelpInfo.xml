@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmHelpInfo">
+
+	<typeAlias alias="drmHelpInfoEntity" type="com.env.dto.DrmHelpInfo" />
+	<resultMap id="drmHelpInfo" class="com.env.dto.DrmHelpInfo">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="companyName" column="company_name" />
+		<result property="nickname" column="nickname" />
+		<result property="contactType" column="contact_type" />
+		<result property="opeTime" column="ope_time" />
+		<result property="evalContent" column="eval_content" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmHelpInfo.columns">
+	    <![CDATA[
+        id, company_name, nickname, contact_type, ope_time, eval_content
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmHelpInfoEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_HELP_INFO (
+	        	id, 
+	        	company_name, 
+	        	nickname, 
+	        	contact_type, 
+	        	ope_time, 
+	        	eval_content
+	        ) VALUES (
+	        	#id#, 
+	        	#companyName#, 
+	        	#nickname#, 
+	        	#contactType#, 
+	        	#opeTime#, 
+	        	#evalContent#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmHelpInfoEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_HELP_INFO (
+	        	id, 
+	        	company_name, 
+	        	nickname, 
+	        	contact_type, 
+	        	ope_time, 
+	        	eval_content
+	        ) VALUES (
+	        	#id#, 
+	        	#companyName#, 
+	        	#nickname#, 
+	        	#contactType#, 
+	        	#opeTime#, 
+	        	#evalContent#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmHelpInfoEntity">
+	    <![CDATA[
+	        UPDATE DRM_HELP_INFO SET
+		        company_name = #companyName#, 
+		        nickname = #nickname#, 
+		        contact_type = #contactType#, 
+		        ope_time = #opeTime#, 
+		        eval_content = #evalContent#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_HELP_INFO WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_HELP_INFO WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmHelpInfo">
+		SELECT
+		<include refid="drmHelpInfo.columns" />
+	    <![CDATA[
+	        FROM DRM_HELP_INFO 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmHelpInfo.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyName">
+		            <![CDATA[
+					company_name = #entity.companyName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.nickname">
+		            <![CDATA[
+					nickname = #entity.nickname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.contactType">
+		            <![CDATA[
+					contact_type = #entity.contactType#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.opeTime">
+		            <![CDATA[
+					ope_time = #entity.opeTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.evalContent">
+		            <![CDATA[
+					eval_content = #entity.evalContent#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_HELP_INFO
+		<include refid="drmHelpInfo.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmHelpInfo">
+		SELECT
+		<include refid="drmHelpInfo.columns" />
+	    <![CDATA[
+	        FROM DRM_HELP_INFO 
+	    ]]>
+		<include refid="drmHelpInfo.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmHelpInfo">
+		SELECT
+		<include refid="drmHelpInfo.columns" />
+	    <![CDATA[
+		    FROM DRM_HELP_INFO
+	    ]]>
+	</select>
+</sqlMap>

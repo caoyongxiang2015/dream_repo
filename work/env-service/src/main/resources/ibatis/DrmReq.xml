@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmReq">
+
+	<typeAlias alias="drmReqEntity" type="com.env.dto.DrmReq" />
+	<resultMap id="drmReq" class="com.env.dto.DrmReq">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="reqNum" column="req_num" />
+		<result property="companyName" column="company_name" />
+		<result property="companyShotname" column="company_shotname" />
+		<result property="price" column="price" />
+		<result property="faceprice" column="faceprice" />
+		<result property="sendUserId" column="send_user_id" />
+		<result property="sendUserPhone" column="send_user_phone" />
+		<result property="sendUserNickname" column="send_user_nickname" />
+		<result property="acceptState" column="accept_state" />
+		<result property="acceptUserId" column="accept_user_id" />
+		<result property="acceptDuration" column="accept_duration" />
+		<result property="openContact" column="open_contact" />
+		<result property="acceptTime" column="accept_time" />
+		<result property="depositTime" column="deposit_time" />
+		<result property="completeTime" column="complete_time" />
+		<result property="endTime" column="end_time" />
+		<result property="stopTime" column="stop_time" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="overtime" column="overtime" />
+		<result property="evalScore" column="eval_score" />
+		<result property="evalContent" column="eval_content" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmReq.columns">
+	    <![CDATA[
+        id, req_num, company_name, company_shotname, price, faceprice, send_user_id, send_user_phone, send_user_nickname, accept_state, accept_user_id, accept_duration, open_contact, accept_time, deposit_time, complete_time, end_time, stop_time, title, content, overtime, eval_score, eval_content, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmReqEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_REQ (
+	        	id, 
+	        	req_num, 
+	        	company_name, 
+	        	company_shotname, 
+	        	price, 
+	        	faceprice, 
+	        	send_user_id, 
+	        	send_user_phone, 
+	        	send_user_nickname, 
+	        	accept_state, 
+	        	accept_user_id, 
+	        	accept_duration, 
+	        	open_contact, 
+	        	accept_time, 
+	        	deposit_time, 
+	        	complete_time, 
+	        	end_time, 
+	        	stop_time, 
+	        	title, 
+	        	content, 
+	        	overtime, 
+	        	eval_score, 
+	        	eval_content, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#reqNum#, 
+	        	#companyName#, 
+	        	#companyShotname#, 
+	        	#price#, 
+	        	#faceprice#, 
+	        	#sendUserId#, 
+	        	#sendUserPhone#, 
+	        	#sendUserNickname#, 
+	        	#acceptState#, 
+	        	#acceptUserId#, 
+	        	#acceptDuration#, 
+	        	#openContact#, 
+	        	#acceptTime#, 
+	        	#depositTime#, 
+	        	#completeTime#, 
+	        	#endTime#, 
+	        	#stopTime#, 
+	        	#title#, 
+	        	#content#, 
+	        	#overtime#, 
+	        	#evalScore#, 
+	        	#evalContent#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmReqEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_REQ (
+	        	id, 
+	        	req_num, 
+	        	company_name, 
+	        	company_shotname, 
+	        	price, 
+	        	faceprice, 
+	        	send_user_id, 
+	        	send_user_phone, 
+	        	send_user_nickname, 
+	        	accept_state, 
+	        	accept_user_id, 
+	        	accept_duration, 
+	        	open_contact, 
+	        	accept_time, 
+	        	deposit_time, 
+	        	complete_time, 
+	        	end_time, 
+	        	stop_time, 
+	        	title, 
+	        	content, 
+	        	overtime, 
+	        	eval_score, 
+	        	eval_content, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#reqNum#, 
+	        	#companyName#, 
+	        	#companyShotname#, 
+	        	#price#, 
+	        	#faceprice#, 
+	        	#sendUserId#, 
+	        	#sendUserPhone#, 
+	        	#sendUserNickname#, 
+	        	#acceptState#, 
+	        	#acceptUserId#, 
+	        	#acceptDuration#, 
+	        	#openContact#, 
+	        	#acceptTime#, 
+	        	#depositTime#, 
+	        	#completeTime#, 
+	        	#endTime#, 
+	        	#stopTime#, 
+	        	#title#, 
+	        	#content#, 
+	        	#overtime#, 
+	        	#evalScore#, 
+	        	#evalContent#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmReqEntity">
+	    <![CDATA[
+	        UPDATE DRM_REQ SET
+		        req_num = #reqNum#, 
+		        company_name = #companyName#, 
+		        company_shotname = #companyShotname#, 
+		        price = #price#, 
+		        faceprice = #faceprice#, 
+		        send_user_id = #sendUserId#, 
+		        send_user_phone = #sendUserPhone#, 
+		        send_user_nickname = #sendUserNickname#, 
+		        accept_state = #acceptState#, 
+		        accept_user_id = #acceptUserId#, 
+		        accept_duration = #acceptDuration#, 
+		        open_contact = #openContact#, 
+		        accept_time = #acceptTime#, 
+		        deposit_time = #depositTime#, 
+		        complete_time = #completeTime#, 
+		        end_time = #endTime#, 
+		        stop_time = #stopTime#, 
+		        title = #title#, 
+		        content = #content#, 
+		        overtime = #overtime#, 
+		        eval_score = #evalScore#, 
+		        eval_content = #evalContent#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_REQ WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_REQ WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmReq">
+		SELECT
+		<include refid="drmReq.columns" />
+	    <![CDATA[
+	        FROM DRM_REQ 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmReq.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.reqNum">
+		            <![CDATA[
+					req_num = #entity.reqNum#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyName">
+		            <![CDATA[
+					company_name = #entity.companyName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyShotname">
+		            <![CDATA[
+					company_shotname = #entity.companyShotname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.price">
+		            <![CDATA[
+					price = #entity.price#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.faceprice">
+		            <![CDATA[
+					faceprice = #entity.faceprice#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendUserId">
+		            <![CDATA[
+					send_user_id = #entity.sendUserId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendUserPhone">
+		            <![CDATA[
+					send_user_phone = #entity.sendUserPhone#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendUserNickname">
+		            <![CDATA[
+					send_user_nickname = #entity.sendUserNickname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.acceptState">
+		            <![CDATA[
+					accept_state = #entity.acceptState#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.acceptUserId">
+		            <![CDATA[
+					accept_user_id = #entity.acceptUserId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.acceptDuration">
+		            <![CDATA[
+					accept_duration = #entity.acceptDuration#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.openContact">
+		            <![CDATA[
+					open_contact = #entity.openContact#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.acceptTime">
+		            <![CDATA[
+					accept_time = #entity.acceptTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.depositTime">
+		            <![CDATA[
+					deposit_time = #entity.depositTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.completeTime">
+		            <![CDATA[
+					complete_time = #entity.completeTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.endTime">
+		            <![CDATA[
+					end_time = #entity.endTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.stopTime">
+		            <![CDATA[
+					stop_time = #entity.stopTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.title">
+		            <![CDATA[
+					title = #entity.title#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.content">
+		            <![CDATA[
+					content = #entity.content#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.overtime">
+		            <![CDATA[
+					overtime = #entity.overtime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.evalScore">
+		            <![CDATA[
+					eval_score = #entity.evalScore#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.evalContent">
+		            <![CDATA[
+					eval_content = #entity.evalContent#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_REQ
+		<include refid="drmReq.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmReq">
+		SELECT
+		<include refid="drmReq.columns" />
+	    <![CDATA[
+	        FROM DRM_REQ 
+	    ]]>
+		<include refid="drmReq.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmReq">
+		SELECT
+		<include refid="drmReq.columns" />
+	    <![CDATA[
+		    FROM DRM_REQ
+	    ]]>
+	</select>
+</sqlMap>

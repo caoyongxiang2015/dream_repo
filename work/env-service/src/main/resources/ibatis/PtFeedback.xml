@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.PtFeedback">
+
+	<typeAlias alias="ptFeedbackEntity" type="com.env.dto.PtFeedback" />
+	<resultMap id="ptFeedback" class="com.env.dto.PtFeedback">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="content" column="content" />
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="callerName" column="caller_name" />
+		<result property="contactType" column="contact_type" />
+		<result property="submitTime" column="submit_time" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ptFeedback.columns">
+	    <![CDATA[
+        id, content, user_id, user_name, caller_name, contact_type, submit_time, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="ptFeedbackEntity">
+	    <![CDATA[
+	        INSERT INTO PT_FEEDBACK (
+	        	id, 
+	        	content, 
+	        	user_id, 
+	        	user_name, 
+	        	caller_name, 
+	        	contact_type, 
+	        	submit_time, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#content#, 
+	        	#userId#, 
+	        	#userName#, 
+	        	#callerName#, 
+	        	#contactType#, 
+	        	#submitTime#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="ptFeedbackEntity">
+	    <![CDATA[
+	        INSERT INTO PT_FEEDBACK (
+	        	id, 
+	        	content, 
+	        	user_id, 
+	        	user_name, 
+	        	caller_name, 
+	        	contact_type, 
+	        	submit_time, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#content#, 
+	        	#userId#, 
+	        	#userName#, 
+	        	#callerName#, 
+	        	#contactType#, 
+	        	#submitTime#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="ptFeedbackEntity">
+	    <![CDATA[
+	        UPDATE PT_FEEDBACK SET
+		        content = #content#, 
+		        user_id = #userId#, 
+		        user_name = #userName#, 
+		        caller_name = #callerName#, 
+		        contact_type = #contactType#, 
+		        submit_time = #submitTime#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM PT_FEEDBACK WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM PT_FEEDBACK WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="ptFeedback">
+		SELECT
+		<include refid="ptFeedback.columns" />
+	    <![CDATA[
+	        FROM PT_FEEDBACK 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="ptFeedback.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.content">
+		            <![CDATA[
+					content = #entity.content#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.userId">
+		            <![CDATA[
+					user_id = #entity.userId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.userName">
+		            <![CDATA[
+					user_name = #entity.userName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.callerName">
+		            <![CDATA[
+					caller_name = #entity.callerName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.contactType">
+		            <![CDATA[
+					contact_type = #entity.contactType#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.submitTime">
+		            <![CDATA[
+					submit_time = #entity.submitTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM PT_FEEDBACK
+		<include refid="ptFeedback.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="ptFeedback">
+		SELECT
+		<include refid="ptFeedback.columns" />
+	    <![CDATA[
+	        FROM PT_FEEDBACK 
+	    ]]>
+		<include refid="ptFeedback.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="ptFeedback">
+		SELECT
+		<include refid="ptFeedback.columns" />
+	    <![CDATA[
+		    FROM PT_FEEDBACK
+	    ]]>
+	</select>
+</sqlMap>

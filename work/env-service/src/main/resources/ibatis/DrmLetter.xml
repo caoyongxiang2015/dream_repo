@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmLetter">
+
+	<typeAlias alias="drmLetterEntity" type="com.env.dto.DrmLetter" />
+	<resultMap id="drmLetter" class="com.env.dto.DrmLetter">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="sendUserid" column="send_userid" />
+		<result property="sendUsername" column="send_username" />
+		<result property="receiveUserid" column="receive_userid" />
+		<result property="receiveUsername" column="receive_username" />
+		<result property="sendTime" column="send_time" />
+		<result property="readed" column="readed" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmLetter.columns">
+	    <![CDATA[
+        id, title, content, send_userid, send_username, receive_userid, receive_username, send_time, readed, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmLetterEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_LETTER (
+	        	id, 
+	        	title, 
+	        	content, 
+	        	send_userid, 
+	        	send_username, 
+	        	receive_userid, 
+	        	receive_username, 
+	        	send_time, 
+	        	readed, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#title#, 
+	        	#content#, 
+	        	#sendUserid#, 
+	        	#sendUsername#, 
+	        	#receiveUserid#, 
+	        	#receiveUsername#, 
+	        	#sendTime#, 
+	        	#readed#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmLetterEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_LETTER (
+	        	id, 
+	        	title, 
+	        	content, 
+	        	send_userid, 
+	        	send_username, 
+	        	receive_userid, 
+	        	receive_username, 
+	        	send_time, 
+	        	readed, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#title#, 
+	        	#content#, 
+	        	#sendUserid#, 
+	        	#sendUsername#, 
+	        	#receiveUserid#, 
+	        	#receiveUsername#, 
+	        	#sendTime#, 
+	        	#readed#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmLetterEntity">
+	    <![CDATA[
+	        UPDATE DRM_LETTER SET
+		        title = #title#, 
+		        content = #content#, 
+		        send_userid = #sendUserid#, 
+		        send_username = #sendUsername#, 
+		        receive_userid = #receiveUserid#, 
+		        receive_username = #receiveUsername#, 
+		        send_time = #sendTime#, 
+		        readed = #readed#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_LETTER WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_LETTER WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmLetter">
+		SELECT
+		<include refid="drmLetter.columns" />
+	    <![CDATA[
+	        FROM DRM_LETTER 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmLetter.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.title">
+		            <![CDATA[
+					title = #entity.title#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.content">
+		            <![CDATA[
+					content = #entity.content#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendUserid">
+		            <![CDATA[
+					send_userid = #entity.sendUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendUsername">
+		            <![CDATA[
+					send_username = #entity.sendUsername#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.receiveUserid">
+		            <![CDATA[
+					receive_userid = #entity.receiveUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.receiveUsername">
+		            <![CDATA[
+					receive_username = #entity.receiveUsername#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendTime">
+		            <![CDATA[
+					send_time = #entity.sendTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.readed">
+		            <![CDATA[
+					readed = #entity.readed#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_LETTER
+		<include refid="drmLetter.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmLetter">
+		SELECT
+		<include refid="drmLetter.columns" />
+	    <![CDATA[
+	        FROM DRM_LETTER 
+	    ]]>
+		<include refid="drmLetter.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmLetter">
+		SELECT
+		<include refid="drmLetter.columns" />
+	    <![CDATA[
+		    FROM DRM_LETTER
+	    ]]>
+	</select>
+</sqlMap>

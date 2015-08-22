@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmCompany">
+
+	<typeAlias alias="drmCompanyEntity" type="com.env.dto.DrmCompany" />
+	<resultMap id="drmCompany" class="com.env.dto.DrmCompany">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="companyName" column="company_name" />
+		<result property="companyShotname" column="company_shotname" />
+		<result property="deptName" column="dept_name" />
+		<result property="postname" column="postname" />
+		<result property="jobDuration" column="job_duration" />
+		<result property="provideContent" column="provide_content" />
+		<result property="wordCount" column="word_count" />
+		<result property="qq" column="qq" />
+		<result property="weixin" column="weixin" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<result property="zhanneixin" column="zhanneixin" />
+		<result property="ptshow" column="ptshow" />
+		<result property="price" column="price" />
+		<result property="faceprice" column="faceprice" />
+		<result property="remark" column="remark" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmCompany.columns">
+	    <![CDATA[
+        id, user_id, company_name, company_shotname, dept_name, postname, job_duration, provide_content, word_count, qq, weixin, phone, email, zhanneixin, ptshow, price, faceprice, remark, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmCompanyEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_COMPANY (
+	        	id, 
+	        	user_id, 
+	        	company_name, 
+	        	company_shotname, 
+	        	dept_name, 
+	        	postname, 
+	        	job_duration, 
+	        	provide_content, 
+	        	word_count, 
+	        	qq, 
+	        	weixin, 
+	        	phone, 
+	        	email, 
+	        	zhanneixin, 
+	        	ptshow, 
+	        	price, 
+	        	faceprice, 
+	        	remark, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#userId#, 
+	        	#companyName#, 
+	        	#companyShotname#, 
+	        	#deptName#, 
+	        	#postname#, 
+	        	#jobDuration#, 
+	        	#provideContent#, 
+	        	#wordCount#, 
+	        	#qq#, 
+	        	#weixin#, 
+	        	#phone#, 
+	        	#email#, 
+	        	#zhanneixin#, 
+	        	#ptshow#, 
+	        	#price#, 
+	        	#faceprice#, 
+	        	#remark#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmCompanyEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_COMPANY (
+	        	id, 
+	        	user_id, 
+	        	company_name, 
+	        	company_shotname, 
+	        	dept_name, 
+	        	postname, 
+	        	job_duration, 
+	        	provide_content, 
+	        	word_count, 
+	        	qq, 
+	        	weixin, 
+	        	phone, 
+	        	email, 
+	        	zhanneixin, 
+	        	ptshow, 
+	        	price, 
+	        	faceprice, 
+	        	remark, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#userId#, 
+	        	#companyName#, 
+	        	#companyShotname#, 
+	        	#deptName#, 
+	        	#postname#, 
+	        	#jobDuration#, 
+	        	#provideContent#, 
+	        	#wordCount#, 
+	        	#qq#, 
+	        	#weixin#, 
+	        	#phone#, 
+	        	#email#, 
+	        	#zhanneixin#, 
+	        	#ptshow#, 
+	        	#price#, 
+	        	#faceprice#, 
+	        	#remark#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmCompanyEntity">
+	    <![CDATA[
+	        UPDATE DRM_COMPANY SET
+		        user_id = #userId#, 
+		        company_name = #companyName#, 
+		        company_shotname = #companyShotname#, 
+		        dept_name = #deptName#, 
+		        postname = #postname#, 
+		        job_duration = #jobDuration#, 
+		        provide_content = #provideContent#, 
+		        word_count = #wordCount#, 
+		        qq = #qq#, 
+		        weixin = #weixin#, 
+		        phone = #phone#, 
+		        email = #email#, 
+		        zhanneixin = #zhanneixin#, 
+		        ptshow = #ptshow#, 
+		        price = #price#, 
+		        faceprice = #faceprice#, 
+		        remark = #remark#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_COMPANY WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_COMPANY WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmCompany">
+		SELECT
+		<include refid="drmCompany.columns" />
+	    <![CDATA[
+	        FROM DRM_COMPANY 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmCompany.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.userId">
+		            <![CDATA[
+					user_id = #entity.userId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyName">
+		            <![CDATA[
+					company_name = #entity.companyName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyShotname">
+		            <![CDATA[
+					company_shotname = #entity.companyShotname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.deptName">
+		            <![CDATA[
+					dept_name = #entity.deptName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.postname">
+		            <![CDATA[
+					postname = #entity.postname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.jobDuration">
+		            <![CDATA[
+					job_duration = #entity.jobDuration#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.provideContent">
+		            <![CDATA[
+					provide_content = #entity.provideContent#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.wordCount">
+		            <![CDATA[
+					word_count = #entity.wordCount#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.qq">
+		            <![CDATA[
+					qq = #entity.qq#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.weixin">
+		            <![CDATA[
+					weixin = #entity.weixin#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.phone">
+		            <![CDATA[
+					phone = #entity.phone#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.email">
+		            <![CDATA[
+					email = #entity.email#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.zhanneixin">
+		            <![CDATA[
+					zhanneixin = #entity.zhanneixin#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.ptshow">
+		            <![CDATA[
+					ptshow = #entity.ptshow#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.price">
+		            <![CDATA[
+					price = #entity.price#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.faceprice">
+		            <![CDATA[
+					faceprice = #entity.faceprice#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.remark">
+		            <![CDATA[
+					remark = #entity.remark#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_COMPANY
+		<include refid="drmCompany.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmCompany">
+		SELECT
+		<include refid="drmCompany.columns" />
+	    <![CDATA[
+	        FROM DRM_COMPANY 
+	    ]]>
+		<include refid="drmCompany.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmCompany">
+		SELECT
+		<include refid="drmCompany.columns" />
+	    <![CDATA[
+		    FROM DRM_COMPANY
+	    ]]>
+	</select>
+</sqlMap>

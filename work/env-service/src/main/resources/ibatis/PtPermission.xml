@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.PtPermission">
+
+	<typeAlias alias="ptPermissionEntity" type="com.env.dto.PtPermission" />
+	<resultMap id="ptPermission" class="com.env.dto.PtPermission">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="permissionCode" column="permission_code" />
+		<result property="permissionName" column="permission_name" />
+		<result property="permissionSequence" column="permission_sequence" />
+		<result property="resource" column="resource" />
+		<result property="appId" column="app_id" />
+		<result property="parentId" column="parent_id" />
+		<result property="type" column="type" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ptPermission.columns">
+	    <![CDATA[
+        id, permission_code, permission_name, permission_sequence, resource, app_id, parent_id, type, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="ptPermissionEntity">
+	    <![CDATA[
+	        INSERT INTO PT_PERMISSION (
+	        	id, 
+	        	permission_code, 
+	        	permission_name, 
+	        	permission_sequence, 
+	        	resource, 
+	        	app_id, 
+	        	parent_id, 
+	        	type, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#permissionCode#, 
+	        	#permissionName#, 
+	        	#permissionSequence#, 
+	        	#resource#, 
+	        	#appId#, 
+	        	#parentId#, 
+	        	#type#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="ptPermissionEntity">
+	    <![CDATA[
+	        INSERT INTO PT_PERMISSION (
+	        	id, 
+	        	permission_code, 
+	        	permission_name, 
+	        	permission_sequence, 
+	        	resource, 
+	        	app_id, 
+	        	parent_id, 
+	        	type, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#permissionCode#, 
+	        	#permissionName#, 
+	        	#permissionSequence#, 
+	        	#resource#, 
+	        	#appId#, 
+	        	#parentId#, 
+	        	#type#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="ptPermissionEntity">
+	    <![CDATA[
+	        UPDATE PT_PERMISSION SET
+		        permission_code = #permissionCode#, 
+		        permission_name = #permissionName#, 
+		        permission_sequence = #permissionSequence#, 
+		        resource = #resource#, 
+		        app_id = #appId#, 
+		        parent_id = #parentId#, 
+		        type = #type#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM PT_PERMISSION WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM PT_PERMISSION WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="ptPermission">
+		SELECT
+		<include refid="ptPermission.columns" />
+	    <![CDATA[
+	        FROM PT_PERMISSION 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="ptPermission.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.permissionCode">
+		            <![CDATA[
+					permission_code = #entity.permissionCode#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.permissionName">
+		            <![CDATA[
+					permission_name = #entity.permissionName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.permissionSequence">
+		            <![CDATA[
+					permission_sequence = #entity.permissionSequence#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.resource">
+		            <![CDATA[
+					resource = #entity.resource#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.appId">
+		            <![CDATA[
+					app_id = #entity.appId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.parentId">
+		            <![CDATA[
+					parent_id = #entity.parentId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.type">
+		            <![CDATA[
+					type = #entity.type#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM PT_PERMISSION
+		<include refid="ptPermission.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="ptPermission">
+		SELECT
+		<include refid="ptPermission.columns" />
+	    <![CDATA[
+	        FROM PT_PERMISSION 
+	    ]]>
+		<include refid="ptPermission.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="ptPermission">
+		SELECT
+		<include refid="ptPermission.columns" />
+	    <![CDATA[
+		    FROM PT_PERMISSION
+	    ]]>
+	</select>
+	
+	
+	<!-- 根据appId查询所有记录 -->
+	<select id="getByAppid" resultMap="permission">
+		select
+		<include refid="permission.columns" />
+	    <![CDATA[
+		    from pt_permission p
+		    where app_id = #appId#
+	    ]]>
+	</select>
+</sqlMap>

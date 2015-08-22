@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.PtVisitLog">
+
+	<typeAlias alias="ptVisitLogEntity" type="com.env.dto.PtVisitLog" />
+	<resultMap id="ptVisitLog" class="com.env.dto.PtVisitLog">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="visitIp" column="visit_ip" />
+		<result property="visitTime" column="visit_time" />
+		<result property="visitUrl" column="visit_url" />
+		<result property="visitUserid" column="visit_userid" />
+		<result property="visitUsername" column="visit_username" />
+		<result property="remark" column="remark" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ptVisitLog.columns">
+	    <![CDATA[
+        id, visit_ip, visit_time, visit_url, visit_userid, visit_username, remark
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="ptVisitLogEntity">
+	    <![CDATA[
+	        INSERT INTO PT_VISIT_LOG (
+	        	id, 
+	        	visit_ip, 
+	        	visit_time, 
+	        	visit_url, 
+	        	visit_userid, 
+	        	visit_username, 
+	        	remark
+	        ) VALUES (
+	        	#id#, 
+	        	#visitIp#, 
+	        	#visitTime#, 
+	        	#visitUrl#, 
+	        	#visitUserid#, 
+	        	#visitUsername#, 
+	        	#remark#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="ptVisitLogEntity">
+	    <![CDATA[
+	        INSERT INTO PT_VISIT_LOG (
+	        	id, 
+	        	visit_ip, 
+	        	visit_time, 
+	        	visit_url, 
+	        	visit_userid, 
+	        	visit_username, 
+	        	remark
+	        ) VALUES (
+	        	#id#, 
+	        	#visitIp#, 
+	        	#visitTime#, 
+	        	#visitUrl#, 
+	        	#visitUserid#, 
+	        	#visitUsername#, 
+	        	#remark#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="ptVisitLogEntity">
+	    <![CDATA[
+	        UPDATE PT_VISIT_LOG SET
+		        visit_ip = #visitIp#, 
+		        visit_time = #visitTime#, 
+		        visit_url = #visitUrl#, 
+		        visit_userid = #visitUserid#, 
+		        visit_username = #visitUsername#, 
+		        remark = #remark#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM PT_VISIT_LOG WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM PT_VISIT_LOG WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="ptVisitLog">
+		SELECT
+		<include refid="ptVisitLog.columns" />
+	    <![CDATA[
+	        FROM PT_VISIT_LOG 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="ptVisitLog.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.visitIp">
+		            <![CDATA[
+					visit_ip = #entity.visitIp#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.visitTime">
+		            <![CDATA[
+					visit_time = #entity.visitTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.visitUrl">
+		            <![CDATA[
+					visit_url = #entity.visitUrl#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.visitUserid">
+		            <![CDATA[
+					visit_userid = #entity.visitUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.visitUsername">
+		            <![CDATA[
+					visit_username = #entity.visitUsername#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.remark">
+		            <![CDATA[
+					remark = #entity.remark#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM PT_VISIT_LOG
+		<include refid="ptVisitLog.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="ptVisitLog">
+		SELECT
+		<include refid="ptVisitLog.columns" />
+	    <![CDATA[
+	        FROM PT_VISIT_LOG 
+	    ]]>
+		<include refid="ptVisitLog.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="ptVisitLog">
+		SELECT
+		<include refid="ptVisitLog.columns" />
+	    <![CDATA[
+		    FROM PT_VISIT_LOG
+	    ]]>
+	</select>
+</sqlMap>
