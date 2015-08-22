@@ -15,6 +15,7 @@
 	<sqlMap resource="ibatis/PtPermission.xml" />
 	<sqlMap resource="ibatis/PtRolePermission.xml" />
 	
+	<sqlMap resource="ibatis/DrmRequirement.xml" />
 	<sqlMap resource="ibatis/DrmCompany.xml" />
 	<sqlMap resource="ibatis/DrmCompanyLib.xml" />
 	<sqlMap resource="ibatis/DrmDept.xml" />
