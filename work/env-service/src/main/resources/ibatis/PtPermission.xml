@@ -6,9 +6,6 @@
 
 	<typeAlias alias="ptPermissionEntity" type="com.env.dto.PtPermission" />
 	<resultMap id="ptPermission" class="com.env.dto.PtPermission">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="permissionCode" column="permission_code" />
 		<result property="permissionName" column="permission_name" />
@@ -272,9 +269,9 @@
 	
 	
 	<!-- 根据appId查询所有记录 -->
-	<select id="getByAppid" resultMap="permission">
+	<select id="getByAppid" resultMap="ptPermission">
 		select
-		<include refid="permission.columns" />
+		<include refid="ptPermission.columns" />
 	    <![CDATA[
 		    from pt_permission p
 		    where app_id = #appId#

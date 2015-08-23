@@ -7,20 +7,24 @@
 	<settings cacheModelsEnabled="true" enhancementEnabled="true"
 		lazyLoadingEnabled="false" errorTracingEnabled="true" maxRequests="32"
 		maxSessions="20" maxTransactions="5" useStatementNamespaces="true" />
-	<sqlMap resource="ibatis/DrmTwotag.xml" />
 	
 	<sqlMap resource="ibatis/PtUser.xml" />
-	<sqlMap resource="ibatis/PtCompany.xml" />
 	<sqlMap resource="ibatis/PtRole.xml" />
+	<sqlMap resource="ibatis/PtRoleUser.xml" />
 	<sqlMap resource="ibatis/PtPermission.xml" />
 	<sqlMap resource="ibatis/PtRolePermission.xml" />
+	<sqlMap resource="ibatis/PtFeedback.xml" />
+	<sqlMap resource="ibatis/PtVisitLog.xml" />
 	
-	<sqlMap resource="ibatis/DrmRequirement.xml" />
+	<sqlMap resource="ibatis/DrmDept.xml" />
 	<sqlMap resource="ibatis/DrmCompany.xml" />
 	<sqlMap resource="ibatis/DrmCompanyLib.xml" />
-	<sqlMap resource="ibatis/DrmDept.xml" />
-	<sqlMap resource="ibatis/DrmDeptLib.xml" />
-	<sqlMap resource="ibatis/DrmOnetag.xml" />
-	<sqlMap resource="ibatis/DrmOnetagLib.xml" />
-	<sqlMap resource="ibatis/DrmTwotagLib.xml" />
+	<sqlMap resource="ibatis/DrmComplain.xml" />
+	<sqlMap resource="ibatis/DrmHelpInfo.xml" />
+	<sqlMap resource="ibatis/DrmLetter.xml" />
+	<sqlMap resource="ibatis/DrmPayNotice.xml" />
+	<sqlMap resource="ibatis/DrmReq.xml" />
+	<sqlMap resource="ibatis/DrmReqNotice.xml" />
+	<sqlMap resource="ibatis/DrmSearchRecord.xml" />
+	
 </sqlMapConfig>

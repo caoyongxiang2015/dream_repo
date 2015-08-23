@@ -41,7 +41,7 @@ public class PtRolePermission extends DomainObject{
 	 * id
 	 */
 	//
-	private java.lang.Integer id;
+//	private java.lang.Integer id;
 	
 	/**
 	 * roleId
@@ -54,6 +54,9 @@ public class PtRolePermission extends DomainObject{
 	 */
 	//@NotNull 
 	private java.lang.Long permissionId;
+
+	private String roleCode;
+	private String permissionCode;
 	
 	//columns END
 	/*
@@ -67,22 +70,6 @@ public class PtRolePermission extends DomainObject{
 	}
 
     */
-
-	/**
-	 * 设置id
-	 * @param id id
-	 */
-	public void setId(java.lang.Integer id) {
-		this.id = id;
-	}
-
-	/**
-	 * 获取id
-	 * @return id
-	 */
-	public java.lang.Integer getId() {
-		return this.id;
-	}
 
 	/**
 	 * 设置roleId
@@ -116,7 +103,23 @@ public class PtRolePermission extends DomainObject{
 		return this.permissionId;
 	}
 
-    /**
+    public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
+	public String getPermissionCode() {
+		return permissionCode;
+	}
+
+	public void setPermissionCode(String permissionCode) {
+		this.permissionCode = permissionCode;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */
