@@ -25,17 +25,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
 import com.env.service.intf.IDrmCompanyService;
-
 import com.env.dto.DrmCompany;
 import com.env.vo.DrmCompanyVo;
 
 
 /**
  * 用户注册的公司信息控制器<br>
- * 
+ * @deprecated
  * @author caoyx
  * @version 1.0, 2015-08-22
  * @see
@@ -50,6 +50,13 @@ public class DrmCompanyController extends BaseController {
 	 */
 	@Autowired
 	private IDrmCompanyService drmCompanyService;
+
+
+    @RequestMapping()
+	public String index(){
+    	System.out.println("IndexController");
+		return "drmprofile/pages/profile";
+	}
 
 
 	/**

@@ -25,10 +25,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
 import com.env.service.intf.IDrmReqService;
-
 import com.env.dto.DrmReq;
 import com.env.vo.DrmReqVo;
 
@@ -51,6 +51,11 @@ public class DrmReqController extends BaseController {
 	@Autowired
 	private IDrmReqService drmReqService;
 
+    @RequestMapping()
+	public String index(){
+    	System.out.println("IndexController");
+		return "drmreq/pages/req";
+	}
 
 	/**
 	 * 去列表页面

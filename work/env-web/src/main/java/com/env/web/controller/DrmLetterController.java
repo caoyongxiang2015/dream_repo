@@ -13,23 +13,25 @@
  */
 package com.env.web.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IDrmLetterService;
-
 import com.env.dto.DrmLetter;
+import com.env.service.intf.IDrmLetterService;
+import com.env.util.SmsSender;
 import com.env.vo.DrmLetterVo;
 
 
@@ -45,6 +47,8 @@ import com.env.vo.DrmLetterVo;
 @RequestMapping("/drmletter")
 public class DrmLetterController extends BaseController {
 
+    @Autowired
+    SmsSender smsSender;
 	/**
 	 * 自动注入DrmLetter业务层实现
 	 */
@@ -52,6 +56,21 @@ public class DrmLetterController extends BaseController {
 	private IDrmLetterService drmLetterService;
 
 
+	@RequestMapping()
+	public String index(){
+		return "drmletter/pages/letter_list";
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/send")
+	public String send(){
+
+        if (smsSender.sendSms("13390793901", "短信内容123abc")) {
+        	return "发送成功";
+        }
+		return "发送失败fail";
+	}
+	
 	/**
 	 * 去列表页面
 	 * @param model

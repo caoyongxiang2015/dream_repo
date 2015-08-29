@@ -13,24 +13,36 @@
  */
 package com.env.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.env.commons.utils.RegExpValidatorUtils;
+import com.env.commons.utils.StringUtils;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IPtUserService;
-
 import com.env.dto.PtUser;
+import com.env.service.intf.IPtUserService;
+import com.env.util.MobileValidateCodeUtil;
+import com.env.util.SmsSender;
+import com.env.util.bean.MobileValidateCodeCheckResult;
 import com.env.vo.PtUserVo;
+import com.google.gson.Gson;
 
 
 /**
@@ -45,13 +57,227 @@ import com.env.vo.PtUserVo;
 @RequestMapping("/ptuser")
 public class PtUserController extends BaseController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PtUserController.class);
+
+    @Autowired
+    SmsSender smsSender;
+    
 	/**
 	 * 自动注入PtUser业务层实现
 	 */
 	@Autowired
 	private IPtUserService ptUserService;
 
+	/**
+	 * 用户注册
+	 * 注册成功后，弹出提示框‘恭喜您，注册成功，3秒后跳转到我的资料页面’；ajax请求
+	 * @param ptUserVo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "reg")
+	public String reg (PtUserVo ptUserVo ){
+		Integer id = -1;
+		try{
+			id = ptUserService.save(ptUserVo.getEntity());
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return "";
+	}
 
+	/**
+     * 
+     * 功能描述: 获取手机验证码
+     * 
+     * @param session 会话
+     * @return 展示视图
+     */
+	@ResponseBody
+    @RequestMapping(value = "/register/getCode", method = RequestMethod.POST)
+    public String getCode(HttpServletRequest request, HttpSession session) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("result", false);
+        map.put("message", "短信发送失败!");
+        try {
+            String phone = request.getParameter("phone");
+            int type = Integer.parseInt(request.getParameter("type"));
+            if (RegExpValidatorUtils.isPhone(phone)) {
+                // 创建手机验证码（已放入session）
+                String code = MobileValidateCodeUtil.setMobileValidateCode(session);
+                StringBuffer content = new StringBuffer();
+                switch (type) {
+                    case 1:// 注册
+                        content.append("您正在注册春宇金融会员，手机动态密码").append(code).append("，有效期120秒，客服电话4008-333-888");
+                        break;
+                    case 2:// 找回密码
+                        content.append("您正在找回密码，手机动态密码").append(code).append("，有效期120秒，客服电话4008-333-888");
+                        break;
+                    case 3:// 修改手机号码
+                        content.append("您正在修改手机号码，手机动态密码").append(code).append("，有效期120秒，客服电话4008-333-888");
+                        break;
+                    default:
+                        break;
+                }
+                // 发送验证码
+                if (smsSender.sendSms(phone, content.toString())) {
+                    map.put("result", true);
+                    map.put("message", "短信已发送!");
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("getCode", e.getMessage());
+            e.printStackTrace();
+        }
+        return new Gson().toJson(map);
+
+    }
+	
+
+    /**
+     * 前台用户注册操作
+     * 
+     * @param request
+     * @return
+     */
+	@ResponseBody
+    @RequestMapping(value = "/register/userRegister", method = RequestMethod.POST)
+    public String userRegister(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        Map<String, Object> map = checkRegisterAll(request, session);
+        if (map.size() < 1) {
+            String loginId = request.getParameter("username");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            PtUser accountBean = new PtUser();
+            accountBean.setLoginId(loginId);
+            accountBean.setPwd(password);
+            accountBean.setEmail(email);
+            accountBean.setPhone(phone);
+            if (ptUserService.userRegister(accountBean)) {
+                map.put("redirect", "/index.htm"); // 返回视图
+            } else {
+                map.put("result", false);
+                map.put("message", "注册失败");
+            }
+        }
+        return new Gson().toJson(map);
+    }
+	
+
+    /**
+     * 注册时后台验证方法
+     * 
+     * @param request
+     * @return
+     */
+    private Map<String, Object> checkRegisterAll(HttpServletRequest request, HttpSession session) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String newPassword = request.getParameter("newPassword");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String authCode = request.getParameter("authCode");
+        if (StringUtils.isNotBlank(username)) {
+            // 验证用户名格式
+            if (RegExpValidatorUtils.isUserName(username)) {
+                if (!ptUserService.isExistLoginid(username)) {
+                    map.put("key", "username");
+                    map.put("msg", "用户名已存在");
+                    return map;
+                }
+            } else {
+                map.put("key", "username");
+                map.put("msg", "用户名为6-25位数字字母汉子组合");
+                return map;
+            }
+        } else {
+            map.put("key", "username");
+            map.put("msg", "用户名为空");
+            return map;
+        }
+
+        if (StringUtils.isNotBlank(password) && StringUtils.isNotBlank(newPassword)) {
+            if (RegExpValidatorUtils.isPassWrod(password)) {
+                if (RegExpValidatorUtils.isPassWrod(newPassword)) {
+                    if (!newPassword.equals(password)) {
+                        map.put("key", "newPassword");
+                        map.put("msg", "两次输入密码不一致");
+                        return map;
+                    }
+                } else {
+                    map.put("key", "newPassword");
+                    map.put("msg", "6-18位数字字母组合");
+                    return map;
+                }
+            } else {
+                map.put("key", "password");
+                map.put("msg", "6-18位数字字母组合");
+                return map;
+            }
+        } else {
+            map.put("key", "password");
+            map.put("msg", "密码为空");
+            return map;
+        }
+        if (StringUtils.isNotBlank(email)) {
+            if (RegExpValidatorUtils.isEmail(email)) {
+                if (!ptUserService.checkEmail(email)) {
+                    map.put("key", "email");
+                    map.put("msg", "email已存在");
+                    return map;
+                }
+            } else {
+                map.put("key", "email");
+                map.put("msg", "email格式不正确");
+                return map;
+            }
+        } else {
+            map.put("key", "email");
+            map.put("msg", "email为空");
+            return map;
+        }
+        if (StringUtils.isNotBlank(phone)) {
+            if (RegExpValidatorUtils.isPhone(phone)) {
+                if (!ptUserService.checkPhone(phone)) {
+                    map.put("key", "phone");
+                    map.put("msg", "手机号已存在");
+                    return map;
+                }
+            } else {
+                map.put("key", "phone");
+                map.put("msg", "手机号码应为11位数字");
+                return map;
+            }
+        } else {
+            map.put("key", "phone");
+            map.put("msg", "手机号为空");
+            return map;
+        }
+
+        if (StringUtils.isNotBlank(authCode)) {
+            MobileValidateCodeCheckResult result = MobileValidateCodeUtil.checkMobileValidateCode(session, authCode);
+            if (!result.isCheckStatus()) {
+                map.put("key", "authCode");
+                map.put("msg", result.getCheckMessage());
+                return map;
+            }
+        } else {
+            map.put("key", "authCode");
+            map.put("msg", "手机验证码为空");
+            return map;
+        }
+        return map;
+    }
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 去列表页面
 	 * @param model
@@ -96,6 +322,7 @@ public class PtUserController extends BaseController {
 		return "ptuser/pages/add";
 	}
 
+	
 	/**
 	 * 新增PtUser
 	 * 

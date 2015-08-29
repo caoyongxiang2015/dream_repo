@@ -2,100 +2,45 @@
 <%@page import="com.env.constant.Constants"%>
 <%@page import="com.env.dto.PtUser"%>
 <%@include file="/WEB-INF/common/layouts/common.jsp"%>
-<!-- HEADER START -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="container${fluid}">
-			<div class="row${fluid}">
-				<div class="span10 offset1">
-					<a href="${ctx}/" class="brand"> <i class="icon-flag"
-						style="vertical-align: middle;"></i> Sample
-					</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav" role="menu" aria-labelledby="dLabel">
-							<li><a href="${ctx}/">Home</a></li>
-							<li><a href="${ctx}/sample/index">Sample</a></li>
-							<li><input type="text" class="span12 input-medium search-query" style="height: 28px; margin-top: 4px;margin-bottom: 4px;" name="companyName" placeholder="请输入公司名称"></li>
-							<li><input type="button" value="搜索"></li>
-							<li><input type="button" value="发布需求"></li>
-							<li><a href="${ctx}/myhome">我的主页</a></li>
-							<li><a href="${ctx}/ptuserset">设置</a></li>
-							<li><a href="${ctx}/uploadSample/uploadPage">订单</a></li>
-							<li><a href="${ctx}/userSample/userListALL">信息</a></li>
-							<li><a href="${ctx}/userSample/userListALL">站内信</a></li>
-							<%-- <shiro:hasPermission name="USER_ADD">
-								<li><a href="#">权限加载成功</a></li>
-							</shiro:hasPermission> --%>
-						</ul>
-						<ul class="nav pull-right">
-							<li class="dropdown pull-right">
-								<a href="#" data-toggle="dropdown" style="padding: 8px 15px;"> 
-									<%
-									PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
-									%>
-									<c:choose> 
-										<c:when test="<%=(null!=user)%>">   
-											<span class="message" title="<%=user.getNickname() %>"><%=user.getNickname() %></span>
-										</c:when> 
-										<c:otherwise>
-											<span class="message" title="">未登录</span>
-										</c:otherwise> 
-									</c:choose>
-									<i class="icon-angle-down"></i>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="#" id="userProfile"><i class="icon-cog"></i>&nbsp;个人中心</a></li>
-									<li><a href="${ctx}/auth/logout"><i class="icon-off"></i>&nbsp;退出</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#userProfile").click(function() {
-			EnvbaseUtil.createRemoteModal("个人中心", "${ctx}/commons/userProfileSection", {}, function() {
-				var validateValue = $("#changePasswordForm").valid();
-				if (validateValue) {
-					var oldPassword = $("#oldPassword").val();
-					var password = $("#password").val();
-					var confirmPassword = $("#confirmPassword").val();
-					$.ajax({
-						url : "${ctx}/commons/changePassword",
-						data : {
-							"oldPassword" : oldPassword,
-							"password" : password,
-							"confirmPassword" : confirmPassword
-						},
-						dataType : "json",
-						type : "GET",
-						contentType : "text/html; charset=UTF-8",
-						error : function() {
-							console.log("error");
-						},
-						success : function(data) {
-							var status = data.status;
-							var message = data.message;
-							// 修改成功，关闭对话框
-							if (0 == status) {
 
-								$("#modal_dialog").modal("hide");
-							} else {
-								// 弹出消息
-								EnvbaseUtil.showAlertMessage($("#userProfileMessage"), message, "error");
-							}
-						},
-					});
-					return false;
-				} else {
-					return false;
-				}
-			}, "修改密码");
-		});
-	});
-</script>
-<!-- HEADER END -->
+<!-- [[ 公共头部 -->
+    <header class="navbar-fixed-top">
+    	<div class="container clearfix">
+    		<div class="logo left">
+	    		<a href="#" class="logo-link">
+	    			<h1>好职客</h1>
+	    			<img src="${static_common}/hzk/images/logo.png" alt="好职客">
+	    		</a>
+    		</div>
+    		<ul class="nav navbar-nav left" role="navigator">
+    			<li class="active"><a href="${ctx }">首页</a></li>
+    			<li><a href="${ctx }/drmletter">私信</a></li>
+    			<li><a href="${ctx }/drmreq">需求</a></li>
+    			<li><a href="${ctx }/drmprofile">我的资料</a></li>
+    		</ul>
+    		<div class="dropdown right">
+	    		<a href="#" class="dropdown-toggle">
+		    		<img src="${static_common}/hzk/images/pic.png" alt=""/>
+    			</a>
+	    		<ul class="dropdown-menu dropup">
+	    			<li>
+	    				<a href="javascript:;">我的资料</a>
+	    				<a href="javascript:;">link2</a>
+	    				<a href="javascript:;">link3</a>
+	    			</li>
+		    		<span class="caret posa"></span>
+	    		</ul>
+    		</div>
+    		<button class="btn btn-large btn-primary right btn-release" onclick="javascript:window.location.href='${ctx}/release/first'" type="button">发布需求</button>
+    		<form action="" class="form-inline search-form right">
+    			<div class="input-group posr">
+	    			<input type="search" class="form-control" placeholder="搜索公司" id="searchCompany">
+		    		<i class="glyphicon glyphicon-search posa"></i>
+	    			<span class="input-group-btn">
+		    			<button type="button" onclick="javascript:window.location.href='${ctx}/drmsearch'" class="btn btn-success btn-large">搜索</button>
+	    			</span>
+		    	</div>
+    		</form>
+    	</div>
+    </header>
+	<!-- 公共头部 ]] -->

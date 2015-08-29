@@ -1,0 +1,135 @@
+<%@include file="/WEB-INF/common/layouts/common.jsp"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><spring:message code="index.title" /></title>
+</head>
+<body>
+
+<div class="container" style="margin-top: 15px;">
+	    <div class="demand-progress">
+	    	<ol class="step-progress clearfix">
+		    	<!--
+					此处进度条
+					当前在哪一步，就给哪一步添加class="current-step"
+					其他步骤都删除class="current-step"
+		    	-->
+	    		<li class="current-step">1. 需求发布</li>
+	    		<li>2. 等待应答</li>
+	    		<li>3. 赏金托管</li>
+	    		<li>4. 服务</li>
+	    		<li>5. 评价并结束</li>
+	    	</ol>
+	    </div>
+    	<section class="release-demand">
+    		<div class="panel">
+    			<div class="panel-heading">
+    				<h3 class="panel-title">发布需求</h3>
+				</div>
+				<div class="panel-body row">
+					<div class="col-xs-9">
+    				<form class="form-horizontal" id="releaseDemand" action="${ctx }/release/second" method="post">
+						<div class="row">
+							<label class="col-xs-3 control-label" for="companyInput01">公司名称</label>
+							<div class="col-xs-7">
+    							<div class="form-group form-group-lg">
+		    						<input type="text" id="companyInput01" name="companyInput01" placeholder="公司名称" class="form-control">
+		    					</div>
+							</div>
+							<div class="col-xs-2">
+								<p class="help-block">必填</p>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-xs-3 control-label" for="companyInput02">金额</label>
+							<div class="col-xs-7">
+    							<div class="form-group form-group-lg">
+		    						<input type="text" id="companyInput02" name="companyInput02" placeholder="金额" class="form-control">
+		    					</div>
+							</div>
+							<div class="col-xs-2">
+								<p class="help-block">必填</p>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-xs-3 control-label" for="companyInput03">手机号码</label>
+							<div class="col-xs-4">
+    							<div class="form-group form-group-lg">
+		    						<input type="text" id="companyInput03" name="companyInput03" placeholder="手机号码" class="form-control">
+								</div>
+							</div>
+							<div class="col-xs-3">
+								<button type="button" class="btn btn-lg btn-primary btn-block">获取手机验证码</button>
+							</div>
+							<div class="col-xs-2">
+								<p class="help-block">必填</p>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-xs-3 control-label" for="companyInput04">验证码</label>
+							<div class="col-xs-4">
+    							<div class="form-group form-group-lg">
+		    						<input type="text" id="companyInput04" name="companyInput04" placeholder="验证码" class="form-control">		 
+		    					</div>
+							</div>
+							<div class="col-xs-2">
+								<p class="help-block">必填</p>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-xs-3 control-label" for="memo">备注</label>
+							<div class="col-xs-7">
+    							<div class="form-group form-group-lg">
+		    						<textarea name="memo" id="memo" class="form-control" rows="3" placeholder="捎上一句话"></textarea>		    					
+		    					</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-7 col-xs-offset-3">
+								<div class="form-group">
+    								<button type="submit" class="btn btn-lg btn-primary btn-block">发布</button>
+								</div>
+							</div>
+						</div>
+    					</form>
+					</div>
+					<div class="col-xs-3">
+						<div class="col-explain fn-left">
+    						<p class="help-block">1.啊飒飒的风光好就快了法国红酒的飞规划局的飞规划局</p>
+    						<p class="help-block">1.啊飒飒的风光好就快了法国红酒的飞规划局的飞规划局</p>
+    						<p class="help-block">1.啊飒飒的风光好就快了法国红酒的飞规划局的飞规划局</p>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</section>
+    </div>
+    
+    
+    
+    
+<script src="${static_common}/hzk/js/jquery.min.js"></script>
+
+<script type="text/javascript" src="${static_common}/hzk/js/jquery.validate.js"></script>
+<script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
+    
+    <script type="text/javascript">
+		$("#releaseDemand").validate({
+			rules: {
+				companyInput01: {required: true},
+				companyInput02: {required: true},
+				companyInput03: {required: true, digits:true},
+				companyInput04: {required: true}
+			},
+			tooltip_options: {
+				'_all_': {placement:'right'},
+				companyInput03: {html:true}
+			},
+		})
+	</script>
+	
+</body>
+</html>

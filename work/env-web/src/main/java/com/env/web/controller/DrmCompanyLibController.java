@@ -25,10 +25,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
 import com.env.service.intf.IDrmCompanyLibService;
-
 import com.env.dto.DrmCompanyLib;
 import com.env.vo.DrmCompanyLibVo;
 
@@ -42,7 +42,7 @@ import com.env.vo.DrmCompanyLibVo;
  * @since 1.0
  */
 @Controller
-@RequestMapping("/drmcompanylib")
+@RequestMapping("/drmsearch")
 public class DrmCompanyLibController extends BaseController {
 
 	/**
@@ -52,6 +52,10 @@ public class DrmCompanyLibController extends BaseController {
 	private IDrmCompanyLibService drmCompanyLibService;
 
 
+    @RequestMapping()
+	public String index(){
+		return "drmsearch/pages/search";
+	}
 	/**
 	 * 去列表页面
 	 * @param model

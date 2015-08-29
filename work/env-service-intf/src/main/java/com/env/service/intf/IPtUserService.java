@@ -27,9 +27,12 @@ import com.env.dto.PtUser;
 public interface IPtUserService<T extends PtUser> extends Service<T> {
 
 	boolean isExistLoginid(String loginId);
+	boolean checkEmail(String email);
+	boolean checkPhone(String phone);
 
 	PtUser loginUser(String loginId, String password);
 
 	PtUser getByLoginid(String loginId);
 
+	boolean userRegister(PtUser user);
 }

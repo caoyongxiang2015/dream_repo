@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>个人资料</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+	<!--[if lt IE 9]>
+    	<script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- [[ 公共头部 -->
+    <header class="navbar-fixed-top">
+    	<div class="container clearfix">
+    		<div class="logo left">
+	    		<a href="#" class="logo-link">
+	    			<h1>哪上班</h1>
+	    			<img src="images/logo.png" alt="哪上班">
+	    		</a>
+    		</div>
+    		<ul class="nav navbar-nav left" role="navigator">
+    			<li class="active"><a href="#">首页</a></li>
+    			<li><a href="#">私信</a></li>
+    			<li><a href="#">需求</a></li>
+    			<li><a href="#">我的资料</a></li>
+    		</ul>
+    		<div class="dropdown right">
+	    		<a href="#" class="dropdown-toggle">
+		    		<img src="images/pic.png" alt=""/>
+    			</a>
+	    		<ul class="dropdown-menu dropup">
+	    			<li>
+	    				<a href="javascript:;">link1</a>
+	    				<a href="javascript:;">link2</a>
+	    				<a href="javascript:;">link3</a>
+	    			</li>
+		    		<span class="caret posa"></span>
+	    		</ul>
+    		</div>
+    		<button class="btn btn-large btn-primary right btn-release" type="button">发布需求</button>
+    		<form action="" class="form-inline search-form right">
+    			<div class="input-group posr">
+	    			<input type="search" class="form-control" placeholder="搜索公司" id="searchCompany">
+		    		<i class="glyphicon glyphicon-search posa"></i>
+	    			<span class="input-group-btn">
+		    			<button type="button" class="btn btn-success btn-large">搜索</button>
+	    			</span>
+		    	</div>
+    		</form>
+    	</div>
+    </header>
+	<!-- 公共头部 ]] -->
+
+	<!-- [[ 主体部分 -->
+	<div class="container">
+		<!-- alert start -->
+		<div class="alert alert-success" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			个人资料信息保存成功！
+		</div>
+		<!-- alert end -->
+		<!-- 设置个人信息 start -->
+		<div class="setting-profile panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">个人信息<span>本平台承诺严格保密您的个人信息</span></h3>
+			</div>
+			<div class="panel-body">
+				<form class="form-horizontal" id="personalProfile">
+				    <fieldset>
+					    <div class="row">
+					    	<label class="col-xs-2 col-md-3 control-label" for="input01">昵称</label>
+					    	<div class="col-xs-5">
+						    	<div class="form-group form-group-lg">
+						            <input type="text" placeholder="昵称" id="input01" name="input01" class="form-control">
+						        </div>
+					    	</div>
+					    </div>
+					    <div class="row">
+					    	<label class="col-xs-2 col-md-3 control-label" for="input02">姓</label>
+					    	<div class="col-xs-3 col-md-3">
+						    	<div class="form-group form-group-lg">
+						            <input id="input02" name="input02" type="text" placeholder="姓" class="form-control">
+						        </div>
+					    	</div>
+					    	<div class="col-xs-2 col-md-2">
+						    	<div class="form-inline">
+						            <label class="radio inline">
+						            	<input type="radio" value="1" checked="checked" name="group">
+						              	男
+						            </label>
+						            <label class="radio inline">
+						            	<input type="radio" value="2" name="group">
+						            	女
+						            </label>
+						            <label class="radio inline">
+						            	<input type="radio" value="3" name="group">
+						            	保密
+						            </label>
+						        </div>
+					    	</div>
+					    	<div class="col-xs-4 col-md-3">
+					    		<p class="help-block">必填</p>
+					    	</div>
+					    </div>
+					    <div class="row">
+					    	<label class="col-xs-2 col-md-3 control-label" for="input03">名</label>
+					    	<div class="col-xs-5">
+						    	<div class="form-group form-group-lg">
+						            <input id="input03" type="text" placeholder="名" class="form-control">
+						        </div>
+					    	</div>
+					    	<div class="col-xs-5 col-md-4">
+						    	<!--<p class="help-block">本平台承诺严格保密您的姓名</p>-->
+					    	</div>
+					    </div>
+					    <div class="worked-experience row">
+							<label class="col-xs-2 col-md-3 control-label">公司</label>
+							<div class="col-xs-10 col-md-9">
+							    <!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#persent" aria-controls="persent" role="tab" data-toggle="tab">当前在职公司</a></li>
+									<li role="presentation"><a href="#previous" aria-controls="previous" role="tab" data-toggle="tab">上一家公司</a></li>
+								</ul>
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="persent">
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" placeholder="公司名称（当前在职的）" id="companyInput01" name="companyInput01" class="form-control"></div>
+											</div>
+											<div class="col-xs-5"><p class="help-block">必填</p></div>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" placeholder="部门名称（当前在职的）" id="companyInput02" class="form-control"></div>
+											</div>
+											<div class="col-xs-5"></div>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg">
+													<select id="companyInput03" class="form-control">
+														<option value="val0" selected="selected">请选择</option>
+														<option value="val1">1年</option>
+														<option value="val2">2年</option>
+														<option value="val3">3年</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-xs-5"></div>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" id="moneyInput01" name="moneyInput01" placeholder="需要支付的金额" class="form-control"></div>
+											</div>
+											<div class="col-xs-1">
+												<p class="help-block">必填</p>
+											</div>
+											<div class="col-xs-4">
+												<p class="help-block">说明什么说明什么说明什么说明书</p>
+											</div>
+										</div>
+										<div class="sperate-line"></div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" id="companyCatagory01" name="companyCatagory01" placeholder="公司所在领域" class="form-control"></div>
+											</div>
+											<div class="col-xs-5">
+												<p class="help-block">使用中文逗号进行分割</p>
+											</div>
+										</div>
+										<p class="suggestion">建议：</p>
+										<div class="label-collected" id="labelCollect01">
+											<button type="button" class="btn btn-default btn-sm">设计网络</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">金融</button>
+											<button type="button" class="btn btn-default btn-sm">操作系统</button>
+											<button type="button" class="btn btn-default btn-sm">政务服务</button>
+											<button type="button" class="btn btn-default btn-sm">云计算</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">设计网络</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">金融</button>
+											<button type="button" class="btn btn-default btn-sm">操作系统</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">金融</button>
+											<button type="button" class="btn btn-default btn-sm">操作系统</button>
+											<button type="button" class="btn btn-default btn-sm">政务服务</button>
+											<button type="button" class="btn btn-default btn-sm">云计算</button>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg">
+													<input type="text" id="companyAddon" placeholder="备注" class="form-control">
+												</div>
+											</div>
+											<div class="col-xs-5">
+												<p class="help-block">可以说明具体情况！</p>
+											</div>
+										</div>
+									</div>
+									<div role="tabpanel" class="tab-pane" id="previous">
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" placeholder="公司名称（上一家公司）" id="previousCompanyInput01" name="previousCompanyInput01" class="form-control"></div>
+											</div>
+											<div class="col-xs-5"><p class="help-block">必填</p></div>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" placeholder="部门名称（上一家公司）" id="previousCompanyInput02" class="form-control"></div>
+											</div>
+											<div class="col-xs-5"></div>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg">
+													<select id="previousCompanyInput03" class="form-control">
+														<option value="val0" selected="selected">请选择</option>
+														<option value="val1">1年</option>
+														<option value="val2">2年</option>
+														<option value="val3">3年</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-xs-5"></div>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" id="moneyInput" placeholder="需要支付的金额" class="form-control"></div>
+											</div>
+											<div class="col-xs-1">
+												<p class="help-block">必填</p>
+											</div>
+											<div class="col-xs-4">
+												<p class="help-block">说明什么说明什么说明什么说明书</p>
+											</div>
+										</div>
+										<div class="sperate-line"></div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg"><input type="text" id="companyCatagory02" placeholder="公司所在领域" class="form-control"></div>
+											</div>
+											<div class="col-xs-5">
+												<p class="help-block">使用中文逗号进行分割</p>
+											</div>
+										</div>
+										<p class="suggestion">建议：</p>
+										<div class="label-collected" id="labelCollect02">
+											<button type="button" class="btn btn-default btn-sm">设计网络</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">金融</button>
+											<button type="button" class="btn btn-default btn-sm">操作系统</button>
+											<button type="button" class="btn btn-default btn-sm">政务服务</button>
+											<button type="button" class="btn btn-default btn-sm">云计算</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">设计网络</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">金融</button>
+											<button type="button" class="btn btn-default btn-sm">操作系统</button>
+											<button type="button" class="btn btn-default btn-sm">移动支付</button>
+											<button type="button" class="btn btn-default btn-sm">互联网</button>
+											<button type="button" class="btn btn-default btn-sm">O2O</button>
+											<button type="button" class="btn btn-default btn-sm">金融</button>
+											<button type="button" class="btn btn-default btn-sm">操作系统</button>
+											<button type="button" class="btn btn-default btn-sm">政务服务</button>
+											<button type="button" class="btn btn-default btn-sm">云计算</button>
+										</div>
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group form-group-lg">
+													<input type="text" id="companyAddon" name="companyAddon" required placeholder="备注" class="form-control">
+												</div>
+											</div>
+											<div class="col-xs-5">
+												<p class="help-block">可以说明具体情况！</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </div>
+						<div class="row">
+							<label class="col-xs-2 col-md-3 control-label" for="qqInput">QQ</label>
+							<div class="col-xs-5 col-md-5">
+								<div class="form-group form-group-lg">
+									<input type="text" placeholder="QQ" class="form-control" id="qqInput" name="qqInput"/>
+								</div>
+							</div>
+							<div class="col-xs-5 col-md-4">
+								<p class="help-block">除了电话外，还可以提供QQ联系方式，方便求职者联系您</p>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-xs-2 col-md-3 control-label" for="mailInput">邮箱</label>
+							<div class="col-xs-5 col-md-5">
+								<div class="form-group form-group-lg"><input type="text" placeholder="邮箱" class="form-control" id="mailInput" name="mailInput"></div>
+							</div>
+							<div class="col-xs-5 col-md-4">
+								<p class="help-block"></p>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-xs-2 col-md-3 control-label" for="accountInput">收款账号</label>
+							<div class="col-xs-5 col-md-5">
+								<div class="form-group form-group-lg"><input type="text" placeholder="收款账号" class="form-control" id="accountInput" name="accountInput"></div>
+							</div>
+							<div class="col-xs-5 col-md-4">
+								<p class="help-block">请预留您的银行卡号或支付宝账号，用于收款使用。推荐您使用支付宝账号</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-2 col-md-3"></div>
+							<div class="col-xs-5 col-md-5">
+								<div class="form-group form-group-lg"><button type="submit" class="btn btn-primary btn-block btn-lg">保存</button></div>
+							</div>
+						</div>
+				    </fieldset>
+				</form>
+			</div>	
+		</div>
+	</div>
+
+	<!-- [[ 公共底部 -->
+    <div class="footer container navbar-fixed-bottom">
+    	<div class="col-xs-6">
+	    	<p class="company-name">南京XXX公司</p>
+	    	<p class="company-location">010-64140991 北京市朝阳区融科望京中心 A 座 1906</p>
+    	</div>
+    	<div class="col-xs-6">
+	    	<div class="company-about right">
+	    		<a href="javascript:;" class="right">关于我们</a>
+	    		<a href="javascript:;" class="right">关于我们</a>
+	    		<a href="javascript:;" class="right">关于我们</a>
+	    		<a href="javascript:;" class="right">关于我们</a>
+	    	</div>
+	    	<p class="company-copyright">京ICP备14019894号-5   © 2015 互帮团队</p>
+    	</div>
+    </div>
+	<!-- 公共底部 ]] -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.js"></script>
+	<script type="text/javascript" src="js/jquery-validate.bootstrap-tooltip.min.js"></script>
+	<script src="js/nn.js"></script>
+	<script type="text/javascript">
+		$("#personalProfile").validate({
+			rules : {
+				// name: { required: true }
+				// 表单的name值
+				// required: 必填项
+				accountInput: {required: true,range:['10','20']},
+				// range 数值之间
+				mailInput: {required: true,email: true},
+				// email 邮件
+				qqInput: {required: true, digits: true},
+				// digits: 数字
+				companyInput01: {required: true,minlength: '8',maxlength: '12'}
+				// minlength: 最小位数
+				// maxlength: 最大位数
+			},
+			tooltip_options: {
+				accountInput: {placement:'right'},
+				mailInput: {placement:'right'},
+				qqInput: {placement:'right'},
+				companyInput01: {placement: 'top'}
+			},
+		})
+	</script>
+</body>
+</html>

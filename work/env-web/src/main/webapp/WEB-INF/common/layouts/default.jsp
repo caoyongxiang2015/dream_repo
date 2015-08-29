@@ -8,12 +8,11 @@
 
 <body>
 <%@include file="topbar.jsp" %>
-<%@include file="js.jsp" %>
-<%-- <div class="container${fluid}" style="margin-top: 50px; min-height: 540px;"> --%>
-<div class="container${fluid}" style="margin-top: 40px; min-height: 540px;">
+<div>
     <sitemesh:body/>
 </div>
-<%@ include file="modal-dialog.jsp" %>
+	<%@include file="js.jsp" %>
+<%-- <%@ include file="modal-dialog.jsp" %> --%>
 <%@ include file="footer.jsp" %>
 </body>
 </html>

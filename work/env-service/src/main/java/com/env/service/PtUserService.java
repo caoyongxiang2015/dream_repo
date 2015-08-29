@@ -15,12 +15,12 @@ package com.env.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.env.dao.api.Dao;
-import com.env.service.impl.DefaultServiceImpl;
 
+import com.env.dao.api.Dao;
 import com.env.dao.intf.IPtUserDao;
-import com.env.service.intf.IPtUserService;
 import com.env.dto.PtUser;
+import com.env.service.impl.DefaultServiceImpl;
+import com.env.service.intf.IPtUserService;
 
 /**
  * PtUser业务实现类<br>
@@ -59,6 +59,24 @@ public class PtUserService<T extends PtUser> extends DefaultServiceImpl<T> imple
 	@Override
 	public PtUser getByLoginid(String loginId) {
 		return ptUserDao.getByLoginid(loginId);
+	}
+
+	@Override
+	public boolean userRegister(PtUser user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkEmail(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkPhone(String phone) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

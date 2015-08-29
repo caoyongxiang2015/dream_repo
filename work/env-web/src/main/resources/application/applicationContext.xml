@@ -10,7 +10,7 @@
 	<bean id="memoryPropertyPlaceholderConfigurer" class="com.env.commons.utils.MemoryPropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:/messages/common.properties</value>
+				<value>classpath:/properties/sms.properties</value>
 			</list>
 		</property>
 	</bean>
