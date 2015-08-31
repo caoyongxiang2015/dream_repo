@@ -37,11 +37,6 @@ public class PtUser extends DomainObject{
 	
 	//可以直接使用: @Length(max=50,message="用户名长度不能大于50")显示错误消息
 	//columns START
-	/**
-	 * id
-	 */
-	//
-	private java.lang.Integer id;
 	
 	/**
 	 * 登录名（手机号）
@@ -174,6 +169,7 @@ public class PtUser extends DomainObject{
 	 */
 	//
 	private java.lang.Integer curCompanyId;
+	private java.lang.Integer companyIndex;
 	
 	/**
 	 * 当前公司名称
@@ -242,21 +238,6 @@ public class PtUser extends DomainObject{
 
     */
 
-	/**
-	 * 设置id
-	 * @param id id
-	 */
-	public void setId(java.lang.Integer id) {
-		this.id = id;
-	}
-
-	/**
-	 * 获取id
-	 * @return id
-	 */
-	public java.lang.Integer getId() {
-		return this.id;
-	}
 
 	/**
 	 * 设置登录名（手机号）
@@ -782,7 +763,15 @@ public class PtUser extends DomainObject{
 		return this.updateTime;
 	}
 
-    /**
+    public java.lang.Integer getCompanyIndex() {
+		return companyIndex;
+	}
+
+	public void setCompanyIndex(java.lang.Integer companyIndex) {
+		this.companyIndex = companyIndex;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */

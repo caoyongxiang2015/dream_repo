@@ -13,14 +13,18 @@
  */
 package com.env.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.env.dao.api.Dao;
-import com.env.service.impl.DefaultServiceImpl;
 
+import com.env.dao.api.Dao;
 import com.env.dao.intf.IDrmCompanyDao;
-import com.env.service.intf.IDrmCompanyService;
 import com.env.dto.DrmCompany;
+import com.env.service.impl.DefaultServiceImpl;
+import com.env.service.intf.IDrmCompanyService;
 
 /**
  * 用户注册的公司信息业务实现类<br>
@@ -41,5 +45,25 @@ public class DrmCompanyService<T extends DrmCompany> extends DefaultServiceImpl<
 	@Override
 	protected Dao<T> getDao() {
 		return (Dao<T>) drmCompanyDao;
+	}
+
+	@Override
+	public List<DrmCompany> getByUserid(Integer userid) {
+		Map params = new HashMap();
+		params.put("userId",userid);
+		return drmCompanyDao.getByUserid(params);
+	}
+
+	@Override
+	public List<DrmCompany> getByUserid(Integer userid, Integer companyIndex) {
+		Map params = new HashMap();
+		params.put("userId",userid);
+		params.put("companyIndex",companyIndex);
+		return drmCompanyDao.getByUserid(params);
+	}
+
+	@Override
+	public List<DrmCompany> queryAllByParams(DrmCompany company) {
+		return drmCompanyDao.queryAllByParams(company);
 	}
 }

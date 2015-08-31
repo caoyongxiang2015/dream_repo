@@ -41,7 +41,7 @@
 		<result property="createTime" column="create_time" />
 		<result property="updateUserid" column="update_userid" />
 		<result property="updateTime" column="update_time" />
-		
+
 	</resultMap>
 
 	<!-- 用于select查询公用抽取的列 -->
@@ -275,7 +275,7 @@
 	<!-- 用于分页查询抽取的公共的条件 -->
 	<sql id="ptUser.queryPage">
 		<dynamic prepend="WHERE">
-		    <isNotNull property="entity">
+			<isNotNull property="entity">
 				<isNotEmpty prepend="AND" property="entity.id">
 		            <![CDATA[
 					id = #entity.id#
@@ -440,6 +440,23 @@
 		</dynamic>
 	</sql>
 
+	<sql id="ptUser.queryByParams">
+		<dynamic prepend="WHERE">
+			<isNotNull property="entity">
+				<isNotEmpty prepend="OR" property="entity.loginId">
+		            <![CDATA[
+					login_id = #entity.loginId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="OR" property="entity.phone">
+		            <![CDATA[
+					phone = #entity.phone#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
 		SELECT count(*) FROM PT_USER
@@ -467,7 +484,15 @@
 		    FROM PT_USER
 	    ]]>
 	</select>
-		
+	<select id="queryAllByParams" resultMap="ptUser">
+		SELECT
+		<include refid="ptUser.columns" />
+	    <![CDATA[
+		    FROM PT_USER
+	    ]]>
+		<include refid="ptUser.queryByParams" />
+	</select>
+
 	<!-- 根据登录ID获取用户 -->
 	<select id="getByLoginid" resultMap="ptUser">
 		SELECT
@@ -478,7 +503,7 @@
 		        login_id = #loginId#
 	    ]]>
 	</select>
-	
+
 	<!-- 登陆验证 -->
 	<select id="loginUser" resultMap="ptUser">
 		SELECT
@@ -490,7 +515,7 @@
 		    AND	pwd = #pwd#
 	    ]]>
 	</select>
-	
+
 	<!-- 验证登录名是否存在 -->
 	<select id="isExistLoginid" resultMap="ptUser">
 		SELECT
@@ -501,5 +526,5 @@
 		        login_id = #loginId#
 	    ]]>
 	</select>
-	
+
 </sqlMap>

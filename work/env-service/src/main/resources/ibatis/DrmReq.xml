@@ -52,7 +52,6 @@
 	<insert id="save" parameterClass="drmReqEntity">
 	    <![CDATA[
 	        INSERT INTO DRM_REQ (
-	        	id, 
 	        	req_num, 
 	        	company_name, 
 	        	company_shotname, 
@@ -82,7 +81,6 @@
 	        	update_userid, 
 	        	update_time
 	        ) VALUES (
-	        	#id#, 
 	        	#reqNum#, 
 	        	#companyName#, 
 	        	#companyShotname#, 
@@ -119,76 +117,6 @@
 		</selectKey>
 	</insert>
 
-	<!-- 新增记录 -->
-	<insert id="insert" parameterClass="drmReqEntity">
-	    <![CDATA[
-	        INSERT INTO DRM_REQ (
-	        	id, 
-	        	req_num, 
-	        	company_name, 
-	        	company_shotname, 
-	        	price, 
-	        	faceprice, 
-	        	send_user_id, 
-	        	send_user_phone, 
-	        	send_user_nickname, 
-	        	accept_state, 
-	        	accept_user_id, 
-	        	accept_duration, 
-	        	open_contact, 
-	        	accept_time, 
-	        	deposit_time, 
-	        	complete_time, 
-	        	end_time, 
-	        	stop_time, 
-	        	title, 
-	        	content, 
-	        	overtime, 
-	        	eval_score, 
-	        	eval_content, 
-	        	version, 
-	        	disabled, 
-	        	create_userid, 
-	        	create_time, 
-	        	update_userid, 
-	        	update_time
-	        ) VALUES (
-	        	#id#, 
-	        	#reqNum#, 
-	        	#companyName#, 
-	        	#companyShotname#, 
-	        	#price#, 
-	        	#faceprice#, 
-	        	#sendUserId#, 
-	        	#sendUserPhone#, 
-	        	#sendUserNickname#, 
-	        	#acceptState#, 
-	        	#acceptUserId#, 
-	        	#acceptDuration#, 
-	        	#openContact#, 
-	        	#acceptTime#, 
-	        	#depositTime#, 
-	        	#completeTime#, 
-	        	#endTime#, 
-	        	#stopTime#, 
-	        	#title#, 
-	        	#content#, 
-	        	#overtime#, 
-	        	#evalScore#, 
-	        	#evalContent#, 
-	        	#version#, 
-	        	#disabled#, 
-	        	#createUserid#, 
-	        	#createTime#, 
-	        	#updateUserid#, 
-	        	#updateTime#
-	        )
-	    ]]>
-		<selectKey resultClass="java.lang.Integer" type="post"
-			keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
 
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmReqEntity">

@@ -37,17 +37,13 @@ public class DrmCompany extends DomainObject{
 	
 	//可以直接使用: @Length(max=50,message="用户名长度不能大于50")显示错误消息
 	//columns START
-	/**
-	 * 主键
-	 */
-	//
-	private java.lang.Integer id;
 	
 	/**
 	 * 用户ID
 	 */
 	//
 	private java.lang.Integer userId;
+	private java.lang.Integer companyIndex;
 	
 	/**
 	 * 公司名称
@@ -194,21 +190,6 @@ public class DrmCompany extends DomainObject{
 
     */
 
-	/**
-	 * 设置主键
-	 * @param id 主键
-	 */
-	public void setId(java.lang.Integer id) {
-		this.id = id;
-	}
-
-	/**
-	 * 获取主键
-	 * @return 主键
-	 */
-	public java.lang.Integer getId() {
-		return this.id;
-	}
 
 	/**
 	 * 设置用户ID
@@ -606,7 +587,15 @@ public class DrmCompany extends DomainObject{
 		return this.updateTime;
 	}
 
-    /**
+    public java.lang.Integer getCompanyIndex() {
+		return companyIndex;
+	}
+
+	public void setCompanyIndex(java.lang.Integer companyIndex) {
+		this.companyIndex = companyIndex;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */

@@ -135,10 +135,6 @@
 	<!-- 登录窗口 ]]-->
 	
 	
-<script src="${static_common}/hzk/js/jquery.min.js"></script>
-
-<script type="text/javascript" src="${static_common}/hzk/js/jquery.validate.js"></script>
-<script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
 	
 	
 	<script type="text/javascript">
