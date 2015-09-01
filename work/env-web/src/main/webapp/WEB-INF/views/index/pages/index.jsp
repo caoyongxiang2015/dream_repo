@@ -34,7 +34,7 @@
 			    <div class="container">
 		        <h2>只为让您拥有的信息产生价值</h1>
 				<p>只为让您帮助更多的人</p>
-				<p><a class="btn btn-purple btn-lg seek-advice" style="color: orange;" href="#" role="button">收到一条请求信息</a></p>
+				<p><a class="btn btn-purple btn-lg seek-advice" href="#" role="button">找人咨询22</a></p>
 		      </div>
 		    </div>
 		  </div>
@@ -80,14 +80,14 @@
 						<a href="javascript:;" class="posa J-gotoregidit">注册<i class="glyphicon glyphicon-share-alt"></i></a>
 					</div>
 					<div class="panel-body">
-						<form id="loginForm" class="form" action="${ctx}/auth/login" method="post">
+						<form id="loginForm" class="form">
 							<div class="form-group form-group-lg mt15">
-								<label for="username" hidden>手机号：</label>
-							    <input type="text" class="form-control" id="username" name="username" placeholder="手机号/邮箱/QQ">
+								<label for="loginName" hidden>手机号：</label>
+							    <input type="text" class="form-control" id="loginName" name="loginName" placeholder="手机号/邮箱/QQ">
 							</div>
 							<div class="form-group form-group-lg mt15">
-							    <label for="password" hidden>密码：</label>
-							    <input type="password" class="form-control" id="password" name="password" placeholder="登录密码">
+							    <label for="loginPassword" hidden>密码：</label>
+							    <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="登录密码">
 							</div>
 							<button class="btn btn-form btn-block btn-login" type="submit">登录</button>
 						</form>
@@ -233,8 +233,8 @@
 		});
 		$("#loginForm").validate({
 			rules: {     
-				password: {required: true},
-				username: {required: true}
+				loginPassword: {required: true},
+				loginName: {required: true}
 			},
 			tooltip_options: {
 				'_all_': {placement:'right'}

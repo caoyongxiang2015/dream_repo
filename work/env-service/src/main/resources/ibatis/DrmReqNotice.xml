@@ -33,6 +33,7 @@
 	<insert id="save" parameterClass="drmReqNoticeEntity">
 	    <![CDATA[
 	        INSERT INTO DRM_REQ_NOTICE (
+	        	id, 
 	        	req_id, 
 	        	send_user_id, 
 	        	receive_user_id, 
@@ -43,6 +44,7 @@
 	        	update_userid, 
 	        	update_time
 	        ) VALUES (
+	        	#id#, 
 	        	#reqId#, 
 	        	#sendUserId#, 
 	        	#receiveUserId#, 
@@ -60,6 +62,38 @@
 		</selectKey>
 	</insert>
 
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmReqNoticeEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_REQ_NOTICE (
+	        	id, 
+	        	req_id, 
+	        	send_user_id, 
+	        	receive_user_id, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#reqId#, 
+	        	#sendUserId#, 
+	        	#receiveUserId#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmReqNoticeEntity">

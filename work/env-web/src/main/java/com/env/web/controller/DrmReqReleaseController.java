@@ -13,7 +13,9 @@
  */
 package com.env.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,14 +23,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.env.dto.DrmCompany;
-import com.env.dto.DrmReq;
-import com.env.dto.DrmReqNotice;
-import com.env.dto.PtUser;
-import com.env.service.intf.IDrmCompanyService;
-import com.env.service.intf.IDrmReqNoticeService;
-import com.env.service.intf.IDrmReqService;
-import com.env.service.intf.IPtUserService;
+import com.env.dao.api.Page;
+import com.env.dao.api.QueryParams;
+import com.env.dto.DrmDept;
+import com.env.service.intf.IDrmDeptService;
+import com.env.vo.DrmDeptVo;
 
 
 /**
@@ -47,77 +46,8 @@ public class DrmReqReleaseController extends BaseController {
 	 * 自动注入用户注册的部门信息业务层实现
 	 */
 	@Autowired
-	private IDrmReqService<DrmReq> drmReqService;
+	private IDrmDeptService drmDeptService;
 
-
-	@Autowired
-	private IPtUserService<PtUser> ptUserService;
-
-	@Autowired
-	private IDrmReqNoticeService<DrmReqNotice> drmReqNoticeService;
-
-	@Autowired
-	private IDrmCompanyService<DrmCompany> drmCompanyService;
-	
-	@RequestMapping(value = "release1_save")
-	public String save (DrmReq req,HttpServletRequest request){
-		try{
-			String telephone = request.getParameter("telephone");
-			String phonecode = request.getParameter("phonecode");
-			
-			// TODO 
-			// 1/验证手机验证码
-			
-			// 2/判断当前手机号有没有注册账号：
-			// a如果没有注册账号，新增user
-			// b如果有注册账号，则查询他的userid
-			PtUser user = new PtUser();
-			user.setLoginId(telephone);// 根据登录号或者手机号查询是否存在注册账号
-			user.setPhone(telephone);
-			List<PtUser> users = ptUserService.queryAllByParams(user);
-			Integer userId = null;
-			if(null==users || users.size()==0){
-				user.setPwd(telephone);// 登录密码默认手机号
-				userId = ptUserService.save(user);
-			}else{
-				user = users.get(0);
-				userId = user.getId();
-			}
-			
-			// 3/save drm_req
-			Integer reqId = -1;
-			reqId = drmReqService.save(req);
-
-			// 4/query drm_company
-			DrmCompany company = new DrmCompany();
-			company.setCompanyName(req.getCompanyShotname());
-			company.setCompanyShotname(req.getCompanyShotname());
-			List<DrmCompany> companys = drmCompanyService.queryAllByParams(company);
-			
-			// 如果查询到, save drm_req_notice
-			if(null!=companys && companys.size()>0){
-				DrmReqNotice notice = new DrmReqNotice();
-				notice.setSendUserId(userId);
-				notice.setReqId(reqId);
-				for(DrmCompany c : companys){// 匹配到1-N个用户
-					if(userId.compareTo(c.getUserId()) != 0){
-						// 如果匹配到自身，则忽略
-						notice.setReceiveUserId(c.getUserId());
-						drmReqNoticeService.save(notice);
-					}
-				}
-			}
-			// 5/发布成功，发送短信
-			
-			
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "redirect:/release/second";
-	}
-
-	
 
     @RequestMapping(value="first")
 	public String first(){
@@ -143,5 +73,69 @@ public class DrmReqReleaseController extends BaseController {
 	public String fifth(){
 		return "drmreqrelease/pages/release5";
 	}
-    
+	/**
+	 * 去列表页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "list")
+	public String list(Integer number , HttpServletRequest request){
+
+        // 拿到所有的入参放到map里
+        Map<String, Object> searchParams = new HashMap<String, Object>();//Servlets.getParametersStartingWith(request, null);
+        
+        Page page = new Page();
+        
+        if (null != number) {
+            page.setCurrentPage(number);
+            String pageSize = request.getParameter("pageSize");
+            if(null != pageSize && !"".equals(pageSize)){
+                page.setPageSize(Integer.parseInt(pageSize));
+            }
+        }
+        
+        QueryParams<DrmDept> queryParams=new QueryParams<DrmDept>();
+        queryParams.setPaging(page);
+        queryParams.setSearchParams(searchParams);
+        
+		List<DrmDept> drmDeptList = drmDeptService.queryByPage(queryParams);
+		
+		request.setAttribute("page", page);
+		request.setAttribute("searchParams", searchParams);
+        request.setAttribute("drmDeptList", drmDeptList);
+
+		return "drmdept/pages/list";
+	}
+	
+	/**
+	 * 去新增用户注册的部门信息
+	 * 
+	 * @return 结果视图
+	 */
+	@RequestMapping(value = "toadd")
+	public String toadd(){
+		return "drmdept/pages/add";
+	}
+
+	/**
+	 * 新增用户注册的部门信息
+	 * 
+	 * @param drmDeptVo 用户注册的部门信息页面表单对象
+	 * @param result 表单验证数据
+	 * @param page 分页配置
+	 * @param request 请求对象
+	 * @return 结果视图
+	 */
+	@RequestMapping(value = "save")
+	public String save (DrmDeptVo drmDeptVo ){
+		Integer id = -1;
+		try{
+			id = drmDeptService.save(drmDeptVo.getEntity());
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return "redirect:/drmdept/detail/"+id;
+	}
+
 }

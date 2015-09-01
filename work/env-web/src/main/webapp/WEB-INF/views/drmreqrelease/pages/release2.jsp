@@ -40,6 +40,7 @@
     	</section>
     </div>
     
+<script src="${static_common}/hzk/js/jquery.min.js"></script>
 	
 </body>
 </html>

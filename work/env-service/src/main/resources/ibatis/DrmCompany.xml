@@ -6,9 +6,11 @@
 
 	<typeAlias alias="drmCompanyEntity" type="com.env.dto.DrmCompany" />
 	<resultMap id="drmCompany" class="com.env.dto.DrmCompany">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="userId" column="user_id" />
-		<result property="companyIndex" column="company_index" />
 		<result property="companyName" column="company_name" />
 		<result property="companyShotname" column="company_shotname" />
 		<result property="deptName" column="dept_name" />
@@ -37,7 +39,7 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmCompany.columns">
 	    <![CDATA[
-        id, user_id, company_index,company_name, company_shotname, dept_name, postname, job_duration, provide_content, word_count, qq, weixin, phone, email, zhanneixin, ptshow, price, faceprice, remark, version, disabled, create_userid, create_time, update_userid, update_time
+        id, user_id, company_name, company_shotname, dept_name, postname, job_duration, provide_content, word_count, qq, weixin, phone, email, zhanneixin, ptshow, price, faceprice, remark, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
 
@@ -47,7 +49,6 @@
 	        INSERT INTO DRM_COMPANY (
 	        	id, 
 	        	user_id, 
-	        	company_index, 
 	        	company_name, 
 	        	company_shotname, 
 	        	dept_name, 
@@ -73,7 +74,6 @@
 	        ) VALUES (
 	        	#id#, 
 	        	#userId#, 
-	        	#companyIndex#, 
 	        	#companyName#, 
 	        	#companyShotname#, 
 	        	#deptName#, 
@@ -104,13 +104,72 @@
 		</selectKey>
 	</insert>
 
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmCompanyEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_COMPANY (
+	        	id, 
+	        	user_id, 
+	        	company_name, 
+	        	company_shotname, 
+	        	dept_name, 
+	        	postname, 
+	        	job_duration, 
+	        	provide_content, 
+	        	word_count, 
+	        	qq, 
+	        	weixin, 
+	        	phone, 
+	        	email, 
+	        	zhanneixin, 
+	        	ptshow, 
+	        	price, 
+	        	faceprice, 
+	        	remark, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#userId#, 
+	        	#companyName#, 
+	        	#companyShotname#, 
+	        	#deptName#, 
+	        	#postname#, 
+	        	#jobDuration#, 
+	        	#provideContent#, 
+	        	#wordCount#, 
+	        	#qq#, 
+	        	#weixin#, 
+	        	#phone#, 
+	        	#email#, 
+	        	#zhanneixin#, 
+	        	#ptshow#, 
+	        	#price#, 
+	        	#faceprice#, 
+	        	#remark#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmCompanyEntity">
 	    <![CDATA[
 	        UPDATE DRM_COMPANY SET
 		        user_id = #userId#, 
-		        company_index = #companyIndex#, 
 		        company_name = #companyName#, 
 		        company_shotname = #companyShotname#, 
 		        dept_name = #deptName#, 
@@ -293,25 +352,6 @@
 		</dynamic>
 	</sql>
 
-
-	<sql id="drmCompany.queryByParams">
-		<dynamic prepend="WHERE">
-			<isNotNull property="entity">
-				<isNotEmpty prepend="OR" property="entity.companyName">
-		            <![CDATA[
-					company_name = #entity.companyName#
-		            ]]>
-				</isNotEmpty>
-				<isNotEmpty prepend="OR" property="entity.companyShotname">
-		            <![CDATA[
-					company_shotname = #entity.companyShotname#
-		            ]]>
-				</isNotEmpty>
-			</isNotNull>
-		</dynamic>
-	</sql>
-
-
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
 		SELECT count(*) FROM DRM_COMPANY
@@ -338,25 +378,5 @@
 	    <![CDATA[
 		    FROM DRM_COMPANY
 	    ]]>
-	</select>
-	
-	<select id="queryAllByParams" resultMap="drmCompany">
-		SELECT
-		<include refid="drmCompany.columns" />
-	    <![CDATA[
-		    FROM DRM_COMPANY
-	    ]]>
-		<include refid="drmCompany.queryByParams" />
-	</select>
-	
-	<select id="getByUserid" resultMap="drmCompany">
-		SELECT
-		<include refid="drmCompany.columns" />
-		    FROM DRM_COMPANY where user_id = #userId#
-		    <isNotEmpty prepend="AND" property="companyIndex">
-	            <![CDATA[
-				company_index = #companyIndex#
-	            ]]>
-			</isNotEmpty>
 	</select>
 </sqlMap>

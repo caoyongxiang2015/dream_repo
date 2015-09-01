@@ -13,10 +13,8 @@
  */
 package com.env.dao.intf;
 
-import java.util.List;
-import java.util.Map;
-
 import com.env.dao.api.Dao;
+
 import com.env.dto.DrmCompany;
 
 /**
@@ -28,6 +26,4 @@ import com.env.dto.DrmCompany;
  * @since 1.0
  */
 public interface IDrmCompanyDao<T extends DrmCompany> extends Dao<T> {
-	public List<DrmCompany> getByUserid(Map params);
-	public List<DrmCompany> queryAllByParams(DrmCompany company); 
 }

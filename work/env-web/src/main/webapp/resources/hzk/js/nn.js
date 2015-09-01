@@ -117,8 +117,6 @@ nn.returnStatus = function(data){
 // 选择公司领域
 nn.selectArea = function(c,o) {
 	var _area = [];
-	var _old = o.val().split("，");
-	_area = _area.concat(_old);// 拼上原来的内容
 	o.on("blur",function(){
 		_area = []
 		_inputV = o.val();
@@ -128,11 +126,11 @@ nn.selectArea = function(c,o) {
 	})
 	c.on("click","button",function(){
 		var _v = $(this).text();
-		if (_area.indexOf(_v)>=0) {// 如果已经选择了，则忽略，跳过
+		if (_area.indexOf(_v)>=0) {
 			return;
 		}
 		_area.push(_v);
-		var _areaList = _area.join('，');	 // 此处约定使用中文的逗号分隔;转成字符串
+		var _areaList = _area.join('，');	 // 此处约定使用中文的逗号分隔
 		o.val(_areaList)
 	})
 }
@@ -145,8 +143,6 @@ $(function(){
 	nn.markScore();
 	nn.selectArea($("#labelCollect01"),$("#companyCatagory01"));
 	nn.selectArea($("#labelCollect02"),$("#companyCatagory02"));
-//	nn.selectArea($("#labelCollect01"),$("#provideContent"));
-//	nn.selectArea($("#labelCollect02"),$("#entity2.provideContent"));
 	$(window).resize(function(){
 		nn.footerFixed();
 	})

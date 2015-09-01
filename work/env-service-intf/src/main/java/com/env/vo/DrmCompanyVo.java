@@ -28,16 +28,7 @@ public class DrmCompanyVo{
 	 * 用户注册的公司信息实体
 	 */
 	private DrmCompany entity;
-	private DrmCompany entity2;
 	
-
-	public DrmCompany getEntity2() {
-		return entity2;
-	}
-
-	public void setEntity2(DrmCompany entity2) {
-		this.entity2 = entity2;
-	}
 
 	/**
 	 * 设置用户注册的公司信息实体

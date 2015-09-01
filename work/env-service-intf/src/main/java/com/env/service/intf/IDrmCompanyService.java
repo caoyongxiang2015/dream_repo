@@ -13,11 +13,8 @@
  */
 package com.env.service.intf;
 
-import java.util.List;
-
-import com.env.dto.DrmCompany;
-import com.env.dto.PtUser;
 import com.env.service.impl.Service;
+import com.env.dto.DrmCompany;
 
 /**
  * 用户注册的公司信息业务接口<br>
@@ -28,7 +25,4 @@ import com.env.service.impl.Service;
  * @since 1.0
  */
 public interface IDrmCompanyService<T extends DrmCompany> extends Service<T> {
-	public List<DrmCompany> getByUserid(Integer userid);
-	public List<DrmCompany> getByUserid(Integer userid,Integer companyIndex);
-	public List<DrmCompany> queryAllByParams(DrmCompany company); 
 }
