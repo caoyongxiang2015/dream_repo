@@ -13,8 +13,9 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
 
+import com.env.dao.api.Dao;
 import com.env.dto.PtUser;
 
 /**
@@ -33,4 +34,5 @@ public interface IPtUserDao<T extends PtUser> extends Dao<T> {
 
 	PtUser loginUser(String loginId, String password);
 
+	List<PtUser> queryAllByParams(PtUser user);
 }

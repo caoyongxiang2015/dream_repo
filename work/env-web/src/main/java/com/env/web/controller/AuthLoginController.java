@@ -92,7 +92,7 @@ public class AuthLoginController {
 		HttpSession session = request.getSession();
 		// redirectUrl 原始URL（登录前URL）
         String redirectUrl = (String) session.getAttribute(Constants.REDIRECT_URL);// redirectURL登陆拦截时设置
-        return InternalResourceViewResolver.REDIRECT_URL_PREFIX + ((null==redirectUrl)? "/":redirectUrl);
+        return InternalResourceViewResolver.REDIRECT_URL_PREFIX + ((null==redirectUrl)? "/profile":redirectUrl);
     }  
       
       
@@ -102,7 +102,8 @@ public class AuthLoginController {
     @RequestMapping("/logout")  
     public String logout(HttpServletRequest request){  
          SecurityUtils.getSubject().logout();  
-         return InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/auth/toLogin";  
+//         return InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/auth/toLogin";  
+         return InternalResourceViewResolver.REDIRECT_URL_PREFIX+"/";// go to index  
     }  
     
     /**

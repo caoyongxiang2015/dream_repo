@@ -13,6 +13,8 @@
  */
 package com.env.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,6 +79,11 @@ public class PtUserService<T extends PtUser> extends DefaultServiceImpl<T> imple
 	public boolean checkPhone(String phone) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<PtUser> queryAllByParams(PtUser user) {
+		return ptUserDao.queryAllByParams(user);
 	}
 
 }

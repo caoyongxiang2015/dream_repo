@@ -78,6 +78,14 @@ input.error:-ms-input-placeholder {
 	background:#A9DF93;
 	border-color:#B1CD9A;
 }
+.alert-failure {
+	background:#FFA500;
+	border-color:#FFB90F;
+}
+.alert-tip {
+	background:#b4f1b8;
+	border-color:#b8ecb0;
+}
 .alert-danger {
 	background:#EF5252;
 	border-color:#EF5252;

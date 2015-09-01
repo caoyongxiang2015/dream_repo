@@ -55,8 +55,6 @@
 		</div>
 	</div>
     
-<script src="${static_common}/hzk/js/jquery.min.js"></script>
-    
 	<script type="text/javascript">
 		$(".J-sendMoney").on("click",function(){
 			$(this).hide();

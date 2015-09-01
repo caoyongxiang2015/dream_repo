@@ -13,8 +13,10 @@
  */
 package com.env.service.intf;
 
-import com.env.service.impl.Service;
+import java.util.List;
+
 import com.env.dto.PtUser;
+import com.env.service.impl.Service;
 
 /**
  * PtUser业务接口<br>
@@ -35,4 +37,6 @@ public interface IPtUserService<T extends PtUser> extends Service<T> {
 	PtUser getByLoginid(String loginId);
 
 	boolean userRegister(PtUser user);
+	
+	List<PtUser> queryAllByParams(PtUser user);
 }
