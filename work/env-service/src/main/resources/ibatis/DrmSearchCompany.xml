@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmSearchCompany">
+
+	<typeAlias alias="drmSearchCompanyEntity" type="com.env.dto.DrmSearchCompany" />
+	<resultMap id="drmSearchCompany" class="com.env.dto.DrmSearchCompany">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="companyName" column="company_name" />
+		<result property="companyShotname" column="company_shotname" />
+		<result property="searched" column="searched" />
+		<result property="sendUserId" column="send_user_id" />
+		<result property="sendUserPhone" column="send_user_phone" />
+		<result property="flag" column="flag" />
+		<result property="version" column="version" />
+		<result property="disabled" column="disabled" />
+		<result property="createUserid" column="create_userid" />
+		<result property="createTime" column="create_time" />
+		<result property="updateUserid" column="update_userid" />
+		<result property="updateTime" column="update_time" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmSearchCompany.columns">
+	    <![CDATA[
+        id, company_name, company_shotname, searched, send_user_id, send_user_phone, flag, version, disabled, create_userid, create_time, update_userid, update_time
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmSearchCompanyEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_SEARCH_COMPANY (
+	        	id, 
+	        	company_name, 
+	        	company_shotname, 
+	        	searched, 
+	        	send_user_id, 
+	        	send_user_phone, 
+	        	flag, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#companyName#, 
+	        	#companyShotname#, 
+	        	#searched#, 
+	        	#sendUserId#, 
+	        	#sendUserPhone#, 
+	        	#flag#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmSearchCompanyEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_SEARCH_COMPANY (
+	        	id, 
+	        	company_name, 
+	        	company_shotname, 
+	        	searched, 
+	        	send_user_id, 
+	        	send_user_phone, 
+	        	flag, 
+	        	version, 
+	        	disabled, 
+	        	create_userid, 
+	        	create_time, 
+	        	update_userid, 
+	        	update_time
+	        ) VALUES (
+	        	#id#, 
+	        	#companyName#, 
+	        	#companyShotname#, 
+	        	#searched#, 
+	        	#sendUserId#, 
+	        	#sendUserPhone#, 
+	        	#flag#, 
+	        	#version#, 
+	        	#disabled#, 
+	        	#createUserid#, 
+	        	#createTime#, 
+	        	#updateUserid#, 
+	        	#updateTime#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmSearchCompanyEntity">
+	    <![CDATA[
+	        UPDATE DRM_SEARCH_COMPANY SET
+		        company_name = #companyName#, 
+		        company_shotname = #companyShotname#, 
+		        searched = #searched#, 
+		        send_user_id = #sendUserId#, 
+		        send_user_phone = #sendUserPhone#, 
+		        flag = #flag#, 
+		        version = #version#, 
+		        disabled = #disabled#, 
+		        create_userid = #createUserid#, 
+		        create_time = #createTime#, 
+		        update_userid = #updateUserid#, 
+		        update_time = #updateTime#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_SEARCH_COMPANY WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_SEARCH_COMPANY WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmSearchCompany">
+		SELECT
+		<include refid="drmSearchCompany.columns" />
+	    <![CDATA[
+	        FROM DRM_SEARCH_COMPANY 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmSearchCompany.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyName">
+		            <![CDATA[
+					company_name = #entity.companyName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyShotname">
+		            <![CDATA[
+					company_shotname = #entity.companyShotname#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.searched">
+		            <![CDATA[
+					searched = #entity.searched#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendUserId">
+		            <![CDATA[
+					send_user_id = #entity.sendUserId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.sendUserPhone">
+		            <![CDATA[
+					send_user_phone = #entity.sendUserPhone#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.flag">
+		            <![CDATA[
+					flag = #entity.flag#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.version">
+		            <![CDATA[
+					version = #entity.version#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createUserid">
+		            <![CDATA[
+					create_userid = #entity.createUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.createTime">
+		            <![CDATA[
+					create_time = #entity.createTime#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateUserid">
+		            <![CDATA[
+					update_userid = #entity.updateUserid#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.updateTime">
+		            <![CDATA[
+					update_time = #entity.updateTime#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_SEARCH_COMPANY
+		<include refid="drmSearchCompany.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmSearchCompany">
+		SELECT
+		<include refid="drmSearchCompany.columns" />
+	    <![CDATA[
+	        FROM DRM_SEARCH_COMPANY 
+	    ]]>
+		<include refid="drmSearchCompany.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmSearchCompany">
+		SELECT
+		<include refid="drmSearchCompany.columns" />
+	    <![CDATA[
+		    FROM DRM_SEARCH_COMPANY
+	    ]]>
+	</select>
+</sqlMap>
