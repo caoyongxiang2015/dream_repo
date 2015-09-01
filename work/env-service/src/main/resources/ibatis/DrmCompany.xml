@@ -299,12 +299,12 @@
 			<isNotNull property="entity">
 				<isNotEmpty prepend="OR" property="entity.companyName">
 		            <![CDATA[
-					company_name = #entity.companyName#
+					company_name like '%$entity.companyName$%'
 		            ]]>
 				</isNotEmpty>
 				<isNotEmpty prepend="OR" property="entity.companyShotname">
 		            <![CDATA[
-					company_shotname = #entity.companyShotname#
+					company_shotname like '%$entity.companyShotname$%'
 		            ]]>
 				</isNotEmpty>
 			</isNotNull>

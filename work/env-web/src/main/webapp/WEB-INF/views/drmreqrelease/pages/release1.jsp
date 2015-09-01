@@ -1,3 +1,5 @@
+<%@page import="com.env.constant.Constants"%>
+<%@page import="com.env.dto.PtUser"%>
 <%@include file="/WEB-INF/common/layouts/common.jsp"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <html>
@@ -54,6 +56,11 @@
 								<p class="help-block">必填</p>
 							</div>
 						</div>
+						
+						<%
+						PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+						if(null==user){// 未登录%>
+						
 						<div class="row">
 							<label class="col-xs-3 control-label" for="telephone">手机号码</label>
 							<div class="col-xs-4">
@@ -79,6 +86,9 @@
 								<p class="help-block">必填</p>
 							</div>
 						</div>
+						
+						<%}%>
+						
 						<div class="row">
 							<label class="col-xs-3 control-label" for="content">备注</label>
 							<div class="col-xs-7">
@@ -98,9 +108,9 @@
 					</div>
 					<div class="col-xs-3">
 						<div class="col-explain fn-left">
-    						<p class="help-block">1.啊飒飒的风光好就快了法国红酒的飞规划局的飞规划局</p>
-    						<p class="help-block">1.啊飒飒的风光好就快了法国红酒的飞规划局的飞规划局</p>
-    						<p class="help-block">1.啊飒飒的风光好就快了法国红酒的飞规划局的飞规划局</p>
+    						<p class="help-block">1、请附上您的诚意金，金额范围一般是您期望薪资的5‰-15‰，单位人民币</p>
+    						<p class="help-block">2、当您的需求有人应答之后，需要您将诚意金托管到本平台，待服务结束后，再将金额转入对方账户</p>
+    						<p class="help-block">3、金额多少不代表信息的价值</p>
     					</div>
     				</div>
     			</div>

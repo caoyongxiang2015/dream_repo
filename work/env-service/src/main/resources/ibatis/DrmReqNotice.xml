@@ -6,9 +6,6 @@
 
 	<typeAlias alias="drmReqNoticeEntity" type="com.env.dto.DrmReqNotice" />
 	<resultMap id="drmReqNotice" class="com.env.dto.DrmReqNotice">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="reqId" column="req_id" />
 		<result property="sendUserId" column="send_user_id" />
@@ -47,9 +44,9 @@
 	        	#sendUserId#, 
 	        	#receiveUserId#, 
 	        	#version#, 
-	        	#disabled#, 
+	        	0, 
 	        	#createUserid#, 
-	        	#createTime#, 
+	        	now(), 
 	        	#updateUserid#, 
 	        	#updateTime#
 	        )
@@ -70,10 +67,8 @@
 		        receive_user_id = #receiveUserId#, 
 		        version = #version#, 
 		        disabled = #disabled#, 
-		        create_userid = #createUserid#, 
-		        create_time = #createTime#, 
 		        update_userid = #updateUserid#, 
-		        update_time = #updateTime#
+		        update_time = now()
 	        WHERE 
 		        id = #id#
 	    ]]>

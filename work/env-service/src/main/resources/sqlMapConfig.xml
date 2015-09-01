@@ -26,5 +26,6 @@
 	<sqlMap resource="ibatis/DrmReq.xml" />
 	<sqlMap resource="ibatis/DrmReqNotice.xml" />
 	<sqlMap resource="ibatis/DrmSearchRecord.xml" />
+	<sqlMap resource="ibatis/DrmSearchCompany.xml" />
 	
 </sqlMapConfig>

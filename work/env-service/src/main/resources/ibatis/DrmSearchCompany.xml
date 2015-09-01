@@ -6,9 +6,6 @@
 
 	<typeAlias alias="drmSearchCompanyEntity" type="com.env.dto.DrmSearchCompany" />
 	<resultMap id="drmSearchCompany" class="com.env.dto.DrmSearchCompany">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="companyName" column="company_name" />
 		<result property="companyShotname" column="company_shotname" />
@@ -36,7 +33,6 @@
 	<insert id="save" parameterClass="drmSearchCompanyEntity">
 	    <![CDATA[
 	        INSERT INTO DRM_SEARCH_COMPANY (
-	        	id, 
 	        	company_name, 
 	        	company_shotname, 
 	        	searched, 
@@ -50,7 +46,6 @@
 	        	update_userid, 
 	        	update_time
 	        ) VALUES (
-	        	#id#, 
 	        	#companyName#, 
 	        	#companyShotname#, 
 	        	#searched#, 
@@ -58,9 +53,9 @@
 	        	#sendUserPhone#, 
 	        	#flag#, 
 	        	#version#, 
-	        	#disabled#, 
+	        	0, 
 	        	#createUserid#, 
-	        	#createTime#, 
+	        	now(), 
 	        	#updateUserid#, 
 	        	#updateTime#
 	        )
@@ -71,44 +66,6 @@
 		</selectKey>
 	</insert>
 
-	<!-- 新增记录 -->
-	<insert id="insert" parameterClass="drmSearchCompanyEntity">
-	    <![CDATA[
-	        INSERT INTO DRM_SEARCH_COMPANY (
-	        	id, 
-	        	company_name, 
-	        	company_shotname, 
-	        	searched, 
-	        	send_user_id, 
-	        	send_user_phone, 
-	        	flag, 
-	        	version, 
-	        	disabled, 
-	        	create_userid, 
-	        	create_time, 
-	        	update_userid, 
-	        	update_time
-	        ) VALUES (
-	        	#id#, 
-	        	#companyName#, 
-	        	#companyShotname#, 
-	        	#searched#, 
-	        	#sendUserId#, 
-	        	#sendUserPhone#, 
-	        	#flag#, 
-	        	#version#, 
-	        	#disabled#, 
-	        	#createUserid#, 
-	        	#createTime#, 
-	        	#updateUserid#, 
-	        	#updateTime#
-	        )
-	    ]]>
-		<selectKey resultClass="java.lang.Integer" type="post"
-			keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
 
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmSearchCompanyEntity">

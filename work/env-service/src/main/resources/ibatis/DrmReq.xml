@@ -6,9 +6,6 @@
 
 	<typeAlias alias="drmReqEntity" type="com.env.dto.DrmReq" />
 	<resultMap id="drmReq" class="com.env.dto.DrmReq">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="reqNum" column="req_num" />
 		<result property="companyName" column="company_name" />
@@ -104,9 +101,9 @@
 	        	#evalScore#, 
 	        	#evalContent#, 
 	        	#version#, 
-	        	#disabled#, 
+	        	0, 
 	        	#createUserid#, 
-	        	#createTime#, 
+	        	now(), 
 	        	#updateUserid#, 
 	        	#updateTime#
 	        )
