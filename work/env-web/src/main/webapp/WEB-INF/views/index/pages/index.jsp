@@ -19,12 +19,13 @@
 		  <ol class="carousel-indicators">
 		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 		    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
 		  </ol>
 		  <!-- Wrapper for slides -->
 		  <div class="carousel-inner" role="listbox">
 		    <div class="item active">
 			    <div class="container">
-			        <h2>只为帮您选择一个理想职业</h1>
+			        <h2>只为帮您选择一个理想职业</h2>
 					<p>已收录2000+公司的内部员工</p>
 					<p><a class="btn btn-purple btn-lg seek-advice" href="#" role="button">找人咨询</a></p>
 
@@ -32,9 +33,16 @@
 		    </div>
 		    <div class="item">
 			    <div class="container">
-		        <h2>只为让您拥有的信息产生价值</h1>
+		        <h2>只为让您掌握的信息产生价值</h2>
 				<p>只为让您帮助更多的人</p>
 				<p><a class="btn btn-purple btn-lg seek-advice" style="color: orange;" href="#" role="button">收到一条请求信息</a></p>
+		      </div>
+		    </div>
+		    <div class="item">
+			    <div class="container">
+		        <h2>面试是一个不对等的双向选择</h2>
+				<p>求职路也是一个不断重新认识自己的过程</p>
+				<p></p>
 		      </div>
 		    </div>
 		  </div>

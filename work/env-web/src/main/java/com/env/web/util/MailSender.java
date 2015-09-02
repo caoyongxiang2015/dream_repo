@@ -58,9 +58,10 @@ public class MailSender {
 //                        .setDefaultEncoding(MemoryPropertyPlaceholderConfigurer
 //                                .getContextProperty("mail.server.encoding")
 //                                .toString());
-                senderImpl.setHost("smtp.qq.com");
+                senderImpl.setHost("smtp.yeah.net");// 需要开启邮箱smtp授权
                 senderImpl.setDefaultEncoding("gb2312");
 
+                
 				// 建立邮件消息,发送简单邮件和html邮件的区别
                 MimeMessage mailMessage = senderImpl.createMimeMessage();
 //                MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage);
@@ -69,7 +70,7 @@ public class MailSender {
 				// 设置收件人，寄件人
                 try {
                     messageHelper.setTo(mailAdress);
-                    messageHelper.setFrom("306635282@qq.com");
+                    messageHelper.setFrom("haozhike@yeah.net");
                     try {
                         messageHelper.setSubject(MimeUtility.encodeText(
                                 msgtitle,"gb2312", "B"));
@@ -96,8 +97,8 @@ public class MailSender {
 //                senderImpl.setPassword(MemoryPropertyPlaceholderConfigurer
 //						.getContextProperty("mail.server.password").toString()); // 根据自己的情况,
 																					// 设置password
-                senderImpl.setUsername("306635282@qq.com"); // 根据自己的情况,设置username
-                senderImpl.setPassword("it7519cao"); // 根据自己的情况,
+                senderImpl.setUsername("haozhike@yeah.net"); // 根据自己的情况,设置username
+                senderImpl.setPassword("bhmfcrsljzkgkyru"); // 根据自己的情况,
                 Properties prop = new Properties();
 //                Map<String, String> contextProperty = MemoryPropertyPlaceholderConfigurer
 //                        .getContextProperty();
@@ -147,18 +148,11 @@ public class MailSender {
             FileSystemResource img, String attachedFileName,
             FileSystemResource file) {
         boolean flag = true;
-        if (Boolean.parseBoolean(MemoryPropertyPlaceholderConfigurer
-                .getContextProperty("sendEmail").toString())) {
             JavaMailSenderImpl senderImpl = new JavaMailSenderImpl();
             try {
 				// 设定mail server
-                senderImpl.setHost(MemoryPropertyPlaceholderConfigurer
-                        .getContextProperty("mail.server.host").toString());
-                senderImpl
-                        .setDefaultEncoding(MemoryPropertyPlaceholderConfigurer
-                                .getContextProperty("mail.server.encoding")
-                                .toString());
-
+                senderImpl.setHost("smtp.yeah.net");// 需要开启邮箱smtp授权
+                senderImpl.setDefaultEncoding("gb2312");
 				// 建立邮件消息,发送简单邮件和html邮件的区别
                 MimeMessage mailMessage = senderImpl.createMimeMessage();
 //                MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage);
@@ -169,15 +163,9 @@ public class MailSender {
                 	InternetAddress[] to = InternetAddress.parse(mailAdress);
                 	messageHelper.setTo(to);
 //                    messageHelper.setTo(mailAdress);
-                    messageHelper.setFrom(MemoryPropertyPlaceholderConfigurer
-                            .getContextProperty("mail.server.from").toString());
+                    messageHelper.setFrom("haozhike@yeah.net");
                     try {
-                        messageHelper.setSubject(MimeUtility.encodeText(
-                                msgtitle,
-                                MemoryPropertyPlaceholderConfigurer
-                                        .getContextProperty(
-                                                "mail.server.encoding")
-                                        .toString(), "B"));
+                    	messageHelper.setSubject(MimeUtility.encodeText(msgtitle,"gb2312", "B"));
 
 						// true 表示启动HTML格式的邮件
                         messageHelper.setText("<html><head></head><body><h1>"
@@ -194,24 +182,18 @@ public class MailSender {
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
-
-                senderImpl.setUsername(MemoryPropertyPlaceholderConfigurer
-						.getContextProperty("mail.server.userName").toString()); // 根据自己的情况,设置username
-                senderImpl.setPassword(MemoryPropertyPlaceholderConfigurer
-						.getContextProperty("mail.server.password").toString()); // 根据自己的情况,
-																					// 设置password
+                
+                senderImpl.setUsername("haozhike@yeah.net"); // 根据自己的情况,设置username
+                senderImpl.setPassword("bhmfcrsljzkgkyru"); // 根据自己的情况
+                
                 Properties prop = new Properties();
-                Map<String, String> contextProperty = MemoryPropertyPlaceholderConfigurer
-                        .getContextProperty();
-                for (String contextKey : contextProperty.keySet()) {
-                    if (contextKey.startsWith("mail.smtp.")) {
-                        prop.put(contextKey, contextProperty.get(contextKey));
-                    }
-                }
-                // prop.put("mail.smtp.auth", "true"); //
+                prop.put("mail.smtp.auth", "true"); //
 				// 将这个参数设为true，让服务器进行认证,认证用户名和密码是否正确
-                // prop.put("mail.smtp.timeout", "25000");
+                prop.put("mail.smtp.timeout", "25000");
+                
                 senderImpl.setJavaMailProperties(prop);
+                senderImpl.setJavaMailProperties(prop);
+                
 				// 发送邮件
                 senderImpl.send(mailMessage);
 				LOGGER.info("模块[" + moduleName + "]发送至[" + mailAdress
@@ -221,12 +203,6 @@ public class MailSender {
 				LOGGER.warn("模块[" + moduleName + "]发送至[" + mailAdress
 						+ "]的 邮件发送失败", e);
             }
-        } else {
-            flag = Boolean.parseBoolean(MemoryPropertyPlaceholderConfigurer
-                    .getContextProperty("defaultEmailSendStatus").toString());
-			LOGGER.warn("邮件发送功能禁止，模块[" + moduleName + "]不会发送至[" + mailAdress
-					+ "]，返回参数使用默认参数[" + flag + "]");
-        }
         return flag;
     }
 }

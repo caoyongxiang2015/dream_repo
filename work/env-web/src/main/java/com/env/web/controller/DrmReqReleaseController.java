@@ -172,6 +172,15 @@ public class DrmReqReleaseController extends BaseController {
 				}
 				
 				// TODO  6/发布成功，发送短信/发邮件
+				// 发邮件
+				MailSender mailSender = new MailSender();
+				for(String addr : receiveUserEmails){
+					mailSender.sendMail("好职客用户有偿咨询服务请求", 
+							"尊敬的客户，您好；\n好职客用户"+((user==null)?"":user.getNickname())+"向您咨询["
+								+req.getCompanyShotname()+"]的情况，愿向您支付诚意金+["+req.getPrice()+"]请登录www.haozhike.cn接单！\n其实您可以帮助更多的人，感谢在我的道路上有您的指导！", 
+					addr, "发布需求第一步", null, null, null, null);
+				}
+				
 				
 				request.getSession().setAttribute("match_success", 1);// 匹配成功标志
 			}else{
@@ -179,8 +188,6 @@ public class DrmReqReleaseController extends BaseController {
 				request.getSession().setAttribute("match_success", 0);// 匹配失败标志
 			}
 			
-			MailSender mailSender = new MailSender();
-			mailSender.sendMail("标题111", "好职客测试内容", "cyx_shzu@163.com", "发布需求", null, null, null, null);
 			
 			request.getSession().setAttribute("match_user_count", receiveUserIds.size());// 匹配到的用户数
 			request.getSession().setAttribute("req_company_shotname", req.getCompanyShotname());// 目标公司名称
