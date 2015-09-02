@@ -13,8 +13,10 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
+import java.util.Map;
 
+import com.env.dao.api.Dao;
 import com.env.dto.DrmReqNotice;
 
 /**
@@ -26,4 +28,12 @@ import com.env.dto.DrmReqNotice;
  * @since 1.0
  */
 public interface IDrmReqNoticeDao<T extends DrmReqNotice> extends Dao<T> {
+
+	/**
+	 * 根据条件查询
+	 * @param params
+	 * @return
+	 */
+	public List<DrmReqNotice> queryByParams(Map params);
 }
+

@@ -13,23 +13,26 @@
  */
 package com.env.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.env.constant.Constants;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IDrmReqService;
 import com.env.dto.DrmReq;
+import com.env.dto.DrmReqNotice;
+import com.env.dto.PtUser;
+import com.env.service.intf.IDrmReqNoticeService;
+import com.env.service.intf.IDrmReqService;
 import com.env.vo.DrmReqVo;
 
 
@@ -51,9 +54,30 @@ public class DrmReqController extends BaseController {
 	@Autowired
 	private IDrmReqService drmReqService;
 
+	@Autowired
+	private IDrmReqNoticeService<DrmReqNotice> drmReqNoticeService;
+
     @RequestMapping()
-	public String index(){
+	public String index(HttpServletRequest request){
     	System.out.println("IndexController");
+    	
+    	PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+    	DrmReqNotice notice = new DrmReqNotice();
+    	
+    	
+    	notice.setReceiveUserId((user==null)?0:user.getId());
+    	List<DrmReqNotice> notices = drmReqNoticeService.queryByParams(notice);
+    	
+    	
+    	// TODO 
+    	// 1 drm_req_notice  我接收到的需求
+    	// 2 drm_req 需求的信息：如金额，公司名称
+    	// 3 私信
+    	// 4
+    	
+    	
+    	request.setAttribute("notices", notices);
+    	
 		return "drmreq/pages/req";
 	}
 

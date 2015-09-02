@@ -5,6 +5,7 @@
 <sqlMap namespace="com.env.dto.DrmReqNotice">
 
 	<typeAlias alias="drmReqNoticeEntity" type="com.env.dto.DrmReqNotice" />
+	<typeAlias alias="drmReqEntity" type="com.env.dto.DrmReq" />
 	<resultMap id="drmReqNotice" class="com.env.dto.DrmReqNotice">
 		<result property="id" column="id" />
 		<result property="reqId" column="req_id" />
@@ -25,6 +26,20 @@
         id, req_id, send_user_id, receive_user_id, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
+
+
+	<resultMap class="com.env.dto.DrmReqNotice" id="noticeWithReq" extends="drmReqNotice">
+		<result property="req" column="req_id" select="com.env.dto.DrmReqNotice.getReqByReceiveUserid" />
+	</resultMap>
+	
+	<!-- 根据用户id获取项目列表 -->
+	<select id="getReqByReceiveUserid" parameterClass="int" resultClass="drmReqEntity">
+		select
+		r.*
+		from drm_req r 
+		where r.id=#value#
+	</select>
+
 
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmReqNoticeEntity">
@@ -186,4 +201,14 @@
 		    FROM DRM_REQ_NOTICE
 	    ]]>
 	</select>
+	
+	<select id="queryByParams" resultMap="noticeWithReq">
+		SELECT
+		<include refid="drmReqNotice.columns" />
+	    <![CDATA[
+		    FROM DRM_REQ_NOTICE
+	    ]]>
+		<include refid="drmReqNotice.queryPage" />
+	</select>
+	
 </sqlMap>

@@ -13,6 +13,8 @@
  */
 package com.env.service.intf;
 
+import java.util.List;
+
 import com.env.service.impl.Service;
 import com.env.dto.DrmReqNotice;
 
@@ -25,4 +27,11 @@ import com.env.dto.DrmReqNotice;
  * @since 1.0
  */
 public interface IDrmReqNoticeService<T extends DrmReqNotice> extends Service<T> {
+
+	/**
+	 * 根据条件查询
+	 * @param params
+	 * @return
+	 */
+	public List<DrmReqNotice> queryByParams(DrmReqNotice entity);
 }

@@ -14,10 +14,16 @@
     		</div>
     		<ul class="nav navbar-nav left" role="navigator">
     			<li class="active"><a href="${ctx }">首页</a></li>
+    			<%
+				PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+				if(null!=user){// 已经登录%>
     			<li><a href="${ctx }/drmletter">私信</a></li>
     			<li><a href="${ctx }/drmreq">需求</a></li>
     			<li><a href="${ctx }/profile">我的资料</a></li>
+    			<%} %>
     		</ul>
+    		
+    		<% if(null!=user){// 已经登录%>
     		<div class="dropdown right">
 	    		<a href="#" class="dropdown-toggle">
 		    		<img src="${static_common}/hzk/images/pic.png" alt=""/>
@@ -30,6 +36,8 @@
 		    		<span class="caret posa"></span>
 	    		</ul>
     		</div>
+   			<%} %>
+    		
     		<button class="btn btn-large btn-primary right btn-release" onclick="javascript:window.location.href='${ctx}/release/first'" type="button">发布需求</button>
     		<form id="mysearch" action="${ctx }/drmsearch" class="form-inline search-form right" method="post">
     			<div class="input-group posr">

@@ -1004,6 +1004,26 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 		}
 		return Boolean.TRUE;
 	}
+	
+	/**
+	 * 判断email是否合规
+	 * @param email 邮箱
+	 * @return  true-合规;false-不合规
+	 */
+	public static Boolean checkEmail(String email) {
+
+		if (email == null || email.length() < 7) {
+			return Boolean.FALSE;
+		}
+
+		Matcher matcherEmail = patternEmail.matcher(email); 
+
+		if (!matcherEmail.find(0)) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
+	
 
 	/**
 	 * 解析路径 组成路径集合

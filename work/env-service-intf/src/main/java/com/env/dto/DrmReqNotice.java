@@ -15,11 +15,14 @@ package com.env.dto;
 
 //import javax.validation.constraints.*;
 //import org.hibernate.validator.constraints.*;
-import com.env.core.domain.DomainObject;
+import java.util.List;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import com.env.core.domain.DomainObject;
 
 /**
  * 给哪些用户发需求通知，我接收到的需求数据库实体/领域对象<br>
@@ -37,6 +40,10 @@ public class DrmReqNotice extends DomainObject{
 	
 	//可以直接使用: @Length(max=50,message="用户名长度不能大于50")显示错误消息
 	//columns START
+	
+//	private List<DrmReq> reqs;
+	private DrmReq req;
+	
 	/**
 	 * id
 	 */
@@ -298,7 +305,18 @@ public class DrmReqNotice extends DomainObject{
 		return this.updateTime;
 	}
 
-    /**
+	
+	
+
+	public DrmReq getReq() {
+		return req;
+	}
+
+	public void setReq(DrmReq req) {
+		this.req = req;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */

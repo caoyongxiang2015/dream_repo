@@ -17,6 +17,14 @@
 			</ul>
     		<div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="sended">
+                
+                
+                
+                
+                
+                
+                
+                
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
@@ -34,29 +42,30 @@
 	                            <ol class="message-step clearfix">
 	                            	<li class="message-step-pass">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">已完成步骤</p>
+	                            		<p class="step-text">需求发布</p>
 	                            	</li>
 	                            	<li class="message-step-current">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">当前步骤</p>
+	                            		<p class="step-text">等待应答</p>
 	                            	</li>
 	                            	<li>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">赏金托管</p>
 	                            	</li>
 	                            	<li>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
 	                            	<li>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">评价并结束</p>
 	                            	</li>
-	                            	<li class="message-step-fail">
+	                            	<!-- 	                            	
+										<li class="message-step-fail">
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">失败结束步骤</p>
-	                            	</li>
-	                            </ol>
+	                            	</li>-->
+	                            	</ol>
                             </div>
                             <div class="send-message">2015.5.28 10:51:00  用户XXXXX 向您发送请求帮助信息，TA想简单了解下XXX公司的信息，诚意金50元</div>
                             <div class="accept-message">
@@ -83,7 +92,7 @@
 								<div class="select-time">
 	                                <div class="form-inline">
 							            <label class="radio inline">
-							            	<input type="radio" value="1" checked="checked" name="group">
+							            	<input type="radio" value="1" name="group">
 							              	工作日
 							            </label>
 							            <label class="radio inline">
@@ -91,7 +100,7 @@
 							            	节假日
 							            </label>
 							            <label class="radio inline">
-							            	<input type="radio" value="3" name="group">
+							            	<input type="radio" value="3" checked="checked" name="group">
 							            	以上均可
 							            </label>
 							            <input type="text" class="form-control" placeholder="您可以指定具体哪天或者时间段（默认全天）">
@@ -104,6 +113,16 @@
                             </div>
                         </div>
                     </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
@@ -121,27 +140,23 @@
 	                            <ol class="message-step clearfix">
 	                            	<li class="message-step-pass">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">已完成步骤</p>
+	                            		<p class="step-text">需求发布</p>
 	                            	</li>
 	                            	<li class="message-step-current">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">当前步骤</p>
+	                            		<p class="step-text">等待应答</p>
 	                            	</li>
 	                            	<li>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">赏金托管</p>
 	                            	</li>
 	                            	<li>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
 	                            	<li>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li class="message-step-fail">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">失败结束步骤</p>
+	                            		<p class="step-text">评价并结束</p>
 	                            	</li>
 	                            </ol>
                             </div>
@@ -154,6 +169,20 @@
                             </div>
                         </div>
                     </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
@@ -200,6 +229,9 @@
                             <div class="contact-message">您选择与求职者沟通的时间是：节假日 18点-21点</div>
                         </div>
                     </div>
+                    
+                    
+                    
                 </div>
                 <div role="tabpanel" class="tab-pane" id="received">
                     <div class="panel panel-default">
@@ -353,11 +385,62 @@
     	</section>
     </div>
     
-<script src="${static_common}/hzk/js/jquery.min.js"></script>
-
-<script type="text/javascript" src="${static_common}/hzk/js/jquery.validate.js"></script>
-<script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
     
+    
+    
+    
+	<!-- 发送私信 [[ -->
+	<div class="modal fade" id="sendPriviteMessage" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!--<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">发送私信</h4>
+			    </div>-->
+			    <div class="modal-body">
+				    <div class="container-fluid">
+					    <div class="row message-object">
+					    	<div class="col-xs-3">对方ID：</div>
+					    	<div class="col-xs-3">xxxxx</div>
+					    	<div class="col-xs-3">对方昵称：</div>
+					    	<div class="col-xs-3">XXXXX</div>
+					    </div>
+				    	<div class="row">
+					    	<label for="messageTitle" class="label-control col-xs-2">标题：</label>
+							<div class="form-group col-xs-10">
+								<input type="text" class="form-control" id="messageTitle" placeholder="私信标题">
+					        </div>
+					    </div>
+					    <div class="row">
+					    	<label for="messageText" class="abel-control col-xs-2">内容：</label>
+					    	<div class="form-group col-xs-10">
+						    	<textarea class="form-control" id="messageText" placeholder="发送私信" rows="8" cols="30"></textarea>
+					    	</div>
+					    </div>
+				    </div>
+		        </div>
+		        <div class="modal-footer text-center">
+			        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" onclick="nn.returnStatus('<div class=\'text-center\'>发送完成！</div>');">发送</button>
+			        <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+		</div>
+	<!-- 发送私信 ]] -->
+
+	<!-- 发送完成返回弹窗状态 -->
+	<div class="modal fade" id="returnStatus" tabindex="-1" role="dialog" aria-labelledby="returnStatus">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer text-center">
+					<button type="button" class="btn btn-primary btn-block btn-lg" data-dismiss="modal">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script type="text/javascript">
 		$(".J-accept-help").on("click",function(){
 			$(this).parent().nextAll(".accept-message").show();

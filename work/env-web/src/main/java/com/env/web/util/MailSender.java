@@ -76,8 +76,10 @@ public class MailSender {
                                 msgtitle,"gb2312", "B"));
 
 						// true 表示启动HTML格式的邮件
-                        messageHelper.setText("<html><head></head><body><h1>"
-                                + msgmemo + "</h1></body></html>", true);
+//                        messageHelper.setText("<html><head></head><body><h1>"
+//                                + msgmemo + "</h1></body></html>", true);
+                        messageHelper.setText("<html><head></head><body>"
+                        		+ msgmemo + "</body></html>", true);
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }

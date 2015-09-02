@@ -18,10 +18,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
 import com.env.dto.DrmCompany;
 import com.env.dto.DrmReq;
@@ -47,6 +50,8 @@ import com.env.web.util.MailSender;
 @Controller
 @RequestMapping("/release")
 public class DrmReqReleaseController extends BaseController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DrmReqReleaseController.class);
 
 	/**
 	 * 自动注入用户注册的部门信息业务层实现
@@ -172,16 +177,26 @@ public class DrmReqReleaseController extends BaseController {
 				}
 				
 				// TODO  6/发布成功，发送短信/发邮件
-				// 发邮件
-				MailSender mailSender = new MailSender();
-				for(String addr : receiveUserEmails){
-					mailSender.sendMail("好职客用户有偿咨询服务请求", 
-							"尊敬的客户，您好；\n好职客用户"+((user==null)?"":user.getNickname())+"向您咨询["
-								+req.getCompanyShotname()+"]的情况，愿向您支付诚意金+["+req.getPrice()+"]请登录www.haozhike.cn接单！\n其实您可以帮助更多的人，感谢在我的道路上有您的指导！", 
-					addr, "发布需求第一步", null, null, null, null);
+				try{
+					// 发邮件
+					MailSender mailSender = new MailSender();
+					for(String email : receiveUserEmails){
+						// 验证addr是否是email
+						LOGGER.debug("收件人邮箱地址"+email);
+						if(StringUtils.checkEmail(email)){
+							LOGGER.debug("发送邮件"+email);
+							String un = (user==null)?"":(user.getNickname()==null)?"":user.getNickname();
+							mailSender.sendMail("好职客用户有偿咨询服务请求", 
+									"<h1>尊敬的好职客用户，您好；</h1><br/><h3>    好职客用户:"+un+"  向您咨询["
+										+req.getCompanyShotname()+"]的情况，愿向您支付诚意金["+req.getPrice()+"元]，请访问<a href=\"http://www.haozhike.cn\">好职客 www.haozhike.cn</a> 接单！</h3><br/><br/><h2>感谢在成长的道路上有您的帮助和指导！</h2>", 
+										email, "发布需求第一步", null, null, null, null);
+						}
+					}
+				}catch(Exception e){
+					LOGGER.error("邮件发送异常！"+e.getMessage());
+					e.printStackTrace();
 				}
-				
-				
+								
 				request.getSession().setAttribute("match_success", 1);// 匹配成功标志
 			}else{
 				// 未匹配到

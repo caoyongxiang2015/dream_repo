@@ -13,9 +13,12 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmReqNoticeDao;
 import com.env.dto.DrmReqNotice;
 
@@ -29,4 +32,8 @@ import com.env.dto.DrmReqNotice;
  */
 @Repository("drmReqNoticeDao")
 public class DrmReqNoticeDao extends DefaultDaoImpl<DrmReqNotice> implements IDrmReqNoticeDao<DrmReqNotice> {
+	
+	public List<DrmReqNotice> queryByParams(Map params) {
+		return this.query(getStatement(), params);
+	}
 }
