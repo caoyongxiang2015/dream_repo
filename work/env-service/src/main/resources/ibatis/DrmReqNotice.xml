@@ -35,7 +35,35 @@
 	<!-- 根据用户id获取项目列表 -->
 	<select id="getReqByReceiveUserid" parameterClass="int" resultClass="drmReqEntity">
 		select
-		r.*
+			id id 
+			,req_num reqNum
+			,company_name companyName
+			,company_shotname companyShotname
+			,price price
+			,faceprice faceprice
+			,send_user_id sendUserId
+			,send_user_phone sendUserPhone
+			,send_user_nickname sendUserNickname
+			,accept_state acceptState
+			,accept_user_id acceptUserId
+			,accept_duration acceptDuration
+			,open_contact openContact
+			,accept_time acceptTime
+			,deposit_time depositTime
+			,complete_time completeTime
+			,end_time endTime
+			,stop_time stopTime
+			,title title
+			,content content
+			,overtime overtime
+			,eval_score evalScore
+			,eval_content evalContent
+			,version 
+			,disabled 
+			,create_userid 
+			,create_time 
+			,update_userid 
+			,update_time 
 		from drm_req r 
 		where r.id=#value#
 	</select>

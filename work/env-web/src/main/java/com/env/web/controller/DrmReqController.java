@@ -13,6 +13,7 @@
  */
 package com.env.web.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,134 +60,68 @@ public class DrmReqController extends BaseController {
 
     @RequestMapping()
 	public String index(HttpServletRequest request){
-    	System.out.println("IndexController");
     	
     	PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
     	DrmReqNotice notice = new DrmReqNotice();
     	
-    	
     	notice.setReceiveUserId((user==null)?0:user.getId());
-    	List<DrmReqNotice> notices = drmReqNoticeService.queryByParams(notice);
-    	
-    	
     	// TODO 
     	// 1 drm_req_notice  我接收到的需求
     	// 2 drm_req 需求的信息：如金额，公司名称
+    	List<DrmReqNotice> notices = drmReqNoticeService.queryByParams(notice);
+    	
+    	
     	// 3 私信
     	// 4
     	
     	
+    	request.setAttribute("cur_userid", user.getId());
     	request.setAttribute("notices", notices);
+    	request.setAttribute("accept_success", request.getSession().getAttribute("accept_success"));
+    	
+    	request.getSession().removeAttribute("accept_success");
     	
 		return "drmreq/pages/req";
 	}
 
+
 	/**
-	 * 去列表页面
-	 * @param model
+	 * 接受需求
+	 * @param reqId 需求id
 	 * @return
 	 */
-	@RequestMapping(value = "list")
-	public String list(Integer number , HttpServletRequest request){
-
-        // 拿到所有的入参放到map里
-        Map<String, Object> searchParams = new HashMap<String, Object>();//Servlets.getParametersStartingWith(request, null);
-        
-        Page page = new Page();
-        
-        if (null != number) {
-            page.setCurrentPage(number);
-            String pageSize = request.getParameter("pageSize");
-            if(null != pageSize && !"".equals(pageSize)){
-                page.setPageSize(Integer.parseInt(pageSize));
-            }
-        }
-        
-        QueryParams<DrmReq> queryParams=new QueryParams<DrmReq>();
-        queryParams.setPaging(page);
-        queryParams.setSearchParams(searchParams);
-        
-		List<DrmReq> drmReqList = drmReqService.queryByPage(queryParams);
+	@RequestMapping(value = "receive")
+	public String receive(DrmReqVo drmReqVo,HttpServletRequest request){
 		
-		request.setAttribute("page", page);
-		request.setAttribute("searchParams", searchParams);
-        request.setAttribute("drmReqList", drmReqList);
-
-		return "drmreq/pages/list";
+		// 先判断是否已经被其他用户接收请求了。
+		DrmReq old = (DrmReq)drmReqService.getById(drmReqVo.getEntity().getId());
+		if(old.getAcceptState().intValue()==1){
+			// 已经是‘已应答状态’
+			request.getSession().setAttribute("accept_success", 0);// 已经被抢先应答
+			return "redirect:/drmreq";
+		}
+		
+		try{
+			PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+			
+			Calendar cal = Calendar.getInstance();
+			
+			old.setAcceptDuration(drmReqVo.getEntity().getAcceptDuration());
+			old.setAcceptState(drmReqVo.getEntity().getAcceptState());
+			old.setAcceptTime(cal.getTime());
+			old.setAcceptUserId(user.getId());
+			old.setOpenContact(drmReqVo.getEntity().getOpenContact());
+			drmReqService.update(old);
+			request.getSession().setAttribute("accept_success",1);// 应答成功
+		}catch(Exception e){
+			request.getSession().setAttribute("accept_success",-1);// 应答失败
+		}
+		
+		
+		return "redirect:/drmreq";
 	}
 	
-	/**
-	 * 去新增需求
-	 * 
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "toadd")
-	public String toadd(){
-		return "drmreq/pages/add";
-	}
 
-	/**
-	 * 新增需求
-	 * 
-	 * @param drmReqVo 需求页面表单对象
-	 * @param result 表单验证数据
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "save")
-	public String save (DrmReqVo drmReqVo ){
-		Integer id = -1;
-		try{
-			id = drmReqService.save(drmReqVo.getEntity());
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "redirect:/drmreq/detail/"+id;
-	}
-
-	/**
-	 * 删除需求
-	 * 
-	 * @param id 需求页面表单对象唯一标识
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "delete/{id}")
-	public String delete (@PathVariable("id") Integer id, Page page, HttpServletRequest request){
-		try{
-			if(null != id){
-			    drmReqService.delete(id);
-			}
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "redirect:/drmreq/list";
-	}
-
-	/**
-	 * 去修改需求
-	 * 
-	 * @param id 需求页面表单对象唯一标识
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "toedit/{id}")
-	public String toedit(@PathVariable("id") Integer id , Model model){
-		try{
-			if(null != id){
-				DrmReq drmReqEntity = (DrmReq) drmReqService.getById(id);
-				model.addAttribute("entity", drmReqEntity);
-			}
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "drmreq/pages/update";
-	}
 
 	/**
 	 * 修改需求
@@ -208,18 +143,4 @@ public class DrmReqController extends BaseController {
 		return "redirect:/drmreq/detail/"+ drmReqVo.getEntity().getId();
 	}
 
-
-	/**
-	 * 跳转到需求详情页面
-	 * 
-	 * @param id
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "detail/{id}")
-	public String detail(@PathVariable Integer id, Model model) {
-		DrmReq com = (DrmReq) drmReqService.getById(id);
-		model.addAttribute("entity", com);
-		return "drmreq/pages/detail";
-	}
 }

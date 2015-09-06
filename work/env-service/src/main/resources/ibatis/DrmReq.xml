@@ -142,11 +142,8 @@
 		        eval_score = #evalScore#, 
 		        eval_content = #evalContent#, 
 		        version = #version#, 
-		        disabled = #disabled#, 
-		        create_userid = #createUserid#, 
-		        create_time = #createTime#, 
 		        update_userid = #updateUserid#, 
-		        update_time = #updateTime#
+		        update_time = now()
 	        WHERE 
 		        id = #id#
 	    ]]>
