@@ -16,6 +16,9 @@
 				<li role="presentation"><a href="#received" aria-controls="#" role="tab" data-toggle="tab">我发出的需求</a></li>
 			</ul>
     		<div class="tab-content">
+    		
+    		
+    		<!-- 我收到的需求 -->
                 <div role="tabpanel" class="tab-pane active" id="sended">
 	                            <!-- 
 									接收到的需求步骤：
@@ -25,11 +28,43 @@
 									4. 未开始的步骤 没有class
 									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
 	                            -->
+	                            <br/>
+                <c:choose>
+		<c:when test="${accept_success == 1 }">
+			<div class="alert alert-success" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				恭喜您，应答成功！请等待对方将诚意金托管至本平台。
+			</div>
+		</c:when>
+		<c:when test="${accept_success == 0 }">
+			<div class="alert alert-tip" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				抱歉，已经被别人抢先应答了，下次动作快点哦！
+			</div>
+		</c:when>
+		<c:when test="${accept_success == -1 }">
+			<div class="alert alert-failure" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				非常抱歉，未应答成功，请刷新页面重试！
+			</div>
+		</c:when>
+		</c:choose>
+		
+                <!-- 应答状态:  0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求 -->
+                <c:if test="${notices.size()==0 }">
+                	<div class="panel panel-default">
+	                	<div class="panel-heading">
+	                            <h3 class="panel-title"><span>没有记录</span></h3>
+	                    </div>
+                    </div>
+                </c:if>
                 
-                <!-- 应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求 -->
                 
                 <c:forEach items="${notices }" var="nt">
-                >>>>>>${nt.req.id } >>>> ${nt.req.acceptState }
+                >>>>req.id>>${nt.req.id } >>acceptState>> ${nt.req.acceptState } 》》acceptUserId》${nt.req.acceptUserId }               
+                <!-- 未被应答，或者该需求是当前登录用户应答的-->
+                <c:if test="${nt.req.acceptState == 0 || nt.req.acceptUserId == cur_userid }">
+                           	
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
@@ -37,7 +72,6 @@
                         <div class="panel-body">
                             <div class="demand-progress">
 	                            <ol class="message-step clearfix">
-	                            <c:if test="${nt.req.acceptState==0}"></c:if>
 	                            	<li class="message-step-pass">
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">需求发布</p>
@@ -54,10 +88,18 @@
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
-	                            	<li class='<c:if test="${nt.req.acceptState==3}">message-step-current</c:if><c:if test="${nt.req.acceptState>3}">message-step-pass</c:if>'>
+	                            	<c:if test="${nt.req.acceptState!=4 && nt.req.acceptState!=5}">
+	                            	<li class='<c:if test="${nt.req.acceptState==3}">message-step-current</c:if>'>
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">评价并结束</p>
 	                            	</li>
+	                            	</c:if>
+	                            	<c:if test="${nt.req.acceptState==4}">
+	                            	<li class="message-step-fail">
+	                            		<div class="step-icon"></div>
+	                            		<p class="step-text">申请退款</p>
+	                            	</li>
+									</c:if>
 	                            	<c:if test="${nt.req.acceptState==5}">
 	                            	<li class="message-step-fail">
 	                            		<div class="step-icon"></div>
@@ -66,20 +108,28 @@
 									</c:if>
 	                            	</ol>
                             </div>
-                            <div class="send-message">2015.5.28 10:51:00  用户XXXXX 向您发送请求帮助信息，TA想简单了解下XXX公司的信息，诚意金50元</div>
-                            <div class="accept-message">接受请求后，待对方将诚意金托管到本平台后，开放联系方式给TA
+                            
+                <!-- 0未应答，等待应答 -->
+                    <c:if test="${nt.req.acceptState==0}">
+                            
+                            <form name="ddyd" action="${ctx}/drmreq/receive" method="post">
+                            <input type="hidden" name="entity.id" value="${nt.req.id }"> 
+                            <input type="hidden" name="entity.acceptState" value="1"> <!-- 1:已应答，赏金待托管 -->
+                            
+                            <div class="send-message">${nt.req.createTime }  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
+                            <div class="accept-message">接受请求后，对方将诚意金托管到本平台后，开放联系方式给TA
 	                            <div class="select-time">
 	                                <div class="form-inline">
-							            <label class="radio inline">
-							            	<input type="radio" value="1" checked="checked" name="contactMethod">
+							            <label class="checkbox inline">
+							            	<input type="checkbox" value="手机号" checked="checked" name="entity.openContact">
 							              	手机号
 							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="2" name="contactMethod">
+							            <label class="checkbox inline">
+							            	<input type="checkbox" value="QQ号码" checked="checked" name="entity.openContact">
 							            	QQ
 							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="3" name="contactMethod">
+							            <label class="checkbox inline">
+							            	<input type="checkbox" value="电子邮箱" checked="checked" name="entity.openContact">
 							            	Email
 							            </label>
 							        </div>
@@ -88,243 +138,61 @@
                             <div class="contact-message">请选择一个您方便的时间，求职者与您联系
 								<div class="select-time">
 	                                <div class="form-inline">
-							            <label class="radio inline">
-							            	<input type="radio" value="1" name="group">
+							            <label class="checkbox inline">
+							            	<input type="checkbox" value="工作日" checked="checked" name="entity.acceptDuration">
 							              	工作日
 							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="2" name="group">
-							            	节假日
+							            <label class="checkbox inline">
+							            	<input type="checkbox" value="周末及节假日" checked="checked" name="entity.acceptDuration">
+							            	周末及节假日
 							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="3" checked="checked" name="group">
-							            	以上均可
-							            </label>
-							            <input type="text" class="form-control" placeholder="您可以指定具体哪天或者时间段（默认全天）">
+							            <input type="text" class="form-control" name="entity.acceptDuration" placeholder="您可以指定具体哪天或者时间段（默认全天）">
 							        </div>
 	                            </div>
                             </div>
                             <div class="button-bar">
-                                <button class="btn btn-lg btn-primary">接受请求</button>
+                                <button class="btn btn-lg btn-primary" type="submit">接受请求</button>
                                 <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
                             </div>
+                        	</form>
+                        	
+                        	</c:if>
+                        	
+                <!-- 1已应答,赏金待托管 -->
+                    <c:if test="${nt.req.acceptState==1}">
+                  			<div class="send-message">${nt.req.createTime }  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
+                          <div class="accept-message">您已经接受请求，请等待对方将赏金托管到本平台</div>
+                          <div class="button-bar">
+                              <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
+                          </div>
+                    </c:if>
+                        	
+                <!-- 2赏金已托管，服务进行中-->
+                    <c:if test="${nt.req.acceptState==2}">
+                   		<div class="send-message">您好，用户${nt.req.sendUserNickname } 已经将诚意金${nt.req.price }元托管到本平台，待您双方沟通完毕后，本平台将诚意金转入您的账户。</div>
+                        <div class="contact-message">您选择与求职者沟通的时间是：${nt.req.acceptDuration } ；TA的联系电话是：${nt.req.sendUserPhone }</div>
+                    </c:if>
+                    
+                <!-- 3服务已完成，评价并结束 -->
+                    <c:if test="${nt.req.acceptState==3}">
+                    
+                    </c:if>
                         </div>
+                        
+                        
+                        
                     </div>
                     
+                </c:if>                
                 </c:forEach>
                 
-                
-                
-                
-                
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="demand-progress">
-	                            <!-- 
-									接收到的需求步骤：
-									1. 根据实际步骤步数，添加多少个li
-									2. 已经完成的步骤 添加class="message-step-pass"
-									3. 当前步骤 添加class="message-step-current"
-									4. 未开始的步骤 没有class
-									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
-	                            -->
-	                            <ol class="message-step clearfix">
-	                            	<li class="message-step-pass">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">需求发布</p>
-	                            	</li>
-	                            	<li class="message-step-current">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">等待应答</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">赏金托管</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">服务进行中</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">评价并结束</p>
-	                            	</li>
-	                            	<!-- 	                            	
-										<li class="message-step-fail">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">失败结束步骤</p>
-	                            	</li>-->
-	                            	</ol>
-                            </div>
-                            <div class="send-message">2015.5.28 10:51:00  用户XXXXX 向您发送请求帮助信息，TA想简单了解下XXX公司的信息，诚意金50元</div>
-                            <div class="accept-message">
-	                            接受请求后，待对方将诚意金托管到本平台后，开放联系方式给TA
-	                            <div class="select-time">
-	                                <div class="form-inline">
-							            <label class="radio inline">
-							            	<input type="radio" value="1" checked="checked" name="contactMethod">
-							              	手机号
-							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="2" name="contactMethod">
-							            	QQ
-							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="3" name="contactMethod">
-							            	Email
-							            </label>
-							        </div>
-	                            </div>
-                            </div>
-                            <div class="contact-message">
-	                            请选择一个您方便的时间，求职者与您联系
-								<div class="select-time">
-	                                <div class="form-inline">
-							            <label class="radio inline">
-							            	<input type="radio" value="1" name="group">
-							              	工作日
-							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="2" name="group">
-							            	节假日
-							            </label>
-							            <label class="radio inline">
-							            	<input type="radio" value="3" checked="checked" name="group">
-							            	以上均可
-							            </label>
-							            <input type="text" class="form-control" placeholder="您可以指定具体哪天或者时间段（默认全天）">
-							        </div>
-	                            </div>
-                            </div>
-                            <div class="button-bar">
-                                <button class="btn btn-lg btn-primary">接受请求</button>
-                                <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
-                        </div>
-                        <div class="panel-body">
-                                                        <div class="demand-progress">
-	                            <!-- 
-									接收到的需求步骤：
-									1. 根据实际步骤步数，添加多少个li
-									2. 已经完成的步骤 添加class="message-step-pass"
-									3. 当前步骤 添加class="message-step-current"
-									4. 未开始的步骤 没有class
-									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
-	                            -->
-	                            <ol class="message-step clearfix">
-	                            	<li class="message-step-pass">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">需求发布</p>
-	                            	</li>
-	                            	<li class="message-step-current">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">等待应答</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">赏金托管</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">服务进行中</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">评价并结束</p>
-	                            	</li>
-	                            </ol>
-                            </div>
-                            <div class="send-message">2015.5.28 10:51:00  用户XXXXX 向您发送请求帮助信息，TA想简单了解下XXX公司的信息，诚意金50元</div>
-                            <div class="accept-message">您已经接受请求，请等待对方将赏金托管到本平台</div>
-<!--                        <div class="contact-message">请选择一个您方便的时间，求职者与您联系</div>-->
-                            <div class="button-bar">
-<!--                        	<button class="btn btn-lg btn-lg btn-primary">接受请求</button>-->
-                                <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="demand-progress">
-	                            <!-- 
-									接收到的需求步骤：
-									1. 根据实际步骤步数，添加多少个li
-									2. 已经完成的步骤 添加class="message-step-pass"
-									3. 当前步骤 添加class="message-step-current"
-									4. 未开始的步骤 没有class
-									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
-	                            -->
-	                            <ol class="message-step clearfix">
-	                            	<li class="message-step-pass">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">已完成步骤</p>
-	                            	</li>
-	                            	<li class="message-step-current">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">当前步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li class="message-step-fail">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">失败结束步骤</p>
-	                            	</li>
-	                            </ol>
-                            </div>
-                            <div class="send-message">您好，求职者用户XXXXX 已经将诚意金50元托管到本平台，待您双方沟通完毕后，由求职者确认服务完成或默认7个工作日内，本平台将诚意金转入您的账户。</div>
-<!--                        <div class="accept-message">接受请求后，待对方将诚意金托管到本平台后，开放联系方式给TA</div>-->
-                            <div class="contact-message">您选择与求职者沟通的时间是：节假日 18点-21点</div>
-                        </div>
-                    </div>
-                    
-                    
-                    
                 </div>
+                
+                
+                
+                
+                <!-- 我发出的需求 -->
+                
                 <div role="tabpanel" class="tab-pane" id="received">
                     <div class="panel panel-default">
                         <div class="panel-heading">
