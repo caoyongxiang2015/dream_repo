@@ -59,19 +59,17 @@ public class DrmReqController extends BaseController {
 
     @RequestMapping()
 	public String index(HttpServletRequest request){
-    	System.out.println("IndexController");
     	
     	PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
     	DrmReqNotice notice = new DrmReqNotice();
     	
-    	
     	notice.setReceiveUserId((user==null)?0:user.getId());
-    	List<DrmReqNotice> notices = drmReqNoticeService.queryByParams(notice);
-    	
-    	
     	// TODO 
     	// 1 drm_req_notice  我接收到的需求
     	// 2 drm_req 需求的信息：如金额，公司名称
+    	List<DrmReqNotice> notices = drmReqNoticeService.queryByParams(notice);
+    	
+    	
     	// 3 私信
     	// 4
     	
