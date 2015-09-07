@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.env.constant.Constants;
 import com.env.dao.api.Page;
@@ -139,25 +140,29 @@ public class DrmReqController extends BaseController {
 	}
 	
 
-
 	/**
-	 * 修改需求
-	 * 
-	 * @param drmReqVo 需求页面表单对象
-	 * @param result 表单验证数据
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
+	 * 修改状态
+	 * @param drmReqVo
+	 * @return
 	 */
-	@RequestMapping(value = "update")
-	public String update (DrmReqVo drmReqVo){
+	@ResponseBody
+	@RequestMapping(value = "modifyState")
+	public String modifyState (DrmReqVo drmReqVo){
 		try{
-			drmReqService.update(drmReqVo.getEntity());
+			DrmReq entity = drmReqVo.getEntity();
+			DrmReq old = (DrmReq)drmReqService.getById(entity.getId());
+			
+			old.setAcceptState(entity.getAcceptState());//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求
+			old.setCompleteTime(entity.getCompleteTime());//服务完成时间
+			old.setStopTime(entity.getStopTime());//废弃终止时间
+			old.setEndTime(entity.getEndTime());//评价结束时间
+			
+			drmReqService.update(old);
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
 		}
-		return "redirect:/drmreq/detail/"+ drmReqVo.getEntity().getId();
+		return "";
 	}
 
 }

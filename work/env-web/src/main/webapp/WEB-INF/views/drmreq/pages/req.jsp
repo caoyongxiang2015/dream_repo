@@ -265,7 +265,7 @@
 	                    
 	                <!-- 1已应答,赏金待托管 -->
 	                    <c:if test="${req.acceptState==1}">
-                            <div class="send-message"><a href="#"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，TA已接受应答，愿意帮助您</a></div>
+                            <div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，TA已接受应答，愿意帮助您</div>
                             <div class="accept-message">您是否愿意接受帮助？
                                 <button class="btn btn-lg btn-warning J-accept-help">接受帮助</button>
                                 <a href="#">放弃帮助</a>
