@@ -62,6 +62,9 @@ public class DrmReqController extends BaseController {
 	public String index(HttpServletRequest request){
     	
     	PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+    	
+    	
+    	// ================ 我收到的需求 ====================
     	DrmReqNotice notice = new DrmReqNotice();
     	
     	notice.setReceiveUserId((user==null)?0:user.getId());
@@ -77,9 +80,19 @@ public class DrmReqController extends BaseController {
     	
     	request.setAttribute("cur_userid", user.getId());
     	request.setAttribute("notices", notices);
+    	// accept_success:0已经被抢先应答,1应答成功,-1应答异常失败,2本人已应答过
     	request.setAttribute("accept_success", request.getSession().getAttribute("accept_success"));
     	
     	request.getSession().removeAttribute("accept_success");
+    	
+    	
+
+    	// ================ 我发出的需求 ====================
+    	DrmReq req = new DrmReq();
+    	req.setSendUserId(user.getId());
+    	List<DrmReq>  reqs = drmReqService.queryByParams(req);
+    	request.setAttribute("reqs", reqs);
+    	
     	
 		return "drmreq/pages/req";
 	}
@@ -94,15 +107,19 @@ public class DrmReqController extends BaseController {
 	public String receive(DrmReqVo drmReqVo,HttpServletRequest request){
 		
 		// 先判断是否已经被其他用户接收请求了。
+		PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
 		DrmReq old = (DrmReq)drmReqService.getById(drmReqVo.getEntity().getId());
 		if(old.getAcceptState().intValue()==1){
 			// 已经是‘已应答状态’
-			request.getSession().setAttribute("accept_success", 0);// 已经被抢先应答
+			if(old.getAcceptUserId().intValue() == user.getId().intValue()){
+				request.getSession().setAttribute("accept_success", 2);// 本人已应答过
+			}else{
+				request.getSession().setAttribute("accept_success", 0);// 已经被抢先应答
+			}
 			return "redirect:/drmreq";
 		}
 		
 		try{
-			PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
 			
 			Calendar cal = Calendar.getInstance();
 			

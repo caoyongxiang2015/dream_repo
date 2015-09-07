@@ -13,8 +13,10 @@
  */
 package com.env.service.intf;
 
-import com.env.service.impl.Service;
+import java.util.List;
+
 import com.env.dto.DrmReq;
+import com.env.service.impl.Service;
 
 /**
  * 需求业务接口<br>
@@ -25,4 +27,6 @@ import com.env.dto.DrmReq;
  * @since 1.0
  */
 public interface IDrmReqService<T extends DrmReq> extends Service<T> {
+	
+	List<DrmReq> queryByParams(DrmReq req);
 }

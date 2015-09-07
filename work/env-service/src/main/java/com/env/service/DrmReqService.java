@@ -13,11 +13,15 @@
  */
 package com.env.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.env.dao.api.Dao;
 import com.env.service.impl.DefaultServiceImpl;
-
 import com.env.dao.intf.IDrmReqDao;
 import com.env.service.intf.IDrmReqService;
 import com.env.dto.DrmReq;
@@ -41,5 +45,12 @@ public class DrmReqService<T extends DrmReq> extends DefaultServiceImpl<T> imple
 	@Override
 	protected Dao<T> getDao() {
 		return (Dao<T>) drmReqDao;
+	}
+
+	@Override
+	public List<DrmReq> queryByParams(DrmReq req) {
+		Map params = new HashMap();
+		params.put("entity", req);
+		return drmReqDao.queryByParams(params);
 	}
 }

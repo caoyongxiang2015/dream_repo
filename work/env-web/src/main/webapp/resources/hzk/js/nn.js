@@ -110,7 +110,7 @@ nn.returnStatus = function(data){
 	setTimeout(function(){
 		$("#returnStatus").modal("show");
 		$("#returnStatus .modal-body").html(data)
-	}, 1000);
+	}, 10);
 
 }
 

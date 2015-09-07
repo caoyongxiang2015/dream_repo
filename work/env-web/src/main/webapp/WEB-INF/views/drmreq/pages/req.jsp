@@ -42,6 +42,12 @@
 				抱歉，已经被别人抢先应答了，下次动作快点哦！
 			</div>
 		</c:when>
+		<c:when test="${accept_success == 2 }">
+			<div class="alert alert-tip" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				您已经接受了应答，请不要重复接受应答。
+			</div>
+		</c:when>
 		<c:when test="${accept_success == -1 }">
 			<div class="alert alert-failure" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -61,7 +67,7 @@
                 
                 
                 <c:forEach items="${notices }" var="nt">
-                >>>>req.id>>${nt.req.id } >>acceptState>> ${nt.req.acceptState } 》》acceptUserId》${nt.req.acceptUserId }               
+                >>>>req.id>>${nt.req.id } >>acceptState>> ${nt.req.acceptState } 》》acceptUserId》${nt.req.acceptUserId }   ###             
                 <!-- 未被应答，或者该需求是当前登录用户应答的-->
                 <c:if test="${nt.req.acceptState == 0 || nt.req.acceptUserId == cur_userid }">
                            	
@@ -106,7 +112,7 @@
 	                            		<p class="step-text">放弃需求</p>
 	                            	</li>
 									</c:if>
-	                            	</ol>
+	                        	</ol>
                             </div>
                             
                 <!-- 0未应答，等待应答 -->
@@ -158,25 +164,27 @@
                         	
                         	</c:if>
                         	
-                <!-- 1已应答,赏金待托管 -->
-                    <c:if test="${nt.req.acceptState==1}">
-                  			<div class="send-message">${nt.req.createTime }  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
-                          <div class="accept-message">您已经接受请求，请等待对方将赏金托管到本平台</div>
-                          <div class="button-bar">
-                              <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
-                          </div>
-                    </c:if>
-                        	
-                <!-- 2赏金已托管，服务进行中-->
-                    <c:if test="${nt.req.acceptState==2}">
-                   		<div class="send-message">您好，用户${nt.req.sendUserNickname } 已经将诚意金${nt.req.price }元托管到本平台，待您双方沟通完毕后，本平台将诚意金转入您的账户。</div>
-                        <div class="contact-message">您选择与求职者沟通的时间是：${nt.req.acceptDuration } ；TA的联系电话是：${nt.req.sendUserPhone }</div>
-                    </c:if>
-                    
-                <!-- 3服务已完成，评价并结束 -->
-                    <c:if test="${nt.req.acceptState==3}">
-                    
-                    </c:if>
+	                <!-- 1已应答,赏金待托管 -->
+	                    <c:if test="${nt.req.acceptState==1}">
+	                  			<div class="send-message">${nt.req.createTime }  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
+	                          <div class="accept-message">您已经接受请求，请等待对方将赏金托管到本平台</div>
+	                          <div class="button-bar">
+	                              <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
+	                          </div>
+	                    </c:if>
+	                        	
+	                <!-- 2赏金已托管，服务进行中-->
+	                    <c:if test="${nt.req.acceptState==2}">
+	                   		<div class="send-message">您好，用户${nt.req.sendUserNickname } 已经将诚意金${nt.req.price }元托管到本平台，待您双方沟通完毕后，本平台将诚意金转入您的账户。</div>
+	                        <div class="contact-message">您选择与求职者沟通的时间是：${nt.req.acceptDuration } ；TA的联系电话是：${nt.req.sendUserPhone }</div>
+	                    </c:if>
+	                    
+	                <!-- 3服务已完成，评价并结束 -->
+	                    <c:if test="${nt.req.acceptState==3}">
+	                    	<div class="send-message">您好，用户${nt.req.sendUserNickname } 已经将诚意金${nt.req.price }元托管到本平台，待您双方沟通完毕后，本平台将诚意金转入您的账户。</div>
+	                        <div class="contact-message">双方咨询已经完成！祝您好运！</div>
+	                    </c:if>
+	                    
                         </div>
                         
                         
@@ -194,152 +202,109 @@
                 <!-- 我发出的需求 -->
                 
                 <div role="tabpanel" class="tab-pane" id="received">
+                    
+                <c:if test="${reqs.size()==0 }">
+                	<div class="panel panel-default">
+	                	<div class="panel-heading">
+	                            <h3 class="panel-title"><span>没有记录</span></h3>
+	                    </div>
+                    </div>
+                </c:if>
+                
+                <c:forEach items="${reqs }" var="req">
+                
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">我发出的需求<span>应答者接受后，自动给请求者发送的</span></h3>
+                            <h3 class="panel-title">我发出的需求<!-- <span>应答者接受后，自动给请求者发送的</span> --></h3>
                         </div>
                         <div class="panel-body">
                             <div class="demand-progress">
-	                            <!-- 
-									接收到的需求步骤：
-									1. 根据实际步骤步数，添加多少个li
-									2. 已经完成的步骤 添加class="message-step-pass"
-									3. 当前步骤 添加class="message-step-current"
-									4. 未开始的步骤 没有class
-									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
-	                            -->
 	                            <ol class="message-step clearfix">
 	                            	<li class="message-step-pass">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">已完成步骤</p>
+	                            		<p class="step-text">需求发布</p>
 	                            	</li>
-	                            	<li class="message-step-current">
+	                            	<li class='<c:if test="${req.acceptState==0}">message-step-current</c:if><c:if test="${req.acceptState>0}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">当前步骤</p>
+	                            		<p class="step-text">等待应答</p>
 	                            	</li>
-	                            	<li>
+	                            	<li class='<c:if test="${req.acceptState==1}">message-step-current</c:if><c:if test="${req.acceptState>1}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">赏金托管</p>
 	                            	</li>
-	                            	<li>
+	                            	<li class='<c:if test="${req.acceptState==2}">message-step-current</c:if><c:if test="${req.acceptState>2}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
-	                            	<li>
+	                            	<c:if test="${req.acceptState!=4 && req.acceptState!=5}">
+	                            	<li class='<c:if test="${req.acceptState==3}">message-step-current</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
+	                            		<p class="step-text">评价并结束</p>
 	                            	</li>
+	                            	</c:if>
+	                            	<c:if test="${req.acceptState==4}">
 	                            	<li class="message-step-fail">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">失败结束步骤</p>
+	                            		<p class="step-text">申请退款</p>
 	                            	</li>
-	                            </ol>
+									</c:if>
+	                            	<c:if test="${req.acceptState==5}">
+	                            	<li class="message-step-fail">
+	                            		<div class="step-icon"></div>
+	                            		<p class="step-text">放弃需求</p>
+	                            	</li>
+									</c:if>
+	                        	</ol>
                             </div>
-                            <div class="send-message"><a href="#">2015.5.28 10:51:00  您向用户XXXXX 发送的请求帮助信息，TA已接受应答，愿意帮助您</a></div>
+                            
+                            
+	                <!-- 0 等待应答 -->
+	                    <c:if test="${req.acceptState==0}">
+	                    	<div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，已经成功发出，请耐心等待，谢谢！</div>
+	                    </c:if>
+	                    
+	                <!-- 1已应答,赏金待托管 -->
+	                    <c:if test="${req.acceptState==1}">
+                            <div class="send-message"><a href="#"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，TA已接受应答，愿意帮助您</a></div>
                             <div class="accept-message">您是否愿意接受帮助？
                                 <button class="btn btn-lg btn-warning J-accept-help">接受帮助</button>
                                 <a href="#">放弃帮助</a>
                             </div>
-                            <div class="accept-message" style="display: none;">TA已经开放了这几种来纳西方式给你，带您赏金托管后可见。</div>
-                            <div class="accept-message" style="display: none;">我们的支付宝账号是:xxxxx，转账是请备注您的ID。
-								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快让您与XXX公司员工取得联系！白领去哪网感谢您的支持！谢谢！')">赏金托管完成，通知客服审核</button>
+                            <div class="accept-message" style="display: none;">TA已经开放了联系方式${req.openContact }，待您赏金托管后可见。</div>
+                            <div class="accept-message" style="display: none;">我们的支付宝账号是:xxxxx
+								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好职客感谢您的支持！')">赏金托管完成，通知客服审核</button>
                             </div>
+	                    </c:if>
+	                <!-- 2赏金已托管，服务进行中-->
+	                    <c:if test="${req.acceptState==2}">
+	                    	<div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您与${req.companyShotname }公司内部员工发送的请求已经达成一致，请您积极主动的联系TA吧；${req.acceptDuration }，${req.openContact }
+                                <button class="btn btn-lg btn-primary">服务完成</button><a>申请退款</a>
+                            </div>
+	                    </c:if>
+                        
+	                <!-- 3服务已完成，评价并结束 -->
+	                    <c:if test="${req.acceptState==3}">
+	                    	<div class="send-message">您好，双方咨询已经完成！通知客服将诚意金转给对方，祝您好运！
+	                    		<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好职客感谢您的支持！')">请将诚意金转给对方</button>
+	                    	</div>
+	                    </c:if>    
+	                <!-- 4申请退款 -->
+	                    <c:if test="${req.acceptState==4}">
+	                    	<div class="send-message">您已申请退款！</div>
+	                    </c:if>    
+	                <!-- 5放弃帮助 -->
+                        <c:if test="${req.acceptState==5}">
+                        	<div class="send-message">有应答者响应，但您已经放弃了该需求。<button class="btn btn-lg btn-primary">重新发起请求</button></div>
+                        </c:if>
+                            
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">我发出的需求<span>应答者接受后，自动给请求者发送的</span></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="demand-progress">
-	                            <!-- 
-									接收到的需求步骤：
-									1. 根据实际步骤步数，添加多少个li
-									2. 已经完成的步骤 添加class="message-step-pass"
-									3. 当前步骤 添加class="message-step-current"
-									4. 未开始的步骤 没有class
-									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
-	                            -->
-	                            <ol class="message-step clearfix">
-	                            	<li class="message-step-pass">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">已完成步骤</p>
-	                            	</li>
-	                            	<li class="message-step-current">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">当前步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li class="message-step-fail">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">失败结束步骤</p>
-	                            	</li>
-	                            </ol>
-                            </div>
-                            <div class="send-message">
-                                <a href="#">2015.5.28 10:51:00  您与用户XXX已经达成一致，请您积极主动的联系TA吧</a>
-                                <button class="btn btn-lg btn-primary">服务完成</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">我发出的需求<span>应答者接受后，自动给请求者发送的</span></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="demand-progress">
-	                            <!-- 
-									接收到的需求步骤：
-									1. 根据实际步骤步数，添加多少个li
-									2. 已经完成的步骤 添加class="message-step-pass"
-									3. 当前步骤 添加class="message-step-current"
-									4. 未开始的步骤 没有class
-									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
-	                            -->
-	                            <ol class="message-step clearfix">
-	                            	<li class="message-step-pass">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">已完成步骤</p>
-	                            	</li>
-	                            	<li class="message-step-current">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">当前步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li>
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">未开始步骤</p>
-	                            	</li>
-	                            	<li class="message-step-fail">
-	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">失败结束步骤</p>
-	                            	</li>
-	                            </ol>
-                            </div>
-                            <div class="send-message">
-                                <a href="#">有应答者响应，但您已经放弃了该需求。</a>
-                                <button class="btn btn-lg btn-primary">重新发起请求</button>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    
+               	</c:forEach>
+                    
+                    
+                
                 </div>           
             </div>
     	</section>
@@ -353,10 +318,6 @@
 	<div class="modal fade" id="sendPriviteMessage" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<!--<div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">发送私信</h4>
-			    </div>-->
 			    <div class="modal-body">
 				    <div class="container-fluid">
 					    <div class="row message-object">

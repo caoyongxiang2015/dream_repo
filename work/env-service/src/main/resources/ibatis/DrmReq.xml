@@ -356,4 +356,15 @@
 		    FROM DRM_REQ
 	    ]]>
 	</select>
+	
+	
+	<select id="queryByParams" resultMap="drmReq">
+		SELECT
+		<include refid="drmReq.columns" />
+	    <![CDATA[
+		    FROM DRM_REQ
+	    ]]>
+		<include refid="drmReq.queryPage" />
+	</select>
+	
 </sqlMap>
