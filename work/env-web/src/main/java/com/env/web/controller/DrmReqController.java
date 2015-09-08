@@ -14,22 +14,16 @@
 package com.env.web.controller;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.env.constant.Constants;
-import com.env.dao.api.Page;
-import com.env.dao.api.QueryParams;
 import com.env.dto.DrmReq;
 import com.env.dto.DrmReqNotice;
 import com.env.dto.PtUser;
@@ -141,28 +135,83 @@ public class DrmReqController extends BaseController {
 	
 
 	/**
-	 * 修改状态
+	 * 放弃帮助
 	 * @param drmReqVo
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "modifyState")
-	public String modifyState (DrmReqVo drmReqVo){
+	@RequestMapping(value = "giveupHelp")
+	public String giveupHelp (HttpServletRequest request){
 		try{
-			DrmReq entity = drmReqVo.getEntity();
-			DrmReq old = (DrmReq)drmReqService.getById(entity.getId());
+			Integer reqid = Integer.valueOf(request.getParameter("reqid"));
+			DrmReq old = (DrmReq)drmReqService.getById(reqid);
 			
-			old.setAcceptState(entity.getAcceptState());//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求
-			old.setCompleteTime(entity.getCompleteTime());//服务完成时间
-			old.setStopTime(entity.getStopTime());//废弃终止时间
-			old.setEndTime(entity.getEndTime());//评价结束时间
+			Integer acceptstate = Integer.valueOf(request.getParameter("acceptstate"));
+//			request.getParameter("completetime");
+//			request.getParameter("stoptime");
+//			request.getParameter("endtime");
+			Calendar cal = Calendar.getInstance();
+			
+			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求
+//			old.setCompleteTime(entity.getCompleteTime());//服务完成时间
+			old.setStopTime(cal.getTime());//废弃终止时间
+//			old.setEndTime(entity.getEndTime());//评价结束时间
 			
 			drmReqService.update(old);
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
+			return "-1";
 		}
-		return "";
+		return "1";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "backMoney")
+	public String backMoney (HttpServletRequest request){
+		try{
+			Integer reqid = Integer.valueOf(request.getParameter("reqid"));
+			DrmReq old = (DrmReq)drmReqService.getById(reqid);
+			
+			Integer acceptstate = Integer.valueOf(request.getParameter("acceptstate"));
+			Calendar cal = Calendar.getInstance();
+			
+			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求
+			old.setStopTime(cal.getTime());//废弃终止时间
+			
+			drmReqService.update(old);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return "-1";
+		}
+		return "1";
+	}
+	
+	/**
+	 * 服务完成
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "serviceComplete")
+	public String serviceComplete (HttpServletRequest request){
+		try{
+			Integer reqid = Integer.valueOf(request.getParameter("reqid"));
+			DrmReq old = (DrmReq)drmReqService.getById(reqid);
+			
+			Integer acceptstate = Integer.valueOf(request.getParameter("acceptstate"));
+			Calendar cal = Calendar.getInstance();
+			
+			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求
+			old.setCompleteTime(cal.getTime());//服务完成时间
+			
+			drmReqService.update(old);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return "-1";
+		}
+		return "1";
+	}
 }
