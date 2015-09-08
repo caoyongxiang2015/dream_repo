@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : 127.0.0.1
 Source Server Version : 50520
-Source Host           : localhost:3306
+Source Host           : 127.0.0.1:3306
 Source Database       : dream_career
 
 Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2015-09-08 17:51:47
+Date: 2015-09-08 23:44:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -197,12 +197,14 @@ CREATE TABLE `drm_letter` (
 DROP TABLE IF EXISTS `drm_pay_notice`;
 CREATE TABLE `drm_pay_notice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `req_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL COMMENT '付款用户id',
   `user_phone` varchar(20) DEFAULT NULL COMMENT '付款用户手机号',
   `receive_user_id` int(11) DEFAULT NULL COMMENT '收钱的用户id',
   `money` decimal(18,6) DEFAULT NULL COMMENT '付款金额（预留）',
   `company_id` int(11) DEFAULT NULL,
   `company_name` varchar(200) DEFAULT NULL,
+  `notice_type` int(11) DEFAULT '1' COMMENT '通知类型：1赏金托管完成通知，2服务完成确认付款通知',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   `disabled` int(11) DEFAULT '0' COMMENT '逻辑删除标志，1删除0可用',
   `create_userid` int(11) DEFAULT NULL COMMENT '创建者ID',
@@ -210,11 +212,16 @@ CREATE TABLE `drm_pay_notice` (
   `update_userid` int(11) DEFAULT NULL COMMENT '修改者id',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款通知';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='付款通知';
 
 -- ----------------------------
 -- Records of drm_pay_notice
 -- ----------------------------
+INSERT INTO `drm_pay_notice` VALUES ('3', '14', '4', '132', '1', '100.000000', null, '途牛', '1', null, '0', null, '2015-09-08 23:00:28', null, null);
+INSERT INTO `drm_pay_notice` VALUES ('4', '14', '4', '132', '1', '100.000000', null, '途牛', '1', null, '0', null, '2015-09-08 23:02:31', null, null);
+INSERT INTO `drm_pay_notice` VALUES ('5', '16', '4', '132', '1', '50.000000', null, '途牛', '2', null, '0', null, '2015-09-08 23:02:55', null, null);
+INSERT INTO `drm_pay_notice` VALUES ('6', '16', '4', '132', '1', '50.000000', null, '途牛', '2', null, '0', null, '2015-09-08 23:03:30', null, null);
+INSERT INTO `drm_pay_notice` VALUES ('7', '13', '4', '132', '4', '100.000000', null, '途牛', '1', null, '0', null, '2015-09-08 23:34:16', null, null);
 
 -- ----------------------------
 -- Table structure for `drm_req`
@@ -270,14 +277,14 @@ INSERT INTO `drm_req` VALUES ('9', null, null, '1', '1.000000', null, '9', '1', 
 INSERT INTO `drm_req` VALUES ('10', null, null, '1', '1.000000', null, '8', '150', null, '3', '1', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 12:28:00', null, null);
 INSERT INTO `drm_req` VALUES ('11', null, null, 'test', '1.000000', null, '11', '188', null, '2', null, null, null, null, null, null, null, null, null, null, null, null, '111', null, null, null, null, '0', null, '2015-09-02 13:54:09', null, null);
 INSERT INTO `drm_req` VALUES ('12', null, null, '1', '11.000000', null, '12', '11', null, '5', '1', null, null, null, null, null, null, null, null, null, null, null, '111', null, null, null, null, '0', null, '2015-09-02 13:55:51', null, null);
-INSERT INTO `drm_req` VALUES ('13', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '0', '1', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:04:13', null, null);
-INSERT INTO `drm_req` VALUES ('14', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '1', '1', null, null, null, '2015-09-08 16:42:16', null, null, '2015-09-08 17:42:59', null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:09:39', null, '2015-09-08 17:42:59');
-INSERT INTO `drm_req` VALUES ('15', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '2', '1', null, null, null, null, '2015-09-08 16:43:01', null, null, null, '2015-09-08 17:23:20', null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:13:37', null, '2015-09-08 17:23:20');
-INSERT INTO `drm_req` VALUES ('16', null, null, '途牛', '50.000000', '1.000000', '4', '132', '130途牛用户', '3', '1', null, null, null, null, null, null, null, null, '2015-09-08 17:42:18', null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:57:15', null, '2015-09-08 17:42:18');
-INSERT INTO `drm_req` VALUES ('17', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '4', '1', null, null, null, null, null, null, null, null, null, null, null, '备注备注备注备注备注备注', null, null, null, null, '0', null, '2015-09-02 16:22:09', null, null);
-INSERT INTO `drm_req` VALUES ('18', null, null, '苏宁', '50.000000', null, '4', '132', '132途牛用户', '5', '1', null, null, null, null, null, null, null, null, null, '2015-09-08 17:41:04', null, '1', null, null, null, null, '0', null, '2015-09-02 16:36:07', null, '2015-09-08 17:41:04');
-INSERT INTO `drm_req` VALUES ('19', null, null, '苏宁', '50.000000', null, '4', '132', '133途牛苏宁用户', '6', '1', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 16:37:20', null, null);
-INSERT INTO `drm_req` VALUES ('20', null, null, '苏宁', '50.000000', null, '4', '132', '132途牛用户', '7', '1', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 16:38:11', null, null);
+INSERT INTO `drm_req` VALUES ('13', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '1', '4', '工作日,周末及节假日,测试啦啦啦', '手机号,QQ号码,电子邮箱', '2015-09-08 23:33:54', null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:04:13', null, '2015-09-08 23:33:54');
+INSERT INTO `drm_req` VALUES ('14', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '1', '4', null, null, null, '2015-09-08 22:33:01', null, null, '2015-09-08 17:42:59', null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:09:39', null, '2015-09-08 22:33:02');
+INSERT INTO `drm_req` VALUES ('15', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '2', '4', null, null, null, null, '2015-09-08 16:43:01', null, null, null, '2015-09-08 17:23:20', null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:13:37', null, '2015-09-08 17:23:20');
+INSERT INTO `drm_req` VALUES ('16', null, null, '途牛', '50.000000', '1.000000', '4', '132', '130途牛用户', '6', '4', null, null, null, null, null, null, null, null, '2015-09-08 23:03:30', null, null, '1', null, null, null, null, '0', null, '2015-09-02 15:57:15', null, '2015-09-08 23:03:30');
+INSERT INTO `drm_req` VALUES ('17', null, null, '途牛', '100.000000', null, '4', '132', '132途牛用户', '4', '4', null, null, null, null, null, null, null, null, null, null, null, '备注备注备注备注备注备注', null, null, null, null, '0', null, '2015-09-02 16:22:09', null, null);
+INSERT INTO `drm_req` VALUES ('18', null, null, '苏宁', '50.000000', null, '4', '132', '132途牛用户', '5', '4', null, null, null, null, null, null, null, null, null, '2015-09-08 17:41:04', null, '1', null, null, null, null, '0', null, '2015-09-02 16:36:07', null, '2015-09-08 17:41:04');
+INSERT INTO `drm_req` VALUES ('19', null, null, '苏宁', '50.000000', null, '4', '132', '133途牛苏宁用户', '6', '4', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 16:37:20', null, null);
+INSERT INTO `drm_req` VALUES ('20', null, null, '苏宁', '50.000000', null, '4', '132', '132途牛用户', '7', '4', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 16:38:11', null, null);
 INSERT INTO `drm_req` VALUES ('21', null, null, '苏宁', '50.000000', null, '2', '130', '130途牛用户', '1', null, null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-02 16:46:14', null, null);
 INSERT INTO `drm_req` VALUES ('22', null, null, '苏宁', '50.000000', null, '2', '130', '130途牛用户', '2', null, null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0', null, '2015-09-07 13:54:59', null, null);
 
@@ -313,23 +320,23 @@ INSERT INTO `drm_req_notice` VALUES ('8', '12', '12', '2', null, '0', null, '201
 INSERT INTO `drm_req_notice` VALUES ('9', '12', '12', '7', null, '0', null, '2015-09-02 13:55:51', null, null);
 INSERT INTO `drm_req_notice` VALUES ('10', '13', '4', '1', null, '0', null, '2015-09-02 15:04:14', null, null);
 INSERT INTO `drm_req_notice` VALUES ('11', '13', '4', '3', null, '0', null, '2015-09-02 15:04:14', null, null);
-INSERT INTO `drm_req_notice` VALUES ('12', '13', '4', '5', null, '0', null, '2015-09-02 15:04:14', null, null);
+INSERT INTO `drm_req_notice` VALUES ('12', '13', '4', '4', null, '0', null, '2015-09-02 15:04:14', null, null);
 INSERT INTO `drm_req_notice` VALUES ('13', '14', '4', '1', null, '0', null, '2015-09-02 15:09:39', null, null);
 INSERT INTO `drm_req_notice` VALUES ('14', '14', '4', '3', null, '0', null, '2015-09-02 15:09:39', null, null);
-INSERT INTO `drm_req_notice` VALUES ('15', '14', '4', '5', null, '0', null, '2015-09-02 15:09:39', null, null);
+INSERT INTO `drm_req_notice` VALUES ('15', '14', '4', '4', null, '0', null, '2015-09-02 15:09:39', null, null);
 INSERT INTO `drm_req_notice` VALUES ('16', '15', '4', '1', null, '0', null, '2015-09-02 15:13:37', null, null);
 INSERT INTO `drm_req_notice` VALUES ('17', '15', '4', '3', null, '0', null, '2015-09-02 15:13:37', null, null);
-INSERT INTO `drm_req_notice` VALUES ('18', '15', '4', '5', null, '0', null, '2015-09-02 15:13:37', null, null);
+INSERT INTO `drm_req_notice` VALUES ('18', '15', '4', '4', null, '0', null, '2015-09-02 15:13:37', null, null);
 INSERT INTO `drm_req_notice` VALUES ('19', '16', '2', '1', null, '0', null, '2015-09-02 15:57:16', null, null);
 INSERT INTO `drm_req_notice` VALUES ('20', '16', '2', '4', null, '0', null, '2015-09-02 15:57:16', null, null);
 INSERT INTO `drm_req_notice` VALUES ('21', '16', '2', '5', null, '0', null, '2015-09-02 15:57:16', null, null);
 INSERT INTO `drm_req_notice` VALUES ('22', '17', '4', '1', null, '0', null, '2015-09-02 16:22:09', null, null);
 INSERT INTO `drm_req_notice` VALUES ('23', '17', '4', '3', null, '0', null, '2015-09-02 16:22:09', null, null);
-INSERT INTO `drm_req_notice` VALUES ('24', '17', '4', '5', null, '0', null, '2015-09-02 16:22:10', null, null);
-INSERT INTO `drm_req_notice` VALUES ('25', '20', '4', '1', null, '0', null, '2015-09-02 16:38:11', null, null);
-INSERT INTO `drm_req_notice` VALUES ('26', '18', '4', '1', null, '0', null, '2015-09-02 16:46:14', null, null);
-INSERT INTO `drm_req_notice` VALUES ('27', '19', '4', '1', null, '0', null, '2015-09-07 13:55:00', null, null);
-INSERT INTO `drm_req_notice` VALUES ('28', '23', '4', '5', null, '0', null, '2015-09-07 17:15:55', null, null);
+INSERT INTO `drm_req_notice` VALUES ('24', '17', '4', '4', null, '0', null, '2015-09-02 16:22:10', null, null);
+INSERT INTO `drm_req_notice` VALUES ('25', '20', '4', '4', null, '0', null, '2015-09-02 16:38:11', null, null);
+INSERT INTO `drm_req_notice` VALUES ('26', '18', '4', '4', null, '0', null, '2015-09-02 16:46:14', null, null);
+INSERT INTO `drm_req_notice` VALUES ('27', '19', '4', '4', null, '0', null, '2015-09-07 13:55:00', null, null);
+INSERT INTO `drm_req_notice` VALUES ('28', '23', '4', '4', null, '0', null, '2015-09-07 17:15:55', null, null);
 INSERT INTO `drm_req_notice` VALUES ('29', '24', '4', '5', null, '0', null, '2015-09-07 17:16:18', null, null);
 
 -- ----------------------------
