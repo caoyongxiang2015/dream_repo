@@ -166,6 +166,11 @@ public class DrmReqController extends BaseController {
 		return "1";
 	}
 	
+	/**
+	 * 申请退款
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "backMoney")
 	public String backMoney (HttpServletRequest request){
