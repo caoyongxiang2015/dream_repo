@@ -55,6 +55,7 @@ public class AuthLoginController {
         LOGGER.debug("为了验证登录用户而封装的token为" + ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
         //获取当前的Subject  
         Subject currentUser = SecurityUtils.getSubject();  
+        String successToUrl = "/";
         try {  
             //在调用了login方法后,SecurityManager会收到AuthenticationToken,并将其发送给已配置的Realm执行必须的认证检查  
             //每个Realm都能在必要时对提交的AuthenticationTokens作出反应  
@@ -64,6 +65,9 @@ public class AuthLoginController {
             currentUser.login(token);  
             
             LOGGER.info("对用户[" + username + "]进行登录验证..验证通过");
+            
+            successToUrl = "/profile";// 登录成功后去我的资料页面
+            
         }catch(UnknownAccountException uae){  
             LOGGER.warn("对用户[" + username + "]进行登录验证..验证未通过,未知账户");
             request.setAttribute("message_login", "未知账户");  
@@ -92,7 +96,7 @@ public class AuthLoginController {
 		HttpSession session = request.getSession();
 		// redirectUrl 原始URL（登录前URL）
         String redirectUrl = (String) session.getAttribute(Constants.REDIRECT_URL);// redirectURL登陆拦截时设置
-        return InternalResourceViewResolver.REDIRECT_URL_PREFIX + ((null==redirectUrl)? "/profile":redirectUrl);
+        return InternalResourceViewResolver.REDIRECT_URL_PREFIX + ((null==redirectUrl)? successToUrl : redirectUrl);
     }  
       
       

@@ -152,7 +152,7 @@ public class DrmReqController extends BaseController {
 //			request.getParameter("endtime");
 			Calendar cal = Calendar.getInstance();
 			
-			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求
+			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
 //			old.setCompleteTime(entity.getCompleteTime());//服务完成时间
 			old.setStopTime(cal.getTime());//废弃终止时间
 //			old.setEndTime(entity.getEndTime());//评价结束时间
@@ -181,8 +181,8 @@ public class DrmReqController extends BaseController {
 			Integer acceptstate = Integer.valueOf(request.getParameter("acceptstate"));
 			Calendar cal = Calendar.getInstance();
 			
-			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求
-			old.setStopTime(cal.getTime());//废弃终止时间
+			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
+			old.setApplyBackmoneyTime(cal.getTime());//申请退款时间
 			
 			drmReqService.update(old);
 		}
@@ -219,4 +219,84 @@ public class DrmReqController extends BaseController {
 		}
 		return "1";
 	}
+	
+	/**
+	 * 确认付款给对方时间
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "payComplete")
+	public String payComplete (HttpServletRequest request){
+		try{
+			Integer reqid = Integer.valueOf(request.getParameter("reqid"));
+			DrmReq old = (DrmReq)drmReqService.getById(reqid);
+			
+			Integer acceptstate = Integer.valueOf(request.getParameter("acceptstate"));
+			Calendar cal = Calendar.getInstance();
+			
+			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
+			old.setPayTime(cal.getTime());//确认付款给对方时间
+			
+			drmReqService.update(old);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return "-1";
+		}
+		return "1";
+	}
+	/**
+	 * 赏金托管完成
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "depositMoney")
+	public String depositMoney (HttpServletRequest request){
+		try{
+			Integer reqid = Integer.valueOf(request.getParameter("reqid"));
+			DrmReq old = (DrmReq)drmReqService.getById(reqid);
+			
+			Integer acceptstate = Integer.valueOf(request.getParameter("acceptstate"));
+			Calendar cal = Calendar.getInstance();
+			
+			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
+			old.setDepositTime(cal.getTime());//2赏金已托管
+			
+			drmReqService.update(old);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return "-1";
+		}
+		return "1";
+	}
+	
+	/**
+	 * 重新发起需求
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "againRelease")
+	public String againRelease (HttpServletRequest request){
+		try{
+			Integer reqid = Integer.valueOf(request.getParameter("reqid"));
+			DrmReq old = (DrmReq)drmReqService.getById(reqid);
+			
+			Calendar cal = Calendar.getInstance();
+			
+			old.setAcceptState(7);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
+			old.setAgainReleaseTime(cal.getTime());//重新发起需求时间
+			
+			drmReqService.update(old);
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+			return "-1";
+		}
+		return "redirect:/release/first";
+	}
+	
+	
 }

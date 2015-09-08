@@ -24,6 +24,9 @@
 		<result property="completeTime" column="complete_time" />
 		<result property="endTime" column="end_time" />
 		<result property="stopTime" column="stop_time" />
+		<result property="applyBackmoneyTime" column="apply_backmoney_time" />
+		<result property="payTime" column="pay_time" />
+		<result property="againReleaseTime" column="again_release_time" />
 		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="overtime" column="overtime" />
@@ -41,7 +44,7 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmReq.columns">
 	    <![CDATA[
-        id, req_num, company_name, company_shotname, price, faceprice, send_user_id, send_user_phone, send_user_nickname, accept_state, accept_user_id, accept_duration, open_contact, accept_time, deposit_time, complete_time, end_time, stop_time, title, content, overtime, eval_score, eval_content, version, disabled, create_userid, create_time, update_userid, update_time
+        id, req_num, company_name, company_shotname, price, faceprice, send_user_id, send_user_phone, send_user_nickname, accept_state, accept_user_id, accept_duration, open_contact, accept_time, deposit_time, complete_time, end_time, stop_time, apply_backmoney_time ,pay_time,again_release_time, title, content, overtime, eval_score, eval_content, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
 
@@ -136,6 +139,9 @@
 		        complete_time = #completeTime#, 
 		        end_time = #endTime#, 
 		        stop_time = #stopTime#, 
+		        apply_backmoney_time = #applyBackmoneyTime#, 
+		        pay_time = #payTime#, 
+		        again_release_time = #againReleaseTime#, 
 		        title = #title#, 
 		        content = #content#, 
 		        overtime = #overtime#, 

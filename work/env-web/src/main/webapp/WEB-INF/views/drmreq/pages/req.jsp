@@ -94,8 +94,8 @@
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
-	                            	<c:if test="${nt.req.acceptState!=4 && nt.req.acceptState!=5}">
-	                            	<li class='<c:if test="${nt.req.acceptState==3}">message-step-current</c:if>'>
+	                            	<c:if test="${nt.req.acceptState!=4 && nt.req.acceptState!=5 && nt.req.acceptState!=7}">
+	                            	<li class='<c:if test="${nt.req.acceptState==3 || nt.req.acceptState==6}">message-step-current</c:if>'>
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">评价并结束</p>
 	                            	</li>
@@ -106,7 +106,7 @@
 	                            		<p class="step-text">申请退款</p>
 	                            	</li>
 									</c:if>
-	                            	<c:if test="${nt.req.acceptState==5}">
+	                            	<c:if test="${nt.req.acceptState==5 || nt.req.acceptState==7}">
 	                            	<li class="message-step-fail">
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">放弃需求</p>
@@ -235,8 +235,8 @@
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
-	                            	<c:if test="${req.acceptState!=4 && req.acceptState!=5}">
-	                            	<li class='<c:if test="${req.acceptState==3}">message-step-current</c:if>'>
+	                            	<c:if test="${req.acceptState!=4 && req.acceptState!=5 && req.acceptState!=7}">
+	                            	<li class='<c:if test="${req.acceptState==3 || req.acceptState==6}">message-step-current</c:if>'>
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">评价并结束</p>
 	                            	</li>
@@ -247,7 +247,7 @@
 	                            		<p class="step-text">申请退款</p>
 	                            	</li>
 									</c:if>
-	                            	<c:if test="${req.acceptState==5}">
+	                            	<c:if test="${req.acceptState==5 || req.acceptState==7}">
 	                            	<li class="message-step-fail">
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">放弃需求</p>
@@ -271,7 +271,8 @@
                             </div>
                             <div class="accept-message" style="display: none;">TA已经开放了联系方式${req.openContact }，待您赏金托管后可见。</div>
                             <div class="accept-message" style="display: none;">我们的支付宝账号是:xxxxx
-								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好职客感谢您的支持！')">赏金托管完成，通知客服审核</button>
+								<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好职客感谢您的支持！')">赏金托管完成，通知客服审核</button> --%>
+								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="depositMoney('${req.id}')">赏金托管完成，通知客服审核</button>
                             </div>
 	                    </c:if>
 	                <!-- 2赏金已托管，服务进行中-->
@@ -284,7 +285,12 @@
 	                <!-- 3服务已完成，评价并结束 -->
 	                    <c:if test="${req.acceptState==3}">
 	                    	<div class="send-message">您好，双方咨询已经完成！通知客服将诚意金转给对方，祝您好运！<!-- pay_notice -->
-	                    		<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好职客感谢您的支持！')">请将诚意金转给对方</button>
+	                    		<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好职客感谢您的支持！')">请将诚意金转给对方</button> --%>
+	                    		<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="payMoney('${req.id}');">请将诚意金转给对方</button>
+	                    	</div>
+	                    </c:if>  
+	                    <c:if test="${req.acceptState==6}">
+	                    	<div class="send-message">您好，双方咨询已完成，祝您工作顺利！
 	                    	</div>
 	                    </c:if>    
 	                <!-- 4申请退款 -->
@@ -292,8 +298,8 @@
 	                    	<div class="send-message">您已申请退款！</div>
 	                    </c:if>    
 	                <!-- 5放弃帮助 -->
-                        <c:if test="${req.acceptState==5}">
-                        	<div class="send-message">有应答者响应，但您已经放弃了该需求。<button class="btn btn-lg btn-primary" onclick="javascript:window.location.href='${ctx}/release/first'">重新发起请求</button></div>
+                        <c:if test="${req.acceptState==5 || req.acceptState==7}">
+                        	<div class="send-message">有应答者响应，但您已经放弃了该需求。<button class="btn btn-lg btn-primary" onclick="javascript:window.location.href='${ctx}/drmreq/againRelease?reqid=${req.id}'">重新发起请求</button></div>
                         </c:if>
                             
                         </div>
@@ -392,6 +398,38 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 将诚意金转给对方-->
+	<div class="modal fade" id="payMoney" tabindex="-1" role="dialog" aria-labelledby="payMoney">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-body">
+					转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好职客感谢您的支持！
+				</div>
+				<div class="modal-footer text-center">
+			        <button type="button" class="btn btn-primary btn-lg J-payMoney-confirm" data-dismiss="modal">确定</button>
+			        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 资金托管完成-->
+	<div class="modal fade" id="depositMoney" tabindex="-1" role="dialog" aria-labelledby="depositMoney">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-body">
+					付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与公司员工取得联系！好职客感谢您的支持！
+				</div>
+				<div class="modal-footer text-center">
+			        <button type="button" class="btn btn-primary btn-lg J-depositMoney-confirm" data-dismiss="modal">确定</button>
+			        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	<!-- 申请退款 -->
 	<div class="modal fade" id="backMoney" tabindex="-1" role="dialog" aria-labelledby="backMoney">
 		<div class="modal-dialog modal-md">
@@ -415,6 +453,8 @@
 	<script type="text/javascript">
 		$(".J-accept-help").on("click",function(){
 			$(this).parent().nextAll(".accept-message").show();
+			$(".J-accept-help").hide();
+			$(".J-giveup-help").hide();
 		})
 		
 		function giveup(reqid){
@@ -430,7 +470,15 @@
 			$("input[name='reqid']").val(reqid);
 			$("#backMoney").modal("show");
 		}
-		
+		function payMoney(reqid){
+			$("input[name='reqid']").val(reqid);
+			$("#payMoney").modal("show");
+		}
+		function depositMoney(reqid){
+			$("input[name='reqid']").val(reqid);
+			$("#depositMoney").modal("show");
+		}
+		// 放弃帮助
 		$(".J-giveup-help-confirm").on("click",function(){
 			$.ajax({
 				url:'${ctx}/drmreq/giveupHelp?acceptstate=5&reqid='+$("input[name='reqid']").val(),
@@ -440,6 +488,7 @@
 				}
 			});
 		})
+		// 服务完成
 		$(".J-service-complete-confirm").on("click",function(){
 			$.ajax({
 				url:'${ctx}/drmreq/serviceComplete?acceptstate=3&reqid='+$("input[name='reqid']").val(),
@@ -449,12 +498,35 @@
 				}
 			});
 		})
+		// 申请退款
 		$(".J-back-money-confirm").on("click",function(){
 			$.ajax({
 				url:'${ctx}/drmreq/backMoney?acceptstate=4&reqid='+$("input[name='reqid']").val(),
 				type:'get',
 				success : function(data) {
 					window.location.reload();
+				}
+			});
+		})
+		
+		// 将资金转给对方
+		$(".J-payMoney-confirm").on("click",function(){
+			$.ajax({
+				url:'${ctx}/drmreq/payComplete?acceptstate=6&reqid='+$("input[name='reqid']").val(),
+				type:'get',
+				success : function(data) {
+					// 不用刷页面
+				}
+			});
+		})
+		
+		// 资金托管完成
+		$(".J-depositMoney-confirm").on("click",function(){
+			$.ajax({
+				url:'${ctx}/drmreq/depositMoney?acceptstate=2&reqid='+$("input[name='reqid']").val(),
+				type:'get',
+				success : function(data) {
+					// 不用刷页面
 				}
 			});
 		})

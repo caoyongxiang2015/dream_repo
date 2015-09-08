@@ -140,10 +140,22 @@ public class DrmReq extends DomainObject{
 	private java.util.Date endTime;
 	
 	/**
-	 * 废弃终止时间
+	 * 废弃终止时间(放弃帮助时间）
 	 */
 	//
 	private java.util.Date stopTime;
+	/**
+	 * 申请退款时间
+	 */
+	private java.util.Date applyBackmoneyTime;
+	/**
+	 * 确认付款给对方的时间
+	 */
+	private java.util.Date payTime;
+	/**
+	 * 重新发起需求时间
+	 */
+	private java.util.Date againReleaseTime;
 	
 	/**
 	 * 标题
@@ -800,7 +812,32 @@ public class DrmReq extends DomainObject{
 		return this.updateTime;
 	}
 
-    /**
+    public java.util.Date getApplyBackmoneyTime() {
+		return applyBackmoneyTime;
+	}
+
+	public void setApplyBackmoneyTime(java.util.Date applyBackmoneyTime) {
+		this.applyBackmoneyTime = applyBackmoneyTime;
+	}
+
+	public java.util.Date getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(java.util.Date payTime) {
+		this.payTime = payTime;
+	}
+
+	
+	public java.util.Date getAgainReleaseTime() {
+		return againReleaseTime;
+	}
+
+	public void setAgainReleaseTime(java.util.Date againReleaseTime) {
+		this.againReleaseTime = againReleaseTime;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */
