@@ -28,6 +28,7 @@
 									4. 未开始的步骤 没有class
 									5. 最后一步如果是放弃，则添加class="messaga-step-fail"
 	                            -->
+	                            
 	                            <br/>
                 <c:choose>
 		<c:when test="${accept_success == 1 }">
@@ -69,7 +70,7 @@
                 <c:forEach items="${notices }" var="nt">
                 >>>>req.id>>${nt.req.id } >>acceptState>> ${nt.req.acceptState } 》》acceptUserId》${nt.req.acceptUserId }   ###             
                 <!-- 未被应答，或者该需求是当前登录用户应答的-->
-                <c:if test="${nt.req.acceptState == 0 || nt.req.acceptUserId == cur_userid }">
+                <%-- <c:if test="${nt.req.acceptState == 0 || nt.req.acceptUserId == cur_userid }"> --%>
                            	
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -80,20 +81,24 @@
 	                            <ol class="message-step clearfix">
 	                            	<li class="message-step-pass">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">需求发布</p>
+	                            		<p class="step-text">需求已发布</p>
 	                            	</li>
 	                            	<li class='<c:if test="${nt.req.acceptState==0}">message-step-current</c:if><c:if test="${nt.req.acceptState>0}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">等待应答</p>
+	                            		<p class="step-text"><c:if test="${nt.req.acceptState==0}">等待应答</c:if><c:if test="${nt.req.acceptState>0}">已应答</c:if></p>
 	                            	</li>
+	                            	<c:if test="${nt.req.acceptState!=5 && nt.req.acceptState!=7}">
 	                            	<li class='<c:if test="${nt.req.acceptState==1}">message-step-current</c:if><c:if test="${nt.req.acceptState>1}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">赏金托管</p>
+	                            		<p class="step-text"><c:if test="${nt.req.acceptState==1}">赏金待托管</c:if><c:if test="${nt.req.acceptState>1}">赏金已托管</c:if></p>
 	                            	</li>
+	                            	</c:if>
+	                            	<c:if test="${nt.req.acceptState!=5 && nt.req.acceptState!=7}">
 	                            	<li class='<c:if test="${nt.req.acceptState==2}">message-step-current</c:if><c:if test="${nt.req.acceptState>2}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
+	                            	</c:if>
 	                            	<c:if test="${nt.req.acceptState!=4 && nt.req.acceptState!=5 && nt.req.acceptState!=7}">
 	                            	<li class='<c:if test="${nt.req.acceptState==3 || nt.req.acceptState==6}">message-step-current</c:if>'>
 	                            		<div class="step-icon"></div>
@@ -184,6 +189,18 @@
 	                    	<div class="send-message">您好，用户${nt.req.sendUserNickname } 已经将诚意金${nt.req.price }元托管到本平台，待您双方沟通完毕后，本平台将诚意金转入您的账户。</div>
 	                        <div class="contact-message">双方咨询已经完成！祝您好运！</div>
 	                    </c:if>
+	                    <c:if test="${nt.req.acceptState==4}">
+	                        <div class="contact-message">您已申请退款。祝您工作顺利！</div>
+	                    </c:if>
+	                    <c:if test="${nt.req.acceptState==5}">
+	                        <div class="contact-message">好职客感谢您的支持，很遗憾对方已主动放弃该帮助。</div>
+	                    </c:if>
+	                    <c:if test="${nt.req.acceptState==6}">
+	                        <div class="contact-message">双方咨询已经完成！您已确认将诚意金转给对方。祝您工作顺利！</div>
+	                    </c:if>
+	                    <c:if test="${nt.req.acceptState==7}">
+	                        <div class="contact-message">好职客感谢您的支持，遗憾对方已主动放弃该帮助。</div>
+	                    </c:if>
 	                    
                         </div>
                         
@@ -191,7 +208,7 @@
                         
                     </div>
                     
-                </c:if>                
+               <%--  </c:if>     --%>            
                 </c:forEach>
                 
                 </div>
@@ -212,6 +229,9 @@
                 </c:if>
                 
                 <c:forEach items="${reqs }" var="req">
+                
+                >>>>reqid:${req.id } >>acceptState:${req.acceptState }>>>acceptUserId:${req.acceptUserId }   ###
+                
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">我发出的需求<!-- <span>应答者接受后，自动给请求者发送的</span> --></h3>
@@ -221,20 +241,26 @@
 	                            <ol class="message-step clearfix">
 	                            	<li class="message-step-pass">
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">需求发布</p>
+	                            		<p class="step-text">需求已发布</p>
 	                            	</li>
+	                            	
 	                            	<li class='<c:if test="${req.acceptState==0}">message-step-current</c:if><c:if test="${req.acceptState>0}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">等待应答</p>
+	                            		<p class="step-text"><c:if test="${req.acceptState==0}">等待应答</c:if><c:if test="${req.acceptState>0}">已应答</c:if></p>
 	                            	</li>
+	                            	
+	                            	<c:if test="${req.acceptState!=5 && req.acceptState!=7}">
 	                            	<li class='<c:if test="${req.acceptState==1}">message-step-current</c:if><c:if test="${req.acceptState>1}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text">赏金托管</p>
+	                            		<p class="step-text"><c:if test="${req.acceptState<=1}">赏金待托管</c:if><c:if test="${req.acceptState>1}">赏金已托管</c:if></p>
 	                            	</li>
+	                            	</c:if>
+	                            	<c:if test="${req.acceptState!=5 && req.acceptState!=7}">
 	                            	<li class='<c:if test="${req.acceptState==2}">message-step-current</c:if><c:if test="${req.acceptState>2}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
 	                            		<p class="step-text">服务进行中</p>
 	                            	</li>
+	                            	</c:if>
 	                            	<c:if test="${req.acceptState!=4 && req.acceptState!=5 && req.acceptState!=7}">
 	                            	<li class='<c:if test="${req.acceptState==3 || req.acceptState==6}">message-step-current</c:if>'>
 	                            		<div class="step-icon"></div>

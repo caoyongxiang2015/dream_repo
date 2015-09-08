@@ -13,6 +13,7 @@
  */
 package com.env.web.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -24,9 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.env.constant.Constants;
+import com.env.dto.DrmPayNotice;
 import com.env.dto.DrmReq;
 import com.env.dto.DrmReqNotice;
 import com.env.dto.PtUser;
+import com.env.service.intf.IDrmPayNoticeService;
 import com.env.service.intf.IDrmReqNoticeService;
 import com.env.service.intf.IDrmReqService;
 import com.env.vo.DrmReqVo;
@@ -52,6 +55,8 @@ public class DrmReqController extends BaseController {
 
 	@Autowired
 	private IDrmReqNoticeService<DrmReqNotice> drmReqNoticeService;
+	@Autowired
+	private IDrmPayNoticeService<DrmPayNotice> drmPayNoticeService;
 
     @RequestMapping()
 	public String index(HttpServletRequest request){
@@ -66,8 +71,18 @@ public class DrmReqController extends BaseController {
     	// TODO 
     	// 1 drm_req_notice  我接收到的需求
     	// 2 drm_req 需求的信息：如金额，公司名称
-    	List<DrmReqNotice> notices = drmReqNoticeService.queryByParams(notice);
+    	List<DrmReqNotice> tempNotices = drmReqNoticeService.queryByParams(notice);
+    	List<DrmReqNotice> notices = new ArrayList<DrmReqNotice> ();
     	
+    	//未被应答，或者该需求是当前登录用户应答的
+    	for(DrmReqNotice n : tempNotices){
+    		DrmReq r = n.getReq();
+    		if(r!=null&&r.getAcceptState()!=null){
+	    		if(r.getAcceptState().intValue()==0 || r.getAcceptUserId().intValue()==user.getId().intValue()){
+	    			notices.add(n);
+	    		}
+    		}
+    	}
     	
     	// 3 私信
     	// 4
@@ -221,7 +236,7 @@ public class DrmReqController extends BaseController {
 	}
 	
 	/**
-	 * 确认付款给对方时间
+	 * 确认付款给对方
 	 * @param request
 	 * @return
 	 */
@@ -239,6 +254,18 @@ public class DrmReqController extends BaseController {
 			old.setPayTime(cal.getTime());//确认付款给对方时间
 			
 			drmReqService.update(old);
+
+			// 赏金托管-付款通知  drm_pay_notice
+			DrmPayNotice pn = new DrmPayNotice();
+			pn.setReqId(reqid);
+			pn.setCompanyName(old.getCompanyShotname());
+			pn.setMoney(old.getPrice());
+			pn.setReceiveUserId(old.getAcceptUserId());
+			pn.setNoticeType(2);//通知类型：1赏金托管完成通知，2服务完成确认付款通知
+			pn.setUserId(old.getSendUserId());
+			pn.setUserPhone(old.getSendUserPhone());
+			
+			drmPayNoticeService.save(pn);
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
@@ -264,7 +291,20 @@ public class DrmReqController extends BaseController {
 			old.setAcceptState(acceptstate);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
 			old.setDepositTime(cal.getTime());//2赏金已托管
 			
-			drmReqService.update(old);
+//			drmReqService.update(old);// 需要客服确认后才能更改状态
+			
+			// 赏金托管-付款通知  drm_pay_notice
+			DrmPayNotice pn = new DrmPayNotice();
+			pn.setReqId(reqid);
+			pn.setCompanyName(old.getCompanyShotname());
+			pn.setMoney(old.getPrice());
+			pn.setReceiveUserId(old.getAcceptUserId());
+			pn.setNoticeType(1);//通知类型：1赏金托管完成通知，2服务完成确认付款通知
+			pn.setUserId(old.getSendUserId());
+			pn.setUserPhone(old.getSendUserPhone());
+			
+			drmPayNoticeService.save(pn);
+			
 		}
 		catch(Exception ex){
 			ex.printStackTrace();

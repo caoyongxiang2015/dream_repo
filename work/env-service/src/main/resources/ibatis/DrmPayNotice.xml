@@ -10,12 +10,14 @@
 		<!-- jdbcType="varchar" javaType="java.lang.String" -->
 		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
+		<result property="reqId" column="req_id" />
 		<result property="userId" column="user_id" />
 		<result property="userPhone" column="user_phone" />
 		<result property="receiveUserId" column="receive_user_id" />
 		<result property="money" column="money" />
 		<result property="companyId" column="company_id" />
 		<result property="companyName" column="company_name" />
+		<result property="noticeType" column="notice_type" />
 		<result property="version" column="version" />
 		<result property="disabled" column="disabled" />
 		<result property="createUserid" column="create_userid" />
@@ -28,7 +30,7 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmPayNotice.columns">
 	    <![CDATA[
-        id, user_id, user_phone, receive_user_id, money, company_id, company_name, version, disabled, create_userid, create_time, update_userid, update_time
+        id, req_id,user_id, user_phone, receive_user_id,notice_type, money, company_id, company_name, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
 
@@ -37,12 +39,14 @@
 	    <![CDATA[
 	        INSERT INTO DRM_PAY_NOTICE (
 	        	id, 
+	        	req_id, 
 	        	user_id, 
 	        	user_phone, 
 	        	receive_user_id, 
 	        	money, 
 	        	company_id, 
 	        	company_name, 
+	        	notice_type,
 	        	version, 
 	        	disabled, 
 	        	create_userid, 
@@ -51,16 +55,18 @@
 	        	update_time
 	        ) VALUES (
 	        	#id#, 
+	        	#reqId#, 
 	        	#userId#, 
 	        	#userPhone#, 
 	        	#receiveUserId#, 
 	        	#money#, 
 	        	#companyId#, 
 	        	#companyName#, 
+	        	#noticeType#, 
 	        	#version#, 
-	        	#disabled#, 
+	        	0, 
 	        	#createUserid#, 
-	        	#createTime#, 
+	        	now(), 
 	        	#updateUserid#, 
 	        	#updateTime#
 	        )
@@ -71,49 +77,12 @@
 		</selectKey>
 	</insert>
 
-	<!-- 新增记录 -->
-	<insert id="insert" parameterClass="drmPayNoticeEntity">
-	    <![CDATA[
-	        INSERT INTO DRM_PAY_NOTICE (
-	        	id, 
-	        	user_id, 
-	        	user_phone, 
-	        	receive_user_id, 
-	        	money, 
-	        	company_id, 
-	        	company_name, 
-	        	version, 
-	        	disabled, 
-	        	create_userid, 
-	        	create_time, 
-	        	update_userid, 
-	        	update_time
-	        ) VALUES (
-	        	#id#, 
-	        	#userId#, 
-	        	#userPhone#, 
-	        	#receiveUserId#, 
-	        	#money#, 
-	        	#companyId#, 
-	        	#companyName#, 
-	        	#version#, 
-	        	#disabled#, 
-	        	#createUserid#, 
-	        	#createTime#, 
-	        	#updateUserid#, 
-	        	#updateTime#
-	        )
-	    ]]>
-		<selectKey resultClass="java.lang.Integer" type="post"
-			keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
 
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmPayNoticeEntity">
 	    <![CDATA[
 	        UPDATE DRM_PAY_NOTICE SET
+		        req_id = #reqId#, 
 		        user_id = #userId#, 
 		        user_phone = #userPhone#, 
 		        receive_user_id = #receiveUserId#, 

@@ -43,6 +43,12 @@ public class DrmPayNotice extends DomainObject{
 	//
 	private java.lang.Integer id;
 	
+	private java.lang.Integer reqId;
+	/**
+	 * 通知类型：1赏金托管完成通知，2服务完成确认付款通知
+	 */
+	private java.lang.Integer noticeType;
+	
 	/**
 	 * 付款用户id
 	 */
@@ -364,7 +370,24 @@ public class DrmPayNotice extends DomainObject{
 		return this.updateTime;
 	}
 
-    /**
+    public java.lang.Integer getNoticeType() {
+		return noticeType;
+	}
+
+	public void setNoticeType(java.lang.Integer noticeType) {
+		this.noticeType = noticeType;
+	}
+	
+
+	public java.lang.Integer getReqId() {
+		return reqId;
+	}
+
+	public void setReqId(java.lang.Integer reqId) {
+		this.reqId = reqId;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */
