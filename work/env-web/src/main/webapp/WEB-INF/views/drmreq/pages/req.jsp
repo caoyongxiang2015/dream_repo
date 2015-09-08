@@ -317,7 +317,7 @@
     
     
     
-    
+<input type="hidden" name="reqid" >
     
 	<!-- 发送私信 [[ -->
 	<div class="modal fade" id="sendPriviteMessage" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage">
@@ -367,7 +367,6 @@
 		</div>
 	</div>
 	
-<input type="text" name="reqid" >
 	
 	<!-- 放弃帮助 -->
 	<div class="modal fade" id="giveupHelp" tabindex="-1" role="dialog" aria-labelledby="giveupHelp">
