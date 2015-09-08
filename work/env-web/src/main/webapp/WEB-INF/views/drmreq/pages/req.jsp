@@ -8,8 +8,6 @@
 <title><spring:message code="index.title" /></title>
 </head>
 <body>
-
-
 <div class="container" style="margin-top: 15px;">
     	<section class="demand-message">
 			<ul class="nav nav-tabs" role="tablist">
