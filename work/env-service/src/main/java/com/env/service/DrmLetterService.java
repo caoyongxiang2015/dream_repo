@@ -13,14 +13,18 @@
  */
 package com.env.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.env.dao.api.Dao;
-import com.env.service.impl.DefaultServiceImpl;
 
+import com.env.dao.api.Dao;
 import com.env.dao.intf.IDrmLetterDao;
-import com.env.service.intf.IDrmLetterService;
 import com.env.dto.DrmLetter;
+import com.env.service.impl.DefaultServiceImpl;
+import com.env.service.intf.IDrmLetterService;
 
 /**
  * DrmLetter业务实现类<br>
@@ -42,4 +46,19 @@ public class DrmLetterService<T extends DrmLetter> extends DefaultServiceImpl<T>
 	protected Dao<T> getDao() {
 		return (Dao<T>) drmLetterDao;
 	}
+
+	@Override
+	public List<DrmLetter> queryLetter(Integer curUserid) {
+		Map params = new HashMap();
+		params.put("userId", curUserid);
+		return drmLetterDao.queryLetter(params);
+	}
+	@Override
+	public List<DrmLetter> letterDetail(Integer myUserId,Integer yourUserId) {
+		Map params = new HashMap();
+		params.put("myUserId", myUserId);
+		params.put("yourUserId", yourUserId);
+		return drmLetterDao.letterDetail(params);
+	}
+
 }

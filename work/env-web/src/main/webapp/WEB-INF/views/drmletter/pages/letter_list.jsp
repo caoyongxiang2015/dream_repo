@@ -9,9 +9,32 @@
 </head>
 <body>
 
-<button onclick="javascript:window.location.href='${ctx}/drmletter/send'">发送测试短信</button>
+<%-- <button onclick="javascript:window.location.href='${ctx}/drmletter/send'">发送测试短信</button> --%>
+
+
 	<div class="container" style="margin-top: 15px;">
 		<section class="privite-message">
+		
+		<c:forEach items="${ls }" var="lte">
+		
+			
+			<div class="panel panel-default">
+				<div class="panel-heading no-bottom-border" onclick="opendetail('${lte.receiveUserid}');">
+					<h3 class="panel-title">
+						我与用户 ${lte.receiveUsername }的私信<i class="right glyphicon glyphicon-resize-full"></i>
+					</h3>
+				</div>
+				<div class="panel-body lettersection" hidden>
+					
+				</div>
+			</div>
+			
+			
+		</c:forEach>
+		
+		
+		====================================
+		
 			<div class="panel panel-default">
 				<div class="panel-heading no-bottom-border">
 					<h3 class="panel-title">
@@ -55,6 +78,9 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
 			<div class="panel panel-default">
 				<div class="panel-heading no-bottom-border">
 					<h3 class="panel-title">
@@ -72,33 +98,30 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading no-bottom-border">
-					<h3 class="panel-title">
-						我与用户XXX的私信<i class="right glyphicon glyphicon-resize-full"></i>
-					</h3>
-				</div>
-				<div class="panel-body" hidden>
-					<div class="media">
-						<div class="media-right text-success">
-							<h5 class="meida-heading">2015.02.02 12:12:12</h5>
-							<div class="media-content">用户XXXXX
-								向您发送请求帮助信息，TA想简单了解下XXX公司的信息，诚意金50元</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
+			
+			
 			</section>
 	</div>
 
-
+<div class="xxx"></div>
 	<script src="${static_common}/hzk/js/jquery.min.js"></script>
 
 	<script type="text/javascript"
 		src="${static_common}/hzk/js/jquery.validate.js"></script>
 	<script type="text/javascript"
 		src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
+		
+		
 	<script type="text/javascript">
+	
+		function opendetail(uid){
+			var url = '${ctx}/drmletter/letterSection/'+uid;
+			
+			$(this).next().load(url);
+			//$('.lettersection').load(url);
+		}
+	
 		$("#messageForm").validate({
 			rules : {
 				sendMessage : {

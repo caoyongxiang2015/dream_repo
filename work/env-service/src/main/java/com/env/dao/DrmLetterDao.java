@@ -13,9 +13,12 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmLetterDao;
 import com.env.dto.DrmLetter;
 
@@ -29,4 +32,14 @@ import com.env.dto.DrmLetter;
  */
 @Repository("drmLetterDao")
 public class DrmLetterDao extends DefaultDaoImpl<DrmLetter> implements IDrmLetterDao<DrmLetter> {
+
+	@Override
+	public List<DrmLetter> queryLetter(Map params) {
+		return this.query(getStatement(), params);
+	}
+
+	@Override
+	public List<DrmLetter> letterDetail(Map params) {
+		return this.query(getStatement(), params);
+	}
 }

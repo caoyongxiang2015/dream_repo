@@ -6,9 +6,6 @@
 
 	<typeAlias alias="drmLetterEntity" type="com.env.dto.DrmLetter" />
 	<resultMap id="drmLetter" class="com.env.dto.DrmLetter">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="title" column="title" />
 		<result property="content" column="content" />
@@ -25,6 +22,10 @@
 		<result property="updateUserid" column="update_userid" />
 		<result property="updateTime" column="update_time" />
 		
+	</resultMap>
+	<resultMap id="drmLetter1" class="com.env.dto.DrmLetter">
+		<result property="receiveUserid" column="receive_userid" />
+		<result property="receiveUsername" column="receive_username" />
 	</resultMap>
 
 	<!-- 用于select查询公用抽取的列 -->
@@ -280,4 +281,23 @@
 		    FROM DRM_LETTER
 	    ]]>
 	</select>
+	
+	<select id="letterDetail" resultMap="drmLetter">
+		  
+		SELECT *  from drm_letter l
+		where ( l.send_userid = #myUserId# and l.receive_userid = #yourUserId#) 
+		or 
+		( l.send_userid = #yourUserId# and l.receive_userid = #myUserId# )
+		 ORDER BY l.send_time 
+ 
+	</select>
+	<select id="queryLetter" resultMap="drmLetter1">
+		SELECT DISTINCT l.receive_userid   ,l.receive_username    from drm_letter l
+		where l.send_userid = #userId#
+		UNION
+		SELECT  DISTINCT l.send_userid   ,l.send_username   from drm_letter l
+		where l.receive_userid = #userId#
+	</select>
+	
+	
 </sqlMap>

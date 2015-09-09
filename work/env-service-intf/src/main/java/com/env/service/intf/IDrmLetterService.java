@@ -13,6 +13,9 @@
  */
 package com.env.service.intf;
 
+import java.util.List;
+import java.util.Map;
+
 import com.env.service.impl.Service;
 import com.env.dto.DrmLetter;
 
@@ -25,4 +28,12 @@ import com.env.dto.DrmLetter;
  * @since 1.0
  */
 public interface IDrmLetterService<T extends DrmLetter> extends Service<T> {
+	public List<DrmLetter> queryLetter(Integer curUserid);
+	/**
+	 * 我与对方的私信往来列表
+	 * @param myUserId
+	 * @param yourUserId
+	 * @return
+	 */
+	public List<DrmLetter> letterDetail(Integer myUserId,Integer yourUserId);
 }

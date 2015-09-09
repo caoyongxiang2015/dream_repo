@@ -13,7 +13,6 @@
  */
 package com.env.web.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +26,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.env.constant.Constants;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
 import com.env.dto.DrmLetter;
+import com.env.dto.PtUser;
 import com.env.service.intf.IDrmLetterService;
 import com.env.util.SmsSender;
 import com.env.vo.DrmLetterVo;
@@ -57,10 +58,27 @@ public class DrmLetterController extends BaseController {
 
 
 	@RequestMapping()
-	public String index(){
+	public String index(HttpServletRequest request){
+		
+		PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+		
+		List<DrmLetter> ls = drmLetterService.queryLetter(user.getId());
+		request.setAttribute("ls", ls);
 		return "drmletter/pages/letter_list";
 	}
+	
+	@RequestMapping("/letterSection/{yourUserid}")
+	public String letterSection(@PathVariable("yourUserid")  Integer yourUserId, HttpServletRequest request){
+		
+		PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+		
+		List<DrmLetter> ds = drmLetterService.letterDetail(user.getId(),yourUserId);
+		
+		request.setAttribute("ds", ds);
+		return "drmletter/pages/letterSection";
+	}
 
+	// TODO test
 	@ResponseBody
 	@RequestMapping(value="/send")
 	public String send(){

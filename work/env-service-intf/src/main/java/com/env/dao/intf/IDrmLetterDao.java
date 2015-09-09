@@ -13,8 +13,10 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
+import java.util.Map;
 
+import com.env.dao.api.Dao;
 import com.env.dto.DrmLetter;
 
 /**
@@ -26,4 +28,6 @@ import com.env.dto.DrmLetter;
  * @since 1.0
  */
 public interface IDrmLetterDao<T extends DrmLetter> extends Dao<T> {
+	List<DrmLetter> queryLetter(Map params);
+	List<DrmLetter> letterDetail(Map params);
 }
