@@ -75,9 +75,25 @@ public class DrmLetterController extends BaseController {
 		List<DrmLetter> ds = drmLetterService.letterDetail(user.getId(),yourUserId);
 		
 		request.setAttribute("ds", ds);
+		request.setAttribute("myUserid", user.getId());
+		request.setAttribute("yourUserId", yourUserId);
+		
 		return "drmletter/pages/letterSection";
 	}
 
+	@RequestMapping(value = "sendletter")
+	public String sendletter (DrmLetterVo drmLetterVo ){
+		Integer id = -1;
+		try{
+			id = drmLetterService.save(drmLetterVo.getEntity());
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return "redirect:/";
+	}
+
+	
 	// TODO test
 	@ResponseBody
 	@RequestMapping(value="/send")
@@ -123,15 +139,6 @@ public class DrmLetterController extends BaseController {
 		return "drmletter/pages/list";
 	}
 	
-	/**
-	 * 去新增DrmLetter
-	 * 
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "toadd")
-	public String toadd(){
-		return "drmletter/pages/add";
-	}
 
 	/**
 	 * 新增DrmLetter
@@ -154,80 +161,5 @@ public class DrmLetterController extends BaseController {
 		return "redirect:/drmletter/detail/"+id;
 	}
 
-	/**
-	 * 删除DrmLetter
-	 * 
-	 * @param id DrmLetter页面表单对象唯一标识
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "delete/{id}")
-	public String delete (@PathVariable("id") Integer id, Page page, HttpServletRequest request){
-		try{
-			if(null != id){
-			    drmLetterService.delete(id);
-			}
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "redirect:/drmletter/list";
-	}
-
-	/**
-	 * 去修改DrmLetter
-	 * 
-	 * @param id DrmLetter页面表单对象唯一标识
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "toedit/{id}")
-	public String toedit(@PathVariable("id") Integer id , Model model){
-		try{
-			if(null != id){
-				DrmLetter drmLetterEntity = (DrmLetter) drmLetterService.getById(id);
-				model.addAttribute("entity", drmLetterEntity);
-			}
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "drmletter/pages/update";
-	}
-
-	/**
-	 * 修改DrmLetter
-	 * 
-	 * @param drmLetterVo DrmLetter页面表单对象
-	 * @param result 表单验证数据
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "update")
-	public String update (DrmLetterVo drmLetterVo){
-		try{
-			drmLetterService.update(drmLetterVo.getEntity());
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "redirect:/drmletter/detail/"+ drmLetterVo.getEntity().getId();
-	}
-
-
-	/**
-	 * 跳转到DrmLetter详情页面
-	 * 
-	 * @param id
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "detail/{id}")
-	public String detail(@PathVariable Integer id, Model model) {
-		DrmLetter com = (DrmLetter) drmLetterService.getById(id);
-		model.addAttribute("entity", com);
-		return "drmletter/pages/detail";
-	}
+	
 }

@@ -24,7 +24,7 @@
 						我与用户 ${lte.receiveUsername }的私信<i class="right glyphicon glyphicon-resize-full"></i>
 					</h3>
 				</div>
-				<div class="panel-body lettersection" hidden>
+				<div class="panel-body lettersection${lte.receiveUserid}" hidden>
 					
 				</div>
 			</div>
@@ -68,8 +68,8 @@
 						</div>
 					</div>
 					<div class="form-group mt15">
-						<form action="" id="messageForm">
-							<textarea id="sendMessage" name="sendMessage" cols="30" rows="3"
+						<form action="" id="messageForm1">
+							<textarea id="sendMessage1" name="sendMessage1" cols="30" rows="3"
 								class="form-control"></textarea>
 							<div class="text-center">
 								<button type="submit" class="btn btn-lg btn-primary mt15">发送私信</button>
@@ -81,30 +81,12 @@
 			
 			
 			
-			<div class="panel panel-default">
-				<div class="panel-heading no-bottom-border">
-					<h3 class="panel-title">
-						我与用户XXX的私信<i class="right glyphicon glyphicon-resize-full"></i>
-					</h3>
-				</div>
-				<div class="panel-body" hidden>
-					<div class="media">
-						<!--                                <div class="media-left"><a href="#"><img src="" alt="">头像</a></div>-->
-						<div class="media-right text-success">
-							<h5 class="meida-heading">2015.02.02 12:12:12</h5>
-							<div class="media-content">用户XXXXX
-								向您发送请求帮助信息，TA想简单了解下XXX公司的信息，诚意金50元</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			
 			
 			
 			</section>
 	</div>
 
-<div class="xxx"></div>
 	<script src="${static_common}/hzk/js/jquery.min.js"></script>
 
 	<script type="text/javascript"
@@ -117,11 +99,11 @@
 	
 		function opendetail(uid){
 			var url = '${ctx}/drmletter/letterSection/'+uid;
-			
-			$(this).next().load(url);
-			//$('.lettersection').load(url);
+			$('.lettersection'+uid).load(url);
 		}
-	
+		
+		
+	/* 
 		$("#messageForm").validate({
 			rules : {
 				sendMessage : {
@@ -133,7 +115,7 @@
 					placement : 'top'
 				}
 			},
-		})
+		}) */
 	</script>
 </body>
 </html>
