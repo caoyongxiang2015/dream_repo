@@ -8,9 +8,9 @@
 	</div>
 	<div class="col-xs-6">
 		<div class="company-about right">
-			<a href="javascript:;" class="right">意见反馈</a>
-				<a href="javascript:;" class="right">用户协议</a>
-			<a href="javascript:;" class="right">关于我们</a> 
+			<a href="${ctx}/ptfeedback" class="right">意见反馈</a>
+			<a href="${ctx}/terms" class="right">用户协议</a>
+			<a href="${ctx}/about" class="right">关于我们</a> 
 			<a href="javascript:;" class="right">微博</a> 
 		</div>
 		<p class="company-copyright">京ICP备14019894号-5 © 2015 互帮团队</p>

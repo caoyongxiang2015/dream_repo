@@ -36,52 +36,22 @@ import com.env.vo.PtFeedbackVo;
  * @since 1.0
  */
 @Controller
-@RequestMapping("/ptfeedback")
-public class PtFeedbackController extends BaseController {
-
-	/**
-	 * 自动注入意见反馈业务层实现
-	 */
-	@Autowired
-	private IPtFeedbackService ptFeedbackService;
+@RequestMapping()
+public class DrmOtherController extends BaseController {
 
 	/**
 	 * 去新增意见反馈
 	 * 
 	 * @return 结果视图
 	 */
-	@RequestMapping()
-	public String index(){
-		return "drmfeedback/pages/feedback";
+	@RequestMapping("/about")
+	public String about(){
+		return "other/pages/about";
+	}
+	@RequestMapping("/terms")
+	public String terms(){
+		return "other/pages/terms";
 	}
 
-	/**
-	 * 新增意见反馈
-	 * 
-	 * @param ptFeedbackVo 意见反馈页面表单对象
-	 * @param result 表单验证数据
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@ResponseBody
-	@RequestMapping(value = "save")
-	public String save (PtFeedbackVo ptFeedbackVo , HttpServletRequest request){
-		Integer id = -1;
-		try{
-			PtUser user = (PtUser) request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
-			PtFeedback entity = ptFeedbackVo.getEntity();
-			if(null!=user){
-				entity.setUserId(user.getId());
-				entity.setUserName(user.getNickname());
-			}
-			id = ptFeedbackService.save(entity);
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-			return "-1";
-		}
-		return "1";
-	}
 
 }
