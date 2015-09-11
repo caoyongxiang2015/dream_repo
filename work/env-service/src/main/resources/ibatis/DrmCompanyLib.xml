@@ -6,9 +6,6 @@
 
 	<typeAlias alias="drmCompanyLibEntity" type="com.env.dto.DrmCompanyLib" />
 	<resultMap id="drmCompanyLib" class="com.env.dto.DrmCompanyLib">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="companyName" column="company_name" />
 		<result property="companyShotname" column="company_shotname" />
@@ -40,7 +37,6 @@
 	<insert id="save" parameterClass="drmCompanyLibEntity">
 	    <![CDATA[
 	        INSERT INTO DRM_COMPANY_LIB (
-	        	id, 
 	        	company_name, 
 	        	company_shotname, 
 	        	website, 
@@ -58,54 +54,6 @@
 	        	update_userid, 
 	        	update_time
 	        ) VALUES (
-	        	#id#, 
-	        	#companyName#, 
-	        	#companyShotname#, 
-	        	#website#, 
-	        	#employeeSum#, 
-	        	#city#, 
-	        	#establishDate#, 
-	        	#introduction#, 
-	        	#fields#, 
-	        	#contactUsernum#, 
-	        	#remark#, 
-	        	#version#, 
-	        	#disabled#, 
-	        	#createUserid#, 
-	        	#createTime#, 
-	        	#updateUserid#, 
-	        	#updateTime#
-	        )
-	    ]]>
-		<selectKey resultClass="java.lang.Integer" type="post"
-			keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
-
-	<!-- 新增记录 -->
-	<insert id="insert" parameterClass="drmCompanyLibEntity">
-	    <![CDATA[
-	        INSERT INTO DRM_COMPANY_LIB (
-	        	id, 
-	        	company_name, 
-	        	company_shotname, 
-	        	website, 
-	        	employee_sum, 
-	        	city, 
-	        	establish_date, 
-	        	introduction, 
-	        	fields, 
-	        	contact_usernum, 
-	        	remark, 
-	        	version, 
-	        	disabled, 
-	        	create_userid, 
-	        	create_time, 
-	        	update_userid, 
-	        	update_time
-	        ) VALUES (
-	        	#id#, 
 	        	#companyName#, 
 	        	#companyShotname#, 
 	        	#website#, 
@@ -302,4 +250,15 @@
 		    FROM DRM_COMPANY_LIB
 	    ]]>
 	</select>
+	
+	
+	
+	<select id="queryByParams" resultMap="drmCompanyLib" >
+		SELECT
+		<include refid="drmCompanyLib.columns" />
+		FROM DRM_COMPANY_LIB
+	    where disabled = 0 and (company_shotname like '%$comname$%' or company_name like '%$comname$%' )
+	</select>
+	
+	
 </sqlMap>

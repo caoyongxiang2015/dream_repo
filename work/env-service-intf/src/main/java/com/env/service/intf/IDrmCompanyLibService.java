@@ -13,8 +13,10 @@
  */
 package com.env.service.intf;
 
-import com.env.service.impl.Service;
+import java.util.List;
+
 import com.env.dto.DrmCompanyLib;
+import com.env.service.impl.Service;
 
 /**
  * 公司库，搜索使用业务接口<br>
@@ -25,4 +27,11 @@ import com.env.dto.DrmCompanyLib;
  * @since 1.0
  */
 public interface IDrmCompanyLibService<T extends DrmCompanyLib> extends Service<T> {
+	
+	/**
+	 * 根据公司名称查询
+	 * @param name
+	 * @return
+	 */
+	public List<DrmCompanyLib> queryByParams(String name);
 }

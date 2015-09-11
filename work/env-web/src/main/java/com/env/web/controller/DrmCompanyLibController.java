@@ -53,7 +53,13 @@ public class DrmCompanyLibController extends BaseController {
 
 
     @RequestMapping()
-	public String index(){
+	public String index(HttpServletRequest request){
+    	
+    	String name = request.getParameter("searchCompany");
+    	List<DrmCompanyLib> libs = drmCompanyLibService.queryByParams(name);
+    	
+    	request.setAttribute("company", (libs==null||libs.size()<1)?new DrmCompanyLib():libs.get(0));
+    	
 		return "drmsearch/pages/search";
 	}
 	/**

@@ -13,8 +13,10 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
+import java.util.Map;
 
+import com.env.dao.api.Dao;
 import com.env.dto.DrmCompanyLib;
 
 /**
@@ -26,4 +28,11 @@ import com.env.dto.DrmCompanyLib;
  * @since 1.0
  */
 public interface IDrmCompanyLibDao<T extends DrmCompanyLib> extends Dao<T> {
+
+	/**
+	 * 根据公司名称查询
+	 * @param name
+	 * @return
+	 */
+	public List<DrmCompanyLib> queryByParams(Map params);
 }

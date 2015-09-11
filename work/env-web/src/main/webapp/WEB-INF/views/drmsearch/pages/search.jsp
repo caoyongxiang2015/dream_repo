@@ -19,41 +19,31 @@
                             <a href="#"><img src="" alt=""></a>
                         </div>
                         <div class="col-xs-10">
-                            <h4>图牛<span class="company-fullname">图牛旅游网</span></h4>
+                            <h4>${company.companyShotname }<span class="company-fullname">${company.companyName }</span></h4>
                             <div class="row">
-                                <div class="col-xs-4"><i class="glyphicon glyphicon-user"></i>200-2000人</div>
-                                <div class="col-xs-3"><i class="glyphicon glyphicon-map-marker"></i>南京</div>
-                                <div class="col-xs-5"><i class="glyphicon glyphicon-time"></i>2006年10月</div>
+                                <div class="col-xs-4"><i class="glyphicon glyphicon-user"></i>${company.employeeSum }</div>
+                                <div class="col-xs-3"><i class="glyphicon glyphicon-map-marker"></i>${company.city }</div>
+                                <div class="col-xs-5"><i class="glyphicon glyphicon-time"></i><f:formatDate value="${company.establishDate }" pattern="yyyy-MM-dd"/></div>
                             </div>
-                            <div class="company-website"><i class="glyphicon glyphicon-globe"></i><a href="#">http://www.suning.com</a></div>
+                            <div class="company-website"><i class="glyphicon glyphicon-globe"></i><a href="#">${company.website }</a></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-2">专长领域</div>
                         <div class="col-xs-10 great-area">
-                            <span class="label label-default">New</span>
-                            <span class="label label-default">互联网集散中心</span>
+                        	<span class="label label-info">${company.fields }</span>
+                            <!-- <span class="label label-default">互联网集散中心</span>
                             <span class="label label-primary">New</span>
-                            <span class="label label-default">互联网集散中心</span>
                             <span class="label label-success">New</span>
-                            <span class="label label-default">互联网集散中心</span>
                             <span class="label label-warning">New</span>
-                            <span class="label label-default">互联网集散中心</span>
                             <span class="label label-info">New</span>
-                            <span class="label label-danger">New</span>
-                            <span class="label label-default">互联网集散中心</span>
-                            <span class="label label-default">New</span>
-                            <span class="label label-default">互联网集散中心</span>
-                            <span class="label label-default">互联网集散中心</span>
+                            <span class="label label-danger">New</span> -->
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-2">公司介绍</div>
                         <div class="col-xs-10 company-introduce">
-                            公开资料显示，2000-2014年，我国社会消费品零售总额增长了541.50%，年复合增长率12.82%。中国网购交易规模在2009-2013年期间的复合增速达65%，远高于同期社会消费品零售总额15%的增长水平。上述数据均显示,这是一个充满活力并且开放的市场。
-阿里巴巴此次与苏宁云商战略合作，被视为落实国家互联网+战略，线上与线下商业全面融合的一个标志性事件。双方的用户将成为直接受益者，享受到线上线下融合的便捷购物体验。过去数十年企业积累的能力和资源，将能够真正的实现社会化开放，打造真正的社会企业。
-当日下午，阿里巴巴与苏宁云商共同召开主题为《认真做梦 踏实做事始于坚持 成于开放》的新闻发布会。
-阿里巴巴集团董事局主席马云出席了双方战略合作发布会并表示，十几年的时间，电子商务迅速的从无到有，从小到大，未来三十年，电子商务必将从大到小，从有到无。在这样一个时代，我们不能追求做一家赚钱的大公司，垄断的心态将会丧失历史给与我们这代人的机遇。基于互联网“开放，透明，分享，利他”的精神，我们必须参与和推动新的商业服务，新的商业合作，新的商业生态，打造未来社会的经济基础设施。只有这样才能确保长江后浪推前浪，才能确保创造创新创意无处无时不在，绵绵不绝。
+                        ${company.introduction }
                         </div>
                     </div>
                 </div>

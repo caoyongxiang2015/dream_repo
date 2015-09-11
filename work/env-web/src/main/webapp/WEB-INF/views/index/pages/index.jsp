@@ -192,13 +192,13 @@
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
-	    			<h4 class="question">问题哇探望探望探望探望探望探望探望探望探望探望？</h4>
+	    			<h4 class="question">我想了解的公司没有搜索到怎么办？</h4>
 	    			<p class="answer">答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
-	    			<h4 class="question">问题哇探望探望探望探望探望探望探望探望探望探望？</h4>
+	    			<h4 class="question">我想了解的公司没有收录内部员工怎么办？</h4>
 	    			<p class="answer">答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案</p>
 	    		</div>
 	    	</div>

@@ -13,14 +13,18 @@
  */
 package com.env.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.env.dao.api.Dao;
-import com.env.service.impl.DefaultServiceImpl;
 
+import com.env.dao.api.Dao;
 import com.env.dao.intf.IDrmCompanyLibDao;
-import com.env.service.intf.IDrmCompanyLibService;
 import com.env.dto.DrmCompanyLib;
+import com.env.service.impl.DefaultServiceImpl;
+import com.env.service.intf.IDrmCompanyLibService;
 
 /**
  * 公司库，搜索使用业务实现类<br>
@@ -41,5 +45,12 @@ public class DrmCompanyLibService<T extends DrmCompanyLib> extends DefaultServic
 	@Override
 	protected Dao<T> getDao() {
 		return (Dao<T>) drmCompanyLibDao;
+	}
+
+	@Override
+	public List<DrmCompanyLib> queryByParams(String name) {
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("comname", name);
+		return drmCompanyLibDao.queryByParams(params);
 	}
 }

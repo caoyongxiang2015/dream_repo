@@ -13,9 +13,12 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmCompanyLibDao;
 import com.env.dto.DrmCompanyLib;
 
@@ -29,4 +32,9 @@ import com.env.dto.DrmCompanyLib;
  */
 @Repository("drmCompanyLibDao")
 public class DrmCompanyLibDao extends DefaultDaoImpl<DrmCompanyLib> implements IDrmCompanyLibDao<DrmCompanyLib> {
+
+	@Override
+	public List<DrmCompanyLib> queryByParams(Map params) {
+		return this.query(getStatement(), params);
+	}
 }
