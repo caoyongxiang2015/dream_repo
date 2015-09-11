@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.env.constant.Constants;
 import com.env.dto.PtFeedback;
@@ -63,6 +64,7 @@ public class PtFeedbackController extends BaseController {
 	 * @param request 请求对象
 	 * @return 结果视图
 	 */
+	@ResponseBody
 	@RequestMapping(value = "save")
 	public String save (PtFeedbackVo ptFeedbackVo , HttpServletRequest request){
 		Integer id = -1;
@@ -77,8 +79,9 @@ public class PtFeedbackController extends BaseController {
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
+			return "-1";
 		}
-		return "redirect:/ptfeedback/detail/"+id;
+		return "1";
 	}
 
 }

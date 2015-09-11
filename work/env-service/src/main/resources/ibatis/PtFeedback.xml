@@ -33,7 +33,6 @@
 	<insert id="save" parameterClass="ptFeedbackEntity">
 	    <![CDATA[
 	        INSERT INTO PT_FEEDBACK (
-	        	id, 
 	        	content, 
 	        	user_id, 
 	        	user_name, 
@@ -47,7 +46,6 @@
 	        	update_userid, 
 	        	update_time
 	        ) VALUES (
-	        	#id#, 
 	        	#content#, 
 	        	#userId#, 
 	        	#userName#, 
