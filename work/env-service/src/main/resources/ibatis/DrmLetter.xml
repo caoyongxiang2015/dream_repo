@@ -62,55 +62,12 @@
 	        	#sendUsername#, 
 	        	#receiveUserid#, 
 	        	#receiveUsername#, 
-	        	#sendTime#, 
+	        	now(), 
 	        	#readed#, 
 	        	#version#, 
-	        	#disabled#, 
+	        	0, 
 	        	#createUserid#, 
-	        	#createTime#, 
-	        	#updateUserid#, 
-	        	#updateTime#
-	        )
-	    ]]>
-		<selectKey resultClass="java.lang.Integer" type="post"
-			keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
-
-	<!-- 新增记录 -->
-	<insert id="insert" parameterClass="drmLetterEntity">
-	    <![CDATA[
-	        INSERT INTO DRM_LETTER (
-	        	id, 
-	        	title, 
-	        	content, 
-	        	send_userid, 
-	        	send_username, 
-	        	receive_userid, 
-	        	receive_username, 
-	        	send_time, 
-	        	readed, 
-	        	version, 
-	        	disabled, 
-	        	create_userid, 
-	        	create_time, 
-	        	update_userid, 
-	        	update_time
-	        ) VALUES (
-	        	#id#, 
-	        	#title#, 
-	        	#content#, 
-	        	#sendUserid#, 
-	        	#sendUsername#, 
-	        	#receiveUserid#, 
-	        	#receiveUsername#, 
-	        	#sendTime#, 
-	        	#readed#, 
-	        	#version#, 
-	        	#disabled#, 
-	        	#createUserid#, 
-	        	#createTime#, 
+	        	now(), 
 	        	#updateUserid#, 
 	        	#updateTime#
 	        )

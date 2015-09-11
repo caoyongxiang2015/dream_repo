@@ -60,8 +60,8 @@
 			,eval_content evalContent
 			,version 
 			,disabled 
-			,create_userid 
-			,create_time 
+			,create_userid createUserid
+			,create_time createTime
 			,update_userid 
 			,update_time 
 		from drm_req r 

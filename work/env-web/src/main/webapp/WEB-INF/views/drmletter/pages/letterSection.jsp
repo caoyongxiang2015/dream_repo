@@ -20,6 +20,8 @@
 
 	<div class="form-group mt15">
 		<form action="${ctx}/drmletter/sendletter" id="messageForm${yourUserid}">
+			<input type="hidden" name="receiveUserid" value="${yourUserid}">
+			
 			<textarea name="sendMessage${yourUserid}" cols="30" rows="3" class="form-control sendMessage${yourUserid}"></textarea>
 			<div class="text-center">
 				<button type="button" class="btn btn-lg btn-primary mt15" onclick="sendmsg('${yourUserid}');">发送私信</button>

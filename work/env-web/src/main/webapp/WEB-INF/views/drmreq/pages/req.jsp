@@ -90,7 +90,7 @@
 	                            	<c:if test="${nt.req.acceptState!=5 && nt.req.acceptState!=7}">
 	                            	<li class='<c:if test="${nt.req.acceptState==1}">message-step-current</c:if><c:if test="${nt.req.acceptState>1}">message-step-pass</c:if>'>
 	                            		<div class="step-icon"></div>
-	                            		<p class="step-text"><c:if test="${nt.req.acceptState==1}">赏金待托管</c:if><c:if test="${nt.req.acceptState>1}">赏金已托管</c:if></p>
+	                            		<p class="step-text"><c:if test="${nt.req.acceptState<=1}">赏金待托管</c:if><c:if test="${nt.req.acceptState>1}">赏金已托管</c:if></p>
 	                            	</li>
 	                            	</c:if>
 	                            	<c:if test="${nt.req.acceptState!=5 && nt.req.acceptState!=7}">
@@ -127,7 +127,7 @@
                             <input type="hidden" name="entity.id" value="${nt.req.id }"> 
                             <input type="hidden" name="entity.acceptState" value="1"> <!-- 1:已应答，赏金待托管 -->
                             
-                            <div class="send-message">${nt.req.createTime }  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
+                            <div class="send-message"><f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
                             <div class="accept-message">接受请求后，对方将诚意金托管到本平台后，开放联系方式给TA
 	                            <div class="select-time">
 	                                <div class="form-inline">
@@ -171,7 +171,7 @@
                         	
 	                <!-- 1已应答,赏金待托管 -->
 	                    <c:if test="${nt.req.acceptState==1}">
-	                  			<div class="send-message">${nt.req.createTime }  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
+	                  			<div class="send-message"><f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
 	                          <div class="accept-message">您已经接受请求，请等待对方将赏金托管到本平台</div>
 	                          <div class="button-bar">
 	                              <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>

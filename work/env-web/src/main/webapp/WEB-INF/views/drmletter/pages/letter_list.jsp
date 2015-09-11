@@ -12,11 +12,31 @@
 <%-- <button onclick="javascript:window.location.href='${ctx}/drmletter/send'">发送测试短信</button> --%>
 
 
+	
 	<div class="container" style="margin-top: 15px;">
 		<section class="privite-message">
+			<c:if test="${send_success == 1}">
+				<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						发送成功
+				</div>
+			</c:if>
+			<c:if test="${send_success == -1}">
+				<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						发送失败
+				</div>
+			</c:if>
+		
+		<c:if test="${ls.size()<1}">
+			<div class="panel panel-default">
+	     		<div class="panel-heading">
+	                 <h3 class="panel-title"><span>没有记录</span></h3>
+	        	</div>
+	        </div>
+		</c:if>
 		
 		<c:forEach items="${ls }" var="lte">
-		
 			
 			<div class="panel panel-default">
 				<div class="panel-heading no-bottom-border" onclick="opendetail('${lte.receiveUserid}');">
@@ -32,57 +52,6 @@
 			
 		</c:forEach>
 		
-		
-		====================================
-		
-			<div class="panel panel-default">
-				<div class="panel-heading no-bottom-border">
-					<h3 class="panel-title">
-						我与用户XXX的私信<i class="right glyphicon glyphicon-resize-full"></i>
-					</h3>
-				</div>
-				<div class="panel-body" hidden>
-					<div class="media">
-						<!--                                <div class="media-left"><a href="#"><img src="" alt="">头像</a></div>-->
-						<div class="media-right text-success">
-							<h5 class="meida-heading">TA：2015.02.02 12:12:12</h5>
-							<div class="media-content">用户XXXXX
-								向您发送请求帮助信息，TA想简单了解下XXX公司的信息，诚意金50元</div>
-						</div>
-					</div>
-					<div class="media">
-						<!--                                <div class="media-left"><a href="#"><img src="" alt="">头像</a></div>-->
-						<div class="media-right text-primary">
-							<h5 class="meida-heading">我：2015.02.02 12:12:12</h5>
-							<div class="media-content">
-								信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息信息
-							</div>
-						</div>
-					</div>
-					<div class="media">
-						<!--                                <div class="media-left"><a href="#"><img src="" alt="">头像</a></div>-->
-						<div class="media-right text-success">
-							<h5 class="meida-heading">TA：2015.02.02 12:12:12</h5>
-							<div class="media-content">
-								请求帮助信息请求帮助信息请求帮助信息请求帮助信息请求帮助信息请求帮助信息请求帮助信息请求帮助信息请求</div>
-						</div>
-					</div>
-					<div class="form-group mt15">
-						<form action="" id="messageForm1">
-							<textarea id="sendMessage1" name="sendMessage1" cols="30" rows="3"
-								class="form-control"></textarea>
-							<div class="text-center">
-								<button type="submit" class="btn btn-lg btn-primary mt15">发送私信</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			
-			
-			
-			
-			
 			
 			</section>
 	</div>

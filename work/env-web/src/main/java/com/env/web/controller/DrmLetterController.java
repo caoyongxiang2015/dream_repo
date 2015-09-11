@@ -32,6 +32,7 @@ import com.env.dao.api.QueryParams;
 import com.env.dto.DrmLetter;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmLetterService;
+import com.env.service.intf.IPtUserService;
 import com.env.util.SmsSender;
 import com.env.vo.DrmLetterVo;
 
@@ -56,6 +57,8 @@ public class DrmLetterController extends BaseController {
 	@Autowired
 	private IDrmLetterService drmLetterService;
 
+	@Autowired
+	private IPtUserService<PtUser> ptUserService;
 
 	@RequestMapping()
 	public String index(HttpServletRequest request){
@@ -63,7 +66,11 @@ public class DrmLetterController extends BaseController {
 		PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
 		
 		List<DrmLetter> ls = drmLetterService.queryLetter(user.getId());
+		
 		request.setAttribute("ls", ls);
+		request.setAttribute("send_success", request.getSession().getAttribute("send_success"));
+		request.getSession().removeAttribute("send_success");
+		
 		return "drmletter/pages/letter_list";
 	}
 	
@@ -82,15 +89,32 @@ public class DrmLetterController extends BaseController {
 	}
 
 	@RequestMapping(value = "sendletter")
-	public String sendletter (DrmLetterVo drmLetterVo ){
+	public String sendletter ( HttpServletRequest request){
 		Integer id = -1;
 		try{
-			id = drmLetterService.save(drmLetterVo.getEntity());
+			PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+			
+			DrmLetter entity = new DrmLetter();
+			String receiveUserid = request.getParameter("receiveUserid");
+			String content = request.getParameter("sendMessage"+receiveUserid);
+//			String content = new String(request.getParameter("sendMessage"+receiveUserid).getBytes("iso8859-1"),"gbk");
+			
+			entity.setContent(content);
+			entity.setSendUserid(user.getId());
+			entity.setSendUsername(user.getNickname());
+			entity.setReceiveUserid(Integer.valueOf(receiveUserid));
+			
+			PtUser receiveUser = ptUserService.getById(Integer.valueOf(receiveUserid));
+			entity.setReceiveUsername(receiveUser.getNickname());
+			
+			id = drmLetterService.save(entity);
+			request.getSession().setAttribute("send_success", 1);
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
+			request.getSession().setAttribute("send_success", -1);
 		}
-		return "redirect:/";
+		return "redirect:/drmletter";
 	}
 
 	
