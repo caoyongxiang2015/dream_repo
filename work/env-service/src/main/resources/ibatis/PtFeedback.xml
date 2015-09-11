@@ -6,9 +6,6 @@
 
 	<typeAlias alias="ptFeedbackEntity" type="com.env.dto.PtFeedback" />
 	<resultMap id="ptFeedback" class="com.env.dto.PtFeedback">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="content" column="content" />
 		<result property="userId" column="user_id" />
@@ -56,50 +53,11 @@
 	        	#userName#, 
 	        	#callerName#, 
 	        	#contactType#, 
-	        	#submitTime#, 
+	        	now(), 
 	        	#version#, 
-	        	#disabled#, 
+	        	0, 
 	        	#createUserid#, 
-	        	#createTime#, 
-	        	#updateUserid#, 
-	        	#updateTime#
-	        )
-	    ]]>
-		<selectKey resultClass="java.lang.Integer" type="post"
-			keyProperty="id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
-
-	<!-- 新增记录 -->
-	<insert id="insert" parameterClass="ptFeedbackEntity">
-	    <![CDATA[
-	        INSERT INTO PT_FEEDBACK (
-	        	id, 
-	        	content, 
-	        	user_id, 
-	        	user_name, 
-	        	caller_name, 
-	        	contact_type, 
-	        	submit_time, 
-	        	version, 
-	        	disabled, 
-	        	create_userid, 
-	        	create_time, 
-	        	update_userid, 
-	        	update_time
-	        ) VALUES (
-	        	#id#, 
-	        	#content#, 
-	        	#userId#, 
-	        	#userName#, 
-	        	#callerName#, 
-	        	#contactType#, 
-	        	#submitTime#, 
-	        	#version#, 
-	        	#disabled#, 
-	        	#createUserid#, 
-	        	#createTime#, 
+	        	now(), 
 	        	#updateUserid#, 
 	        	#updateTime#
 	        )

@@ -35,7 +35,7 @@
 			    <div class="container">
 		        <h2>只为让您掌握的信息产生价值</h2>
 				<p>只为让您帮助更多的人</p>
-				<p><a class="btn btn-purple btn-lg seek-advice" style="color: orange;" href="#" role="button">收到一条请求信息</a></p>
+				<!-- <p><a class="btn btn-purple btn-lg seek-advice" style="color: orange;" href="#" role="button">收到一条请求信息</a></p> -->
 		      </div>
 		    </div>
 		    <div class="item">
@@ -133,6 +133,11 @@
 			</div>
 		</div>
 	</div>	
+	
+	
+	
+	
+	<!-- 流程说明 -->
     <div class="container">
 	    <div class="section-title">
 		    <h2>流程说明</h2>
@@ -175,13 +180,13 @@
 	    <div class="row">
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
-	    			<h4 class="question">问题哇探望探望探望探望探望探望探望探望探望探望？</h4>
+	    			<h4 class="question">好职客是个什么样的网站？</h4>
 	    			<p class="answer">答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
-	    			<h4 class="question">问题哇探望探望探望探望探望探望探望探望探望探望？</h4>
+	    			<h4 class="question">我在好职客能得到什么？</h4>
 	    			<p class="answer">答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案答案</p>
 	    		</div>
 	    	</div>
@@ -247,7 +252,7 @@
 		    	</div>
 		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
 	    	</div>
-	    	<a href="javascript:;">查看更多&gt;&gt;</a>
+	    	<a href="${ctx }/drmeval">查看更多&gt;&gt;</a>
     	</div>
     </div>
     

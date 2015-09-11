@@ -274,7 +274,7 @@
 		<include refid="ptPermission.columns" />
 	    <![CDATA[
 		    from pt_permission p
-		    where app_id = #appId#
+		    where disabled=0 and app_id = #appId#
 	    ]]>
 	</select>
 </sqlMap>

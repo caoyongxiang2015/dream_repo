@@ -232,7 +232,7 @@
                 
                 <c:forEach items="${reqs }" var="req">
                 
-                >>>>reqid:${req.id } >>acceptState:${req.acceptState }>>>acceptUserId:${req.acceptUserId }   ###
+<%--                 >>>>reqid:${req.id } >>acceptState:${req.acceptState }>>>acceptUserId:${req.acceptUserId }   ### --%>
                 
                     <div class="panel panel-default">
                         <div class="panel-heading">
