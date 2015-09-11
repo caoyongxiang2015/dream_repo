@@ -237,6 +237,7 @@
 		    FROM DRM_REQ_NOTICE
 	    ]]>
 		<include refid="drmReqNotice.queryPage" />
+		order by create_time desc
 	</select>
 	
 </sqlMap>

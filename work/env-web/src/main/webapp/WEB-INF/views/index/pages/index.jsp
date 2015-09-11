@@ -57,6 +57,30 @@
 		  </a>
 		  <!-- Forms -->
 		  <div class="container form-container posr">
+		  	
+	  		<%
+	  		PtUser curUser = (PtUser) request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+	  		if(null!=curUser){
+  			%>
+	  		<div class="user-form posa" style="top: 50px;">
+	  			<div class="regidit-form panel panel-default">
+					<div class="panel-heading posr">
+						<h3 class="panel-title"><%=curUser.getLoginId() %>，欢迎回来</h3>
+					</div>
+					<div class="panel-body">
+					<!-- 收到的请求消息 -->
+						<c:if test="${notices==null || notices.size()<1 }">
+							您暂无新消息
+						</c:if>
+						<c:if test="${notices!=null && notices.size()>0 }">
+						<a href="${ctx}/drmreq">您收到新的需求帮助信息，请查看</a>
+						</c:if>
+					</div> 
+				</div>
+			</div>
+  			<%
+	  		}else{
+  			%>
 		  	<div class="user-form posa">
 				<div class="regidit-form panel panel-default">
 					<div class="panel-heading posr">
@@ -82,6 +106,7 @@
 						</form>
 					</div> 
 				</div>
+				
 				<div class="login-form panel panel-default" hidden>
 					<div class="panel-heading posr">
 						<h3 class="panel-title">登录</h3>
@@ -102,6 +127,9 @@
 					</div>
 				</div>
 			</div>
+	  			<%
+		  		}
+		  		%>
 			</div>
 		</div>
 	</div>	
@@ -176,7 +204,7 @@
 	    <div class="examples">
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">目标公司：XXXX有限公司</div>
+		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
 		    		<div class="col-xs-2">昵称：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
@@ -185,7 +213,7 @@
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">目标公司：XXXX有限公司</div>
+		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
 		    		<div class="col-xs-2">昵称：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
@@ -194,7 +222,7 @@
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">目标公司：XXXX有限公司</div>
+		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
 		    		<div class="col-xs-2">昵称：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
@@ -203,7 +231,7 @@
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">目标公司：XXXX有限公司</div>
+		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
 		    		<div class="col-xs-2">昵称：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
@@ -212,7 +240,7 @@
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">目标公司：XXXX有限公司</div>
+		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
 		    		<div class="col-xs-2">昵称：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>

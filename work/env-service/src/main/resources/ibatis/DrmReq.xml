@@ -371,6 +371,7 @@
 		    FROM DRM_REQ
 	    ]]>
 		<include refid="drmReq.queryPage" />
+		order by create_time desc
 	</select>
 	
 </sqlMap>

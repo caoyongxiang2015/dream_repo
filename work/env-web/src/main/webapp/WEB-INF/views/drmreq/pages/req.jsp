@@ -68,13 +68,12 @@
                 
                 
                 <c:forEach items="${notices }" var="nt">
-                >>>>req.id>>${nt.req.id } >>acceptState>> ${nt.req.acceptState } 》》acceptUserId》${nt.req.acceptUserId }   ###             
                 <!-- 未被应答，或者该需求是当前登录用户应答的-->
                 <%-- <c:if test="${nt.req.acceptState == 0 || nt.req.acceptUserId == cur_userid }"> --%>
                            	
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">我接受到的需求<span>请求者给应答者发送的</span></h3>
+                            <h3 class="panel-title">我接受到的需求 <f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/><!-- <span>请求者给应答者发送的</span> --></h3>
                         </div>
                         <div class="panel-body">
                             <div class="demand-progress">
@@ -163,7 +162,7 @@
                             </div>
                             <div class="button-bar">
                                 <button class="btn btn-lg btn-primary" type="submit">接受请求</button>
-                                <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
+                                <button class="btn btn-lg btn-default" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
                             </div>
                         	</form>
                         	
@@ -174,7 +173,7 @@
 	                  			<div class="send-message"><f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
 	                          <div class="accept-message">您已经接受请求，请等待对方将赏金托管到本平台</div>
 	                          <div class="button-bar">
-	                              <button class="btn btn-lg btn-default" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
+	                              <button class="btn btn-lg btn-default" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
 	                          </div>
 	                    </c:if>
 	                        	
@@ -182,6 +181,9 @@
 	                    <c:if test="${nt.req.acceptState==2}">
 	                   		<div class="send-message">您好，用户${nt.req.sendUserNickname } 已经将诚意金${nt.req.price }元托管到本平台，待您双方沟通完毕后，本平台将诚意金转入您的账户。</div>
 	                        <div class="contact-message">您选择与求职者沟通的时间是：${nt.req.acceptDuration } ；TA的联系电话是：${nt.req.sendUserPhone }</div>
+	                        <div class="button-bar">
+	                              <button class="btn btn-lg btn-default" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
+	                          </div>
 	                    </c:if>
 	                    
 	                <!-- 3服务已完成，评价并结束 -->
@@ -347,32 +349,33 @@
     
 	<!-- 发送私信 [[ -->
 	<div class="modal fade" id="sendPriviteMessage" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage">
+		<input type="text" name="youruserid" >
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 			    <div class="modal-body">
 				    <div class="container-fluid">
-					    <div class="row message-object">
+					    <!-- <div class="row message-object">
 					    	<div class="col-xs-3">对方ID：</div>
 					    	<div class="col-xs-3">xxxxx</div>
 					    	<div class="col-xs-3">对方昵称：</div>
 					    	<div class="col-xs-3">XXXXX</div>
-					    </div>
-				    	<div class="row">
+					    </div> -->
+				    	<!-- <div class="row">
 					    	<label for="messageTitle" class="label-control col-xs-2">标题：</label>
 							<div class="form-group col-xs-10">
-								<input type="text" class="form-control" id="messageTitle" placeholder="私信标题">
+								<input type="text" class="form-control" id="messageTitle" name="messageTitle" placeholder="私信标题">
 					        </div>
-					    </div>
+					    </div> -->
 					    <div class="row">
 					    	<label for="messageText" class="abel-control col-xs-2">内容：</label>
 					    	<div class="form-group col-xs-10">
-						    	<textarea class="form-control" id="messageText" placeholder="发送私信" rows="8" cols="30"></textarea>
+						    	<textarea class="form-control" id="messageText" name="messageText" placeholder="发送私信" rows="8" cols="30"></textarea>
 					    	</div>
 					    </div>
 				    </div>
 		        </div>
 		        <div class="modal-footer text-center">
-			        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" onclick="nn.returnStatus('<div class=\'text-center\'>发送完成！</div>');">发送</button>
+			        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" onclick="sendletter();">发送</button>
 			        <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -463,7 +466,7 @@
 					您确定退款吗?
 					 <div class="row">
 					    	<div class="form-group col-xs-10">
-						    	<textarea class="form-control" id="messageText" placeholder="请说明退款原因" rows="3" cols="30"></textarea>
+						    	<textarea class="form-control" id="reasonText" placeholder="请说明退款原因" rows="3" cols="30"></textarea>
 					    	</div>
 					    </div>
 				</div>
@@ -475,6 +478,42 @@
 		</div>
 	</div>
 	
+	<script type="text/javascript">
+	
+		function showletterdialog(youruserid){
+			$("input[name='youruserid']").val(youruserid);
+			$('#sendPriviteMessage').modal('show');
+		}
+		function sendletter(){
+			var messageText = $("#messageText").val();
+			if(''==messageText){
+				alert("请填写内容！");
+				return ;
+			}
+			var sendurl = '${ctx}/drmletter/sendletter?receiveUserid='+$("input[name='youruserid']").val() +'&sendMessage'+$("input[name='youruserid']").val()+ '='+messageText;
+			$.ajax({
+				url: sendurl ,
+				type:'get',
+				success:function(data){
+					$("#returnStatus .modal-body").html("发送成功");
+					$("#returnStatus").modal("show");
+				},
+				fail:function(data){
+					$("#returnStatus .modal-body").html("发送失败");
+					$("#returnStatus").modal("show");
+				},
+				error:function(data){
+					$("#returnStatus .modal-body").html("发送失败，请刷新重试！");
+					$("#returnStatus").modal("show");
+				}
+			});
+		}
+		
+	   /* $(function () { $('#sendPriviteMessage').on('show.bs.modal', function () {
+	      alert('嘿，我听说您喜欢模态框...');})
+	   }); */
+	</script>
+
 	<script type="text/javascript">
 		$(".J-accept-help").on("click",function(){
 			$(this).parent().nextAll(".accept-message").show();
@@ -526,7 +565,7 @@
 		// 申请退款
 		$(".J-back-money-confirm").on("click",function(){
 			$.ajax({
-				url:'${ctx}/drmreq/backMoney?acceptstate=4&reqid='+$("input[name='reqid']").val(),
+				url:'${ctx}/drmreq/backMoney?acceptstate=4&reqid='+$("input[name='reqid']").val()+'&reason='+$("input[name='reasonText']").val(),
 				type:'get',
 				success : function(data) {
 					window.location.reload();
