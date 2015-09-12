@@ -13,23 +13,26 @@
  */
 package com.env.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.env.constant.Constants;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
-import com.env.service.intf.IDrmCompanyLibService;
+import com.env.dto.DrmCompany;
 import com.env.dto.DrmCompanyLib;
+import com.env.dto.PtUser;
+import com.env.service.intf.IDrmCompanyLibService;
+import com.env.service.intf.IDrmCompanyService;
 import com.env.vo.DrmCompanyLibVo;
 
 
@@ -51,6 +54,8 @@ public class DrmCompanyLibController extends BaseController {
 	@Autowired
 	private IDrmCompanyLibService drmCompanyLibService;
 
+	@Autowired
+	private IDrmCompanyService drmCompanyService;
 
     @RequestMapping()
 	public String index(HttpServletRequest request){
@@ -58,7 +63,19 @@ public class DrmCompanyLibController extends BaseController {
     	String name = request.getParameter("searchCompany");
     	List<DrmCompanyLib> libs = drmCompanyLibService.queryByParams(name);
     	
-    	request.setAttribute("company", (libs==null||libs.size()<1)?new DrmCompanyLib():libs.get(0));
+    	DrmCompany company = new DrmCompany();
+		company.setCompanyName(name);
+		company.setCompanyShotname(name);
+		// 通过公司名称匹配到的记录数
+		List<DrmCompany> companys = drmCompanyService.queryAllByParams(company);
+    	
+		
+    	request.setAttribute("usercount", (companys==null)?0:companys.size());
+    	request.setAttribute("companyname", name);
+    	request.setAttribute("company", (libs==null||libs.size()<1)?null:libs.get(0));
+    	
+    	PtUser user = (PtUser) request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+    	request.setAttribute("logined", (user==null)?0:1);// logined:未登录，1已登录
     	
 		return "drmsearch/pages/search";
 	}

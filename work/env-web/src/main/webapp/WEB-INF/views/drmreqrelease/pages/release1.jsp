@@ -38,7 +38,7 @@
 							<label class="col-xs-3 control-label" for="companyShotname">公司名称</label>
 							<div class="col-xs-7">
     							<div class="form-group form-group-lg">
-		    						<input type="text" id="companyShotname" name="companyShotname" placeholder="公司名称" class="form-control">
+		    						<input type="text" id="companyShotname" name="companyShotname" placeholder="公司名称" value="${req_companyname }" class="form-control">
 		    					</div>
 							</div>
 							<div class="col-xs-2">
@@ -109,7 +109,7 @@
 					<div class="col-xs-3">
 						<div class="col-explain fn-left">
     						<p class="help-block">1、请附上您的诚意金，金额范围一般是您期望薪资的5‰-15‰，单位人民币</p>
-    						<p class="help-block">2、当您的需求有人应答之后，需要您将诚意金托管到本平台，待服务结束后，再将金额转入对方账户</p>
+    						<p class="help-block">2、您不需要立即托管诚意金，当有人接受了您的请求信息之后，需要您将诚意金托管到本平台，待服务结束后，再将金额转入对方账户</p>
     						<p class="help-block">3、金额多少不代表信息的价值</p>
     					</div>
     				</div>

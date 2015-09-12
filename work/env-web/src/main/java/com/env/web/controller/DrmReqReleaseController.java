@@ -13,6 +13,7 @@
  */
 package com.env.web.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -216,7 +217,18 @@ public class DrmReqReleaseController extends BaseController {
 	
 
     @RequestMapping(value="first")
-	public String first(){
+	public String first(HttpServletRequest request) {
+//    	request.setAttribute("req_companyname", request.getSession().getAttribute("req_companyname"));
+//    	request.getSession().removeAttribute("req_companyname");
+    	String name="";
+    	try {
+    		if(null!=request.getParameter("name")){
+    			name = new String(request.getParameter("name").getBytes("iso-8859-1"),"UTF-8");
+    		}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+    	request.setAttribute("req_companyname" , name);
 		return "drmreqrelease/pages/release1";
 	}
 

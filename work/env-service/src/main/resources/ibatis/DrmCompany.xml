@@ -359,4 +359,12 @@
 	            ]]>
 			</isNotEmpty>
 	</select>
+	
+	<!-- 
+	<select id="getCountByCompanyname" resultMap="drmCompany">
+		SELECT * 
+		<include refid="drmCompany.columns" />
+		from drm_company c where disabled=0 and ( c.company_name like '%$companyname$%' or c.company_shotname  like '%$companyname$%' )
+	</select>
+	 -->
 </sqlMap>

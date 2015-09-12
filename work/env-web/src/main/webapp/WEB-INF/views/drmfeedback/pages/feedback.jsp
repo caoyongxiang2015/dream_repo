@@ -64,6 +64,17 @@
 
 <script type="text/javascript">
 function fd(){
+	
+	if(''==$('#content').val()){
+		alert("请填写反馈内容，谢谢！");
+		return ;
+	}
+	
+	if(''==$('#contactType').val()){
+		alert("请填写联系方式，谢谢！");
+		return ;
+	}
+	
 	$.ajax({
 		url:'${ctx}/ptfeedback/save',
 		type:'POST', 
