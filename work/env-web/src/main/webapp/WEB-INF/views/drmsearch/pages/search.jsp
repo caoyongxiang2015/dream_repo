@@ -75,11 +75,11 @@
                         <div class="col-xs-10">
                             <h4>${company.companyShotname }<span class="company-fullname">${company.companyName }</span></h4>
                             <div class="row">
-                                <div class="col-xs-4"><i class="glyphicon glyphicon-user"></i>${company.employeeSum }</div>
-                                <div class="col-xs-3"><i class="glyphicon glyphicon-map-marker"></i>${company.city }</div>
-                                <div class="col-xs-5"><i class="glyphicon glyphicon-time"></i><f:formatDate value="${company.establishDate }" pattern="yyyy-MM-dd"/></div>
+                                <div class="col-xs-4"><c:if test="${null != company.employeeSum}"><i class="glyphicon glyphicon-user"></i>${company.employeeSum }</c:if></div>
+                                <div class="col-xs-3"><c:if test="${null != company.city}"><i class="glyphicon glyphicon-map-marker"></i>${company.city }</c:if></div>
+                                <div class="col-xs-5"><c:if test="${null != company.establishDate}"><i class="glyphicon glyphicon-time"></i><f:formatDate value="${company.establishDate }" pattern="yyyy-MM-dd"/></c:if></div>
                             </div>
-                            <div class="company-website"><i class="glyphicon glyphicon-globe"></i><a href="${company.website }" target="_blank">${company.website }</a></div>
+                            <div class="company-website"><c:if test="${null != company.website}"><i class="glyphicon glyphicon-globe"></i><a href="${company.website }" target="_blank">${company.website }</a></c:if></div>
                         </div>
                     </div>
                     <div class="row">
@@ -100,6 +100,14 @@
                         ${company.introduction }
                         </div>
                     </div>
+            		<c:if test="${usercount<1}">
+                    <div class="row">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-10 company-introduce">
+                        		非常抱歉，我们目前还没有收录 [${companyname}] 内部员工信息，如果您想找到${companyname}内部员工，请点击右侧按钮，我们会尽快为您服务，谢谢！
+                        </div>
+                    </div>
+                    </c:if>
                 </div>
             </div>
             

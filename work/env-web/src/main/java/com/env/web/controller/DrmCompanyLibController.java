@@ -30,9 +30,11 @@ import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
 import com.env.dto.DrmCompany;
 import com.env.dto.DrmCompanyLib;
+import com.env.dto.DrmSearchRecord;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmCompanyLibService;
 import com.env.service.intf.IDrmCompanyService;
+import com.env.service.intf.IDrmSearchRecordService;
 import com.env.vo.DrmCompanyLibVo;
 
 
@@ -57,6 +59,10 @@ public class DrmCompanyLibController extends BaseController {
 	@Autowired
 	private IDrmCompanyService drmCompanyService;
 
+	@Autowired
+	private IDrmSearchRecordService<DrmSearchRecord> drmSearchRecordService;
+	
+	
     @RequestMapping()
 	public String index(HttpServletRequest request){
     	
@@ -76,6 +82,12 @@ public class DrmCompanyLibController extends BaseController {
     	
     	PtUser user = (PtUser) request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
     	request.setAttribute("logined", (user==null)?0:1);// logined:未登录，1已登录
+    	
+    	// TODO 记录搜索过的公司
+    	DrmSearchRecord entity = new DrmSearchRecord();
+    	entity.setCompanyName(name);
+    	entity.setSearchCount(1);
+    	drmSearchRecordService.save(entity);
     	
 		return "drmsearch/pages/search";
 	}
