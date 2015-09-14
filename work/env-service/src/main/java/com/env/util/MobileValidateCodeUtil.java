@@ -14,7 +14,6 @@ import com.env.util.bean.MobileValidateCodeCheckResult;
 /**
  * 手机验证码工具<br>
  *
- * @author chengjianfang
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本] （可选）
  */
@@ -37,7 +36,7 @@ public class MobileValidateCodeUtil {
     /**
      * 超时时间（2分钟）
      */
-    private static final int TIME_OUT = 2 * 60 * 1000;
+    private static final int TIME_OUT = 1 * 60 * 1000;// 2 * 60 * 1000;
 
     /**
      * 

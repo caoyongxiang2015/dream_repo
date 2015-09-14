@@ -1,14 +1,13 @@
 package com.env.web.controller;
 
 	
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONObject;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -22,6 +21,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +29,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.env.commons.utils.JsonUtils;
+import com.env.commons.utils.RegExpValidatorUtils;
+import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
+import com.env.dto.PtUser;
+import com.env.service.intf.IPtUserService;
+import com.env.util.MobileValidateCodeUtil;
+import com.env.util.SmsSender;
+import com.env.util.bean.MobileValidateCodeCheckResult;
+import com.google.gson.Gson;
 	  
 /**
  * 登陆认证的控制器
@@ -45,6 +53,12 @@ public class AuthLoginController {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthLoginController.class);
 
+    @Autowired
+    SmsSender smsSender;
+    
+    @Autowired
+    IPtUserService<PtUser> ptUserService;
+    
 	@RequestMapping("/toLogin")
     public String toLogin(){
 		return "index/pages/auth_login";
@@ -191,4 +205,181 @@ public class AuthLoginController {
     public String unauthor(){
 		return "index/pages/unauthor";
 	}
+	
+	
+	
+	//===========================================================================
+	
+	@RequestMapping(value = "/register/userRegister", method = RequestMethod.POST,produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String userRegister(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        Map<String, Object> map = checkRegisterAll(request, session);
+        if (map.size() < 1) {
+            String phone = request.getParameter("phone");
+            String pwd = request.getParameter("pwd");
+            
+            PtUser user = new PtUser();
+            user.setPhone(phone);
+            user.setLoginId(phone);
+            user.setPwd(pwd);
+            
+            Integer id = 0;
+            try{
+            	id = ptUserService.save(user);
+
+                map.put("result", true);
+                map.put("message", "注册成功");
+            }catch(Exception e){
+            	e.printStackTrace();
+                map.put("result", false);
+                map.put("message", "注册失败");
+            }
+            
+            if (id < 1) {
+                map.put("result", false);
+                map.put("message", "注册失败");
+            }
+        }
+        
+        return JsonUtils.toJson(map);
+    }
+	
+	 /**
+     * 
+     * 功能描述: 获取手机验证码
+     * 
+     * @param session 会话
+     * @return 展示视图
+     */
+    @RequestMapping(value = "/register/getCode", method = RequestMethod.POST,produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getCode(HttpServletRequest request, HttpSession session) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("result", false);
+        map.put("message", "短信发送失败!");
+        try {
+            String phone = request.getParameter("phone");
+            int type = Integer.parseInt(request.getParameter("type"));
+            if (RegExpValidatorUtils.isPhone(phone)) {
+                // 创建手机验证码（已放入session）
+                String code = MobileValidateCodeUtil.setMobileValidateCode(session);
+                StringBuffer content = new StringBuffer();
+                switch (type) {
+                    case 1:// 注册
+                        content.append("您正在注册好职客会员，手机动态密码").append(code).append("，有效期120秒，客服电话4008-333-888");
+                        break;
+                    case 2:// 找回密码
+                        content.append("您正在找回密码，手机动态密码").append(code).append("，有效期120秒，客服电话4008-333-888");
+                        break;
+                    case 3:// 修改手机号码
+                        content.append("您正在修改手机号码，手机动态密码").append(code).append("，有效期120秒，客服电话4008-333-888");
+                        break;
+                    default:
+                        break;
+                }
+                // 发送验证码
+                if (smsSender.sendSms(phone, content.toString())) {
+                    map.put("result", true);
+                    map.put("message", "短信已发送!");
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("getCode", e.getMessage());
+            e.printStackTrace();
+        }
+        return JsonUtils.toJson(map);
+//        return new Gson().toJson(map);
+
+    }
+
+	
+    
+
+    /**
+     * 注册时后台验证方法
+     * 
+     * @param request
+     * @return
+     */
+    private Map<String, Object> checkRegisterAll(HttpServletRequest request, HttpSession session) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        String password = request.getParameter("pwd");
+        String phone = request.getParameter("phone");
+        String authCode = request.getParameter("authCode");
+//        String email = request.getParameter("email");
+
+        if (StringUtils.isNotBlank(password)) {
+            /*if (RegExpValidatorUtils.isPassWrod(password)) {
+                if (RegExpValidatorUtils.isPassWrod(newPassword)) {
+                    if (!newPassword.equals(password)) {
+                        map.put("key", "newPassword");
+                        map.put("msg", "两次输入密码不一致");
+                        return map;
+                    }
+                } else {
+                    map.put("key", "newPassword");
+                    map.put("msg", "6-18位数字字母组合");
+                    return map;
+                }
+            } else {
+                map.put("key", "password");
+                map.put("msg", "6-18位数字字母组合");
+                return map;
+            }*/
+        } else {
+            map.put("key", "password");
+            map.put("msg", "密码为空");
+            return map;
+        }
+/*        if (StringUtils.isNotBlank(email)) {
+            if (RegExpValidatorUtils.isEmail(email)) {
+                if (!myAccountService.checkEmail(email)) {
+                    map.put("key", "email");
+                    map.put("msg", "email已存在");
+                    return map;
+                }
+            } else {
+                map.put("key", "email");
+                map.put("msg", "email格式不正确");
+                return map;
+            }
+        } else {
+            map.put("key", "email");
+            map.put("msg", "email为空");
+            return map;
+        }
+*/        if (StringUtils.isNotBlank(phone)) {
+            /*if (RegExpValidatorUtils.isPhone(phone)) {
+                if (!myAccountService.checkPhone(phone)) {
+                    map.put("key", "phone");
+                    map.put("msg", "手机号已存在");
+                    return map;
+                }
+            } else {
+                map.put("key", "phone");
+                map.put("msg", "手机号码应为11位数字");
+                return map;
+            }*/
+        } else {
+            map.put("key", "phone");
+            map.put("msg", "手机号为空");
+            return map;
+        }
+
+        if (StringUtils.isNotBlank(authCode)) {
+            MobileValidateCodeCheckResult result = MobileValidateCodeUtil.checkMobileValidateCode(session, authCode);
+            if (!result.isCheckStatus()) {
+                map.put("key", "authCode");
+                map.put("msg", result.getCheckMessage());
+                return map;
+            }
+        } else {
+            map.put("key", "authCode");
+            map.put("msg", "手机验证码为空");
+            return map;
+        }
+        return map;
+    }
+
+	
 }  

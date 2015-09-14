@@ -90,19 +90,19 @@
 					<div class="panel-body">
 						<form class="form" id="regiditForm">
 							<div class="form-group form-group-lg">
-								<label for="inputPhone" hidden>手机号：</label>
-							    <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="手机号">
+								<label for="phone" hidden>手机号：</label>
+							    <input type="tel" class="form-control" id="phone" name="phone" placeholder="手机号">
 							</div>
 							<div class="form-group form-group-lg">
-							    <label for="setPassword" hidden>密码：</label>
-							    <input type="password" class="form-control" id="setPassword" name="setPassword" placeholder="密码">
+							    <label for="pwd" hidden>密码：</label>
+							    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="密码">
 							</div>
 							<div class="form-inline form-group-lg">
 							    <label for="verfityCodeSMS" hidden>短信验证码：</label>
 							    <input type="text" class="form-control" id="verfityCodeSMS" name="verfityCodeSMS" placeholder="手机验证码">
 								<button type="button" id="getCodeSMS" class="btn btn-success btn-lg">免费获取验证码</button>
 							</div>
-							<button class="btn btn-form mt15 btn-block btn-lg">注册</button>
+							<button class="btn btn-form mt15 btn-block btn-lg registerUser" type="button">注册</button>
 						</form>
 					</div> 
 				</div>
@@ -265,8 +265,8 @@
 		$("#regiditForm").validate({
 			rules: {     
 				verfityCodeSMS: {required: true},
-				setPassword: {required: true},
-				inputPhone: {required: true}
+				pwd: {required: true},
+				phone: {required: true}
 			},
 			tooltip_options: {
 				'_all_': {placement:'right'}
@@ -281,6 +281,50 @@
 				'_all_': {placement:'right'}
 			}
 		})
+		
+		//获取手机验证码
+		$("#getCodeSMS").on('click',function(){
+			$.ajax({
+				url:'${ctx}/auth/register/getCode?type=1&phone='+$("#phone").val(),
+				type:'post',
+				success : function(data) {
+					//alert(data);
+					var json = eval('(' + data + ')'); 
+					alert(json.message);
+				},
+				error:function(){
+					alert("手机验证码获取失败");
+				}  
+			});
+		})
+		// 注册
+		$(".registerUser").on('click',function(){
+   			//var pwd=$.md5($('#pwd').val());
+   			var pwd=$('#pwd').val();
+   			var phone=$('#phone').val();
+   			var authCode=$('#verfityCodeSMS').val();
+			//alert(pwd+'#'+phone+'#'+authCode);
+   			
+			$.ajax({
+				url:'${ctx}/auth/register/userRegister'+'?phone='+phone+'&pwd='+pwd+'&authCode='+authCode+'&n='+new Date(),
+				type:'post',
+				success : function(data) {
+					//alert(data);
+					var json = eval('(' + data + ')'); 
+					if(json.result==false){
+						alert(json.message);
+					}
+					if(json.result==true){
+						alert("注册成功，将跳转到个人资料页面，请完善您的基本资料，谢谢！");
+						window.location.href="${ctx}/profile";
+					}
+				},
+				error:function(){
+					alert("注册异常");
+				} 
+			});
+		})
+		
 	</script>
 	
 </body>

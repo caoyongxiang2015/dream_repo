@@ -9,7 +9,6 @@ import org.apache.commons.lang.math.RandomUtils;
 /**
  * 手机验证码对象<br>
  *
- * @author chengjianfang
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本] （可选）
  */
@@ -50,6 +49,7 @@ public class MobileValidateCode implements Serializable, Comparable<MobileValida
     public MobileValidateCode() {
         final String baseNumber = (PREFIX_CODE + Math.abs(RandomUtils.nextLong()));
         code = baseNumber.substring(baseNumber.length() - CODE_LENGTH);
+        System.out.println("短信验证码"+code);
     }
 
     /**
