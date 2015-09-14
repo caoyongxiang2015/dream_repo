@@ -288,9 +288,7 @@
 				url:'${ctx}/auth/register/getCode?type=1&phone='+$("#phone").val(),
 				type:'post',
 				success : function(data) {
-					//alert(data);
-					var json = eval('(' + data + ')'); 
-					alert(json.message);
+					alert(data.message);
 				},
 				error:function(){
 					alert("手机验证码获取失败");
@@ -309,12 +307,10 @@
 				url:'${ctx}/auth/register/userRegister'+'?phone='+phone+'&pwd='+pwd+'&authCode='+authCode+'&n='+new Date(),
 				type:'post',
 				success : function(data) {
-					//alert(data);
-					var json = eval('(' + data + ')'); 
-					if(json.result==false){
-						alert(json.message);
+					if(data.result==false){
+						alert(data.message);
 					}
-					if(json.result==true){
+					if(data.result==true){
 						alert("注册成功，将跳转到个人资料页面，请完善您的基本资料，谢谢！");
 						window.location.href="${ctx}/profile";
 					}

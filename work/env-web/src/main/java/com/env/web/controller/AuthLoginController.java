@@ -210,7 +210,7 @@ public class AuthLoginController {
 	
 	//===========================================================================
 	
-	@RequestMapping(value = "/register/userRegister", method = RequestMethod.POST,produces="text/html;charset=UTF-8")
+	@RequestMapping(value = "/register/userRegister", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public String userRegister(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         Map<String, Object> map = checkRegisterAll(request, session);
@@ -226,7 +226,7 @@ public class AuthLoginController {
             Integer id = 0;
             try{
             	id = ptUserService.save(user);
-
+            	request.getSession().setAttribute(Constants.SESSION_LOGINUSER,user);
                 map.put("result", true);
                 map.put("message", "注册成功");
             }catch(Exception e){
@@ -239,6 +239,8 @@ public class AuthLoginController {
                 map.put("result", false);
                 map.put("message", "注册失败");
             }
+        }else{
+        	map.put("result", false);
         }
         
         return JsonUtils.toJson(map);
@@ -251,7 +253,7 @@ public class AuthLoginController {
      * @param session 会话
      * @return 展示视图
      */
-    @RequestMapping(value = "/register/getCode", method = RequestMethod.POST,produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/register/getCode", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getCode(HttpServletRequest request, HttpSession session) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -313,56 +315,61 @@ public class AuthLoginController {
                 if (RegExpValidatorUtils.isPassWrod(newPassword)) {
                     if (!newPassword.equals(password)) {
                         map.put("key", "newPassword");
-                        map.put("msg", "两次输入密码不一致");
+                        map.put("message", "两次输入密码不一致");
                         return map;
                     }
                 } else {
                     map.put("key", "newPassword");
-                    map.put("msg", "6-18位数字字母组合");
+                    map.put("message", "6-18位数字字母组合");
                     return map;
                 }
             } else {
                 map.put("key", "password");
-                map.put("msg", "6-18位数字字母组合");
+                map.put("message", "6-18位数字字母组合");
                 return map;
             }*/
         } else {
             map.put("key", "password");
-            map.put("msg", "密码为空");
+            map.put("message", "密码为空");
             return map;
         }
 /*        if (StringUtils.isNotBlank(email)) {
             if (RegExpValidatorUtils.isEmail(email)) {
                 if (!myAccountService.checkEmail(email)) {
                     map.put("key", "email");
-                    map.put("msg", "email已存在");
+                    map.put("message", "email已存在");
                     return map;
                 }
             } else {
                 map.put("key", "email");
-                map.put("msg", "email格式不正确");
+                map.put("message", "email格式不正确");
                 return map;
             }
         } else {
             map.put("key", "email");
-            map.put("msg", "email为空");
+            map.put("message", "email为空");
             return map;
         }
 */        if (StringUtils.isNotBlank(phone)) {
-            /*if (RegExpValidatorUtils.isPhone(phone)) {
-                if (!myAccountService.checkPhone(phone)) {
+            if (RegExpValidatorUtils.isPhone(phone)) {
+                /*if (!myAccountService.checkPhone(phone)) {
                     map.put("key", "phone");
-                    map.put("msg", "手机号已存在");
+                    map.put("message", "手机号已存在");
+                    return map;
+                }*/
+            	if (ptUserService.isExistLoginid(phone)) {
+                    map.put("key", "phone");
+                    map.put("message", "手机号码已存在");
                     return map;
                 }
             } else {
                 map.put("key", "phone");
-                map.put("msg", "手机号码应为11位数字");
+                map.put("message", "手机号码应为11位数字");
                 return map;
-            }*/
+            }
         } else {
             map.put("key", "phone");
-            map.put("msg", "手机号为空");
+            map.put("message", "手机号为空");
             return map;
         }
 
@@ -370,12 +377,12 @@ public class AuthLoginController {
             MobileValidateCodeCheckResult result = MobileValidateCodeUtil.checkMobileValidateCode(session, authCode);
             if (!result.isCheckStatus()) {
                 map.put("key", "authCode");
-                map.put("msg", result.getCheckMessage());
+                map.put("message", result.getCheckMessage());
                 return map;
             }
         } else {
             map.put("key", "authCode");
-            map.put("msg", "手机验证码为空");
+            map.put("message", "手机验证码为空");
             return map;
         }
         return map;

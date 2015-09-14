@@ -443,6 +443,7 @@
 	        FROM pt_user 
 	        WHERE 
 		        login_id = #loginId#
+		    or  phone = #loginId#
 	    ]]>
 	</select>
 
