@@ -16,7 +16,6 @@ package com.env.web.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +31,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.env.commons.utils.JsonUtils;
 import com.env.commons.utils.RegExpValidatorUtils;
 import com.env.commons.utils.StringUtils;
+import com.env.constant.Constants;
 import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
 import com.env.dto.PtUser;
@@ -386,6 +387,34 @@ public class PtUserController extends BaseController {
 		return "ptuser/pages/update";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "modifypwd",method=RequestMethod.POST,produces = "application/json; charset=utf-8")
+	public String modifypwd (HttpServletRequest request){
+		String oldpwd = request.getParameter("oldpwd");
+		String newpwd = request.getParameter("newpwd");
+		String confirmpwd = request.getParameter("confirmpwd");
+		
+		PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+		PtUser old = (PtUser) ptUserService.getById(user.getId());
+		Map map = new HashMap();
+		if(!oldpwd.equals(old.getPwd())){
+			map.put("success", false);
+			map.put("msg", "原始密码不正确");
+			return JsonUtils.toJson(map);
+		}
+		if(!newpwd.equals(confirmpwd)){
+			map.put("success", false);
+			map.put("msg", "新密码与确认密码不一致");
+			return JsonUtils.toJson(map);
+		}
+		old.setPwd(confirmpwd);
+		ptUserService.update(old);
+		
+		map.put("success", true);
+		map.put("msg", "修改成功");
+		return JsonUtils.toJson(map);
+	}
+	
 	/**
 	 * 修改PtUser
 	 * 

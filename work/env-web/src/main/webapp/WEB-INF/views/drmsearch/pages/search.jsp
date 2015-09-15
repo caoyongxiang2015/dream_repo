@@ -287,15 +287,11 @@
 			type:'post',
 			data:$('#loginForm').serialize(),
 			success:function(data){
-				//alert(data);
-				var rtn = eval('(' + data + ')');
-				if("1"==rtn.loginSuccess) {
+				if("1"==data.loginSuccess) {
 					alert("登录成功!")
 					window.location.reload();
-					
 				}else{
-					//alert("登录失败!")
-					$("#loginmsg").text("用户名或密码不正确!");
+					$("#loginmsg").text(data.loginMsg);
 					$("#loginmsg").show();
 				}
 			},

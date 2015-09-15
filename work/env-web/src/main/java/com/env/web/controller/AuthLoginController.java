@@ -122,7 +122,7 @@ public class AuthLoginController {
     }  
      
     @ResponseBody
-    @RequestMapping(value="/ajaxlogin", method=RequestMethod.POST)  
+    @RequestMapping(value="/ajaxlogin", method=RequestMethod.POST ,produces = "application/json; charset=utf-8")  
     public String ajaxlogin(HttpServletRequest request){  
     	String username = request.getParameter("username");  
     	String password = request.getParameter("password");  

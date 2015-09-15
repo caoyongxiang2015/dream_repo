@@ -64,8 +64,8 @@ public class SmsSender {
 //        } else {
 //            return false;
 //        }
-//        return true;
-        return send(receiver, content, false);
+        return true;
+//        return send(receiver, content, false);
     }
 
     /**

@@ -29,7 +29,7 @@
 			    <div class="container">
 			        <h2>只为帮您选择一个理想职业</h2>
 					<p>已收录2000+公司的内部员工</p>
-					<p><a class="btn btn-purple btn-lg seek-advice" href="#" role="button">找人咨询</a></p>
+					<p><a class="btn btn-purple btn-lg seek-advice" href="javascript:window.location.href='${ctx}/release/first'" role="button">找人咨询</a></p>
 
 		      </div>
 		    </div>
@@ -117,7 +117,8 @@
 						<a href="javascript:;" class="posa J-gotoregidit">注册<i class="glyphicon glyphicon-share-alt"></i></a>
 					</div>
 					<div class="panel-body">
-						<form id="loginForm" class="form" action="${ctx}/auth/login" method="post">
+						<form id="loginForm" class="form" method="post">
+							<div class="alert loginmsg" style="padding: 1px;margin-bottom: 5px; background-color:#FF0000; color:#FFFFFF" hidden></div>
 							<div class="form-group form-group-lg mt15">
 								<label for="username" hidden>手机号：</label>
 							    <input type="text" class="form-control" id="username" name="username" placeholder="手机号/邮箱/QQ">
@@ -126,7 +127,7 @@
 							    <label for="password" hidden>密码：</label>
 							    <input type="password" class="form-control" id="password" name="password" placeholder="登录密码">
 							</div>
-							<button class="btn btn-form btn-block btn-login" type="submit">登录</button>
+							<button class="btn btn-form btn-block btn-login" type="button">登录</button>
 						</form>
 					</div>
 				</div>
@@ -285,6 +286,42 @@
 				'_all_': {placement:'right'}
 			}
 		})
+		
+		$(".btn-login").on('click',function(){
+			
+			$("div.loginmsg").hide();
+   			var une=$('#username').val();
+   			var pwd=$('#password').val();
+			if(''==une){
+				$("div.loginmsg").text("请填写用户名");
+				$("div.loginmsg").show();
+				return ;
+			}
+			if(''==pwd){
+				$("div.loginmsg").text("请填写密码");
+				$("div.loginmsg").show();
+				return ;
+			}
+
+			// 登录
+			$.ajax({
+				url:'${ctx}/auth/ajaxlogin?username='+une+'&password='+pwd,
+				type:'post',
+				success : function(data) {
+					if(data.loginSuccess == '0'){
+						$("div.loginmsg").text(data.loginMsg);
+						$("div.loginmsg").show();
+					}
+					if(data.loginSuccess == '1'){
+						alert('登录成功，请您简单的填写基本资料，点击确定跳转到个人资料页面，谢谢！');
+						window.location.href="${ctx}/profile";						
+					}
+				},
+				error:function(){
+					alert("登录失败");
+				}  
+			});
+		});
 		
 		//获取手机验证码
 		$("#getCodeSMS").on('click',function(){
