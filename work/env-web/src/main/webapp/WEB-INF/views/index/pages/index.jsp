@@ -314,18 +314,17 @@
    			var authCode=$('#verfityCodeSMS').val();
 			
    			$("div.alert-failure").hide();
-			if(''==phone){
-				$("div.alert-failure").text("亲，请填写您的手机号");
+				$("div.alert-failure").text("请填写手机号");
 				$("div.alert-failure").show();
 				return ;
 			}
 			if(''==pwd){
-				$("div.alert-failure").text("亲，请填写密码");
+				$("div.alert-failure").text("请填写密码");
 				$("div.alert-failure").show();
 				return ;
 			}
 			if(''==authCode){
-				$("div.alert-failure").text("亲，请填写手机号验证码");
+				$("div.alert-failure").text("请填写手机号验证码");
 				$("div.alert-failure").show();
 				return ;
 			}
