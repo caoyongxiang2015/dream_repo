@@ -13,6 +13,8 @@
  */
 package com.env.web.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -117,13 +118,19 @@ public class DrmLetterController extends BaseController {
 		return "redirect:/drmletter";
 	}
 
-	
+	public static void main(String []a){
+
+		Date d = new Date();
+		System.out.println((d.getMinutes()+":"+d.getSeconds()));
+	}
 	// TODO test
 	@ResponseBody
 	@RequestMapping(value="/send")
 	public String send(){
-
-        if (smsSender.sendSms("13390793901", "短信内容123abc")) {
+		Calendar cal = Calendar.getInstance();
+		Date d = new Date();
+		
+        if (smsSender.sendSms("13390793901", "验证码"+(d.getMinutes()+"a"+d.getSeconds()) )) {
         	return "发送成功";
         }
 		return "发送失败fail";

@@ -7,11 +7,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -58,12 +58,14 @@ public class SmsSender {
      * @return 发送成功与否
      */
     public boolean sendSms(String receiver, String content) {
+    	System.out.println(content+"===发送短信，当前时间"+(new Date()));
 //        if (check(content)) {
 //            return true;//send(receiver, content, false);
 //        } else {
 //            return false;
 //        }
-        return true;//send(receiver, content, false);
+//        return true;
+        return send(receiver, content, false);
     }
 
     /**

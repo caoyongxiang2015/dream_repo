@@ -162,6 +162,7 @@
 						</div>
 						<div class="panel-body">
 							<form id="regiditForm" class="form">
+								<div id="regiditmsg" class="alert alert-failure" role="alert" hidden="hidden"></div>
 								<div class="form-group form-group-lg">
 									<label for="inputPhone" hidden>手机号：</label>
 								    <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="手机号">
@@ -175,7 +176,7 @@
 								    <input type="text" class="form-control" id="verfityCodeSMS" name="verfityCodeSMS" placeholder="手机验证码">
 									<button type="button" id="getCodeSMS" class="btn btn-success btn-lg">免费获取验证码</button>
 								</div>
-								<button type="submit" class="btn btn-form mt15 btn-block btn-lg">注册</button>
+								<button class="btn btn-form mt15 btn-block btn-lg registerUser" type="button">注册</button>
 							</form>
 						</div> 
 					</div>
@@ -189,7 +190,7 @@
 								<div id="loginmsg" class="alert alert-failure" role="alert" hidden="hidden"></div>
 								<div class="form-group form-group-lg mt15">
 									<label for="username" hidden>手机号：</label>
-							    	<input type="text" class="form-control" id="username" name="username" placeholder="手机号/邮箱/QQ">
+							    	<input type="text" class="form-control" id="username" name="username" placeholder="手机号">
 								</div>
 								<div class="form-group form-group-lg mt15">
 								    <label for="password" hidden>密码：</label>
@@ -269,6 +270,18 @@
 	});
 	
 	function login(){
+		$("#loginmsg").hide();
+		if(''==$("#username").val()){
+			$("#loginmsg").text("请输入登录名");
+			$("#loginmsg").show();
+			return ;
+		}
+		if(''==$("#password").val()){
+			$("#loginmsg").text("请输入登录密码");
+			$("#loginmsg").show();
+			return ;
+		}
+		
 		$.ajax({
 			url:'${ctx}/auth/ajaxlogin',
 			type:'post',
@@ -281,8 +294,8 @@
 					window.location.reload();
 					
 				}else{
-					alert("登录失败!")
-					$("#loginmsg").text("登录失败!");
+					//alert("登录失败!")
+					$("#loginmsg").text("用户名或密码不正确!");
 					$("#loginmsg").show();
 				}
 			},
@@ -292,6 +305,80 @@
 		});
 	}
 	</script>
+	
+	
+	
+    	<script type="text/javascript">
+		//获取手机验证码
+		$("#getCodeSMS").on('click',function(){
+			$("#regiditmsg").hide();
+			if(''==$("#inputPhone").val()){
+				$("#regiditmsg").text("请填写手机号");
+				$("#regiditmsg").show();
+				return ;
+			}
+			
+			$.ajax({
+				url:'${ctx}/auth/register/getCode?type=1&phone='+$("#inputPhone").val(),
+				type:'post',
+				success : function(data) {
+					alert(data.message);
+				},
+				error:function(){
+					alert("手机验证码获取失败");
+				}  
+			});
+		})
+		
+		// 注册
+		$(".registerUser").on('click',function(){
+			
+   			//var pwd=$.md5($('#pwd').val());
+   			var phone=$('#inputPhone').val();
+   			var pwd=$('#setPassword').val();
+   			var authCode=$('#verfityCodeSMS').val();
+			
+   			$("#regiditmsg").hide();
+			if(''==phone){
+				$("#regiditmsg").text("请填写手机号");
+				$("#regiditmsg").show();
+				return ;
+			}
+			if(''==pwd){
+				$("#regiditmsg").text("请填写密码");
+				$("#regiditmsg").show();
+				return ;
+			}
+			if(''==authCode){
+				$("#regiditmsg").text("请填写手机号验证码");
+				$("#regiditmsg").show();
+				return ;
+			}
+			
+			
+			$.ajax({
+				url:'${ctx}/auth/register/userRegister'+'?phone='+phone+'&pwd='+pwd+'&authCode='+authCode+'&n='+new Date(),
+				type:'post',
+				success : function(data) {
+					if(data.result==false){
+						//alert(data.message);
+						$("#regiditmsg").text(data.message);
+						$("#regiditmsg").show();
+					}
+					if(data.result==true){
+						alert("注册成功，将跳转到个人资料页面，请完善您的基本资料，谢谢！");
+						window.location.href="${ctx}/profile";
+					}
+				},
+				error:function(){
+					alert("注册异常");
+				} 
+			});
+		})
+	</script>
+	
+	
+	
 </body>
 
 </html>

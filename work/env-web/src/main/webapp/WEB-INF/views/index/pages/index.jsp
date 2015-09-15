@@ -4,10 +4,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101044974" charset="utf-8"></script>
 <meta charset="UTF-8">
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><spring:message code="index.title"/></title>
+
 
 
 <body>
@@ -348,7 +350,6 @@
 				} 
 			});
 		})
-		
 	</script>
 	
 </body>

@@ -21,7 +21,7 @@ public class MobileValidateCode implements Serializable, Comparable<MobileValida
     /**
      * 验证码长度
      */
-    public static final int CODE_LENGTH = 6;
+    public static final int CODE_LENGTH = 4;
 
     /**
      * 验证码前缀
