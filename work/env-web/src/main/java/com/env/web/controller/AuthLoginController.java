@@ -364,7 +364,7 @@ public class AuthLoginController {
                 }
             } else {
                 map.put("key", "phone");
-                map.put("message", "手机号码应为11位数字");
+                map.put("message", "手机号码非正常手机号码");
                 return map;
             }
         } else {

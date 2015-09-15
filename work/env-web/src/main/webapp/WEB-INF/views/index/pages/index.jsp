@@ -89,6 +89,8 @@
 					</div>
 					<div class="panel-body">
 						<form class="form" id="regiditForm">
+							<div class="alert alert-failure" style="padding: 1px;margin-bottom: 5px; background-color:#FF0000; color:#FFFFFF" hidden></div>
+							
 							<div class="form-group form-group-lg">
 								<label for="phone" hidden>手机号：</label>
 							    <input type="tel" class="form-control" id="phone" name="phone" placeholder="手机号">
@@ -284,6 +286,13 @@
 		
 		//获取手机验证码
 		$("#getCodeSMS").on('click',function(){
+			$("div.alert-failure").hide();
+			if(''==$("#phone").val()){
+				$("div.alert-failure").text("请填写手机号");
+				$("div.alert-failure").show();
+				return ;
+			}
+			
 			$.ajax({
 				url:'${ctx}/auth/register/getCode?type=1&phone='+$("#phone").val(),
 				type:'post',
@@ -295,20 +304,41 @@
 				}  
 			});
 		})
+		
 		// 注册
 		$(".registerUser").on('click',function(){
+			
    			//var pwd=$.md5($('#pwd').val());
-   			var pwd=$('#pwd').val();
    			var phone=$('#phone').val();
+   			var pwd=$('#pwd').val();
    			var authCode=$('#verfityCodeSMS').val();
-			//alert(pwd+'#'+phone+'#'+authCode);
-   			
+			
+   			$("div.alert-failure").hide();
+			if(''==phone){
+				$("div.alert-failure").text("亲，请填写您的手机号");
+				$("div.alert-failure").show();
+				return ;
+			}
+			if(''==pwd){
+				$("div.alert-failure").text("亲，请填写密码");
+				$("div.alert-failure").show();
+				return ;
+			}
+			if(''==authCode){
+				$("div.alert-failure").text("亲，请填写手机号验证码");
+				$("div.alert-failure").show();
+				return ;
+			}
+			
+			
 			$.ajax({
 				url:'${ctx}/auth/register/userRegister'+'?phone='+phone+'&pwd='+pwd+'&authCode='+authCode+'&n='+new Date(),
 				type:'post',
 				success : function(data) {
 					if(data.result==false){
-						alert(data.message);
+						//alert(data.message);
+						$("div.alert-failure").text(data.message);
+						$("div.alert-failure").show();
 					}
 					if(data.result==true){
 						alert("注册成功，将跳转到个人资料页面，请完善您的基本资料，谢谢！");
