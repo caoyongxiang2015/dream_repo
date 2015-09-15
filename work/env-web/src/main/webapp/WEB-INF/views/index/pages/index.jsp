@@ -124,7 +124,6 @@
 							    <label for="password" hidden>密码：</label>
 							    <input type="password" class="form-control" id="password" name="password" placeholder="登录密码">
 							</div>
-							
 							<button class="btn btn-form btn-block btn-login" type="submit">登录</button>
 						</form>
 					</div>
