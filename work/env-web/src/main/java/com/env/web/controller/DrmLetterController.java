@@ -34,6 +34,7 @@ import com.env.dto.DrmLetter;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmLetterService;
 import com.env.service.intf.IPtUserService;
+import com.env.util.Sender;
 import com.env.util.SmsSender;
 import com.env.vo.DrmLetterVo;
 
@@ -130,10 +131,20 @@ public class DrmLetterController extends BaseController {
 		Calendar cal = Calendar.getInstance();
 		Date d = new Date();
 		
-        if (smsSender.sendSms("13390793901", "验证码"+(d.getMinutes()+"a"+d.getSeconds()) )) {
+        if (smsSender.sendSms("13390793901", "sendSms你好")) {
         	return "发送成功";
         }
 		return "发送失败fail";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/massSend")
+	public String massSend(){
+		Calendar cal = Calendar.getInstance();
+		Date d = new Date();
+		
+		return (new Sender("test6","123456")).massSend("13390793901", "massSend你好","","");
+		
 	}
 	
 	/**

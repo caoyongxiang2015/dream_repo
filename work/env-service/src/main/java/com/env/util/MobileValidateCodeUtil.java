@@ -37,7 +37,7 @@ public class MobileValidateCodeUtil {
     /**
      * 超时时间（2分钟）
      */
-    private static final int TIME_OUT = 1 * 60 * 1000;// 2 * 60 * 1000;
+    private static final int TIME_OUT = 10 * 60 * 1000;// 2 * 60 * 1000;
 
     /**
      * 

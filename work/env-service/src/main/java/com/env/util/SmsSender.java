@@ -31,7 +31,8 @@ public class SmsSender {
      * 发送URL
      */
 //    @Value("#{sms['sms.sendUrl']}")
-    private String sendUrl = "http://www.139000.com/send/gsend.asp";
+    private String sendUrl = "http://203.81.21.34/send/gsend.asp";
+//    private String sendUrl = "http://www.139000.com/send/gsend.asp";
     /**
      * 检查URL
      */
@@ -41,12 +42,14 @@ public class SmsSender {
      * 用户名
      */
 //    @Value("#{sms['sms.userName']}")
-    private String userName = "306635282";
+    private String userName = "test6";// 这个账号只测试是否成功，不发短信
+//    private String userName = "306635282";
     /**
      * 密码
      */
 //    @Value("#{sms['sms.password']}")
-    private String password = "it7519cao";
+    private String password = "123456";
+//    private String password = "it7519cao";
 
     /**
      * 
@@ -64,8 +67,8 @@ public class SmsSender {
 //        } else {
 //            return false;
 //        }
-        return true;
-//        return send(receiver, content, false);
+//        return true;
+        return send(receiver, content, false);
     }
 
     /**
@@ -190,6 +193,8 @@ public class SmsSender {
                 }
             }
             String sendResult = sb.toString();
+            // num=1&success=13390793901&faile=&err=发送成功！&errid=0
+            // num发送短信的条数
             LOGGER.debug("sendResult:" + sendResult);
             if (StringUtils.isNotBlank(sendResult)) {
                 int numberBeginIndex = getIndex(sendResult, "num=");
@@ -200,6 +205,7 @@ public class SmsSender {
                     String num = sendResult.substring(numberBeginIndex, numberEndIndex);
                     if (StringUtils.isNumeric(num) && Integer.valueOf(num) > 0) {
                         sendSuccess = true;
+                        LOGGER.debug("短信发送成功！发送条数"+num);
                     } else if (-1 != messageBeginIndex && -1 != messageEndIndex) {
                         LOGGER.error("短信发送失败，失败原因：" + sendResult.substring(messageBeginIndex, messageEndIndex));
                     }

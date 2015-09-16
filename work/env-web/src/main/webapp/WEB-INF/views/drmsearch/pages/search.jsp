@@ -308,6 +308,7 @@
 		//获取手机验证码
 		$("#getCodeSMS").on('click',function(){
 			$("#regiditmsg").hide();
+			
 			if(''==$("#inputPhone").val()){
 				$("#regiditmsg").text("请填写手机号");
 				$("#regiditmsg").show();
@@ -315,7 +316,7 @@
 			}
 			
 			$.ajax({
-				url:'${ctx}/auth/register/getCode?type=1&phone='+$("#inputPhone").val(),
+				url:'${ctx}/auth/register/getCode?type=1&pwd=1&phone='+$("#inputPhone").val(),
 				type:'post',
 				success : function(data) {
 					alert(data.message);
@@ -335,6 +336,7 @@
    			var authCode=$('#verfityCodeSMS').val();
 			
    			$("#regiditmsg").hide();
+   			
 			if(''==phone){
 				$("#regiditmsg").text("请填写手机号");
 				$("#regiditmsg").show();
