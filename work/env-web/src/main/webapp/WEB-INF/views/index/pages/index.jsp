@@ -272,6 +272,7 @@
 	<script type="text/javascript">
 
 var InterValObj; //timer变量，控制时间
+<<<<<<< HEAD
 var count = 10; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
 
@@ -324,6 +325,56 @@ function SetRemainTime() {
             else {
                 curCount--;
                 $("#getCodeSMS").text("请" + curCount + "秒内输入验证码");
+=======
+var count = 5; //间隔函数，1秒执行
+var curCount;//当前剩余秒数
+
+     
+	//获取手机验证码
+	$("#getCodeSMS").on('click',function(){
+		$("div.alert-failure").hide();
+		if(''==$("#phone").val()){
+			$("div.alert-failure").text("请填写手机号");
+			$("div.alert-failure").show();
+			return ;
+		}
+		if(''==$("#pwd").val()){
+			$("div.alert-failure").text("请填写密码");
+			$("div.alert-failure").show();
+			return ;
+		}
+		
+		curCount = count;
+		//设置button效果，开始计时
+	     $("#getCodeSMS").attr("disabled", "true");
+	     $("#getCodeSMS").text("请在" + curCount + "秒内输入验证码");
+	     InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+		//向后台发送处理数据
+		
+		$.ajax({
+			url:'${ctx}/auth/register/getCode?type=1&pwd=1&phone='+$("#phone").val(),
+			type:'post',
+			success : function(data) {
+				alert(data.message);
+			},
+			error:function(){
+				alert("手机验证码获取失败");
+			}  
+		});
+	})
+	
+
+//timer处理函数
+function SetRemainTime() {
+            if (curCount == 0) {                
+                window.clearInterval(InterValObj);//停止计时器
+                $("#getCodeSMS").removeAttr("disabled");//启用按钮
+                $("#getCodeSMS").text("重新发送验证码");
+            }
+            else {
+                curCount--;
+                $("#getCodeSMS").text("请在" + curCount + "秒内输入验证码");
+>>>>>>> branch 'master' of https://github.com/caoyongxiang2015/dream_repo
             }
         }
 </script>
