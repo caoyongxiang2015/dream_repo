@@ -38,7 +38,7 @@
 							<label class="col-xs-3 control-label" for="companyShotname">公司名称</label>
 							<div class="col-xs-7">
     							<div class="form-group form-group-lg">
-		    						<input type="text" id="companyShotname" name="companyShotname" placeholder="公司名称" value="${req_companyname }" class="form-control">
+		    						<input type="text" id="companyShotname" name="companyShotname" placeholder="公司名称" value="${req_companyname }" class="form-control required">
 		    					</div>
 							</div>
 							<div class="col-xs-2">
@@ -60,7 +60,15 @@
 						<%
 						PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
 						if(null==user){// 未登录%>
-						
+							
+						<div class="row alert-msg" hidden>
+							<label class="col-xs-3 control-label" for="phonecode">&nbsp;</label>
+							<div class="col-xs-6">
+								<div class="alert alert-failure" style="width:200px;height:30px;padding: 5px;margin-bottom: 5px; background-color:#FF0000; color:#FFFFFF">手机号号码阿布正去</div>
+							</div>
+						</div>
+
+
 						<div class="row">
 							<label class="col-xs-3 control-label" for="telephone">手机号码</label>
 							<div class="col-xs-4">
@@ -69,7 +77,7 @@
 								</div>
 							</div>
 							<div class="col-xs-3">
-								<button type="button" class="btn btn-lg btn-primary btn-block">获取手机验证码</button>
+								<button type="button"  class="btn btn-lg btn-primary btn-block getCodeSMS">获取手机验证码</button>
 							</div>
 							<div class="col-xs-2">
 								<p class="help-block">必填</p>
@@ -100,7 +108,7 @@
 						<div class="row">
 							<div class="col-xs-7 col-xs-offset-3">
 								<div class="form-group">
-    								<button type="submit" class="btn btn-lg btn-primary btn-block">发布</button>
+    								<button type="button" class="btn btn-lg btn-primary btn-block deploy">发布</button>
 								</div>
 							</div>
 						</div>
@@ -120,19 +128,96 @@
     
     
     <script type="text/javascript">
-		$("#releaseDemand").validate({
-			rules: {
-				companyShotname: {required: true},
-				price: {required: true},
-				telephone: {required: true, digits:true},
-				phonecode: {required: true}
-			},
-			tooltip_options: {
-				'_all_': {placement:'right'},
-				telephone: {html:true}
-			},
-		})
+		
 	</script>
 	
+	
+	<script type="text/javascript">
+
+var InterValObj; //timer变量，控制时间
+var count = 10; //间隔函数，1秒执行
+var curCount;//当前剩余秒数
+
+     
+	//获取手机验证码
+	$(".getCodeSMS").on('click',function(){
+		$("div.alert-msg").hide();
+		if(''==$("#telephone").val()){
+			$("div.alert-failure").text("请填写手机号");
+			$("div.alert-msg").show();
+			return ;
+		}
+					//向后台发送处理数据
+		$.ajax({
+			url:'${ctx}/auth/register/getCode?type=1&pwd=1&phone='+$("#telephone").val(),
+			type:'post',
+			success : function(data) {
+				//alert(data.message);
+				if(data.result==false){
+					$("div.alert-failure").text(data.message);
+					$("div.alert-msg").show();
+				}else{
+					curCount = count;
+					//设置button效果，开始计时
+				     $(".getCodeSMS").attr("disabled", "true");
+				     $(".getCodeSMS").text("请" + curCount + "秒内输入验证码");
+				     InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+				}
+			},
+			error:function(){
+				alert("手机验证码获取失败");
+			}  
+		});
+	})	
+
+//timer处理函数
+function SetRemainTime() {
+            if (curCount == 0) {                
+                window.clearInterval(InterValObj);//停止计时器
+                $(".getCodeSMS").removeAttr("disabled");//启用按钮
+                $(".getCodeSMS").text("重新发送验证码");
+            }
+            else {
+                curCount--;
+                $(".getCodeSMS").text("请" + curCount + "秒内输入验证码");
+
+            }
+}
+
+
+	var xx = $("#releaseDemand").validate({
+		rules: {
+			companyShotname: {required: true},
+			price: {required: true, digits:true},
+			telephone: {required: true, digits:true},
+			phonecode: {required: true}
+		},
+		tooltip_options: {
+			'_all_': {placement:'right'},
+			telephone: {html:true}
+		},
+	})
+$(".deploy").on("click",function(){
+	alert(xx.valid());
+	$.ajax({
+		url:'${ctx}/release/checkcode?authCode='+$("#phonecode").val(),
+		type:'post',
+		success:function(data){
+			if(data.result==false){
+				$("div.alert-failure").text(data.message);
+				$("div.alert-msg").show();
+			}
+			if(data.result==true){
+				$("#releaseDemand").submit();
+			}
+		},
+		error:function(data){
+			alert("校验验证码失败")
+		}
+	})
+})
+
+</script>
+
 </body>
 </html>

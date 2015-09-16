@@ -15,15 +15,20 @@ package com.env.web.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
@@ -37,6 +42,8 @@ import com.env.service.intf.IDrmReqNoticeService;
 import com.env.service.intf.IDrmReqService;
 import com.env.service.intf.IDrmSearchCompanyService;
 import com.env.service.intf.IPtUserService;
+import com.env.util.MobileValidateCodeUtil;
+import com.env.util.bean.MobileValidateCodeCheckResult;
 import com.env.web.util.MailSender;
 
 
@@ -261,4 +268,34 @@ public class DrmReqReleaseController extends BaseController {
 		return "drmreqrelease/pages/release5";
 	}
     
+    
+    
+
+    /**
+     * 手机验证码校验
+     * @param request
+     * @param session
+     * @return
+     */
+	@RequestMapping(value = "/checkcode", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Map<String, Object> checkRegisterPhoneCode(HttpServletRequest request, HttpSession session) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	String authCode = request.getParameter("authCode");
+    	 
+    	map.put("result", true);
+    	 if (StringUtils.isNotBlank(authCode)) {
+    		 MobileValidateCodeCheckResult result = MobileValidateCodeUtil.checkMobileValidateCode(session, authCode);
+    		 if (!result.isCheckStatus()) {
+    			 map.put("result", false);
+    			 map.put("message", result.getCheckMessage());
+    			 return map;
+    		 }
+    	 } else {
+    		 map.put("result", false);
+    		 map.put("message", "手机验证码为空");
+    		 return map;
+    	 }
+    	 return map;
+    }
 }

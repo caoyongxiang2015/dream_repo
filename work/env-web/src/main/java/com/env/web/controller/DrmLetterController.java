@@ -34,7 +34,7 @@ import com.env.dto.DrmLetter;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmLetterService;
 import com.env.service.intf.IPtUserService;
-import com.env.util.Sender;
+//import com.env.util.Sender;
 import com.env.util.SmsSender;
 import com.env.vo.DrmLetterVo;
 
@@ -143,8 +143,8 @@ public class DrmLetterController extends BaseController {
 		Calendar cal = Calendar.getInstance();
 		Date d = new Date();
 		
-		return (new Sender("test6","123456")).massSend("13390793901", "massSend你好","","");
-		
+//		return (new Sender("test6","123456")).massSend("13390793901", "massSend你好","","");
+		return "massSend";
 	}
 	
 	/**
