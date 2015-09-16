@@ -16,7 +16,6 @@ import com.env.dto.PtUser;
 import com.env.service.intf.IDrmReqNoticeService;
 import com.env.web.annotation.NeedLogin;
 
-@NeedLogin(false)
 @Controller
 @RequestMapping()
 public class IndexController {

@@ -61,7 +61,8 @@ public class AuthLoginController {
     
 	@RequestMapping("/toLogin")
     public String toLogin(){
-		return "index/pages/auth_login";
+		//return "index/pages/auth_login";
+		return "redirect:/";// 跳到首页
 	}
 	
     /** 
@@ -210,10 +211,20 @@ public class AuthLoginController {
 	
 	//===========================================================================
 	
+	/**
+	 * 用户注册
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/register/userRegister", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public String userRegister(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         Map<String, Object> map = checkRegisterAll(request, session);
+        if (map.size() < 1) {
+        	map = checkRegisterPhoneCode(request, session);
+        }
         if (map.size() < 1) {
             String phone = request.getParameter("phone");
             String pwd = request.getParameter("pwd");
@@ -229,6 +240,10 @@ public class AuthLoginController {
             	request.getSession().setAttribute(Constants.SESSION_LOGINUSER,user);
                 map.put("result", true);
                 map.put("message", "注册成功");
+                
+                // 赋予权限
+                // v0.2版本不设置权限，默认全有
+                
             }catch(Exception e){
             	e.printStackTrace();
                 map.put("result", false);
@@ -257,39 +272,43 @@ public class AuthLoginController {
     @ResponseBody
     public String getCode(HttpServletRequest request, HttpSession session) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("result", false);
-        map.put("message", "短信发送失败!");
-        try {
-            String phone = request.getParameter("phone");
-            int type = Integer.parseInt(request.getParameter("type"));
-            if (RegExpValidatorUtils.isPhone(phone)) {
-                // 创建手机验证码（已放入session）
-                String code = MobileValidateCodeUtil.setMobileValidateCode(session);
-                StringBuffer content = new StringBuffer();
-                switch (type) {
-                    case 1:// 注册
-//                        content.append("手机验证码").append(code).append("，有效期120秒");
-                    	
-                        content.append("手机验证码").append(code).append("，有效期120秒");
-                        break;
-                    case 2:// 找回密码
-                        content.append("您正在找回密码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
-                        break;
-                    case 3:// 修改手机号码
-                        content.append("您正在修改手机号码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
-                        break;
-                    default:
-                        break;
-                }
-                // 发送验证码
-                if (smsSender.sendSms(phone, content.toString())) {
-                    map.put("result", true);
-                    map.put("message", "短信已发送!");
-                }
-            }
-        } catch (Exception e) {
-            LOGGER.error("getCode", e.getMessage());
-            e.printStackTrace();
+        map = checkRegisterAll(request, session);// 校验
+        if (map.size() < 1) {
+	        map.put("result", false);
+	        map.put("message", "短信发送失败!");
+	        try {
+	            String phone = request.getParameter("phone");
+	            int type = Integer.parseInt(request.getParameter("type"));
+	            if (RegExpValidatorUtils.isPhone(phone)) {
+	                
+	                // 创建手机验证码（已放入session）
+	                String code = MobileValidateCodeUtil.setMobileValidateCode(session);
+	                StringBuffer content = new StringBuffer();
+	                switch (type) {
+	                    case 1:// 注册
+	                        content.append("您正在注册好职客会员,手机验证码").append(code).append(",有效期120秒");
+	                        break;
+	                    case 2:// 找回密码
+	                        content.append("您正在找回密码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
+	                        break;
+	                    case 3:// 修改手机号码
+	                        content.append("您正在修改手机号码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
+	                        break;
+	                    default:
+	                        break;
+	                }
+	                // 发送验证码
+	                if (smsSender.sendSms(phone, content.toString())) {
+	                    map.put("result", true);
+	                    map.put("message", "短信已发送!");
+	                }
+	            }
+	        } catch (Exception e) {
+	            LOGGER.error("getCode", e.getMessage());
+	            e.printStackTrace();
+	        }
+        }else{
+        	map.put("result", false);
         }
         return JsonUtils.toJson(map);
 //        return new Gson().toJson(map);
@@ -311,7 +330,30 @@ public class AuthLoginController {
         String phone = request.getParameter("phone");
         String authCode = request.getParameter("authCode");
 //        String email = request.getParameter("email");
-
+        
+        if (StringUtils.isNotBlank(phone)) {
+            if (RegExpValidatorUtils.isPhone(phone)) {
+                /*if (!myAccountService.checkPhone(phone)) {
+                    map.put("key", "phone");
+                    map.put("message", "手机号已存在");
+                    return map;
+                }*/
+            	if (ptUserService.isExistLoginid(phone)) {
+                    map.put("key", "phone");
+                    map.put("message", "手机号码已存在");
+                    return map;
+                }
+            } else {
+                map.put("key", "phone");
+                map.put("message", "手机号码非正常手机号码");
+                return map;
+            }
+        } else {
+            map.put("key", "phone");
+            map.put("message", "手机号为空");
+            return map;
+        }
+        
         if (StringUtils.isNotBlank(password)) {
             /*if (RegExpValidatorUtils.isPassWrod(password)) {
                 if (RegExpValidatorUtils.isPassWrod(newPassword)) {
@@ -335,6 +377,7 @@ public class AuthLoginController {
             map.put("message", "密码为空");
             return map;
         }
+        
 /*        if (StringUtils.isNotBlank(email)) {
             if (RegExpValidatorUtils.isEmail(email)) {
                 if (!myAccountService.checkEmail(email)) {
@@ -352,29 +395,8 @@ public class AuthLoginController {
             map.put("message", "email为空");
             return map;
         }
-*/        if (StringUtils.isNotBlank(phone)) {
-            if (RegExpValidatorUtils.isPhone(phone)) {
-                /*if (!myAccountService.checkPhone(phone)) {
-                    map.put("key", "phone");
-                    map.put("message", "手机号已存在");
-                    return map;
-                }*/
-            	if (ptUserService.isExistLoginid(phone)) {
-                    map.put("key", "phone");
-                    map.put("message", "手机号码已存在");
-                    return map;
-                }
-            } else {
-                map.put("key", "phone");
-                map.put("message", "手机号码非正常手机号码");
-                return map;
-            }
-        } else {
-            map.put("key", "phone");
-            map.put("message", "手机号为空");
-            return map;
-        }
-
+*/        
+/*
         if (StringUtils.isNotBlank(authCode)) {
             MobileValidateCodeCheckResult result = MobileValidateCodeUtil.checkMobileValidateCode(session, authCode);
             if (!result.isCheckStatus()) {
@@ -387,7 +409,32 @@ public class AuthLoginController {
             map.put("message", "手机验证码为空");
             return map;
         }
+        */
         return map;
+    }
+    /**
+     * 手机验证码校验
+     * @param request
+     * @param session
+     * @return
+     */
+    private Map<String, Object> checkRegisterPhoneCode(HttpServletRequest request, HttpSession session) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	String authCode = request.getParameter("authCode");
+    	 
+    	 if (StringUtils.isNotBlank(authCode)) {
+    		 MobileValidateCodeCheckResult result = MobileValidateCodeUtil.checkMobileValidateCode(session, authCode);
+    		 if (!result.isCheckStatus()) {
+    			 map.put("key", "authCode");
+    			 map.put("message", result.getCheckMessage());
+    			 return map;
+    		 }
+    	 } else {
+    		 map.put("key", "authCode");
+    		 map.put("message", "手机验证码为空");
+    		 return map;
+    	 }
+    	 return map;
     }
 
 	
