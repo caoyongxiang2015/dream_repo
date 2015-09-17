@@ -33,7 +33,7 @@
 				</div>
 				<div class="panel-body row">
 					<div class="col-xs-9">
-    				<form class="form-horizontal" id="releaseDemand" action="${ctx }/release/release1_save" method="post">
+    				<form class="form-horizontal" id="releaseDemand" action="${ctx }/release/release1_save" method="post" onSubmit="return check();">
 						<div class="row">
 							<label class="col-xs-3 control-label" for="companyShotname">公司名称</label>
 							<div class="col-xs-7">
@@ -108,7 +108,7 @@
 						<div class="row">
 							<div class="col-xs-7 col-xs-offset-3">
 								<div class="form-group">
-    								<button type="button" class="btn btn-lg btn-primary btn-block deploy">发布</button>
+    								<button type="submit" class="btn btn-lg btn-primary btn-block deploy">发布</button>
 								</div>
 							</div>
 						</div>
@@ -128,7 +128,18 @@
     
     
     <script type="text/javascript">
-		
+	    $("#releaseDemand").validate({
+			rules: {
+				companyShotname: {required: true},
+				price: {required: true, digits:true},
+				telephone: {required: true, digits:true},
+				phonecode: {required: true}
+			},
+			tooltip_options: {
+				'_all_': {placement:'right'},
+				telephone: {html:true}
+			},
+		})
 	</script>
 	
 	
@@ -185,36 +196,30 @@ function SetRemainTime() {
 }
 
 
-	var xx = $("#releaseDemand").validate({
-		rules: {
-			companyShotname: {required: true},
-			price: {required: true, digits:true},
-			telephone: {required: true, digits:true},
-			phonecode: {required: true}
-		},
-		tooltip_options: {
-			'_all_': {placement:'right'},
-			telephone: {html:true}
-		},
-	})
+	
+	function check(){
+		var flag = false;
+		$.ajax({
+			url:'${ctx}/release/checkcode?authCode='+$("#phonecode").val(),
+			type:'post',
+			async:false,
+			success:function(data){
+				if(data.result==false){
+					flag = false;
+					$("div.alert-failure").text(data.message);
+					$("div.alert-msg").show();
+				}else {
+					flag = true;
+				}
+			},
+			error:function(data){
+				alert("校验验证码失败")
+			}
+		})
+		return flag;
+	}
+	
 $(".deploy").on("click",function(){
-	alert(xx.valid());
-	$.ajax({
-		url:'${ctx}/release/checkcode?authCode='+$("#phonecode").val(),
-		type:'post',
-		success:function(data){
-			if(data.result==false){
-				$("div.alert-failure").text(data.message);
-				$("div.alert-msg").show();
-			}
-			if(data.result==true){
-				$("#releaseDemand").submit();
-			}
-		},
-		error:function(data){
-			alert("校验验证码失败")
-		}
-	})
 })
 
 </script>
