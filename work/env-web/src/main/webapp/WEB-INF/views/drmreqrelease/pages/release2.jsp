@@ -29,7 +29,11 @@
     			<div class="col-xs-8 col-xs-offset-2">
 	    			<div class="send-respond">
 	    				<p class="text-success"><i class="glyphicon glyphicon-ok"></i>恭喜您，需求发布成功!</p>
-	    				<div class="help-block text-center"><c:if test="${match_success==0 }">非常抱歉，当前未匹配到[${req_company_shotname}]内部的员工！</c:if>
+	    				<div class="help-block text-center">
+	    				<c:if test="${match_success==0 }">
+	    					 但非常抱歉，当前未匹配到[${req_company_shotname}]内部的员工！<br>
+	    					 您可以尝试搜索该公司信息，您也可以给我们留言！
+	    				</c:if>
 	    				<c:if test="${match_success==1 }">您的需求已经发送给[${req_company_shotname}]的[${match_user_count }]位内部员工，请耐心等待！感谢您的支持，谢谢！</c:if></div>
 	    				<div class="next-btn">
 							&nbsp;

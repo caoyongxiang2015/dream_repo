@@ -1,7 +1,9 @@
 package com.env.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,11 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.env.constant.Constants;
+import com.env.dao.api.QueryParams;
+import com.env.dto.DrmPayNotice;
 import com.env.dto.DrmReq;
 import com.env.dto.DrmReqNotice;
 import com.env.dto.PtUser;
+import com.env.service.intf.IDrmPayNoticeService;
 import com.env.service.intf.IDrmReqNoticeService;
-import com.env.web.annotation.NeedLogin;
+import com.env.service.intf.IPtUserService;
 
 @Controller
 @RequestMapping()
@@ -24,6 +29,14 @@ public class IndexController {
 	@Autowired
 	private IDrmReqNoticeService<DrmReqNotice> drmReqNoticeService;
 
+
+	@Autowired
+	private IDrmPayNoticeService<DrmPayNotice> drmPayNoticeService;
+
+
+	@Autowired
+	private IPtUserService<PtUser> ptUserService;
+	
 	
 	public IndexController() {
 	}
@@ -57,8 +70,28 @@ public class IndexController {
 	    	
 	    	request.setAttribute("cur_userid", user.getId());
 	    	request.setAttribute("notices", notices);
-    	}
     	
+	    	// 赏金待托管
+	    	notice.setReceiveUserId(null);
+	    	notice.setSendUserId(user.getId());// 我发出的需求
+	    	List<DrmReqNotice> tuoguanTempNotices = drmReqNoticeService.queryByParams(notice);
+	    	List<DrmReqNotice> tuoguanNotices = new ArrayList<DrmReqNotice> ();
+	    	List<DrmReqNotice> serviceCompleteNotices = new ArrayList<DrmReqNotice> ();
+
+	    	for(DrmReqNotice n : tuoguanTempNotices){
+	    		DrmReq r = n.getReq();
+	    		if(r!=null&&r.getAcceptState()!=null){
+		    		if(r.getAcceptState().intValue()==1){// 已应答=待托管
+		    			tuoguanNotices.add(n);
+		    		}
+		    		if(r.getAcceptState().intValue()==2){// 2赏金已托管3服务已完成
+		    			serviceCompleteNotices.add(n);
+		    		}
+	    		}
+	    	}
+	    	request.setAttribute("tuoguanNotices", tuoguanNotices);
+	    	request.setAttribute("serviceCompleteNotices", serviceCompleteNotices);
+    	}
 		return "index/pages/index";
 	}
 

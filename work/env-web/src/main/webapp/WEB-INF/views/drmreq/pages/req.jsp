@@ -349,7 +349,7 @@
     
 	<!-- 发送私信 [[ -->
 	<div class="modal fade" id="sendPriviteMessage" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage">
-		<input type="text" name="youruserid" >
+		<input type="hidden" name="youruserid" >
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 			    <div class="modal-body">
@@ -447,7 +447,7 @@
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-body">
-					付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与公司员工取得联系！好职客感谢您的支持！
+					请点击确定按钮，通知客服诚意金已经托管完成，平台客服24小时内会审核您的付款情况；会尽快使您与公司员工取得联系！好职客感谢您的支持！
 				</div>
 				<div class="modal-footer text-center">
 			        <button type="button" class="btn btn-primary btn-lg J-depositMoney-confirm" data-dismiss="modal">确定</button>

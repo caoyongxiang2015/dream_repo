@@ -29,10 +29,26 @@
     			<div class="col-xs-8 col-xs-offset-2">
 	    			<div class="send-respond">
 	    				<p class="text-success">服务进行中...</p>
-	    				<div class="help-block">请您带着诚意向TA请教问题，待服务完成后，对TA的服务做出评价。默认7天后赏金自动转入对方账户</div>
-	    				<div class="help-block">可用【私信/电话1332232244/QQ/邮箱】与TA联系</div>
-	    				<div class="next-btn"><button onclick="javascript:window.location.href='${ctx}/release/fifth'" class="btn btn-primary btn-lg btn-block">服务完成</button>
-							<button class="btn btn-link" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button>
+	    				<div class="help-block">请带着诚意向TA请教问题，待服务完成后，对TA的服务做出评价。默认7天后赏金自动转入对方账户</div>
+	    				<div class="help-block">
+		    				(${req.acceptUser.lastname}  先生/女士)TA已开发了联系发送  ${req.openContact} 给您：
+							<c:if test="${fn:contains(req.openContact, '手机号')}">
+		    					<br>手机号${req.acceptUser.phone}
+		    				</c:if>
+							<c:if test="${fn:contains(req.openContact, 'QQ号码')}">
+		    					<br>QQ号码${req.acceptUser.qq}
+		    				</c:if>
+							<c:if test="${fn:contains(req.openContact, '电子邮箱')}">
+		    					<br>电子邮箱${req.acceptUser.email}
+		    				</c:if>
+	    				</div>
+	    				
+	    				<div class="next-btn">
+	    					<%-- <button onclick="javascript:window.location.href='${ctx}/release/fifth'" class="btn btn-primary btn-lg btn-block">服务完成</button> --%>
+	    					<button onclick="serviceComplete('${req.id}');" class="btn btn-primary btn-lg btn-block">服务完成</button>
+	    					<%-- <a onclick="backMoney('${req.id}');">申请退款</a> --%>
+							<!-- <button class="btn btn-link" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button> -->
+							<button class="btn btn-link" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
 	    				</div>
 	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
 	    			</div>
@@ -43,13 +59,10 @@
     
     
     <!-- 发送私信 [[ -->
-	<div class="modal fade" id="sendPriviteMessage" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage">
+    <!-- 
+	<div class="modal fade" id="sendPriviteMessage1" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage1">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<!--<div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">发送私信</h4>
-			    </div>-->
 			    <div class="modal-body">
 				    <div class="container-fluid">
 					    <div class="row message-object">
@@ -79,6 +92,7 @@
 			</div>
 		</div>
 	</div>
+	 -->
 	<!-- 发送私信 ]] -->
 	
 	<!-- 发送完成返回弹窗状态 -->
@@ -95,13 +109,116 @@
 	</div>
 	
 	
-    
+ 
+	<!-- 服务完成 -->
+	<div class="modal fade" id="serviceComplete" tabindex="-1" role="dialog" aria-labelledby="serviceComplete">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-body">
+					您确定咨询完成了吗?
+				</div>
+				<div class="modal-footer text-center">
+			        <button type="button" class="btn btn-primary btn-lg J-service-complete-confirm" data-dismiss="modal">确定</button>
+			        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	   
+	   
+	   
+	   
+	<!-- 发送私信 [[ -->
+	<div class="modal fade" id="sendPriviteMessage" tabindex="-1" role="dialog" aria-labelledby="sendPriviteMessage">
+		<input type="hidden" name="youruserid" >
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			    <div class="modal-body">
+				    <div class="container-fluid">
+					    <div class="row">
+					    	<label for="messageText" class="abel-control col-xs-2">内容：</label>
+					    	<div class="form-group col-xs-10">
+						    	<textarea class="form-control" id="messageText" name="messageText" placeholder="发送私信" rows="8" cols="30"></textarea>
+					    	</div>
+					    </div>
+				    </div>
+		        </div>
+		        <div class="modal-footer text-center">
+			        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" onclick="sendletter();">发送</button>
+			        <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+		</div>
+	<!-- 发送私信 ]] -->
+	   
+	   
+	   
+	   
+    <input type="hidden" name="reqid" >
     
 <script src="${static_common}/hzk/js/jquery.min.js"></script>
 
 <script type="text/javascript" src="${static_common}/hzk/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
     
-	
+<script type="text/javascript">
+
+function serviceComplete(reqid){
+	$("input[name='reqid']").val(reqid);
+	$("#serviceComplete").modal("show");
+}
+
+
+// 服务完成
+$(".J-service-complete-confirm").on("click",function(){
+	$.ajax({
+		url:'${ctx}/drmreq/serviceComplete?acceptstate=3&reqid='+$("input[name='reqid']").val(),
+		type:'get',
+		success : function(data) {
+			window.location.location="${ctx}/release/fifth";
+		}
+	});
+})
+
+
+
+
+
+		function showletterdialog(youruserid){
+			$("input[name='youruserid']").val(youruserid);
+			$('#sendPriviteMessage').modal('show');
+		}
+		
+		
+// 发私信
+function sendletter(){
+	var messageText = $("#messageText").val();
+	if(''==messageText){
+		alert("请填写内容！");
+		return ;
+	}
+	var sendurl = '${ctx}/drmletter/sendletter?receiveUserid='+$("input[name='youruserid']").val() +'&sendMessage'+$("input[name='youruserid']").val()+ '='+messageText;
+	$.ajax({
+		url: sendurl ,
+		type:'get',
+		success:function(data){
+			$("#returnStatus .modal-body").html("发送成功");
+			$("#returnStatus").modal("show");
+		},
+		fail:function(data){
+			$("#returnStatus .modal-body").html("发送失败");
+			$("#returnStatus").modal("show");
+		},
+		error:function(data){
+			$("#returnStatus .modal-body").html("发送失败，请刷新重试！");
+			$("#returnStatus").modal("show");
+		}
+	});
+}
+
+
+
+</script>
 </body>
 </html>

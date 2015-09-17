@@ -16,6 +16,7 @@ package com.env.dto;
 //import javax.validation.constraints.*;
 //import org.hibernate.validator.constraints.*;
 import com.env.core.domain.DomainObject;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -102,6 +103,7 @@ public class DrmReq extends DomainObject{
 	 */
 	//
 	private java.lang.Integer acceptUserId;
+	private PtUser acceptUser ;
 	
 	/**
 	 * 方便的时间段，例如工作日，节假日，均可。直接是存储汉字
@@ -835,6 +837,15 @@ public class DrmReq extends DomainObject{
 
 	public void setAgainReleaseTime(java.util.Date againReleaseTime) {
 		this.againReleaseTime = againReleaseTime;
+	}
+
+	
+	public PtUser getAcceptUser() {
+		return acceptUser;
+	}
+
+	public void setAcceptUser(PtUser acceptUser) {
+		this.acceptUser = acceptUser;
 	}
 
 	/**

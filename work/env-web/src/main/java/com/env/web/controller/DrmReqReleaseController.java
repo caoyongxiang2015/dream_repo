@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,6 +44,7 @@ import com.env.service.intf.IDrmReqService;
 import com.env.service.intf.IDrmSearchCompanyService;
 import com.env.service.intf.IPtUserService;
 import com.env.util.MobileValidateCodeUtil;
+import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
 import com.env.web.util.MailSender;
 
@@ -79,6 +81,9 @@ public class DrmReqReleaseController extends BaseController {
 
 	@Autowired
 	private IDrmSearchCompanyService<DrmSearchCompany> drmSearchCompanyService;
+
+	@Autowired
+	private SmsSender smsSender;
 	
 	/**
 	 * 涉及到的表：pt_user,drm_req,drm_company,drm_search_company,drm_req_notice
@@ -96,9 +101,6 @@ public class DrmReqReleaseController extends BaseController {
 				
 				// 未登录
 				telephone = request.getParameter("telephone");
-				String phonecode = request.getParameter("phonecode");
-				
-				// TODO  1/验证手机验证码
 				
 				// 2/判断当前手机号有没有注册账号：
 				// a如果没有注册账号，新增user
@@ -106,7 +108,7 @@ public class DrmReqReleaseController extends BaseController {
 				user = new PtUser();
 				user.setLoginId(telephone);// 根据登录号或者手机号查询是否存在注册账号
 				user.setPhone(telephone);
-				// TODO 新增用户成功，发送短信告知账号及登录密码
+				
 				
 				// 判断该手机号是否已经注册过了
 				List<PtUser> users = ptUserService.queryAllByParams(user);
@@ -114,12 +116,20 @@ public class DrmReqReleaseController extends BaseController {
 					// 未注册过了
 					user.setPwd(telephone);// 登录密码默认手机号
 					curUserId = ptUserService.save(user);
+					// TODO smsSender 新增用户成功，发送短信告知账号及登录密码
+	                if (smsSender.sendSms(telephone, "您已成功注册好职客会员，用户名及密码均为"+telephone )) {
+	                	LOGGER.debug("短信发送成功，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
+	                }else{
+	                	LOGGER.error("短信发送失败，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
+	                }
+	                
 				}else{
 					// 已经注册过了;  但未登录
 					user = users.get(0);
 					curUserId = user.getId();
 					telephone = user.getPhone();
 				}
+				request.getSession().setAttribute(Constants.SESSION_LOGINUSER,user);// 把当前用户放入session
 
 			}else{
 				// 已经登录
@@ -253,13 +263,20 @@ public class DrmReqReleaseController extends BaseController {
 		return "drmreqrelease/pages/release2";
 	}
 
-    @RequestMapping(value="third")
-	public String third(){
+    @RequestMapping(value="third/{reqid}")
+	public String third(@PathVariable("reqid") Integer reqid, HttpServletRequest request){
+    	DrmReq req = drmReqService.getById(reqid);
+    	request.setAttribute("req", req);
 		return "drmreqrelease/pages/release3";
 	}
 
-    @RequestMapping(value="forth")
-	public String forth(){
+    @RequestMapping(value="forth/{reqid}")
+	public String forth(@PathVariable("reqid") Integer reqid, HttpServletRequest request){
+    	DrmReq req = drmReqService.getById(reqid);
+
+		PtUser acceptUser = ptUserService.getById(req.getAcceptUserId());
+		req.setAcceptUser(acceptUser);
+    	request.setAttribute("req", req);
 		return "drmreqrelease/pages/release4";
 	}
 

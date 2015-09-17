@@ -71,11 +71,27 @@
 					</div>
 					<div class="panel-body">
 					<!-- 收到的请求消息 -->
-						<c:if test="${notices==null || notices.size()<1 }">
+						<c:if test="${  notices==null || notices.size()<1  }">
+						<c:if test="${ tuoguanNotices==null || tuoguanNotices.size()<1  }">
+						<c:if test="${ serviceCompleteNotices==null || serviceCompleteNotices.size()<1  }">
 							您暂无新消息
 						</c:if>
+						</c:if>
+						</c:if>
 						<c:if test="${notices!=null && notices.size()>0 }">
-						<a href="${ctx}/drmreq">您收到新的需求帮助信息，请查看</a>
+							<a href="${ctx}/drmreq">您收到新的需求帮助信息，请查看</a>
+						</c:if>
+						<c:if test="${tuoguanNotices!=null && tuoguanNotices.size()>0 }">
+							您发布的需求有人已应答，请托管赏金<br>
+							<c:forEach items="${tuoguanNotices}" var="tn">
+								<a href="${ctx}/release/third/${tn.reqId}">需求编号${tn.reqId}，<f:formatDate value="${tn.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></a><br>
+							</c:forEach>
+						</c:if>
+						<c:if test="${serviceCompleteNotices!=null && serviceCompleteNotices.size()>0 }">
+							已在进行中的咨询服务<br>
+							<c:forEach items="${serviceCompleteNotices}" var="sn">
+								<a href="${ctx}/release/forth/${sn.reqId}">需求编号${sn.reqId}，<f:formatDate value="${sn.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></a><br>
+							</c:forEach>
 						</c:if>
 					</div> 
 				</div>
@@ -122,7 +138,7 @@
 							<div class="alert loginmsg" style="padding: 1px;margin-bottom: 5px; background-color:#FF0000; color:#FFFFFF" hidden></div>
 							<div class="form-group form-group-lg mt15">
 								<label for="username" hidden>手机号：</label>
-							    <input type="text" class="form-control" id="username" name="username" placeholder="手机号/邮箱/QQ">
+							    <input type="text" class="form-control" id="username" name="username" placeholder="手机号登录">
 							</div>
 							<div class="form-group form-group-lg mt15">
 							    <label for="password" hidden>密码：</label>

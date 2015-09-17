@@ -6,9 +6,6 @@
 
 	<typeAlias alias="drmPayNoticeEntity" type="com.env.dto.DrmPayNotice" />
 	<resultMap id="drmPayNotice" class="com.env.dto.DrmPayNotice">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="reqId" column="req_id" />
 		<result property="userId" column="user_id" />
@@ -226,5 +223,6 @@
 	    <![CDATA[
 		    FROM DRM_PAY_NOTICE
 	    ]]>
+		<include refid="drmPayNotice.queryPage" />
 	</select>
 </sqlMap>

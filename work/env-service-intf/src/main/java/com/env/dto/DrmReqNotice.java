@@ -61,7 +61,6 @@ public class DrmReqNotice extends DomainObject{
 	 */
 	//
 	private java.lang.Integer sendUserId;
-	
 	/**
 	 * 匹配到需求的用户id
 	 */
@@ -315,6 +314,7 @@ public class DrmReqNotice extends DomainObject{
 	public void setReq(DrmReq req) {
 		this.req = req;
 	}
+
 
 	/**
      * 实体的toString方法
