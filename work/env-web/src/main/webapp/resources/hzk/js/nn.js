@@ -77,7 +77,7 @@ nn.markScore = function() {
 			for (var i = 0;i<=_i;i++) {
 				$(".mark-stars i").eq(i).addClass("hover")
 			}
-			$(".J-score").text(_i + 1 +'分').show();
+			//$(".J-score").text(_i + 1 +'分').show();
 		}
 	}).on("mouseleave","i",function(){
 		$(".mark-stars i").removeClass("hover")
@@ -88,6 +88,7 @@ nn.markScore = function() {
 			$(".mark-stars i").eq(i).addClass("selected")
 		}
 		$(".J-score").text(_i + 1 +'分').show();
+		$(".I-score").val(_i + 1);
 	})
 }
 

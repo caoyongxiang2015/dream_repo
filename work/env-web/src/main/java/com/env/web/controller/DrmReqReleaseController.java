@@ -280,10 +280,34 @@ public class DrmReqReleaseController extends BaseController {
 		return "drmreqrelease/pages/release4";
 	}
 
-    @RequestMapping(value="fifth")
-	public String fifth(){
+    @RequestMapping(value="fifth/{reqid}")
+	public String fifth(@PathVariable("reqid") Integer reqid, HttpServletRequest request){
+    	DrmReq req = drmReqService.getById(reqid);
+
+		PtUser acceptUser = ptUserService.getById(req.getAcceptUserId());
+		req.setAcceptUser(acceptUser);
+    	request.setAttribute("req", req);
 		return "drmreqrelease/pages/release5";
 	}
+    
+    /**
+     * 第五步，评价 
+     * @param req
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="eval")
+    public String fifthEval(DrmReq req , HttpServletRequest request){
+    	DrmReq old = drmReqService.getById(req.getId());
+    	old.setEvalScore(req.getEvalScore());
+    	old.setEvalContent((req.getEvalContent()==null||"".equals(req.getEvalContent())?"无":req.getEvalContent()));
+    	old.setAcceptState(6);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
+    	drmReqService.update(old);
+    	
+    	request.setAttribute("req", old);
+    	
+    	return "redirect:/release/fifth/"+req.getId();
+    }
     
     
     

@@ -42,6 +42,7 @@ public class DrmComplain extends DomainObject{
 	 */
 	//
 	private java.lang.Integer id;
+	private java.lang.Integer reqId;
 	
 	/**
 	 * 投诉原因
@@ -332,6 +333,15 @@ public class DrmComplain extends DomainObject{
 				ex.printStackTrace();
 			}
 		}
+	}
+
+	
+	public java.lang.Integer getReqId() {
+		return reqId;
+	}
+
+	public void setReqId(java.lang.Integer reqId) {
+		this.reqId = reqId;
 	}
 
 	/**

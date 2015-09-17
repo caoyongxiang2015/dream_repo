@@ -98,8 +98,8 @@ public class DrmLetterController extends BaseController {
 			
 			DrmLetter entity = new DrmLetter();
 			String receiveUserid = request.getParameter("receiveUserid");
-			String content = request.getParameter("sendMessage"+receiveUserid);
-//			String content = new String(request.getParameter("sendMessage"+receiveUserid).getBytes("iso8859-1"),"gbk");
+//			String content = request.getParameter("sendMessage"+receiveUserid);
+			String content = new String(request.getParameter("sendMessage"+receiveUserid).getBytes("iso8859-1"),"gbk");
 			
 			entity.setContent(content);
 			entity.setSendUserid(user.getId());

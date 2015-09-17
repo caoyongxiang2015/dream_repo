@@ -28,9 +28,13 @@
     	<section class="release-demand">
     		<div class="row">
     			<div class="col-xs-8 col-xs-offset-2">
+    			
+    				<c:if test="${req.acceptState==3 }">
 	    			<div class="send-respond">
 	    				<p class="text-success"><i class="glyphicon glyphicon-ok"></i>服务完成，请评价热心的小伙伴吧，鼓励鼓励TA！</p>
 	    				<div class="help-block text-center">评价完成后，赏金将转入对方的账户</div>
+	    				<form id="" name="" action="${ctx }/release/eval" method="post" onSubmit="return check();">
+	    				<input type="hidden" value="${req.id }" name="id">
 	    				<div class="give-mark row">
 		    				<div class="col-xs-2 text-right">请评分：</div>
 		    				<div class="col-xs-8">
@@ -42,17 +46,35 @@
 			    					<i class="glyphicon glyphicon-star"></i>
 			    					<span class="J-score" hidden></span>
 			    					<span hidden>分</span>
+			    					<input type="hidden" class="I-score "  name="evalScore">
 			    				</div>
 			    				<div class="form-group">
-		    						<textarea class="form-control" name="judgment" rows="5" cols="10"></textarea>
+		    						<textarea class="form-control" name="evalContent" rows="5" cols="8" placeholder="简单说两句吧"></textarea>
 			    				</div>
 		    				</div>
 	    				</div>
-	    				<div class="next-btn"><button class="btn btn-primary btn-lg btn-block">完成评价并结束</button>
+	    				<div class="next-btn">
+	    					<button type="submit" class="btn btn-primary btn-lg btn-block">完成评价并结束</button>
 							<button class="btn btn-link" data-toggle="modal" data-target="#complainHim">投诉TA</button>
 	    				</div>
+	    				</form>
 	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
 	    			</div>
+    				
+    				</c:if>
+    				
+    				
+    				<c:if test="${req.acceptState==6 }">
+	    				<div class="send-respond">
+		    				<div class="help-block text-center">评价已完成，平台会在24小时内将诚意金赏金转给对方，祝您工作顺利！</div>
+		    				<br>
+		    				您给TA的评分是${req.evalScore }分，您给TA的评价:${req.evalContent }
+		    				<br>
+		    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
+						</div>	    			
+    				</c:if>
+    				
+    				
     			</div>
     		</div>
     	</section>
@@ -70,23 +92,25 @@
 	      <div class="modal-body">
 	        <form>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">投诉原因:</label>
-	            <select name="recipient-name" id="recipient-name" class="form-control">
-		            <option value="0" selected>投诉云因11111</option>
-		            <option value="">投诉原因1</option>
-		            <option value="">投诉原因2</option>
-		            <option value="">投诉原因3</option>
+	            <label for="complainReason" class="control-label">投诉原因:</label>
+	            <label class="reason-msg" style="color: red" hidden></label>
+	            <select name="complainReason" id="complainReason" class="form-control">
+		            <option value="" selected>请选择投诉原因</option>
+		            <option value="投诉原因1">投诉原因1</option>
+		            <option value="投诉原因2">投诉原因2</option>
+		            <option value="投诉原因3">投诉原因3</option>
 	            </select>
 	          </div>
 	          <div class="form-group">
-	            <label for="message-text" class="control-label">补充说明:</label>
-	            <textarea class="form-control" id="message-text" placeholder="补充说明"></textarea>
+	            <label for="remark" class="control-label">补充说明:</label>
+	            <label class="remark-msg" style="color: red" hidden></label>
+	            <textarea class="form-control" id="remark" name="remark" placeholder="补充说明"></textarea>
 	          </div>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
-	        <button type="button" class="btn btn-primary btn-lg J-submit-complain" data-dismiss="modal" onclick="nn.returnStatus('提交成功！')">提交</button>
+	        <button type="button" class="btn btn-primary btn-lg J-submit-complain" data-dismiss="modal">提交</button>
 	      </div>
 	    </div>
 	  </div>
@@ -120,6 +144,45 @@
 <script type="text/javascript" src="${static_common}/hzk/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
     
+	<script type="text/javascript">
+	function check(){
+		if(''==$('.I-score').val()){
+			alert("朋友，麻烦您给TA评个分呗");
+			return false;
+		}
+		return true;
+	}
 	
+	
+	$(".J-submit-complain").on('click',function(){
+		
+		var reason = $("#complainReason").val();
+		var remark = $("#remark").val();
+		$(".reason-msg").hide();
+		$(".remark-msg").hide();
+		if(''==reason){
+			$(".reason-msg").text("请选择投诉原因");
+			$(".reason-msg").show();
+			return false;
+		}		
+		if(''==remark){
+			$(".remark-msg").text("请填写补充说明");
+			$(".remark-msg").show();
+			return false;
+		}		
+		var curl = '${ctx}/complain/comp?reqId=${req.id}&reason='+reason+'&remark='+remark+'&receiveId=${req.acceptUserId}';
+		alert(curl);
+		$.ajax({
+			url:curl,
+			type:'post',
+			success:function(data){
+				alert("平台已经收到您的投诉信息，会及时反馈！非常感谢您的支持！");
+			},
+			error:function(data){
+				alert("服务器正忙，请稍后重试！");
+			}
+		})
+	})
+	</script>
 </body>
 </html>

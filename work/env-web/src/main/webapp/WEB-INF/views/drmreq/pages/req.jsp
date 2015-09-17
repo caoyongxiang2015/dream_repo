@@ -305,14 +305,31 @@
 	                    </c:if>
 	                <!-- 2赏金已托管，服务进行中-->
 	                    <c:if test="${req.acceptState==2}">
-	                    	<div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您与${req.companyShotname }公司内部员工发送的请求已经达成一致，请您积极主动的联系TA吧；${req.acceptDuration }，${req.openContact }
+	                    	<div class="send-message">
+	                    		<a href="${ctx}/release/forth/${req.id}">
+	                    		<f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 
+	                    		您与${req.companyShotname }公司内部员工发送的请求已经达成一致，请您积极主动的联系TA吧；
+	                    		</a>
+	                    		<br>TA方便的时间:${req.acceptDuration }
+	                    		<c:if test="${fn:contains(req.openContact, '手机号')}">
+			    					<br>手机号${req.acceptUser.phone}
+			    				</c:if>
+								<c:if test="${fn:contains(req.openContact, 'QQ号码')}">
+			    					&nbsp;&nbsp;QQ号码${req.acceptUser.qq}
+			    				</c:if>
+								<c:if test="${fn:contains(req.openContact, '电子邮箱')}">
+			    					&nbsp;&nbsp;电子邮箱${req.acceptUser.email}
+			    				</c:if>
+			    				<br>
                                 <button class="btn btn-lg btn-primary" onclick="serviceComplete('${req.id}');">服务完成</button><a onclick="backMoney('${req.id}');">申请退款</a>
                             </div>
 	                    </c:if>
                         
 	                <!-- 3服务已完成，评价并结束 -->
 	                    <c:if test="${req.acceptState==3}">
-	                    	<div class="send-message">您好，双方咨询已经完成！通知客服将诚意金转给对方，祝您好运！<!-- pay_notice -->
+	                    	<div class="send-message">
+	                    		<a href="${ctx}/release/fifth/${req.id}">您好，双方咨询已经完成！通知客服将诚意金转给对方，祝您好运！</a>
+	                    	<!-- pay_notice -->
 	                    		<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好职客感谢您的支持！')">请将诚意金转给对方</button> --%>
 	                    		<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="payMoney('${req.id}');">请将诚意金转给对方</button>
 	                    	</div>

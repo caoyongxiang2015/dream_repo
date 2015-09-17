@@ -31,7 +31,8 @@
 	    				<p class="text-success">服务进行中...</p>
 	    				<div class="help-block">请带着诚意向TA请教问题，待服务完成后，对TA的服务做出评价。默认7天后赏金自动转入对方账户</div>
 	    				<div class="help-block">
-		    				(${req.acceptUser.lastname}  先生/女士)TA已开发了联系发送  ${req.openContact} 给您：
+		    				(${req.acceptUser.lastname}  先生/女士)TA已给您留了联系方式  ${req.openContact} ：
+	    					<br>方便的时间段:${req.acceptDuration}
 							<c:if test="${fn:contains(req.openContact, '手机号')}">
 		    					<br>手机号${req.acceptUser.phone}
 		    				</c:if>
@@ -44,11 +45,12 @@
 	    				</div>
 	    				
 	    				<div class="next-btn">
-	    					<%-- <button onclick="javascript:window.location.href='${ctx}/release/fifth'" class="btn btn-primary btn-lg btn-block">服务完成</button> --%>
 	    					<button onclick="serviceComplete('${req.id}');" class="btn btn-primary btn-lg btn-block">服务完成</button>
+							<button class="btn btn-link" data-toggle="modal" onclick="showletterdialog('${req.sendUserId}');">给TA发私信</button>
+
+	    					<%-- <button onclick="javascript:window.location.href='${ctx}/release/fifth'" class="btn btn-primary btn-lg btn-block">服务完成</button> --%>
 	    					<%-- <a onclick="backMoney('${req.id}');">申请退款</a> --%>
 							<!-- <button class="btn btn-link" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button> -->
-							<button class="btn btn-link" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
 	    				</div>
 	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
 	    			</div>

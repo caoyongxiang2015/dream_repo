@@ -32,6 +32,7 @@ import com.env.dto.PtUser;
 import com.env.service.intf.IDrmPayNoticeService;
 import com.env.service.intf.IDrmReqNoticeService;
 import com.env.service.intf.IDrmReqService;
+import com.env.service.intf.IPtUserService;
 import com.env.vo.DrmReqVo;
 
 
@@ -50,6 +51,10 @@ public class DrmReqController extends BaseController {
 	/**
 	 * 自动注入需求业务层实现
 	 */
+
+	@Autowired
+	private IPtUserService<PtUser> ptUserService;
+	
 	@Autowired
 	private IDrmReqService drmReqService;
 
@@ -100,7 +105,17 @@ public class DrmReqController extends BaseController {
     	// ================ 我发出的需求 ====================
     	DrmReq req = new DrmReq();
     	req.setSendUserId(user.getId());
-    	List<DrmReq>  reqs = drmReqService.queryByParams(req);
+    	List<DrmReq>  tempreqs = drmReqService.queryByParams(req);
+    	List<DrmReq>  reqs = new ArrayList<DrmReq>();
+    	
+    	for(DrmReq r : tempreqs){
+    		PtUser u = ptUserService.getById(r.getAcceptUserId());// 获取应答者的信息
+    		if(r.getAcceptState().intValue()==2){// 2赏金已托管3服务已完成
+    			r.setAcceptUser(u);
+    		}
+    		reqs.add(r);
+    	}
+    	
     	request.setAttribute("reqs", reqs);
     	
     	
