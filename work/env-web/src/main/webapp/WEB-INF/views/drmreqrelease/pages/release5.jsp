@@ -20,7 +20,7 @@
 		    	-->
 	    		<li>1. 需求发布</li>
 	    		<li>2. 等待应答</li>
-	    		<li>3. 赏金托管</li>
+	    		<li>3. 诚意金托管</li>
 	    		<li>4. 服务</li>
 	    		<li class="current-step">5. 评价并结束</li>
 	    	</ol>

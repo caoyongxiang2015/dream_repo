@@ -9,6 +9,15 @@
 </head>
 <body>
 
+
+<SCRIPT>
+setTimeout("wait_hide()",4000);
+function wait_hide() {
+	$(".waiting").hide();
+	$(".result").show();
+}
+</Script>
+
     <div class="container" style="margin-top: 15px;">
 	    <div class="demand-progress">
 	    	<ol class="step-progress clearfix">
@@ -19,13 +28,25 @@
 		    	-->
 	    		<li>1. 需求发布</li>
 	    		<li class="current-step">2. 等待应答</li>
-	    		<li>3. 赏金托管</li>
+	    		<li>3. 诚意金托管</li>
 	    		<li>4. 服务</li>
 	    		<li>5. 评价并结束</li>
 	    	</ol>
 	    </div>
     	<section class="release-demand">
-    		<div class="row">
+    	
+
+			<div id="waiting" class="row waiting" style="text-align: center;background-color: #DBDBDB;">
+				<img style="margin-top:150px; " src="${static_common }/hzk/images/wait.gif">
+				<br>
+				<br>
+				<p style="font-size: 20px;color: green;">好职客正在通过大数据分析  为您搜索${req_company_shotname}内部员工...请稍后...</p>
+				<br><br><br><br>&nbsp;
+				<br><br><br><br>&nbsp;
+			</div>
+
+
+    		<div class="row result" hidden>
     			<div class="col-xs-8 col-xs-offset-2">
 	    			<div class="send-respond">
 	    				<p class="text-success"><i class="glyphicon glyphicon-ok"></i>恭喜您，需求发布成功!</p>

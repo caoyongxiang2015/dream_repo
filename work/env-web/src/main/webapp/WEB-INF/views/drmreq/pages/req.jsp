@@ -171,7 +171,7 @@
 	                <!-- 1已应答,赏金待托管 -->
 	                    <c:if test="${nt.req.acceptState==1}">
 	                  			<div class="send-message"><f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
-	                          <div class="accept-message">您已经接受请求，请等待对方将赏金托管到本平台</div>
+	                          <div class="accept-message">您已经接受请求，请等待对方将诚意金托管到本平台</div>
 	                          <div class="button-bar">
 	                              <button class="btn btn-lg btn-default" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
 	                          </div>
@@ -294,13 +294,13 @@
 	                    <c:if test="${req.acceptState==1}">
                             <div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，TA已接受应答，愿意帮助您</div>
                             <div class="accept-message">您是否愿意接受帮助？
-                                <button class="btn btn-lg btn-warning J-accept-help">接受帮助</button>
+                                <button class="btn btn-lg btn-warning J-accept-help" >接受帮助</button>
                                 <a class="J-giveup-help" onclick="giveup('${req.id}');">放弃帮助</a>
                             </div>
-                            <div class="accept-message" style="display: none;">TA已经开放了联系方式${req.openContact }，待您赏金托管后可见。</div>
+                            <div class="accept-message" style="display: none;">TA已经开放了联系方式${req.openContact }，待您诚意金托管后可见。</div>
                             <div class="accept-message" style="display: none;">我们的支付宝账号是:xxxxx
-								<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好职客感谢您的支持！')">赏金托管完成，通知客服审核</button> --%>
-								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="depositMoney('${req.id}')">赏金托管完成，通知客服审核</button>
+								<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好职客感谢您的支持！')">诚意金托管完成，通知客服审核</button> --%>
+								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="depositMoney('${req.id}')">诚意金托管完成，通知客服审核</button>
                             </div>
 	                    </c:if>
 	                <!-- 2赏金已托管，服务进行中-->
@@ -532,10 +532,13 @@
 	</script>
 
 	<script type="text/javascript">
+		
 		$(".J-accept-help").on("click",function(){
 			$(this).parent().nextAll(".accept-message").show();
-			$(".J-accept-help").hide();
-			$(".J-giveup-help").hide();
+			$(this).hide();
+			$(this).next("a").hide();
+			//$(".J-accept-help").hide();
+			//$(".J-giveup-help").hide();
 		})
 		
 		function giveup(reqid){

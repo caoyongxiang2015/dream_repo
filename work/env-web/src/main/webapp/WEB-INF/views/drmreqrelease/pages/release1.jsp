@@ -21,7 +21,7 @@
 		    	-->
 	    		<li class="current-step">1. 需求发布</li>
 	    		<li>2. 等待应答</li>
-	    		<li>3. 赏金托管</li>
+	    		<li>3. 诚意金托管</li>
 	    		<li>4. 服务</li>
 	    		<li>5. 评价并结束</li>
 	    	</ol>
@@ -108,7 +108,7 @@
 						<div class="row">
 							<div class="col-xs-7 col-xs-offset-3">
 								<div class="form-group">
-    								<button type="submit" class="btn btn-lg btn-primary btn-block deploy">发布</button>
+    								<button type="submit" class="btn btn-lg btn-primary btn-block deploy">查找内部员工</button>
 								</div>
 							</div>
 						</div>
