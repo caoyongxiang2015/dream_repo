@@ -22,6 +22,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,7 +134,7 @@ public class DrmReqReleaseController extends BaseController {
 	                ruService.save(ru);
 	                
 					// TODO smsSender 新增用户成功，发送短信告知账号及登录密码
-	                if (smsSender.sendSms(telephone, "您已成功注册好职客会员，用户名及密码均为"+telephone )) {
+	                if (smsSender.sendSms(telephone, "您已成功注册好职客会员，用户名及密码默认为"+telephone+"，请及时修改密码" )) {
 	                	LOGGER.debug("短信发送成功，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
 	                }else{
 	                	LOGGER.error("短信发送失败，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
@@ -143,7 +146,12 @@ public class DrmReqReleaseController extends BaseController {
 					curUserId = user.getId();
 					telephone = user.getPhone();
 				}
-				request.getSession().setAttribute(Constants.SESSION_LOGINUSER,user);// 把当前用户放入session
+				// 把当前用户放入session
+				request.getSession().setAttribute(Constants.SESSION_LOGINUSER,user);
+				// 读取权限
+				UsernamePasswordToken token = new UsernamePasswordToken(telephone, telephone);  
+		    	Subject currentUser = SecurityUtils.getSubject();  
+	    		currentUser.login(token);  
 
 			}else{
 				// 已经登录

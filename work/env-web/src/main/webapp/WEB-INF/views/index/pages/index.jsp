@@ -123,6 +123,7 @@
 								<button type="button" id="getCodeSMS" class="btn btn-success btn-lg">免费获取验证码</button>
 								<!-- <input id="getCodeSMS" type="button" class="btn btn-success " style="color: #000;background-color: green" value="免费获取验证码" onclick="sendMessage()" /> -->
 							</div>
+							<a href="${ctx }/" target="_blank">我已阅读并接受好职客服务条款</a>
 							<button class="btn btn-form mt15 btn-block btn-lg registerUser" type="button">注册</button>
 						</form>
 					</div> 

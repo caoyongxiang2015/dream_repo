@@ -250,6 +250,10 @@ public class AuthLoginController {
                 ru.setRoleId(2);
                 ru.setUserId(id);
                 ruService.save(ru);
+                // 读取权限
+				UsernamePasswordToken token = new UsernamePasswordToken(phone, pwd);  
+		    	Subject currentUser = SecurityUtils.getSubject();  
+	    		currentUser.login(token);  
                 
             }catch(Exception e){
             	e.printStackTrace();
