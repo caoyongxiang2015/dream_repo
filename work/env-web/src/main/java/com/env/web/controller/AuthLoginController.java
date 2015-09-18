@@ -3,7 +3,6 @@ package com.env.web.controller;
 	
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,12 +31,13 @@ import com.env.commons.utils.JsonUtils;
 import com.env.commons.utils.RegExpValidatorUtils;
 import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
+import com.env.dto.PtRoleUser;
 import com.env.dto.PtUser;
+import com.env.service.intf.IPtRoleUserService;
 import com.env.service.intf.IPtUserService;
 import com.env.util.MobileValidateCodeUtil;
 import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
-import com.google.gson.Gson;
 	  
 /**
  * 登陆认证的控制器
@@ -58,6 +58,9 @@ public class AuthLoginController {
     
     @Autowired
     IPtUserService<PtUser> ptUserService;
+
+    @Autowired
+    IPtRoleUserService<PtRoleUser> ruService;
     
 	@RequestMapping("/toLogin")
     public String toLogin(){
@@ -170,7 +173,7 @@ public class AuthLoginController {
     		token.clear();  
     		loginSuccess = "0";
     	}  
-    	Map rtn = new HashMap();
+    	Map<String,Object> rtn = new HashMap<String,Object> ();
     	rtn.put("loginSuccess", loginSuccess);
     	String message_login = (String)request.getAttribute("message_login") ;
     	rtn.put("loginMsg", message_login);
@@ -243,6 +246,10 @@ public class AuthLoginController {
                 
                 // 赋予权限
                 // v0.2版本不设置权限，默认全有
+                PtRoleUser ru = new PtRoleUser();
+                ru.setRoleId(2);
+                ru.setUserId(id);
+                ruService.save(ru);
                 
             }catch(Exception e){
             	e.printStackTrace();

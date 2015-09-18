@@ -32,7 +32,7 @@
     				<c:if test="${req.acceptState==3 }">
 	    			<div class="send-respond">
 	    				<p class="text-success"><i class="glyphicon glyphicon-ok"></i>服务完成，请评价热心的小伙伴吧，鼓励鼓励TA！</p>
-	    				<div class="help-block text-center">评价完成后，赏金将转入对方的账户</div>
+	    				
 	    				<form id="" name="" action="${ctx }/release/eval" method="post" onSubmit="return check();">
 	    				<input type="hidden" value="${req.id }" name="id">
 	    				<div class="give-mark row">
@@ -53,11 +53,15 @@
 			    				</div>
 		    				</div>
 	    				</div>
-	    				<div class="next-btn">
+	    				<div class="help-block text-center">评价完成后，诚意金将转给对方</div>
+	    				<div class="next-btn" style="margin-top: 0px;">
 	    					<button type="submit" class="btn btn-primary btn-lg btn-block">完成评价并结束</button>
-							<button class="btn btn-link" data-toggle="modal" data-target="#complainHim">投诉TA</button>
 	    				</div>
 	    				</form>
+	    				
+	    				<div class="next-btn">
+							<button class="btn btn-link" data-toggle="modal" data-target="#complainHim">投诉TA</button>
+	    				</div>
 	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
 	    			</div>
     				

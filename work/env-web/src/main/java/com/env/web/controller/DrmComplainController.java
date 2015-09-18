@@ -63,10 +63,10 @@ public class DrmComplainController extends BaseController {
 		DrmComplain entity = new DrmComplain();
 		
 		try{
-			entity.setReqId(Integer.getInteger(reqId));
+			entity.setReqId( new Integer(reqId));
 			entity.setComplainReason(complainReason);
 			entity.setRemark(remark);
-			entity.setReceiveUserId(Integer.getInteger(receiveId));
+			entity.setReceiveUserId( new Integer(receiveId));
 		}catch(Exception e){
 			e.printStackTrace();
 			return "0";
@@ -74,25 +74,5 @@ public class DrmComplainController extends BaseController {
 		
 		drmComplainService.save(entity);
 		return "1";
-	}
-	/**
-	 * 新增投诉
-	 * 
-	 * @param drmComplainVo 投诉页面表单对象
-	 * @param result 表单验证数据
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "save")
-	public String save (DrmComplainVo drmComplainVo ){
-		Integer id = -1;
-		try{
-			id = drmComplainService.save(drmComplainVo.getEntity());
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "redirect:/drmcomplain/detail/"+id;
 	}
 }

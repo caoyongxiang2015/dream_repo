@@ -137,7 +137,6 @@
 				$("#modifypwdmsg").show();
 				return;
 			}
-			
 			//修改
 			$.ajax({
 				url:'${ctx}/ptuser/modifypwd?oldpwd='+oldp+'&newpwd='+newp+'&confirmpwd='+conp,

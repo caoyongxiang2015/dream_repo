@@ -53,9 +53,9 @@
 	        	#receiveUserId#, 
 	        	#moneyCount#, 
 	        	#version#, 
-	        	#disabled#, 
+	        	0, 
 	        	#createUserid#, 
-	        	#createTime#, 
+	        	now(), 
 	        	#updateUserid#, 
 	        	#updateTime#
 	        )

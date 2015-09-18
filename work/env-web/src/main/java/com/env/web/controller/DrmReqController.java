@@ -56,7 +56,7 @@ public class DrmReqController extends BaseController {
 	private IPtUserService<PtUser> ptUserService;
 	
 	@Autowired
-	private IDrmReqService drmReqService;
+	private IDrmReqService<DrmReq> drmReqService;
 
 	@Autowired
 	private IDrmReqNoticeService<DrmReqNotice> drmReqNoticeService;

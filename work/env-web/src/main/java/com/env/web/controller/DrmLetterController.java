@@ -15,9 +15,7 @@ package com.env.web.controller;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,15 +26,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.env.constant.Constants;
-import com.env.dao.api.Page;
-import com.env.dao.api.QueryParams;
 import com.env.dto.DrmLetter;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmLetterService;
 import com.env.service.intf.IPtUserService;
 //import com.env.util.Sender;
 import com.env.util.SmsSender;
-import com.env.vo.DrmLetterVo;
 
 
 /**
@@ -57,7 +52,7 @@ public class DrmLetterController extends BaseController {
 	 * 自动注入DrmLetter业务层实现
 	 */
 	@Autowired
-	private IDrmLetterService drmLetterService;
+	private IDrmLetterService<DrmLetter> drmLetterService;
 
 	@Autowired
 	private IPtUserService<PtUser> ptUserService;
@@ -76,6 +71,12 @@ public class DrmLetterController extends BaseController {
 		return "drmletter/pages/letter_list";
 	}
 	
+	/**
+	 * 加载短信内容
+	 * @param yourUserId
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/letterSection/{yourUserid}")
 	public String letterSection(@PathVariable("yourUserid")  Integer yourUserId, HttpServletRequest request){
 		
@@ -98,8 +99,8 @@ public class DrmLetterController extends BaseController {
 			
 			DrmLetter entity = new DrmLetter();
 			String receiveUserid = request.getParameter("receiveUserid");
-//			String content = request.getParameter("sendMessage"+receiveUserid);
-			String content = new String(request.getParameter("sendMessage"+receiveUserid).getBytes("iso8859-1"),"gbk");
+			String content = request.getParameter("sendMessage"+receiveUserid);
+//			String content = new String(request.getParameter("sendMessage"+receiveUserid).getBytes("iso8859-1"),"gbk");
 			
 			entity.setContent(content);
 			entity.setSendUserid(user.getId());
@@ -119,11 +120,7 @@ public class DrmLetterController extends BaseController {
 		return "redirect:/drmletter";
 	}
 
-	public static void main(String []a){
-
-		Date d = new Date();
-		System.out.println((d.getMinutes()+":"+d.getSeconds()));
-	}
+	
 	// TODO test
 	@ResponseBody
 	@RequestMapping(value="/send")
@@ -136,72 +133,7 @@ public class DrmLetterController extends BaseController {
         }
 		return "发送失败fail";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/massSend")
-	public String massSend(){
-		Calendar cal = Calendar.getInstance();
-		Date d = new Date();
-		
-//		return (new Sender("test6","123456")).massSend("13390793901", "massSend你好","","");
-		return "massSend";
-	}
-	
-	/**
-	 * 去列表页面
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "list")
-	public String list(Integer number , HttpServletRequest request){
 
-        // 拿到所有的入参放到map里
-        Map<String, Object> searchParams = new HashMap<String, Object>();//Servlets.getParametersStartingWith(request, null);
-        
-        Page page = new Page();
-        
-        if (null != number) {
-            page.setCurrentPage(number);
-            String pageSize = request.getParameter("pageSize");
-            if(null != pageSize && !"".equals(pageSize)){
-                page.setPageSize(Integer.parseInt(pageSize));
-            }
-        }
-        
-        QueryParams<DrmLetter> queryParams=new QueryParams<DrmLetter>();
-        queryParams.setPaging(page);
-        queryParams.setSearchParams(searchParams);
-        
-		List<DrmLetter> drmLetterList = drmLetterService.queryByPage(queryParams);
-		
-		request.setAttribute("page", page);
-		request.setAttribute("searchParams", searchParams);
-        request.setAttribute("drmLetterList", drmLetterList);
-
-		return "drmletter/pages/list";
-	}
-	
-
-	/**
-	 * 新增DrmLetter
-	 * 
-	 * @param drmLetterVo DrmLetter页面表单对象
-	 * @param result 表单验证数据
-	 * @param page 分页配置
-	 * @param request 请求对象
-	 * @return 结果视图
-	 */
-	@RequestMapping(value = "save")
-	public String save (DrmLetterVo drmLetterVo ){
-		Integer id = -1;
-		try{
-			id = drmLetterService.save(drmLetterVo.getEntity());
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
-		return "redirect:/drmletter/detail/"+id;
-	}
 
 	
 }

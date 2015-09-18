@@ -37,11 +37,13 @@ import com.env.dto.DrmCompany;
 import com.env.dto.DrmReq;
 import com.env.dto.DrmReqNotice;
 import com.env.dto.DrmSearchCompany;
+import com.env.dto.PtRoleUser;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmCompanyService;
 import com.env.service.intf.IDrmReqNoticeService;
 import com.env.service.intf.IDrmReqService;
 import com.env.service.intf.IDrmSearchCompanyService;
+import com.env.service.intf.IPtRoleUserService;
 import com.env.service.intf.IPtUserService;
 import com.env.util.MobileValidateCodeUtil;
 import com.env.util.SmsSender;
@@ -84,8 +86,13 @@ public class DrmReqReleaseController extends BaseController {
 
 	@Autowired
 	private SmsSender smsSender;
-	
+
+    @Autowired
+    IPtRoleUserService<PtRoleUser> ruService;
+    
 	/**
+	 * 发布需求
+	 * 涉及用户默认注册
 	 * 涉及到的表：pt_user,drm_req,drm_company,drm_search_company,drm_req_notice
 	 * @param req
 	 * @param request
@@ -116,6 +123,13 @@ public class DrmReqReleaseController extends BaseController {
 					// 未注册过了
 					user.setPwd(telephone);// 登录密码默认手机号
 					curUserId = ptUserService.save(user);
+	                // 赋予权限
+	                // v0.2版本不设置权限，默认全有
+	                PtRoleUser ru = new PtRoleUser();
+	                ru.setRoleId(2);
+	                ru.setUserId(curUserId);
+	                ruService.save(ru);
+	                
 					// TODO smsSender 新增用户成功，发送短信告知账号及登录密码
 	                if (smsSender.sendSms(telephone, "您已成功注册好职客会员，用户名及密码均为"+telephone )) {
 	                	LOGGER.debug("短信发送成功，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
@@ -235,8 +249,6 @@ public class DrmReqReleaseController extends BaseController {
 
     @RequestMapping(value="first")
 	public String first(HttpServletRequest request) {
-//    	request.setAttribute("req_companyname", request.getSession().getAttribute("req_companyname"));
-//    	request.getSession().removeAttribute("req_companyname");
     	String name="";
     	try {
     		if(null!=request.getParameter("name")){
