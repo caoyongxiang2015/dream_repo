@@ -123,8 +123,8 @@
 								<button type="button" id="getCodeSMS" class="btn btn-success btn-lg">免费获取验证码</button>
 								<!-- <input id="getCodeSMS" type="button" class="btn btn-success " style="color: #000;background-color: green" value="免费获取验证码" onclick="sendMessage()" /> -->
 							</div>
-							<a href="${ctx }/" target="_blank">我已阅读并接受好职客服务条款</a>
-							<button class="btn btn-form mt15 btn-block btn-lg registerUser" type="button">注册</button>
+							<a href="${ctx }/terms" target="_blank" style="padding-left:30px;"><span style="color: gray;">我已阅读并接受好职客服务条款</span></a>
+							<button style="margin-top:5px;" class="btn btn-form mt15 btn-block btn-lg registerUser" type="button">注册</button>
 						</form>
 					</div> 
 				</div>
@@ -222,7 +222,7 @@
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
 	    			<h4 class="question">我想了解的公司没有找到内部员工怎么办？</h4>
-	    			<p class="answer">好职客平台会定期收集公司内部员工，也会根据会员需要寻找内部员工，但无法保证每个公司都能收集到内部员工；如果当前没有在本平台找到内部员工，可以通过网站底部反馈</p>
+	    			<p class="answer">好职客平台会定期收集公司内部员工，也会根据会员需要寻找内部员工，但无法保证每个公司都能及时收集到内部员工；如果当前没有在本平台找到内部员工，可以通过网站底部反馈</p>
 	    		</div>
 	    	</div>
 	    </div>
@@ -240,7 +240,7 @@
 		    <div class="example-item">
 		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：南京擎天科技</div>
-		    		<div class="col-xs-2">昵称：天使的城</div>
+		    		<div class="col-xs-2">用户：夏先生</div>
 		    		<div class="col-xs-3">联系方式：186****5268</div>
 		    		<div class="col-xs-3">2015-11-07 20:37:11</div>
 		    	</div>
@@ -251,8 +251,17 @@
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
+		    		<div class="col-xs-4">咨询的公司：苏宁易购</div>
+		    		<div class="col-xs-2">用户：孟女士</div>
+		    		<div class="col-xs-3">联系方式：150****6293</div>
+		    		<div class="col-xs-3">2015-11-05 12:55:09</div>
+		    	</div>
+		    	<div class="judgement">之前听说苏宁的加班文化，不知道是真是假，就在好职客上找到一位苏宁易购的朋友，咨询了一下，基本了解了里面的情况，总比道听途说的好，咨询费也没白花</div>
+		    </div>
+		    <div class="example-item">
+		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
+		    		<div class="col-xs-2">用户：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
 		    	</div>
@@ -261,7 +270,7 @@
 		    <div class="example-item">
 		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
+		    		<div class="col-xs-2">用户：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
 		    	</div>
@@ -270,16 +279,7 @@
 		    <div class="example-item">
 		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
-		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
-		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
-		    </div>
-		    <div class="example-item">
-		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
+		    		<div class="col-xs-2">用户：XXXXX</div>
 		    		<div class="col-xs-3">联系方式：188********</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
 		    	</div>
@@ -299,7 +299,7 @@
 	<script type="text/javascript">
 
 var InterValObj; //timer变量，控制时间
-var count = 10; //间隔函数，1秒执行
+var count = 120; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
 
      

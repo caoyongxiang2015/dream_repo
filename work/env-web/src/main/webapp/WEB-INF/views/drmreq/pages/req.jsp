@@ -126,7 +126,9 @@
                             <input type="hidden" name="entity.id" value="${nt.req.id }"> 
                             <input type="hidden" name="entity.acceptState" value="1"> <!-- 1:已应答，赏金待托管 -->
                             
-                            <div class="send-message"><f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
+                            <div class="send-message"><f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元
+                            <br>${nt.req.content }
+                            </div>
                             <div class="accept-message">接受请求后，对方将诚意金托管到本平台后，开放联系方式给TA
 	                            <div class="select-time">
 	                                <div class="form-inline">
@@ -287,7 +289,9 @@
                             
 	                <!-- 0 等待应答 -->
 	                    <c:if test="${req.acceptState==0}">
-	                    	<div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，已经成功发出，请耐心等待，谢谢！</div>
+	                    	<div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，已经成功发出，请耐心等待，谢谢！
+	                    	<br>${req.content}
+	                    	</div>
 	                    </c:if>
 	                    
 	                <!-- 1已应答,赏金待托管 -->

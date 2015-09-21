@@ -137,10 +137,11 @@
 											<div class="col-xs-6">
 												<div class="form-group form-group-lg">
 													<select id="jobDuration" name="jobDuration" class="form-control">
-														<option value="请选择" <c:if test="${curcompany.jobDuration eq null || curcompany.jobDuration eq '' }">selected="selected"</c:if>>请选择</option>
-														<option value="1年" <c:if test="${curcompany.jobDuration eq '1年'}">selected="selected"</c:if>>1年</option>
-														<option value="2年" <c:if test="${curcompany.jobDuration eq '2年'}">selected="selected"</c:if>>2年</option>
-														<option value="3年" <c:if test="${curcompany.jobDuration eq '3年'}">selected="selected"</c:if>>3年</option>
+														<option value="请选择在该公司工作时长" <c:if test="${curcompany.jobDuration eq null || curcompany.jobDuration eq '' }">selected="selected"</c:if>>请选择在该公司工作时长</option>
+														<option value="1年以内" <c:if test="${curcompany.jobDuration eq '1年以内'}">selected="selected"</c:if>>1年以内</option>
+														<option value="1-3年" <c:if test="${curcompany.jobDuration eq '1-3年'}">selected="selected"</c:if>>1-3年</option>
+														<option value="3-5年" <c:if test="${curcompany.jobDuration eq '3-5年'}">selected="selected"</c:if>>3-5年</option>
+														<option value="5年以上" <c:if test="${curcompany.jobDuration eq '5年以上'}">selected="selected"</c:if>>5年以上</option>
 													</select>
 												</div>
 											</div>
@@ -148,13 +149,13 @@
 										</div>
 										<div class="row">
 											<div class="col-xs-6">
-												<div class="form-group form-group-lg"><input type="text" id="price" name="price" value="${curcompany.price }" placeholder="需要支付的金额" class="form-control"></div>
+												<div class="form-group form-group-lg"><input type="text" id="price" name="price" value="${curcompany.price }" placeholder="需要对方支付的金额" class="form-control"></div>
 											</div>
 											<div class="col-xs-1">
 												<p class="help-block"></p>
 											</div>
 											<div class="col-xs-4">
-												<p class="help-block">说明什么说明什么说明什么说明书</p>
+												<p class="help-block">他人咨询我公司信息时，期望支付给我的诚意金的金额</p>
 											</div>
 										</div>
 										<div class="sperate-line"></div>
@@ -222,10 +223,11 @@
 											<div class="col-xs-6">
 												<div class="form-group form-group-lg">
 													<select id="entity2.jobDuration" name="entity2.jobDuration" class="form-control">
-														<option value="请选择" <c:if test="${precompany.jobDuration eq null || precompany.jobDuration eq '' }">selected="selected"</c:if>>请选择</option>
-														<option value="1年" <c:if test="${precompany.jobDuration eq '1年'}">selected="selected"</c:if>>1年</option>
-														<option value="2年" <c:if test="${precompany.jobDuration eq '2年'}">selected="selected"</c:if>>2年</option>
-														<option value="3年" <c:if test="${precompany.jobDuration eq '3年'}">selected="selected"</c:if>>3年</option>
+														<option value="请选择在该公司工作时长" <c:if test="${precompany.jobDuration eq null || precompany.jobDuration eq '' }">selected="selected"</c:if>>请选择在该公司工作时长</option>
+														<option value="1年以内" <c:if test="${precompany.jobDuration eq '1年以内'}">selected="selected"</c:if>>1年以内</option>
+														<option value="1-3年" <c:if test="${precompany.jobDuration eq '1-3年'}">selected="selected"</c:if>>1-3年</option>
+														<option value="3-5年" <c:if test="${precompany.jobDuration eq '3-5年'}">selected="selected"</c:if>>3-5年</option>
+														<option value="5年以上" <c:if test="${precompany.jobDuration eq '5年以上'}">selected="selected"</c:if>>5年以上</option>
 													</select>
 												</div>
 											</div>
@@ -233,13 +235,13 @@
 										</div>
 										<div class="row">
 											<div class="col-xs-6">
-												<div class="form-group form-group-lg"><input type="text" id="entity2.price" name="entity2.price" value="${precompany.price }" placeholder="需要支付的金额" class="form-control"></div>
+												<div class="form-group form-group-lg"><input type="text" id="entity2.price" name="entity2.price" value="${precompany.price }" placeholder="需要对方支付的金额" class="form-control"></div>
 											</div>
 											<div class="col-xs-1">
-												<p class="help-block">必填</p>
+												<p class="help-block"></p>
 											</div>
 											<div class="col-xs-4">
-												<p class="help-block">说明什么说明什么说明什么说明书</p>
+												<p class="help-block">他人咨询我公司信息时，期望支付给我的诚意金的金额</p>
 											</div>
 										</div>
 										<div class="sperate-line"></div>

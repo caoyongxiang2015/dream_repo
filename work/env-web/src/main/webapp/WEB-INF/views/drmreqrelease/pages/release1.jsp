@@ -101,7 +101,7 @@
 							<label class="col-xs-3 control-label" for="content">备注</label>
 							<div class="col-xs-7">
     							<div class="form-group form-group-lg">
-		    						<textarea id="content" name="content" class="form-control" rows="3" placeholder="捎上一句话"></textarea>		    					
+		    						<textarea id="content" name="content" class="form-control" rows="3" placeholder="捎上一句话，比如您想咨询的问题；您的期望；您的诚意等等"></textarea>		    					
 		    					</div>
 							</div>
 						</div>
@@ -146,7 +146,7 @@
 	<script type="text/javascript">
 
 var InterValObj; //timer变量，控制时间
-var count = 10; //间隔函数，1秒执行
+var count = 120; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
 
      

@@ -42,6 +42,7 @@ public class DrmOtherController extends BaseController {
 	public String terms(){
 		return "other/pages/terms";
 	}
+	
 
 
 }
