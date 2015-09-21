@@ -1,8 +1,6 @@
 
 新用户发布需求后，等于是注册了会员，需要重新登录获取权限 -done
 
->>>>>>> branch 'master' of https://github.com/caoyongxiang2015/dream_repo
-
 
 注册协议
 测试
