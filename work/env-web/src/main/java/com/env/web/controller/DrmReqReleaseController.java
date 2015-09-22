@@ -258,13 +258,14 @@ public class DrmReqReleaseController extends BaseController {
     @RequestMapping(value="first")
 	public String first(HttpServletRequest request) {
     	String name="";
-    	try {
-    		if(null!=request.getParameter("name")){
-    			name = new String(request.getParameter("name").getBytes("iso-8859-1"),"UTF-8");
-    		}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+//    	try {
+//    		if(null!=request.getParameter("name")){
+//    			name = new String(request.getParameter("name").getBytes("iso-8859-1"),"UTF-8");
+//    		}
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
+    	name=request.getParameter("name");
     	request.setAttribute("req_companyname" , name);
 		return "drmreqrelease/pages/release1";
 	}
