@@ -196,6 +196,8 @@ public class DrmReqReleaseController extends BaseController {
 						notice.setReceiveUserId(c.getUserId());
 						drmReqNoticeService.save(notice);
 						sc.setSearched(1);//匹配到
+						// TODO 短信通知
+						
 					}
 				}
 			}
