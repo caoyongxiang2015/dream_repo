@@ -335,12 +335,14 @@ public class DrmReqController extends BaseController {
 	 */
 	@RequestMapping(value = "againRelease")
 	public String againRelease (HttpServletRequest request){
+		String name = "";
 		try{
 			Integer reqid = Integer.valueOf(request.getParameter("reqid"));
 			DrmReq old = (DrmReq)drmReqService.getById(reqid);
 			
 			Calendar cal = Calendar.getInstance();
 			
+			name = old.getCompanyShotname();
 			old.setAcceptState(7);//应答状态0未应答1已应答2赏金已托管3服务已完成4申请退款5放弃需求6确认将赏金转给对方7重新发起需求
 			old.setAgainReleaseTime(cal.getTime());//重新发起需求时间
 			
@@ -350,7 +352,7 @@ public class DrmReqController extends BaseController {
 			ex.printStackTrace();
 			return "-1";
 		}
-		return "redirect:/release/first";
+		return "redirect:/release/first?name="+name;
 	}
 	
 	
