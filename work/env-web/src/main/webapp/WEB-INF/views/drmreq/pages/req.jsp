@@ -122,7 +122,7 @@
                 <!-- 0未应答，等待应答 -->
                     <c:if test="${nt.req.acceptState==0}">
                             
-                            <form name="ddyd" action="${ctx}/drmreq/receive" method="post">
+                            <form id="receive_form" action="${ctx}/drmreq/receive" method="post">
                             <input type="hidden" name="entity.id" value="${nt.req.id }"> 
                             <input type="hidden" name="entity.acceptState" value="1"> <!-- 1:已应答，赏金待托管 -->
                             
@@ -163,8 +163,8 @@
 	                            </div>
                             </div>
                             <div class="button-bar">
-                                <button class="btn btn-lg btn-primary" type="submit">接受请求</button>
-                                <button class="btn btn-lg btn-default" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
+                                <button class="btn btn-lg btn-primary " type="submit">接受请求</button>
+                                <button class="btn btn-lg btn-default" onclick="showletterdialog('${nt.req.sendUserId}');"  type="button">给TA发私信</button>
                             </div>
                         	</form>
                         	
@@ -175,7 +175,7 @@
 	                  			<div class="send-message"><f:formatDate value="${nt.req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>  用户${nt.req.sendUserNickname } 向您发送请求帮助信息，TA想简单了解下${nt.req.companyShotname }公司的信息，诚意金${nt.req.price }元</div>
 	                          <div class="accept-message">您已经接受请求，请等待对方将诚意金托管到本平台</div>
 	                          <div class="button-bar">
-	                              <button class="btn btn-lg btn-default" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
+	                              <button class="btn btn-lg btn-default" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
 	                          </div>
 	                    </c:if>
 	                        	
@@ -184,7 +184,7 @@
 	                   		<div class="send-message">您好，用户${nt.req.sendUserNickname } 已经将诚意金${nt.req.price }元托管到本平台，待您双方沟通完毕后，本平台将诚意金转入您的账户。</div>
 	                        <div class="contact-message">您选择与求职者沟通的时间是：${nt.req.acceptDuration } ；TA的联系电话是：${nt.req.sendUserPhone }</div>
 	                        <div class="button-bar">
-	                              <button class="btn btn-lg btn-default" data-toggle="modal" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
+	                              <button class="btn btn-lg btn-default" onclick="showletterdialog('${nt.req.sendUserId}');">给TA发私信</button>
 	                          </div>
 	                    </c:if>
 	                    
