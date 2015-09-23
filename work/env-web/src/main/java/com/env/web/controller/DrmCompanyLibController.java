@@ -60,13 +60,13 @@ public class DrmCompanyLibController extends BaseController {
 	public String index(HttpServletRequest request){
     	
     	String name = request.getParameter("searchCompany");
-    	List<DrmCompanyLib> libs = drmCompanyLibService.queryByParams(name);
+    	List<DrmCompanyLib> libs = (null==name||"".equals(name.trim()))?null:drmCompanyLibService.queryByParams(name);
     	
     	DrmCompany company = new DrmCompany();
 		company.setCompanyName(name);
 		company.setCompanyShotname(name);
 		// 通过公司名称匹配到的记录数
-		List<DrmCompany> companys = drmCompanyService.queryAllByParams(company);
+		List<DrmCompany> companys = (null==name||"".equals(name.trim()))?null:drmCompanyService.queryAllByParams(company);
     	
 		
     	request.setAttribute("usercount", (companys==null)?0:companys.size());
@@ -76,11 +76,13 @@ public class DrmCompanyLibController extends BaseController {
     	PtUser user = (PtUser) request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
     	request.setAttribute("logined", (user==null)?0:1);// logined:未登录，1已登录
     	
-    	//  记录搜索过的公司
-    	DrmSearchRecord entity = new DrmSearchRecord();
-    	entity.setCompanyName(name);
-    	entity.setSearchCount(1);
-    	drmSearchRecordService.save(entity);
+    	if(null!=name&&!"".equals(name.trim())){
+	    	//  记录搜索过的公司
+	    	DrmSearchRecord entity = new DrmSearchRecord();
+	    	entity.setCompanyName(name);
+	    	entity.setSearchCount(1);
+	    	drmSearchRecordService.save(entity);
+    	}
     	
 		return "drmsearch/pages/search";
 	}

@@ -788,9 +788,10 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 	/** 电话 格式 021-12345678 */
 	private static Pattern patternPhone = Pattern
 			.compile("[0]{1}[0-9]{2,3}-[0-9]{7,8}");
+	
 	/** 手机 */
 	private static Pattern patternMobilePhone = Pattern
-			.compile("^((13[0-9])|(14[0-9])|(15[0-9,\\D])|(18[0-9]))\\d{8}$");
+			.compile("^((13[0-9])|(14[0-9])|(15[0-9,\\D])|(17[0-9,\\D])|(18[0-9]))\\d{8}$");
 
 	/**
 	 * 显示金额

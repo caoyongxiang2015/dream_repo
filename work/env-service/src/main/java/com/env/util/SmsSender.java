@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
+ * 短信供应商：商讯中国
  * 短信发送器<br>
  *
  * @author chengjianfang

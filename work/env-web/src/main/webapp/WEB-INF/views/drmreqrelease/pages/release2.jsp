@@ -55,7 +55,7 @@ function wait_hide() {
 	    					 但非常抱歉，当前未匹配到[${req_company_shotname}]内部的员工！<br>
 	    					 您可以尝试搜索该公司信息，您也可以给我们留言！
 	    				</c:if>
-	    				<c:if test="${match_success==1 }">您的需求已经发送给[${req_company_shotname}]的[${match_user_count }]位内部员工，请耐心等待！感谢您的支持，谢谢！</c:if></div>
+	    				<c:if test="${match_success==1 }">您的需求已经发送给[${req_company_shotname}]的[${match_user_count }]位内部员工，已通知他们，请耐心等待！感谢您的支持，谢谢！</c:if></div>
 	    				<div class="next-btn">
 							&nbsp;
 	    				</div>

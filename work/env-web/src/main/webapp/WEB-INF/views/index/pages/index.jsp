@@ -100,7 +100,7 @@
 	  		}else{
   			%>
 		  	<div class="user-form posa">
-				<div class="regidit-form panel panel-default">
+				<div class="regidit-form panel panel-default" hidden>
 					<div class="panel-heading posr">
 						<h3 class="panel-title">注册</h3>
 						<a href="javascript:;" class="posa J-gotologin">登录<i class="glyphicon glyphicon-share-alt"></i></a>
@@ -129,10 +129,10 @@
 					</div> 
 				</div>
 				
-				<div class="login-form panel panel-default" hidden>
+				<div class="login-form panel panel-default" >
 					<div class="panel-heading posr">
-						<h3 class="panel-title">登录</h3>
-						<a href="javascript:;" class="posa J-gotoregidit">注册<i class="glyphicon glyphicon-share-alt"></i></a>
+						<h3 class="panel-title" style="color: #563D7C;text-align: center;">欢迎来到白领社区 — 好职客</h3>
+						<!-- <a href="javascript:;" class="posa J-gotoregidit">注册<i class="glyphicon glyphicon-share-alt"></i></a> -->
 					</div>
 					<div class="panel-body">
 						<form id="loginForm" class="form" method="post">
@@ -145,7 +145,10 @@
 							    <label for="password" hidden>密码：</label>
 							    <input type="password" class="form-control" id="password" name="password" placeholder="登录密码">
 							</div>
-							<button class="btn btn-form btn-block btn-login" type="button">登录</button>
+							<div>还没有账号？
+								<a href="javascript:;" class="posa J-gotoregidit">快速注册</a>
+								<button class="btn btn-form btn-block" style="margin-top: 10px;" type="button">登录</button>
+							</div>
 						</form>
 					</div>
 				</div>

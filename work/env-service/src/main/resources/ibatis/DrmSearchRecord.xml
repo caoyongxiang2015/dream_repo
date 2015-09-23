@@ -26,11 +26,13 @@
 	        INSERT INTO DRM_SEARCH_RECORD (
 	        	company_id, 
 	        	company_name, 
-	        	search_count
+	        	search_count,
+	        	search_time
 	        ) VALUES (
 	        	#companyId#, 
 	        	#companyName#, 
-	        	#searchCount#
+	        	#searchCount#,
+	        	now()
 	        )
 	    ]]>
 		<selectKey resultClass="java.lang.Integer" type="post"

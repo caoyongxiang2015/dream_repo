@@ -44,7 +44,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-2"></div>
-                        <div class="col-xs-10 company-introduce">
+                        <div class="col-xs-10 company-introduce" style="color: green">
                         		非常抱歉，我们目前还没有收录 [${companyname}] 信息，如果您想了解该公司信息，请点击右侧按钮，我们会尽快为您服务，谢谢！
                         </div>
                     </div>
@@ -103,7 +103,7 @@
             		<c:if test="${usercount<1}">
                     <div class="row">
                         <div class="col-xs-2"></div>
-                        <div class="col-xs-10 company-introduce">
+                        <div class="col-xs-10 company-introduce" style="color: green">
                         		非常抱歉，我们目前还没有收录 [${companyname}] 内部员工信息，如果您想找到${companyname}内部员工，请点击右侧按钮，我们会尽快为您服务，谢谢！
                         </div>
                     </div>
@@ -122,7 +122,7 @@
 	                
 	                <div class="panel panel-default">
 	                    <div class="panel-heading">
-	                        <h3 class="panel-title"><!-- <i class="glyphicon glyphicon-new-window"></i> -->已有${company.remark }+位小伙伴成功通过该平台了解该公司</h3>
+	                        <h3 class="panel-title"><!-- <i class="glyphicon glyphicon-new-window"></i> -->已有<c:if test="${company.remark==null || company.remark==''}">1+</c:if><c:if test="${company.remark!=null && company.remark!=''}">${company.remark }+</c:if>位小伙伴成功通过该平台了解该公司</h3>
 	                    </div>
 	                    <!-- <div class="panel-body"><button class="btn btn-lg btn-success btn-block">查看</button></div> -->
 	                </div>

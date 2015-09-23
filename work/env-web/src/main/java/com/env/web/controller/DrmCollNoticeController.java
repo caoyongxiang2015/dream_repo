@@ -62,13 +62,13 @@ public class DrmCollNoticeController extends BaseController {
 			String companyname = request.getParameter("companyname");
 			String colltype = request.getParameter("colltype");
 			if(!StringUtils.isEmpty(companyname)){
-				companyname = new String(companyname.getBytes("iso-8859-1"),"UTF-8");
+//				companyname = new String(companyname.getBytes("iso-8859-1"),"UTF-8");
 				PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
 				DrmCollNotice entity = new DrmCollNotice();
 				entity.setCompanyShotname(companyname);
 				entity.setUserId((user==null)?0:user.getId());
 				if(!StringUtils.isEmpty(colltype)){
-					colltype = new String(colltype.getBytes("iso-8859-1"),"UTF-8");
+//					colltype = new String(colltype.getBytes("iso-8859-1"),"UTF-8");
 					entity.setCollType(colltype);
 				}
 				id = drmCollNoticeService.save(entity);

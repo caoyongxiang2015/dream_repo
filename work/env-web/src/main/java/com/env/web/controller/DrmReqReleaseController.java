@@ -13,7 +13,6 @@
  */
 package com.env.web.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,8 +47,8 @@ import com.env.service.intf.IDrmReqService;
 import com.env.service.intf.IDrmSearchCompanyService;
 import com.env.service.intf.IPtRoleUserService;
 import com.env.service.intf.IPtUserService;
+import com.env.util.D1SmsSender;
 import com.env.util.MobileValidateCodeUtil;
-import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
 import com.env.web.util.MailSender;
 
@@ -88,7 +87,8 @@ public class DrmReqReleaseController extends BaseController {
 	private IDrmSearchCompanyService<DrmSearchCompany> drmSearchCompanyService;
 
 	@Autowired
-	private SmsSender smsSender;
+//	private SmsSender smsSender;
+	private D1SmsSender smsSender;
 
     @Autowired
     IPtRoleUserService<PtRoleUser> ruService;
@@ -196,6 +196,7 @@ public class DrmReqReleaseController extends BaseController {
 						notice.setReceiveUserId(c.getUserId());
 						drmReqNoticeService.save(notice);
 						sc.setSearched(1);//匹配到
+						
 					}
 				}
 			}
@@ -236,6 +237,22 @@ public class DrmReqReleaseController extends BaseController {
 					LOGGER.error("邮件发送异常！"+e.getMessage());
 					e.printStackTrace();
 				}
+				StringBuffer phoneBuf = new StringBuffer();
+				// 发送短信
+				for(int i=0;i<receiveUserPhones.size();i++){
+					String phone = receiveUserPhones.get(i);
+					// 验证phone是否是手机号
+					LOGGER.debug("收信人手机号"+phone);
+					if(StringUtils.isMobilePhone(phone)){
+						if(i==0){
+							phoneBuf.append(phone);
+						} else {
+							phoneBuf.append(",").append(phone);
+						}
+					}
+				}
+				// 向匹配成功的用户发送短信
+				smsSender.sendSms(phoneBuf.toString(), "好职客会员向您咨询"+req.getCompanyShotname()+"(公司)情况，诚意金"+req.getPrice()+"元，请登录查看http://www.haozhike.cn");
 								
 				request.getSession().setAttribute("match_success", 1);// 匹配成功标志
 			}else{

@@ -41,7 +41,7 @@
     		<button class="btn btn-large btn-primary right btn-release" onclick="javascript:window.location.href='${ctx}/release/first'" type="button">发布需求</button>
     		<form id="mysearch" action="${ctx }/drmsearch" class="form-inline search-form right" method="post">
     			<div class="input-group posr">
-	    			<input type="text" class="form-control" placeholder="搜索公司" id="searchCompany" name="searchCompany">
+	    			<input type="text" class="form-control" placeholder="请输入公司简称" id="searchCompany" name="searchCompany">
 		    		<i class="glyphicon glyphicon-search posa"></i>
 	    			<span class="input-group-btn">
 		    			<%-- <button type="button" onclick="javascript:window.location.href='${ctx}/drmsearch'" class="btn btn-success btn-large">搜索</button> --%>
