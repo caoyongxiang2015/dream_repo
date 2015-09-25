@@ -47,8 +47,9 @@ import com.env.service.intf.IDrmReqService;
 import com.env.service.intf.IDrmSearchCompanyService;
 import com.env.service.intf.IPtRoleUserService;
 import com.env.service.intf.IPtUserService;
-import com.env.util.D1SmsSender;
+//import com.env.util.D1SmsSender;
 import com.env.util.MobileValidateCodeUtil;
+import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
 import com.env.web.util.MailSender;
 
@@ -87,8 +88,8 @@ public class DrmReqReleaseController extends BaseController {
 	private IDrmSearchCompanyService<DrmSearchCompany> drmSearchCompanyService;
 
 	@Autowired
-//	private SmsSender smsSender;
-	private D1SmsSender smsSender;
+	private SmsSender smsSender;
+//	private D1SmsSender smsSender;
 
     @Autowired
     IPtRoleUserService<PtRoleUser> ruService;

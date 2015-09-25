@@ -131,7 +131,7 @@
 				
 				<div class="login-form panel panel-default" >
 					<div class="panel-heading posr">
-						<h3 class="panel-title" style="color: #563D7C;text-align: center;">欢迎来到白领社区 — 好职客</h3>
+						<h3 class="panel-title" style="color: #563D7C;text-align: center;">欢迎来到白领社区</h3>
 						<!-- <a href="javascript:;" class="posa J-gotoregidit">注册<i class="glyphicon glyphicon-share-alt"></i></a> -->
 					</div>
 					<div class="panel-body">

@@ -139,8 +139,17 @@
 	                        <h3 class="panel-title"><i class="glyphicon glyphicon-new-window"></i>已收录该公司</h3>
 	                    </div>
 	                    <div class="panel-body">
-	                    	登录后填写您所在公司名称后，可联系该公司内部员工
-	                    <button class="btn btn-lg btn-success btn-block cal_login" >登录 / 注册</button></div>
+           		<c:if test="${logined==0}">
+	                    	登录并填写您所在公司名称后，可联系该公司内部员工
+	                    <button class="btn btn-lg btn-success btn-block cal_login" >登录 / 注册</button>
+           		</c:if>
+           		<c:if test="${hascurcompany==0}">
+	                    	填写所在公司名称后，可联系该公司内部员工
+	                    <a href="${ctx }/profile">
+	                    <button class="btn btn-lg btn-success btn-block" >去完善个人信息</button>
+	                    </a>
+           		</c:if>
+	                    </div>
 	                </div>
            		</c:if>
             	
