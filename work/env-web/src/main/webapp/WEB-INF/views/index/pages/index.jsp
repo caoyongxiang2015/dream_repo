@@ -147,7 +147,7 @@
 							</div>
 							<div>还没有账号？
 								<a href="javascript:;" class="posa J-gotoregidit">快速注册</a>
-								<button class="btn btn-form btn-block" style="margin-top: 10px;" type="button">登录</button>
+								<button class="btn btn-form btn-block btn-login" style="margin-top: 10px;" type="button">登录</button>
 							</div>
 						</form>
 					</div>
