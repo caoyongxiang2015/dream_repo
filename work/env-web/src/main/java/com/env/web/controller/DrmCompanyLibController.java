@@ -69,6 +69,7 @@ public class DrmCompanyLibController extends BaseController {
 		List<DrmCompany> companys = (null==name||"".equals(name.trim()))?null:drmCompanyService.queryAllByParams(company);
     	
 		
+		
     	request.setAttribute("usercount", (companys==null)?0:companys.size());
     	request.setAttribute("companyname", name);
     	request.setAttribute("company", (libs==null||libs.size()<1)?null:libs.get(0));
@@ -76,6 +77,16 @@ public class DrmCompanyLibController extends BaseController {
     	PtUser user = (PtUser) request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
     	request.setAttribute("logined", (user==null)?0:1);// logined:未登录，1已登录
     	
+    	// TODO 没有填写自己所在公司 or 没有登录的 ： 提醒用户登录并完善信息
+    	
+    	if(null!=user){// 已经登录
+    		if(null==user.getCurCompanyName() || "".equals(user.getCurCompanyName())){
+    			// 没有填写当前公司信息
+    			request.setAttribute("hascurcompany", 0);// 		
+    		}else{
+    			request.setAttribute("hascurcompany", 1);// 		
+    		}
+    	}
     	if(null!=name&&!"".equals(name.trim())){
 	    	//  记录搜索过的公司
 	    	DrmSearchRecord entity = new DrmSearchRecord();

@@ -100,7 +100,10 @@
                         ${company.introduction }
                         </div>
                     </div>
-            		<c:if test="${usercount<1}">
+                    
+                    
+            		
+            		<c:if test="${hascurcompany==1 && usercount<1}">
                     <div class="row">
                         <div class="col-xs-2"></div>
                         <div class="col-xs-10 company-introduce" style="color: green">
@@ -128,7 +131,20 @@
 	                </div>
             	</c:if>
             	
-            	<c:if test="${usercount<1}">
+            	
+                    
+           		<c:if test="${logined==0 || hascurcompany==0}">
+           			<div class="panel panel-default">
+	                    <div class="panel-heading">
+	                        <h3 class="panel-title"><i class="glyphicon glyphicon-new-window"></i>已收录该公司</h3>
+	                    </div>
+	                    <div class="panel-body">
+	                    	登录后填写您所在公司名称后，可联系该公司内部员工
+	                    <button class="btn btn-lg btn-success btn-block cal_login" >登录 / 注册</button></div>
+	                </div>
+           		</c:if>
+            	
+            	<c:if test="${hascurcompany==1 && usercount<1}">
 	                <div class="panel panel-default">
 	                    <div class="panel-heading">
 	                        <h3 class="panel-title"><i class="glyphicon glyphicon-new-window"></i>已收录该公司，尚未找到该公司员工</h3>
@@ -300,6 +316,13 @@
 			}
 		});
 	}
+	
+	$(".cal_login").on("click",function(){
+		if(0=='${logined}'){// 未登录
+			$("#loginFormModel").modal("show");
+			return;
+		}
+	})
 	</script>
 	
 	
