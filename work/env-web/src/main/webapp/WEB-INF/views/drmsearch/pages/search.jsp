@@ -144,7 +144,7 @@
 	                    <button class="btn btn-lg btn-success btn-block cal_login" >登录 / 注册</button>
            		</c:if>
            		<c:if test="${hascurcompany==0}">
-	                    	填写所在公司名称后，可联系该公司内部员工
+	                    	您尚未填写您最近在职的公司名称，填写所在公司名称后，可联系该公司内部员工
 	                    <a href="${ctx }/profile">
 	                    <button class="btn btn-lg btn-success btn-block" >去完善个人信息</button>
 	                    </a>

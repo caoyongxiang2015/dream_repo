@@ -60,6 +60,9 @@ public class DrmCompanyLibController extends BaseController {
 	public String index(HttpServletRequest request){
     	
     	String name = request.getParameter("searchCompany");
+    	
+    	name = (null==name||"".equals(name.trim()))?null:name.trim();
+    	
     	List<DrmCompanyLib> libs = (null==name||"".equals(name.trim()))?null:drmCompanyLibService.queryByParams(name);
     	
     	DrmCompany company = new DrmCompany();
@@ -67,8 +70,6 @@ public class DrmCompanyLibController extends BaseController {
 		company.setCompanyShotname(name);
 		// 通过公司名称匹配到的记录数
 		List<DrmCompany> companys = (null==name||"".equals(name.trim()))?null:drmCompanyService.queryAllByParams(company);
-    	
-		
 		
     	request.setAttribute("usercount", (companys==null)?0:companys.size());
     	request.setAttribute("companyname", name);

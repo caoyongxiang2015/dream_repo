@@ -123,13 +123,13 @@
 									<%-- <input type="hidden" name="curcompanyid" value="${curcompany.id }"> --%>
 										<div class="row">
 											<div class="col-xs-6">
-												<div class="form-group form-group-lg"><input type="text" placeholder="公司名称（当前在职的）" id="companyShotname" name="companyShotname" value="${curcompany.companyShotname }" class="form-control"></div>
+												<div class="form-group form-group-lg"><input type="text" placeholder="公司名称（当前在职的 或 最近工作的一家公司）" id="companyShotname" name="companyShotname" value="${curcompany.companyShotname }" class="form-control"></div>
 											</div>
 											<div class="col-xs-5"><p class="help-block">必填</p></div>
 										</div>
 										<div class="row">
 											<div class="col-xs-6">
-												<div class="form-group form-group-lg"><input type="text" placeholder="部门名称（当前在职的）" id="deptName" name="deptName"  value="${curcompany.deptName }"class="form-control"></div>
+												<div class="form-group form-group-lg"><input type="text" placeholder="部门名称（当前在职的 或 最近工作的一家公司）" id="deptName" name="deptName"  value="${curcompany.deptName }"class="form-control"></div>
 											</div>
 											<div class="col-xs-5"></div>
 										</div>
