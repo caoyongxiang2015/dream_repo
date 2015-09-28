@@ -40,6 +40,6 @@ public class DrmReqDao extends DefaultDaoImpl<DrmReq> implements IDrmReqDao<DrmR
 
 	@Override
 	public int releaseCount(Map params) {
-		return this.getTotalCount(params);
+		return this.queryCount(getStatement(), params);
 	}
 }

@@ -106,6 +106,11 @@ public class DrmReqReleaseController extends BaseController {
 	@RequestMapping(value = "release1_save")
 	public String save (DrmReq req,HttpServletRequest request){
 		try{
+			int curMonthCount_samecompany = 0;// 当前用户本月发布该公司次数
+			int curDayCount_samecompany = 0;// 当前用户当天发布该公司次数
+			int curMonthCount_distinctcompany = 0;// 当前用户本月发布不同公司个数
+			int curDayCount_distinctcompany = 0;// 当前用户当天发布不同公司个数
+
 			Integer curUserId = null;
 			String telephone = null;
 			PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
@@ -120,7 +125,6 @@ public class DrmReqReleaseController extends BaseController {
 				user = new PtUser();
 				user.setLoginId(telephone);// 根据登录号或者手机号查询是否存在注册账号
 				user.setPhone(telephone);
-				
 				
 				// 判断该手机号是否已经注册过了
 				List<PtUser> users = ptUserService.queryAllByParams(user);
@@ -159,6 +163,12 @@ public class DrmReqReleaseController extends BaseController {
 				// 已经登录
 				curUserId = user.getId();
 				telephone = user.getPhone();
+			}
+			
+			if(checkCount(request,curUserId,req)){
+				//超限
+				LOGGER.error("超限-----"+request.getSession().getAttribute("req_count_over_msg"));
+				return "redirect:/release/second";
 			}
 			
 			// 3/save drm_req 保存需求
@@ -283,22 +293,23 @@ public class DrmReqReleaseController extends BaseController {
     	name=request.getParameter("name");
     	request.setAttribute("req_companyname" , name);
 
+    	// 当天、当月发布需求的次数初始为0
+		request.setAttribute("req_release_month_company_count", 0);
+		request.setAttribute("req_release_day_company_count", 0);
     	if(null!=user){
-    		int curUserId=user.getId();
-			// 判断当天、当月发布需求的次数
-			int curMonthCount = drmReqService.releaseCount(curUserId, "%Y-%m",name);//当月
-			if(curMonthCount > Constants.REQ_RELEASE_MONTH_COMPANY_COUNT ){
-				// 超限
-				request.setAttribute("req_release_month_company_count", "1");
-			}else{
-				request.setAttribute("req_release_month_company_count", "0");
-			}
-			int curDayCount   = drmReqService.releaseCount(curUserId, "%Y-%m-%d",name);//当天
-			if(curDayCount > Constants.REQ_RELEASE_DAY_COMPANY_COUNT){
-				request.setAttribute("req_release_day_company_count", "1");
-			}else{
-				request.setAttribute("req_release_day_company_count", "0");
-			}
+    		if(null!=name){
+	    		int curUserId=user.getId();
+				// 判断当天、当月发布需求的次数
+				int curMonthCount = drmReqService.releaseCount(curUserId, "%Y-%m",name);//当月
+				if(curMonthCount > Constants.REQ_RELEASE_MONTH_COMPANY_COUNT ){
+					// 超限
+					request.setAttribute("req_release_month_company_count", 1);
+				}
+				int curDayCount   = drmReqService.releaseCount(curUserId, "%Y-%m-%d",name);//当天
+				if(curDayCount > Constants.REQ_RELEASE_DAY_COMPANY_COUNT){
+					request.setAttribute("req_release_day_company_count", 1);
+				}
+    		}
     	}
 		
 		return "drmreqrelease/pages/release1";
@@ -310,6 +321,11 @@ public class DrmReqReleaseController extends BaseController {
 		request.setAttribute("match_user_count", request.getSession().getAttribute("match_user_count"));// 匹配到的用户数
 		request.setAttribute("match_success", request.getSession().getAttribute("match_success"));//1匹配成功，0匹配不成功
 		request.setAttribute("req_company_shotname", request.getSession().getAttribute("req_company_shotname"));//目标公司
+		request.setAttribute("req_count_over_flag", request.getSession().getAttribute("req_count_over_flag"));//
+		request.setAttribute("req_count_over_msg", request.getSession().getAttribute("req_count_over_msg"));//
+		
+		request.getSession().removeAttribute("req_count_over_msg");
+		request.getSession().removeAttribute("req_count_over_flag");
 		
 		request.getSession().removeAttribute("match_user_count");
 		request.getSession().removeAttribute("match_success");
@@ -396,4 +412,78 @@ public class DrmReqReleaseController extends BaseController {
     }
 
 
+	/**
+	 * 判断：
+	 * 同一家公司每天发布需求的次数 2
+	 * 同一家公司每月发布需求的次数 6
+	 * 每天发布需求的公司数 3
+	 * 每月发布需求的公司数 10
+	 * 
+	 * @param request
+	 * @param curUserId
+	 * @param req
+	 * @return
+	 */
+	private boolean checkCount(HttpServletRequest request,Integer curUserId, DrmReq req){
+		
+
+		//每月发布需求的公司数
+		int curMonthCount_distinctcompany = drmReqService.releaseCount(curUserId, "%Y-%m",null);//当月
+		System.out.println("当月发布需求的公司数"+curMonthCount_distinctcompany);
+
+		request.getSession().setAttribute("req_count_over_flag", 0);
+		request.getSession().setAttribute("req_count_over_msg", "");
+		
+//		request.getSession().setAttribute("req_release_month_company_count_2", 0);
+//		request.getSession().setAttribute("req_release_day_company_count_2", 0);
+		if(curMonthCount_distinctcompany > Constants.REQ_RELEASE_MONTH_COMPANY_COUNT_2 ){
+			request.getSession().setAttribute("req_count_over_flag", 1);
+			request.getSession().setAttribute("req_count_over_msg", "您好，这个月发布的公司数量已经达到上限"+Constants.REQ_RELEASE_MONTH_COMPANY_COUNT_2+"家");
+			return true;
+		}
+		
+		
+		
+		//每天发布需求的公司数
+		int curDayCount_distinctcompany = drmReqService.releaseCount(curUserId, "%Y-%m-%d",null);//当天
+		System.out.println("当天发布需求的公司数"+curDayCount_distinctcompany);
+		
+		
+		if(curDayCount_distinctcompany > Constants.REQ_RELEASE_DAY_COMPANY_COUNT_2 ){
+			request.getSession().setAttribute("req_count_over_flag", 1);
+			request.getSession().setAttribute("req_count_over_msg", "您好，今天发布的公司数量已经达到上限"+Constants.REQ_RELEASE_DAY_COMPANY_COUNT_2+"家");
+			return true;
+		}
+		
+		
+		// 判断发布该公司的次数
+		// 判断当天、当月发布需求的次数
+//		request.getSession().setAttribute("req_release_month_company_count", 0);
+//		request.getSession().setAttribute("req_release_day_company_count", 0);
+		
+		
+		int curMonthCount_samecompany = drmReqService.releaseCount(curUserId, "%Y-%m",req.getCompanyShotname());//当月
+		System.out.println("当月发布该公司需求的次数"+curMonthCount_samecompany);
+		
+		
+		if(curMonthCount_samecompany > Constants.REQ_RELEASE_MONTH_COMPANY_COUNT ){
+			request.getSession().setAttribute("req_count_over_flag", 1);
+			request.getSession().setAttribute("req_count_over_msg", "您好，本月发布的"+req.getCompanyShotname()+"公司需求次数已经达到上限"+Constants.REQ_RELEASE_MONTH_COMPANY_COUNT+"家");
+			return true;
+		}
+		
+		
+		
+		int curDayCount_samecompany = drmReqService.releaseCount(curUserId, "%Y-%m-%d",req.getCompanyShotname());//当天
+		System.out.println("当天发布该公司需求的次数"+curDayCount_samecompany);
+		
+		if(curDayCount_samecompany > Constants.REQ_RELEASE_DAY_COMPANY_COUNT){
+			request.getSession().setAttribute("req_count_over_flag", 1);
+			request.getSession().setAttribute("req_count_over_msg", "您好，今天发布的"+req.getCompanyShotname()+"公司需求次数已经达到上限"+Constants.REQ_RELEASE_DAY_COMPANY_COUNT+"家");
+			return true;
+		}
+	
+		
+		return false;
+	}
 }

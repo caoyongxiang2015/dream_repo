@@ -372,4 +372,8 @@ public class DaoImpl<T extends DomainObject> {
                 + COUNT_STATEMENT_SUFFIX, params);
 
     }
+    protected int queryCount(String statement, Object params) {
+    	return (Integer) readTemplate.queryForObject(statement,params);
+    	
+    }
 }

@@ -35,6 +35,9 @@ function wait_hide() {
 	    </div>
     	<section class="release-demand">
     	
+    		<c:if test="${req_count_over_flag==1}">
+    		>>>>>>${req_count_over_msg }
+    		</c:if>
 
 			<div id="waiting" class="row waiting" style="text-align: center;background-color: #DBDBDB;">
 				<img style="margin-top:150px; " src="${static_common }/hzk/images/wait.gif">

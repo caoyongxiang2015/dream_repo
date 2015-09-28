@@ -377,7 +377,18 @@
 	</select>
 	
 	<select id="releaseCount"  resultClass="int">
-		SELECT COUNT(r.create_time)
+		SELECT 
+		<isNull property="companyShotname">
+        	<![CDATA[
+			COUNT( DISTINCT(r.company_shotname) )  as disinct_company_count
+			]]>
+		</isNull>
+		<isNotEmpty property="companyShotname">
+        	<![CDATA[
+			COUNT(r.create_time) as same_company_count
+			]]>
+		</isNotEmpty>
+		
 		from drm_req r
 		where r.send_user_id = #sendUserId#
 		and DATE_FORMAT(now(),'$format$') = DATE_FORMAT(r.create_time,'$format$')

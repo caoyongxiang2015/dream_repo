@@ -30,10 +30,23 @@ public class Constants {
 	 * 用户名或密码错误
 	 */
 	public static final String USERNAME_OR_PWD_ERROR = "USERNAME_OR_PWD_ERROR";
-	// 每天发布需求的公司数
-	public static final int REQ_RELEASE_DAY_COMPANY_COUNT = 3;
-	// 每月发布需求的公司数
-	public static final int REQ_RELEASE_MONTH_COMPANY_COUNT = 10;
-	
+
+	/**
+	 *  同一家公司每天发布需求的次数 2
+	 */
+	public static final int REQ_RELEASE_DAY_COMPANY_COUNT = 2;
+	/**
+	 *  同一家公司每月发布需求的次数 6
+	 */
+	public static final int REQ_RELEASE_MONTH_COMPANY_COUNT = 6;
+
+	/**
+	 *  每天发布需求的公司数 3
+	 */
+	public static final int REQ_RELEASE_DAY_COMPANY_COUNT_2 = 3;
+	/**
+	 *  每月发布需求的公司数 10
+	 */
+	public static final int REQ_RELEASE_MONTH_COMPANY_COUNT_2 = 10;
 	
 }
