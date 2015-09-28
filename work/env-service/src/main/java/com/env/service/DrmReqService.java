@@ -53,4 +53,14 @@ public class DrmReqService<T extends DrmReq> extends DefaultServiceImpl<T> imple
 		params.put("entity", req);
 		return drmReqDao.queryByParams(params);
 	}
+
+	@Override
+	public int releaseCount(Integer userid,String format,String companyname) {
+		Map params = new HashMap();
+		params.put("sendUserId", userid);
+		params.put("format", format);
+		params.put("companyName", companyname);
+		params.put("companyShotname", companyname);
+		return drmReqDao.releaseCount(params);
+	}
 }

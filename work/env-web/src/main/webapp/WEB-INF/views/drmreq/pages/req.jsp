@@ -291,6 +291,7 @@
 	                    <c:if test="${req.acceptState==0}">
 	                    	<div class="send-message"><f:formatDate value="${req.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/> 您向${req.companyShotname }公司内部员工  发送的请求帮助信息，已经成功发出，请耐心等待，谢谢！
 	                    	<br>${req.content}
+	                    	<br><a href="javascript:void(0)" class="a_tip" data="${req.id }">长时间无应答？重新发送一次</a>
 	                    	</div>
 	                    </c:if>
 	                    
@@ -617,6 +618,22 @@
 					// 不用刷页面
 				}
 			});
+		})
+
+		// 长时间无应答，重新发送一次
+		$(".a_tip").on("click",function(){
+			//alert($(this).attr('data'));
+			$.ajax({
+				url:'${ctx}/drmreq/tip/'+$(this).attr('data'),
+				type:'POST',
+				success : function(data) {
+					alert("\n重新发送成功;\n\n您也可以通过下方的‘意见反馈’把问题反馈给客服人员；请加好职客的客服QQ号419792519");
+				},
+				error:function(data) {
+					alert("发送失败，刷新后重试");
+				}
+			});
+			$(this).hide();
 		})
 		
 	</script>

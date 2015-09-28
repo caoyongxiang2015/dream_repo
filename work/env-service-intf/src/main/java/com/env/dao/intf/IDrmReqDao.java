@@ -31,4 +31,5 @@ public interface IDrmReqDao<T extends DrmReq> extends Dao<T> {
 
 	List<DrmReq> queryByParams(Map params);
 	
+	int releaseCount(Map params);
 }

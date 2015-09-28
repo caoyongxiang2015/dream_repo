@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
 import com.env.dto.DrmCompany;
+import com.env.dto.DrmComplain;
 import com.env.dto.DrmReq;
 import com.env.dto.DrmReqNotice;
 import com.env.dto.DrmSearchCompany;
@@ -276,15 +277,30 @@ public class DrmReqReleaseController extends BaseController {
     @RequestMapping(value="first")
 	public String first(HttpServletRequest request) {
     	String name="";
-//    	try {
-//    		if(null!=request.getParameter("name")){
-//    			name = new String(request.getParameter("name").getBytes("iso-8859-1"),"UTF-8");
-//    		}
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+
+		PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+		
     	name=request.getParameter("name");
     	request.setAttribute("req_companyname" , name);
+
+    	if(null!=user){
+    		int curUserId=user.getId();
+			// 判断当天、当月发布需求的次数
+			int curMonthCount = drmReqService.releaseCount(curUserId, "%Y-%m",name);//当月
+			if(curMonthCount > Constants.REQ_RELEASE_MONTH_COMPANY_COUNT ){
+				// 超限
+				request.setAttribute("req_release_month_company_count", "1");
+			}else{
+				request.setAttribute("req_release_month_company_count", "0");
+			}
+			int curDayCount   = drmReqService.releaseCount(curUserId, "%Y-%m-%d",name);//当天
+			if(curDayCount > Constants.REQ_RELEASE_DAY_COMPANY_COUNT){
+				request.setAttribute("req_release_day_company_count", "1");
+			}else{
+				request.setAttribute("req_release_day_company_count", "0");
+			}
+    	}
+		
 		return "drmreqrelease/pages/release1";
 	}
 
@@ -378,4 +394,6 @@ public class DrmReqReleaseController extends BaseController {
     	 }
     	 return map;
     }
+
+
 }

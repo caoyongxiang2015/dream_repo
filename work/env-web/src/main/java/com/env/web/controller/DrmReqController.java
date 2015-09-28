@@ -21,7 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.env.constant.Constants;
@@ -355,5 +357,13 @@ public class DrmReqController extends BaseController {
 		return "redirect:/release/first?name="+name;
 	}
 	
-	
+
+	@ResponseBody
+	@RequestMapping(value="/tip/{reqid}", method=RequestMethod.POST ,produces = "application/json; charset=utf-8")  
+	public String tip (@PathVariable("reqid") Integer reqid, HttpServletRequest request){
+		DrmReq old = drmReqService.getById(reqid);
+    	old.setTipCount(old.getTipCount()+1);;
+    	drmReqService.update(old);
+		return "1";
+	}
 }

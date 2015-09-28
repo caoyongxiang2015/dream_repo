@@ -32,6 +32,7 @@
 		<result property="overtime" column="overtime" />
 		<result property="evalScore" column="eval_score" />
 		<result property="evalContent" column="eval_content" />
+		<result property="tipCount" column="tip_count" />
 		<result property="version" column="version" />
 		<result property="disabled" column="disabled" />
 		<result property="createUserid" column="create_userid" />
@@ -44,7 +45,7 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmReq.columns">
 	    <![CDATA[
-        id, req_num, company_name, company_shotname, price, faceprice, send_user_id, send_user_phone, send_user_nickname, accept_state, accept_user_id, accept_duration, open_contact, accept_time, deposit_time, complete_time, end_time, stop_time, apply_backmoney_time ,pay_time,again_release_time, title, content, overtime, eval_score, eval_content, version, disabled, create_userid, create_time, update_userid, update_time
+        id, req_num,tip_count, company_name, company_shotname, price, faceprice, send_user_id, send_user_phone, send_user_nickname, accept_state, accept_user_id, accept_duration, open_contact, accept_time, deposit_time, complete_time, end_time, stop_time, apply_backmoney_time ,pay_time,again_release_time, title, content, overtime, eval_score, eval_content, version, disabled, create_userid, create_time, update_userid, update_time
 	    ]]>
 	</sql>
 
@@ -147,6 +148,7 @@
 		        overtime = #overtime#, 
 		        eval_score = #evalScore#, 
 		        eval_content = #evalContent#, 
+		        tip_count = #tipCount#, 
 		        version = #version#, 
 		        update_userid = #updateUserid#, 
 		        update_time = now()
@@ -373,5 +375,25 @@
 		<include refid="drmReq.queryPage" />
 		order by create_time desc
 	</select>
+	
+	<select id="releaseCount"  resultClass="int">
+		SELECT COUNT(r.create_time)
+		from drm_req r
+		where r.send_user_id = #sendUserId#
+		and DATE_FORMAT(now(),'$format$') = DATE_FORMAT(r.create_time,'$format$')
+		<dynamic prepend="AND"  open="(" close=")">
+			<isNotEmpty prepend="OR" property="companyShotname">
+	        	<![CDATA[
+				 r.company_shotname like '%$companyShotname$%' 
+				]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="OR" property="companyName">
+	        	<![CDATA[
+				 r.company_name like '%$companyName$%' 
+				]]>
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
 	
 </sqlMap>

@@ -30,4 +30,10 @@ public class Constants {
 	 * 用户名或密码错误
 	 */
 	public static final String USERNAME_OR_PWD_ERROR = "USERNAME_OR_PWD_ERROR";
+	// 每天发布需求的公司数
+	public static final int REQ_RELEASE_DAY_COMPANY_COUNT = 3;
+	// 每月发布需求的公司数
+	public static final int REQ_RELEASE_MONTH_COMPANY_COUNT = 10;
+	
+	
 }

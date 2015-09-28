@@ -69,9 +69,15 @@ public class DrmCompanyLibController extends BaseController {
 		company.setCompanyName(name);
 		company.setCompanyShotname(name);
 		// 通过公司名称匹配到的记录数
-		List<DrmCompany> companys = (null==name||"".equals(name.trim()))?null:drmCompanyService.queryAllByParams(company);
+//		List<DrmCompany> companys = (null==name||"".equals(name.trim()))?null:drmCompanyService.queryAllByParams(company);
 		
-    	request.setAttribute("usercount", (companys==null)?0:companys.size());
+//    	request.setAttribute("usercount", (companys==null)?0:companys.size());
+		int contactUsernum = 0;
+		if(libs!=null && libs.size()>0 && libs.get(0)!=null && libs.get(0).getContactUsernum()!=null){
+			contactUsernum = libs.get(0).getContactUsernum();
+		}
+				
+    	request.setAttribute("usercount", contactUsernum);
     	request.setAttribute("companyname", name);
     	request.setAttribute("company", (libs==null||libs.size()<1)?null:libs.get(0));
     	

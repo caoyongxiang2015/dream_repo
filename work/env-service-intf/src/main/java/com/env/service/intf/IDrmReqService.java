@@ -14,6 +14,7 @@
 package com.env.service.intf;
 
 import java.util.List;
+import java.util.Map;
 
 import com.env.dto.DrmReq;
 import com.env.service.impl.Service;
@@ -29,4 +30,5 @@ import com.env.service.impl.Service;
 public interface IDrmReqService<T extends DrmReq> extends Service<T> {
 	
 	List<DrmReq> queryByParams(DrmReq req);
+	int releaseCount(Integer userid,String format,String companyname);
 }

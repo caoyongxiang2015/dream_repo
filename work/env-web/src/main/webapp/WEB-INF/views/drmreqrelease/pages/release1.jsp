@@ -28,9 +28,21 @@
 	    </div>
     	<section class="release-demand">
     		<div class="panel">
-    			<div class="panel-heading">
+    		
+    		<c:if test="${req_release_month_company_count==1}">
+    		当月超限
+    		</c:if>
+    		<c:if test="${req_release_day_company_count==1 }">
+    		当天超限
+    		</c:if>
+    		
+    			<!-- <div class="panel-heading">
     				<h3 class="panel-title">发布需求</h3>
-				</div>
+				</div> -->
+				
+    		<c:if test="${req_release_month_company_count==0 && req_release_day_company_count==0}">
+    	
+				
 				<div class="panel-body row">
 					<div class="col-xs-9">
     				<form class="form-horizontal" id="releaseDemand" action="${ctx }/release/release1_save" method="post" onSubmit="return check();">
@@ -122,6 +134,11 @@
     					</div>
     				</div>
     			</div>
+    		
+    		
+    		
+    		</c:if>
+    		
     		</div>
     	</section>
     </div>

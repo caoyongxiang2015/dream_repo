@@ -188,6 +188,7 @@ public class DrmReq extends DomainObject{
 	 */
 	//@Length(max=4000)
 	private java.lang.String evalContent;
+	private java.lang.Integer tipCount;
 	
 	/**
 	 * 版本号
@@ -846,6 +847,15 @@ public class DrmReq extends DomainObject{
 
 	public void setAcceptUser(PtUser acceptUser) {
 		this.acceptUser = acceptUser;
+	}
+
+	
+	public java.lang.Integer getTipCount() {
+		return tipCount;
+	}
+
+	public void setTipCount(java.lang.Integer tipCount) {
+		this.tipCount = tipCount;
 	}
 
 	/**
