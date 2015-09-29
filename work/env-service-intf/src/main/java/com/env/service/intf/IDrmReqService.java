@@ -30,5 +30,6 @@ import com.env.service.impl.Service;
 public interface IDrmReqService<T extends DrmReq> extends Service<T> {
 	
 	List<DrmReq> queryByParams(DrmReq req);
-	int releaseCount(Integer userid,String format,String companyname);
+	int releaseSameCompanyCount(Integer userid,String format,String companyname);
+	int releaseDistinctCompanyCount(Integer userid,String format );
 }

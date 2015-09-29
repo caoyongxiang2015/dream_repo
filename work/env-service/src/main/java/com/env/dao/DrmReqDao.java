@@ -39,7 +39,12 @@ public class DrmReqDao extends DefaultDaoImpl<DrmReq> implements IDrmReqDao<DrmR
 	}
 
 	@Override
-	public int releaseCount(Map params) {
+	public int releaseSameCompanyCount(Map params) {
+		return this.queryCount(getStatement(), params);
+	}
+
+	@Override
+	public int releaseDistinctCompanyCount(Map params) {
 		return this.queryCount(getStatement(), params);
 	}
 }
