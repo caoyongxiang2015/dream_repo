@@ -55,12 +55,20 @@ public class DrmReqService<T extends DrmReq> extends DefaultServiceImpl<T> imple
 	}
 
 	@Override
-	public int releaseCount(Integer userid,String format,String companyname) {
+	public int releaseSameCompanyCount(Integer userid,String format,String companyname) {
 		Map params = new HashMap();
 		params.put("sendUserId", userid);
 		params.put("format", format);
 		params.put("companyName", companyname);
 		params.put("companyShotname", companyname);
-		return drmReqDao.releaseCount(params);
+		return drmReqDao.releaseSameCompanyCount(params);
+	}
+
+	@Override
+	public int releaseDistinctCompanyCount(Integer userid, String format) {
+		Map params = new HashMap();
+		params.put("sendUserId", userid);
+		params.put("format", format);
+		return drmReqDao.releaseDistinctCompanyCount(params);
 	}
 }
