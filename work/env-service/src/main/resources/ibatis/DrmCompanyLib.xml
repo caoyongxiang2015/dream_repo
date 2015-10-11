@@ -36,7 +36,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmCompanyLibEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_COMPANY_LIB (
+	        INSERT INTO drm_company_lib (
 	        	company_name, 
 	        	company_shotname, 
 	        	website, 
@@ -81,7 +81,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmCompanyLibEntity">
 	    <![CDATA[
-	        UPDATE DRM_COMPANY_LIB SET
+	        UPDATE drm_company_lib SET
 		        company_name = #companyName#, 
 		        company_shotname = #companyShotname#, 
 		        website = #website#, 
@@ -106,7 +106,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_COMPANY_LIB WHERE
+	        DELETE FROM drm_company_lib WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -114,7 +114,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_COMPANY_LIB WHERE
+	        DELETE FROM drm_company_lib WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -124,7 +124,7 @@
 		SELECT
 		<include refid="drmCompanyLib.columns" />
 	    <![CDATA[
-	        FROM DRM_COMPANY_LIB 
+	        FROM drm_company_lib 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -225,7 +225,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_COMPANY_LIB
+		SELECT count(*) FROM drm_company_lib
 		<include refid="drmCompanyLib.queryPage" />
 	</select>
 
@@ -234,7 +234,7 @@
 		SELECT
 		<include refid="drmCompanyLib.columns" />
 	    <![CDATA[
-	        FROM DRM_COMPANY_LIB 
+	        FROM drm_company_lib 
 	    ]]>
 		<include refid="drmCompanyLib.queryPage" />
 		<![CDATA[
@@ -247,7 +247,7 @@
 		SELECT
 		<include refid="drmCompanyLib.columns" />
 	    <![CDATA[
-		    FROM DRM_COMPANY_LIB
+		    FROM drm_company_lib
 	    ]]>
 	</select>
 	
@@ -256,7 +256,7 @@
 	<select id="queryByParams" resultMap="drmCompanyLib" >
 		SELECT
 		<include refid="drmCompanyLib.columns" />
-		FROM DRM_COMPANY_LIB
+		FROM drm_company_lib
 	    where disabled = 0 and (company_shotname like '%$comname$%' or company_name like '%$comname$%' )
 	</select>
 	

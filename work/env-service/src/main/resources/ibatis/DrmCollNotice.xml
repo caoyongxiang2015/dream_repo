@@ -30,7 +30,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmCollNoticeEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_COLL_NOTICE (
+	        INSERT INTO drm_coll_notice (
 	        	company_name, 
 	        	company_shotname, 
 	        	user_id, 
@@ -63,7 +63,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmCollNoticeEntity">
 	    <![CDATA[
-	        UPDATE DRM_COLL_NOTICE SET
+	        UPDATE drm_coll_notice SET
 		        company_name = #companyName#, 
 		        company_shotname = #companyShotname#, 
 		        user_id = #userId#, 
@@ -81,7 +81,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_COLL_NOTICE WHERE
+	        DELETE FROM drm_coll_notice WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -89,7 +89,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_COLL_NOTICE WHERE
+	        DELETE FROM drm_coll_notice WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -99,7 +99,7 @@
 		SELECT
 		<include refid="drmCollNotice.columns" />
 	    <![CDATA[
-	        FROM DRM_COLL_NOTICE 
+	        FROM drm_coll_notice 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -170,7 +170,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_COLL_NOTICE
+		SELECT count(*) FROM drm_coll_notice
 		<include refid="drmCollNotice.queryPage" />
 	</select>
 
@@ -179,7 +179,7 @@
 		SELECT
 		<include refid="drmCollNotice.columns" />
 	    <![CDATA[
-	        FROM DRM_COLL_NOTICE 
+	        FROM drm_coll_notice 
 	    ]]>
 		<include refid="drmCollNotice.queryPage" />
 		<![CDATA[
@@ -192,7 +192,7 @@
 		SELECT
 		<include refid="drmCollNotice.columns" />
 	    <![CDATA[
-		    FROM DRM_COLL_NOTICE
+		    FROM drm_coll_notice
 	    ]]>
 	</select>
 </sqlMap>

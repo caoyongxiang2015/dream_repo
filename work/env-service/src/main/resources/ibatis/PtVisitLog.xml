@@ -29,7 +29,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="ptVisitLogEntity">
 	    <![CDATA[
-	        INSERT INTO PT_VISIT_LOG (
+	        INSERT INTO pt_visit_log (
 	        	id, 
 	        	visit_ip, 
 	        	visit_time, 
@@ -56,7 +56,7 @@
 	<!-- 新增记录 -->
 	<insert id="insert" parameterClass="ptVisitLogEntity">
 	    <![CDATA[
-	        INSERT INTO PT_VISIT_LOG (
+	        INSERT INTO pt_visit_log (
 	        	id, 
 	        	visit_ip, 
 	        	visit_time, 
@@ -83,7 +83,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="ptVisitLogEntity">
 	    <![CDATA[
-	        UPDATE PT_VISIT_LOG SET
+	        UPDATE pt_visit_log SET
 		        visit_ip = #visitIp#, 
 		        visit_time = #visitTime#, 
 		        visit_url = #visitUrl#, 
@@ -98,7 +98,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM PT_VISIT_LOG WHERE
+	        DELETE FROM pt_visit_log WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -106,7 +106,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM PT_VISIT_LOG WHERE
+	        DELETE FROM pt_visit_log WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -116,7 +116,7 @@
 		SELECT
 		<include refid="ptVisitLog.columns" />
 	    <![CDATA[
-	        FROM PT_VISIT_LOG 
+	        FROM pt_visit_log 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -167,7 +167,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM PT_VISIT_LOG
+		SELECT count(*) FROM pt_visit_log
 		<include refid="ptVisitLog.queryPage" />
 	</select>
 
@@ -176,7 +176,7 @@
 		SELECT
 		<include refid="ptVisitLog.columns" />
 	    <![CDATA[
-	        FROM PT_VISIT_LOG 
+	        FROM pt_visit_log 
 	    ]]>
 		<include refid="ptVisitLog.queryPage" />
 		<![CDATA[
@@ -189,7 +189,7 @@
 		SELECT
 		<include refid="ptVisitLog.columns" />
 	    <![CDATA[
-		    FROM PT_VISIT_LOG
+		    FROM pt_visit_log
 	    ]]>
 	</select>
 </sqlMap>

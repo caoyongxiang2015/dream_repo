@@ -52,7 +52,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmReqEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_REQ (
+	        INSERT INTO drm_req (
 	        	req_num, 
 	        	company_name, 
 	        	company_shotname, 
@@ -122,7 +122,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmReqEntity">
 	    <![CDATA[
-	        UPDATE DRM_REQ SET
+	        UPDATE drm_req SET
 		        req_num = #reqNum#, 
 		        company_name = #companyName#, 
 		        company_shotname = #companyShotname#, 
@@ -160,7 +160,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_REQ WHERE
+	        DELETE FROM drm_req WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -168,7 +168,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_REQ WHERE
+	        DELETE FROM drm_req WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -178,7 +178,7 @@
 		SELECT
 		<include refid="drmReq.columns" />
 	    <![CDATA[
-	        FROM DRM_REQ 
+	        FROM drm_req 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -339,7 +339,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_REQ
+		SELECT count(*) FROM drm_req
 		<include refid="drmReq.queryPage" />
 	</select>
 
@@ -348,7 +348,7 @@
 		SELECT
 		<include refid="drmReq.columns" />
 	    <![CDATA[
-	        FROM DRM_REQ 
+	        FROM drm_req 
 	    ]]>
 		<include refid="drmReq.queryPage" />
 		<![CDATA[
@@ -361,7 +361,7 @@
 		SELECT
 		<include refid="drmReq.columns" />
 	    <![CDATA[
-		    FROM DRM_REQ
+		    FROM drm_req
 	    ]]>
 	</select>
 	
@@ -370,7 +370,7 @@
 		SELECT
 		<include refid="drmReq.columns" />
 	    <![CDATA[
-		    FROM DRM_REQ
+		    FROM drm_req
 	    ]]>
 		<include refid="drmReq.queryPage" />
 		order by create_time desc

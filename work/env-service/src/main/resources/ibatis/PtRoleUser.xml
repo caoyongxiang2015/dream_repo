@@ -25,7 +25,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="ptRoleUserEntity">
 	    <![CDATA[
-	        INSERT INTO PT_ROLE_USER (
+	        INSERT INTO pt_role_user (
 	        	id, 
 	        	user_id, 
 	        	role_id
@@ -44,7 +44,7 @@
 	<!-- 新增记录 -->
 	<insert id="insert" parameterClass="ptRoleUserEntity">
 	    <![CDATA[
-	        INSERT INTO PT_ROLE_USER (
+	        INSERT INTO pt_role_user (
 	        	id, 
 	        	user_id, 
 	        	role_id
@@ -63,7 +63,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="ptRoleUserEntity">
 	    <![CDATA[
-	        UPDATE PT_ROLE_USER SET
+	        UPDATE pt_role_user SET
 		        user_id = #userId#, 
 		        role_id = #roleId#
 	        WHERE 
@@ -74,7 +74,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM PT_ROLE_USER WHERE
+	        DELETE FROM pt_role_user WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -82,7 +82,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM PT_ROLE_USER WHERE
+	        DELETE FROM pt_role_user WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -92,7 +92,7 @@
 		SELECT
 		<include refid="ptRoleUser.columns" />
 	    <![CDATA[
-	        FROM PT_ROLE_USER 
+	        FROM pt_role_user 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -123,7 +123,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM PT_ROLE_USER
+		SELECT count(*) FROM pt_role_user
 		<include refid="ptRoleUser.queryPage" />
 	</select>
 
@@ -132,7 +132,7 @@
 		SELECT
 		<include refid="ptRoleUser.columns" />
 	    <![CDATA[
-	        FROM PT_ROLE_USER 
+	        FROM pt_role_user 
 	    ]]>
 		<include refid="ptRoleUser.queryPage" />
 		<![CDATA[
@@ -145,7 +145,7 @@
 		SELECT
 		<include refid="ptRoleUser.columns" />
 	    <![CDATA[
-		    FROM PT_ROLE_USER
+		    FROM pt_role_user
 	    ]]>
 	</select>
 </sqlMap>

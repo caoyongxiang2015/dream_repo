@@ -33,7 +33,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmDeptEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_DEPT (
+	        INSERT INTO drm_dept (
 	        	id, 
 	        	user_id, 
 	        	company_id, 
@@ -68,7 +68,7 @@
 	<!-- 新增记录 -->
 	<insert id="insert" parameterClass="drmDeptEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_DEPT (
+	        INSERT INTO drm_dept (
 	        	id, 
 	        	user_id, 
 	        	company_id, 
@@ -103,7 +103,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmDeptEntity">
 	    <![CDATA[
-	        UPDATE DRM_DEPT SET
+	        UPDATE drm_dept SET
 		        user_id = #userId#, 
 		        company_id = #companyId#, 
 		        company_name = #companyName#, 
@@ -122,7 +122,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_DEPT WHERE
+	        DELETE FROM drm_dept WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -130,7 +130,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_DEPT WHERE
+	        DELETE FROM drm_dept WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -140,7 +140,7 @@
 		SELECT
 		<include refid="drmDept.columns" />
 	    <![CDATA[
-	        FROM DRM_DEPT 
+	        FROM drm_dept 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -211,7 +211,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_DEPT
+		SELECT count(*) FROM drm_dept
 		<include refid="drmDept.queryPage" />
 	</select>
 
@@ -220,7 +220,7 @@
 		SELECT
 		<include refid="drmDept.columns" />
 	    <![CDATA[
-	        FROM DRM_DEPT 
+	        FROM drm_dept 
 	    ]]>
 		<include refid="drmDept.queryPage" />
 		<![CDATA[
@@ -233,7 +233,7 @@
 		SELECT
 		<include refid="drmDept.columns" />
 	    <![CDATA[
-		    FROM DRM_DEPT
+		    FROM drm_dept
 	    ]]>
 	</select>
 </sqlMap>

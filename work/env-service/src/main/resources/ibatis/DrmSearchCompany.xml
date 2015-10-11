@@ -32,7 +32,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmSearchCompanyEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_SEARCH_COMPANY (
+	        INSERT INTO drm_search_company (
 	        	company_name, 
 	        	company_shotname, 
 	        	searched, 
@@ -70,7 +70,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmSearchCompanyEntity">
 	    <![CDATA[
-	        UPDATE DRM_SEARCH_COMPANY SET
+	        UPDATE drm_search_company SET
 		        company_name = #companyName#, 
 		        company_shotname = #companyShotname#, 
 		        searched = #searched#, 
@@ -91,7 +91,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_SEARCH_COMPANY WHERE
+	        DELETE FROM drm_search_company WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -99,7 +99,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_SEARCH_COMPANY WHERE
+	        DELETE FROM drm_search_company WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -109,7 +109,7 @@
 		SELECT
 		<include refid="drmSearchCompany.columns" />
 	    <![CDATA[
-	        FROM DRM_SEARCH_COMPANY 
+	        FROM drm_search_company 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -190,7 +190,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_SEARCH_COMPANY
+		SELECT count(*) FROM drm_search_company
 		<include refid="drmSearchCompany.queryPage" />
 	</select>
 
@@ -199,7 +199,7 @@
 		SELECT
 		<include refid="drmSearchCompany.columns" />
 	    <![CDATA[
-	        FROM DRM_SEARCH_COMPANY 
+	        FROM drm_search_company 
 	    ]]>
 		<include refid="drmSearchCompany.queryPage" />
 		<![CDATA[
@@ -212,7 +212,7 @@
 		SELECT
 		<include refid="drmSearchCompany.columns" />
 	    <![CDATA[
-		    FROM DRM_SEARCH_COMPANY
+		    FROM drm_search_company
 	    ]]>
 	</select>
 </sqlMap>

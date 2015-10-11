@@ -44,7 +44,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmCompanyEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_COMPANY (
+	        INSERT INTO drm_company (
 	        	id, 
 	        	user_id, 
 	        	company_index, 
@@ -108,7 +108,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmCompanyEntity">
 	    <![CDATA[
-	        UPDATE DRM_COMPANY SET
+	        UPDATE drm_company SET
 		        user_id = #userId#, 
 		        company_index = #companyIndex#, 
 		        company_name = #companyName#, 
@@ -141,7 +141,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_COMPANY WHERE
+	        DELETE FROM drm_company WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -149,7 +149,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_COMPANY WHERE
+	        DELETE FROM drm_company WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -159,7 +159,7 @@
 		SELECT
 		<include refid="drmCompany.columns" />
 	    <![CDATA[
-	        FROM DRM_COMPANY 
+	        FROM drm_company 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -314,7 +314,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_COMPANY
+		SELECT count(*) FROM drm_company
 		<include refid="drmCompany.queryPage" />
 	</select>
 
@@ -323,7 +323,7 @@
 		SELECT
 		<include refid="drmCompany.columns" />
 	    <![CDATA[
-	        FROM DRM_COMPANY 
+	        FROM drm_company 
 	    ]]>
 		<include refid="drmCompany.queryPage" />
 		<![CDATA[
@@ -336,7 +336,7 @@
 		SELECT
 		<include refid="drmCompany.columns" />
 	    <![CDATA[
-		    FROM DRM_COMPANY
+		    FROM drm_company
 	    ]]>
 	</select>
 	
@@ -344,7 +344,7 @@
 		SELECT
 		<include refid="drmCompany.columns" />
 	    <![CDATA[
-		    FROM DRM_COMPANY
+		    FROM drm_company
 	    ]]>
 		<include refid="drmCompany.queryByParams" />
 	</select>
@@ -352,7 +352,7 @@
 	<select id="getByUserid" resultMap="drmCompany">
 		SELECT
 		<include refid="drmCompany.columns" />
-		    FROM DRM_COMPANY where user_id = #userId#
+		    FROM drm_company where user_id = #userId#
 		    <isNotEmpty prepend="AND" property="companyIndex">
 	            <![CDATA[
 				company_index = #companyIndex#

@@ -38,7 +38,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmLetterEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_LETTER (
+	        INSERT INTO drm_letter (
 	        	id, 
 	        	title, 
 	        	content, 
@@ -81,7 +81,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmLetterEntity">
 	    <![CDATA[
-	        UPDATE DRM_LETTER SET
+	        UPDATE drm_letter SET
 		        title = #title#, 
 		        content = #content#, 
 		        send_userid = #sendUserid#, 
@@ -104,7 +104,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_LETTER WHERE
+	        DELETE FROM drm_letter WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -112,7 +112,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_LETTER WHERE
+	        DELETE FROM drm_letter WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -122,7 +122,7 @@
 		SELECT
 		<include refid="drmLetter.columns" />
 	    <![CDATA[
-	        FROM DRM_LETTER 
+	        FROM drm_letter 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -213,7 +213,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_LETTER
+		SELECT count(*) FROM drm_letter
 		<include refid="drmLetter.queryPage" />
 	</select>
 
@@ -222,7 +222,7 @@
 		SELECT
 		<include refid="drmLetter.columns" />
 	    <![CDATA[
-	        FROM DRM_LETTER 
+	        FROM drm_letter 
 	    ]]>
 		<include refid="drmLetter.queryPage" />
 		<![CDATA[
@@ -235,7 +235,7 @@
 		SELECT
 		<include refid="drmLetter.columns" />
 	    <![CDATA[
-		    FROM DRM_LETTER
+		    FROM drm_letter
 	    ]]>
 	</select>
 	

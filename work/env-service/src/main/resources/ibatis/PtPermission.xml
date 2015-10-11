@@ -33,7 +33,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="ptPermissionEntity">
 	    <![CDATA[
-	        INSERT INTO PT_PERMISSION (
+	        INSERT INTO pt_permission (
 	        	id, 
 	        	permission_code, 
 	        	permission_name, 
@@ -74,7 +74,7 @@
 	<!-- 新增记录 -->
 	<insert id="insert" parameterClass="ptPermissionEntity">
 	    <![CDATA[
-	        INSERT INTO PT_PERMISSION (
+	        INSERT INTO pt_permission (
 	        	id, 
 	        	permission_code, 
 	        	permission_name, 
@@ -115,7 +115,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="ptPermissionEntity">
 	    <![CDATA[
-	        UPDATE PT_PERMISSION SET
+	        UPDATE pt_permission SET
 		        permission_code = #permissionCode#, 
 		        permission_name = #permissionName#, 
 		        permission_sequence = #permissionSequence#, 
@@ -137,7 +137,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM PT_PERMISSION WHERE
+	        DELETE FROM pt_permission WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -145,7 +145,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM PT_PERMISSION WHERE
+	        DELETE FROM pt_permission WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -155,7 +155,7 @@
 		SELECT
 		<include refid="ptPermission.columns" />
 	    <![CDATA[
-	        FROM PT_PERMISSION 
+	        FROM pt_permission 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -241,7 +241,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM PT_PERMISSION
+		SELECT count(*) FROM pt_permission
 		<include refid="ptPermission.queryPage" />
 	</select>
 
@@ -250,7 +250,7 @@
 		SELECT
 		<include refid="ptPermission.columns" />
 	    <![CDATA[
-	        FROM PT_PERMISSION 
+	        FROM pt_permission 
 	    ]]>
 		<include refid="ptPermission.queryPage" />
 		<![CDATA[
@@ -263,7 +263,7 @@
 		SELECT
 		<include refid="ptPermission.columns" />
 	    <![CDATA[
-		    FROM PT_PERMISSION
+		    FROM pt_permission
 	    ]]>
 	</select>
 	

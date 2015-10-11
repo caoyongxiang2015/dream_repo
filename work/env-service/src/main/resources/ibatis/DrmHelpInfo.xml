@@ -28,7 +28,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmHelpInfoEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_HELP_INFO (
+	        INSERT INTO drm_help_info (
 	        	id, 
 	        	company_name, 
 	        	nickname, 
@@ -53,7 +53,7 @@
 	<!-- 新增记录 -->
 	<insert id="insert" parameterClass="drmHelpInfoEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_HELP_INFO (
+	        INSERT INTO drm_help_info (
 	        	id, 
 	        	company_name, 
 	        	nickname, 
@@ -78,7 +78,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmHelpInfoEntity">
 	    <![CDATA[
-	        UPDATE DRM_HELP_INFO SET
+	        UPDATE drm_help_info SET
 		        company_name = #companyName#, 
 		        nickname = #nickname#, 
 		        contact_type = #contactType#, 
@@ -92,7 +92,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_HELP_INFO WHERE
+	        DELETE FROM drm_help_info WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -100,7 +100,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_HELP_INFO WHERE
+	        DELETE FROM drm_help_info WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -110,7 +110,7 @@
 		SELECT
 		<include refid="drmHelpInfo.columns" />
 	    <![CDATA[
-	        FROM DRM_HELP_INFO 
+	        FROM drm_help_info 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -156,7 +156,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_HELP_INFO
+		SELECT count(*) FROM drm_help_info
 		<include refid="drmHelpInfo.queryPage" />
 	</select>
 
@@ -165,7 +165,7 @@
 		SELECT
 		<include refid="drmHelpInfo.columns" />
 	    <![CDATA[
-	        FROM DRM_HELP_INFO 
+	        FROM drm_help_info 
 	    ]]>
 		<include refid="drmHelpInfo.queryPage" />
 		<![CDATA[
@@ -178,7 +178,7 @@
 		SELECT
 		<include refid="drmHelpInfo.columns" />
 	    <![CDATA[
-		    FROM DRM_HELP_INFO
+		    FROM drm_help_info
 	    ]]>
 	</select>
 </sqlMap>

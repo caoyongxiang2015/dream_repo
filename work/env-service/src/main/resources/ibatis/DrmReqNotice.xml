@@ -72,7 +72,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmReqNoticeEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_REQ_NOTICE (
+	        INSERT INTO drm_req_notice (
 	        	req_id, 
 	        	send_user_id, 
 	        	receive_user_id, 
@@ -104,7 +104,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmReqNoticeEntity">
 	    <![CDATA[
-	        UPDATE DRM_REQ_NOTICE SET
+	        UPDATE drm_req_notice SET
 		        req_id = #reqId#, 
 		        send_user_id = #sendUserId#, 
 		        receive_user_id = #receiveUserId#, 
@@ -120,7 +120,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_REQ_NOTICE WHERE
+	        DELETE FROM drm_req_notice WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -128,7 +128,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_REQ_NOTICE WHERE
+	        DELETE FROM drm_req_notice WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -138,7 +138,7 @@
 		SELECT
 		<include refid="drmReqNotice.columns" />
 	    <![CDATA[
-	        FROM DRM_REQ_NOTICE 
+	        FROM drm_req_notice 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -204,7 +204,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_REQ_NOTICE
+		SELECT count(*) FROM drm_req_notice
 		<include refid="drmReqNotice.queryPage" />
 	</select>
 
@@ -213,7 +213,7 @@
 		SELECT
 		<include refid="drmReqNotice.columns" />
 	    <![CDATA[
-	        FROM DRM_REQ_NOTICE 
+	        FROM drm_req_notice 
 	    ]]>
 		<include refid="drmReqNotice.queryPage" />
 		<![CDATA[
@@ -226,7 +226,7 @@
 		SELECT
 		<include refid="drmReqNotice.columns" />
 	    <![CDATA[
-		    FROM DRM_REQ_NOTICE
+		    FROM drm_req_notice
 	    ]]>
 	</select>
 	
@@ -234,7 +234,7 @@
 		SELECT
 		<include refid="drmReqNotice.columns" />
 	    <![CDATA[
-		    FROM DRM_REQ_NOTICE
+		    FROM drm_req_notice
 	    ]]>
 		<include refid="drmReqNotice.queryPage" />
 		order by create_time desc

@@ -32,7 +32,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="ptFeedbackEntity">
 	    <![CDATA[
-	        INSERT INTO PT_FEEDBACK (
+	        INSERT INTO pt_feedback (
 	        	content, 
 	        	user_id, 
 	        	user_name, 
@@ -69,7 +69,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="ptFeedbackEntity">
 	    <![CDATA[
-	        UPDATE PT_FEEDBACK SET
+	        UPDATE pt_feedback SET
 		        content = #content#, 
 		        user_id = #userId#, 
 		        user_name = #userName#, 
@@ -90,7 +90,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM PT_FEEDBACK WHERE
+	        DELETE FROM pt_feedback WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -98,7 +98,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM PT_FEEDBACK WHERE
+	        DELETE FROM pt_feedback WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -108,7 +108,7 @@
 		SELECT
 		<include refid="ptFeedback.columns" />
 	    <![CDATA[
-	        FROM PT_FEEDBACK 
+	        FROM pt_feedback 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -189,7 +189,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM PT_FEEDBACK
+		SELECT count(*) FROM pt_feedback
 		<include refid="ptFeedback.queryPage" />
 	</select>
 
@@ -198,7 +198,7 @@
 		SELECT
 		<include refid="ptFeedback.columns" />
 	    <![CDATA[
-	        FROM PT_FEEDBACK 
+	        FROM pt_feedback 
 	    ]]>
 		<include refid="ptFeedback.queryPage" />
 		<![CDATA[
@@ -211,7 +211,7 @@
 		SELECT
 		<include refid="ptFeedback.columns" />
 	    <![CDATA[
-		    FROM PT_FEEDBACK
+		    FROM pt_feedback
 	    ]]>
 	</select>
 </sqlMap>

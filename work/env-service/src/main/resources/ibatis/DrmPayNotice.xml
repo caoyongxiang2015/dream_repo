@@ -34,7 +34,7 @@
 	<!-- 新增记录 -->
 	<insert id="save" parameterClass="drmPayNoticeEntity">
 	    <![CDATA[
-	        INSERT INTO DRM_PAY_NOTICE (
+	        INSERT INTO drm_pay_notice (
 	        	id, 
 	        	req_id, 
 	        	user_id, 
@@ -78,7 +78,7 @@
 	<!-- 通过ID修改 -->
 	<update id="update" parameterClass="drmPayNoticeEntity">
 	    <![CDATA[
-	        UPDATE DRM_PAY_NOTICE SET
+	        UPDATE drm_pay_notice SET
 		        req_id = #reqId#, 
 		        user_id = #userId#, 
 		        user_phone = #userPhone#, 
@@ -100,7 +100,7 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM DRM_PAY_NOTICE WHERE
+	        DELETE FROM drm_pay_notice WHERE
 	        id = #id#
 	    ]]>
 	</delete>
@@ -108,7 +108,7 @@
 	<!-- 通过ID列表批量删除 -->
 	<delete id="deleteByIds" parameterClass="java.lang.String">
 	    <![CDATA[
-	        DELETE FROM DRM_PAY_NOTICE WHERE
+	        DELETE FROM drm_pay_notice WHERE
 	        id IN ($ids$)
 	    ]]>
 	</delete>
@@ -118,7 +118,7 @@
 		SELECT
 		<include refid="drmPayNotice.columns" />
 	    <![CDATA[
-	        FROM DRM_PAY_NOTICE 
+	        FROM drm_pay_notice 
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -199,7 +199,7 @@
 
 	<!-- 为分页查询符合条件的记录数 -->
 	<select id="queryByPage_count" resultClass="int">
-		SELECT count(*) FROM DRM_PAY_NOTICE
+		SELECT count(*) FROM drm_pay_notice
 		<include refid="drmPayNotice.queryPage" />
 	</select>
 
@@ -208,7 +208,7 @@
 		SELECT
 		<include refid="drmPayNotice.columns" />
 	    <![CDATA[
-	        FROM DRM_PAY_NOTICE 
+	        FROM drm_pay_notice 
 	    ]]>
 		<include refid="drmPayNotice.queryPage" />
 		<![CDATA[
@@ -221,7 +221,7 @@
 		SELECT
 		<include refid="drmPayNotice.columns" />
 	    <![CDATA[
-		    FROM DRM_PAY_NOTICE
+		    FROM drm_pay_notice
 	    ]]>
 		<include refid="drmPayNotice.queryPage" />
 	</select>
