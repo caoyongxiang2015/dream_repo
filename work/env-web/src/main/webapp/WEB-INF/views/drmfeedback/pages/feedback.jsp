@@ -47,7 +47,7 @@
 					    	<label class="col-xs-2 col-md-3 control-label" for=""></label>
 							<div class="col-xs-3">
 						    	<div class="form-group form-group-lg">
-    								用户交流群：52638921
+    								用户交流QQ群：338471845
 								</div>
 							</div>
 							<div class="col-xs-2">
