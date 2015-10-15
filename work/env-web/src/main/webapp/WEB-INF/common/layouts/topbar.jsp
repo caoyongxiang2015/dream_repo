@@ -7,9 +7,9 @@
     <header class="navbar-fixed-top">
     	<div class="container clearfix">
     		<div class="logo left">
-	    		<a href="#" class="logo-link">
-	    			<h1>好职客</h1>
-	    			<img src="${static_common}/hzk/images/logo.png" alt="好职客">
+	    		<a href="${ctx}" class="logo-link">
+	    			<h1>好知客</h1>
+	    			<img src="${static_common}/hzk/images/haozhike2.png" alt="好知客">
 	    		</a>
     		</div>
     		<ul class="nav navbar-nav left" role="navigator">
