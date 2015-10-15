@@ -2,7 +2,6 @@
 <%@page import="com.env.constant.Constants"%>
 <%@page import="com.env.dto.PtUser"%>
 <%@include file="/WEB-INF/common/layouts/common.jsp"%>
-
 <!-- [[ 公共头部 -->
     <header class="navbar-fixed-top">
     	<div class="container clearfix">
