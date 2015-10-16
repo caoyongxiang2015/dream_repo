@@ -25,10 +25,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
 import com.env.dto.DrmCompany;
+import com.env.dto.DrmCompanyLib;
 import com.env.dto.PtUser;
+import com.env.service.intf.IDrmCompanyLibService;
 import com.env.service.intf.IDrmCompanyService;
 import com.env.service.intf.IPtUserService;
 import com.env.vo.DrmCompanyVo;
+import com.env.web.util.MailSender;
 
 
 /**
@@ -49,6 +52,9 @@ public class DrmProfileController extends BaseController {
 	@Autowired
 	private IDrmCompanyService<DrmCompany> drmCompanyService;
 
+	@Autowired
+	private IDrmCompanyLibService<DrmCompanyLib> drmCompanyLibService;
+	
 	@Autowired
 	private IPtUserService<PtUser> ptUserService;
 
@@ -100,6 +106,7 @@ public class DrmProfileController extends BaseController {
 				curUser.setCurCompanyId(curcomid);
 				curUser.setCurCompanyName(curcompany.getCompanyShotname());
 				curUser.setCurDeptName(curcompany.getDeptName());
+				
 			}else{
 				// 已经存了当前公司;更新当前公司信息
 				curcompany.setId(curUser.getCurCompanyId());
@@ -110,15 +117,39 @@ public class DrmProfileController extends BaseController {
 			DrmCompany pre = precompany.getEntity2();
 			if(pre!=null ){
 				if(pre.getId()!=null){
-				// 有上一家公司的记录
-				pre.setCompanyIndex(2);
-				pre.setUserId(curUser.getId());
-				drmCompanyService.update(pre);
-			}else if(!StringUtils.isEmpty(pre.getCompanyShotname())){
-				pre.setCompanyIndex(2);
-				pre.setUserId(curUser.getId());
-				drmCompanyService.save(pre);// 上一家公司
+					// 有上一家公司的记录
+					pre.setCompanyIndex(2);
+					pre.setUserId(curUser.getId());
+					drmCompanyService.update(pre);
+				}else if(!StringUtils.isEmpty(pre.getCompanyShotname())){
+					pre.setCompanyIndex(2);
+					pre.setUserId(curUser.getId());
+					drmCompanyService.save(pre);// 上一家公司
+
+				}
 			}
+			
+			if(null!=curcompany.getCompanyShotname() && !"".equals(curcompany.getCompanyShotname().trim())){
+				// 判断填写的[当前]公司是否存在公司原始库中，如果不存在发邮件通知haozhike@yeah.net
+				List<DrmCompanyLib> curLibs = drmCompanyLibService.queryByParams(curcompany.getCompanyShotname());
+				if(null==curLibs||curLibs.size()==0){
+					// 发邮件
+					MailSender mailSender = new MailSender();
+					mailSender.sendMail("[好知客]提醒：用户(userid="+curUser.getId()+")保存自己当前公司名称,公司["+curcompany.getCompanyShotname()+"]不存在公司原始库中", 
+							"<h2>userid:"+curUser.getId()+",当前公司名称:"+curcompany.getCompanyShotname()+"</h2>", 
+								"haozhike@yeah.net", "用户保存个人信息", null, null, null, null);
+				}
+			}
+			if(null!=pre.getCompanyShotname() && !"".equals(pre.getCompanyShotname().trim())){
+				// 判断填写的[上一家]公司是否存在公司原始库中，如果不存在发邮件通知haozhike@yeah.net
+				List<DrmCompanyLib> preLibs = drmCompanyLibService.queryByParams(pre.getCompanyShotname());
+				if(null==preLibs||preLibs.size()==0){
+					// 发邮件
+					MailSender mailSender = new MailSender();
+					mailSender.sendMail("[好知客]提醒：用户(userid="+curUser.getId()+")保存自己上一家公司名称,公司["+pre.getCompanyShotname()+"]不存在公司原始库中", 
+							"<h2>userid:"+curUser.getId()+",上一家公司名称:"+pre.getCompanyShotname()+"</h2>", 
+								"haozhike@yeah.net", "用户保存个人信息", null, null, null, null);
+				}
 			}
 			
 			curUser.setQq(u.getQq());
