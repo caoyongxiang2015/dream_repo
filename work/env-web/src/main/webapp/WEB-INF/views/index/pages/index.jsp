@@ -28,7 +28,7 @@
 		    <div class="item active">
 			    <div class="container">
 			        <h2>只为帮您选择一个理想职业</h2>
-					<p style="font-size: 28px;">已收录1300+(南京)公司信息 — 互联网/IT/电商</p>
+					<p style="font-size: 28px;">已收录1500+(南京)公司信息 — IT/互联网/通信</p>
 					<p><a class="btn btn-purple btn-lg seek-advice" href="javascript:window.location.href='${ctx}/release/first'" role="button">找人咨询</a></p>
 
 		      </div>
@@ -123,7 +123,7 @@
 								<button type="button" id="getCodeSMS" class="btn btn-success btn-lg">免费获取验证码</button>
 								<!-- <input id="getCodeSMS" type="button" class="btn btn-success " style="color: #000;background-color: green" value="免费获取验证码" onclick="sendMessage()" /> -->
 							</div>
-							<a href="${ctx }/terms" target="_blank" style="padding-left:30px;"><span style="color: gray;">我已阅读并接受好职客服务条款</span></a>
+							<a href="${ctx }/terms" target="_blank" style="padding-left:30px;"><span style="color: gray;">我已阅读并接受好知客服务条款</span></a>
 							<button style="margin-top:5px;" class="btn btn-form mt15 btn-block btn-lg registerUser" type="button">注册</button>
 						</form>
 					</div> 
@@ -206,26 +206,26 @@
 	    <div class="row">
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
-	    			<h4 class="question">好职客是个什么样的网站？</h4>
-	    			<p class="answer">白领在换工作时，往往对公司信息把握不够，导致工作不满意。好职客旨在帮助白领在换工作之前能够准确的把握目标公司的信息，不打无准备的仗，提高白领与企业之间的信息对等性</p>
+	    			<h4 class="question">好知客是个什么样的网站？</h4>
+	    			<p class="answer">白领在换工作时，往往对公司信息把握不够，导致工作不满意。好知客旨在帮助白领在换工作之前能够准确的把握目标公司的信息，不打无准备的仗，提高白领与企业之间的信息对等性</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
-	    			<h4 class="question">我在好职客能得到什么？</h4>
-	    			<p class="answer">可以直接在好职客找到企业的内部员工，通过他们了解最真实最新的公司信息；可以为他人提供自己所在公司的信息，帮助他人同时赚取一定费用，也可以为别人推荐工作，还可以认识到同行业的朋友</p>
+	    			<h4 class="question">我在好知客能得到什么？</h4>
+	    			<p class="answer">可以直接在好知客找到企业的内部员工，通过他们了解最真实最新的公司信息；可以为他人提供自己所在公司的信息，帮助他人同时赚取一定费用，也可以为别人推荐工作，还可以认识到同行业的朋友</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
 	    			<h4 class="question">我想了解的公司没有搜索到怎么办？</h4>
-	    			<p class="answer">好职客平台首先会收集搜索频率较高的公司信息，然后也尽可能多的收集搜索频率不高的公司信息，但难免会有很多公司信息当前没有收集到，如果您没有搜索到，可以通知我们，我们在第一时间搜集该公司信息</p>
+	    			<p class="answer">好知客平台首先会收集搜索频率较高的公司信息，然后也尽可能多的收集搜索频率不高的公司信息，但难免会有很多公司信息当前没有收集到，如果您没有搜索到，可以通知我们，我们在第一时间搜集该公司信息</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
 	    			<h4 class="question">我想了解的公司没有找到内部员工怎么办？</h4>
-	    			<p class="answer">好职客平台会定期收集公司内部员工，也会根据会员需要寻找内部员工，但无法保证每个公司都能及时收集到内部员工；如果当前没有在本平台找到内部员工，可以通过网站底部反馈</p>
+	    			<p class="answer">好知客平台会定期收集公司内部员工，也会根据会员需要寻找内部员工，但无法保证每个公司都能及时收集到内部员工；如果当前没有在本平台找到内部员工，可以通过网站底部反馈</p>
 	    		</div>
 	    	</div>
 	    </div>
@@ -243,12 +243,12 @@
 		    <div class="example-item">
 		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：南京擎天科技</div>
-		    		<div class="col-xs-2">用户：夏先生</div>
+		    		<div class="col-xs-2">昵称：天使的城</div>
 		    		<div class="col-xs-3">联系方式：186****5268</div>
 		    		<div class="col-xs-3">2015-11-07 20:37:11</div>
 		    	</div>
 		    	<div class="judgement">收到擎天的面试通知，由于不知道擎天怎么样，就在网上查找这个公司的信息，有说好的，也有说不好的，各种说法都有，也不知道真假，
-		    	偶然看到好职客网，就试了下，果然找到了一位已经在擎天工作四年的朋友，感觉对方很友善，优缺点都帮我分析了下，出差的情况啊，加班啊，福利待遇啊，里面员工的情况领导的情况啊，
+		    	偶然看到好知客网，就试了下，果然找到了一位已经在擎天工作四年的朋友，感觉对方很友善，优缺点都帮我分析了下，出差的情况啊，加班啊，福利待遇啊，里面员工的情况领导的情况啊，
 		    	做的项目情况啊等等，交流的信息也比较全面，比较客观，挺感谢他的，感觉不错。
 		    	</div>
 		    </div>
@@ -259,34 +259,34 @@
 		    		<div class="col-xs-3">联系方式：150****6293</div>
 		    		<div class="col-xs-3">2015-11-05 12:55:09</div>
 		    	</div>
-		    	<div class="judgement">之前听说苏宁的加班文化，不知道是真是假，就在好职客上找到一位苏宁易购的朋友，咨询了一下，基本了解了里面的情况，总比道听途说的好，咨询费也没白花</div>
+		    	<div class="judgement">之前听说苏宁的加班文化，不知道是真是假，就在好知客上找到一位苏宁易购的朋友，咨询了一下，基本了解了里面的情况，总比道听途说的好，咨询费也没白花</div>
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
-		    		<div class="col-xs-2">用户：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
-		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
+		    		<div class="col-xs-4">咨询的公司：南京唐尧网络科技有限公司</div>
+		    		<div class="col-xs-2">昵称：jackchen</div>
+		    		<div class="col-xs-3">联系方式：133********</div>
+		    		<div class="col-xs-3">2015-11-05 19:50:27</div>
 		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
+		    	<div class="judgement">在百度贴吧里看到了好知客网站，就注册了一下试试，没想到这么快就有人咨询我们公司的信息，收了五十块钱，虽然不多，能帮人就帮下吧，大家找好工作也都不容易，想了解唐尧的信息可以找我哈</div>
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
-		    		<div class="col-xs-2">用户：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
-		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
+		    		<div class="col-xs-4">咨询的公司：南京睿翊腾信息技术有限公司</div>
+		    		<div class="col-xs-2">昵称：遥远的尽头</div>
+		    		<div class="col-xs-3">联系方式：138********</div>
+		    		<div class="col-xs-3">2015-11-02 19:20:03</div>
 		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
+		    	<div class="judgement">我在这工作了一两年了，还算比较熟悉睿翊腾的情况，如果来我们公司面试或者想了解的情况的亲们可以问我哈，可以先通过站内信，QQ或者打电话也行哈</div>
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：XXXX有限公司</div>
-		    		<div class="col-xs-2">用户：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
-		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
+		    		<div class="col-xs-4">咨询的公司：江苏智通交通科技有限公司</div>
+		    		<div class="col-xs-2">昵称：张先生</div>
+		    		<div class="col-xs-3">联系方式：130****5623</div>
+		    		<div class="col-xs-3">2015-11-01 21:16:22</div>
 		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
+		    	<div class="judgement">上周一去面试的，在网上查的信息也不是很多，面试官问了很多技术问题，面试的情况还可以，公司感觉还可以，不知道具体怎么样，今天在好知客发了个需求，向里面的员工咨询了下，他们反馈的肯定都是真实的；有时候面试官说的也不是很全面或者很含蓄，拿捏不准，花一百块钱也值得，免得被蒙了</div>
 	    	</div>
 	    	<a href="${ctx }/drmeval">查看更多&gt;&gt;</a>
     	</div>

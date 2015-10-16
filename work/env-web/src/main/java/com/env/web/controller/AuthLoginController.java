@@ -297,7 +297,7 @@ public class AuthLoginController {
 	                StringBuffer content = new StringBuffer();
 	                switch (type) {
 	                    case 1:// 注册
-	                        content.append("您正在注册好职客会员,手机验证码").append(code).append(",有效期120秒");
+	                        content.append("您正在注册好知客会员,手机验证码").append(code).append(",有效期120秒");
 	                        break;
 	                    case 2:// 找回密码
 	                        content.append("您正在找回密码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");

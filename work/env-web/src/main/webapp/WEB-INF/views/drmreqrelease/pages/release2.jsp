@@ -44,7 +44,7 @@ function wait_hide() {
 						 	* 每天发布需求的不同的公司数量 上限是3家<br>
 						 	* 每月发布需求的不同的公司数量 上限是10家<br>
 						 	<br>
-						 	亲爱的好职客用户，请耐心等待，不必再次重复发布需求，如果有疑问可以通过下方[意见反馈],向我们反馈情况，多谢您的支持！
+						 	亲爱的好知客用户，请耐心等待，不必再次重复发布需求，如果有疑问可以通过下方[意见反馈],向我们反馈情况，多谢您的支持！
 	    				</div>
 	    				<div class="next-btn">
 							&nbsp;
@@ -60,7 +60,7 @@ function wait_hide() {
 				<img style="margin-top:150px; " src="${static_common }/hzk/images/wait.gif">
 				<br>
 				<br>
-				<p style="font-size: 20px;color: green;">好职客正在通过大数据分析  为您搜索${req_company_shotname}内部员工...请稍后...</p>
+				<p style="font-size: 20px;color: green;">好知客正在通过大数据分析  为您搜索${req_company_shotname}内部员工...请稍后...</p>
 				<br><br><br><br>&nbsp;
 				<br><br><br><br>&nbsp;
 			</div>

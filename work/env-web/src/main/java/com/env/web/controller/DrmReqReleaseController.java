@@ -139,10 +139,10 @@ public class DrmReqReleaseController extends BaseController {
 	                ruService.save(ru);
 	                
 					// TODO smsSender 新增用户成功，发送短信告知账号及登录密码
-	                if (smsSender.sendSms(telephone, "您已成功注册好职客会员，用户名及密码默认为"+telephone+"，请及时修改密码" )) {
-	                	LOGGER.debug("短信发送成功，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
+	                if (smsSender.sendSms(telephone, "您已成功注册好知客会员，用户名及密码默认为"+telephone+"，请及时修改密码" )) {
+	                	LOGGER.debug("短信发送成功，短信内容：您已成功注册好知客会员，用户名及密码均为"+telephone);	
 	                }else{
-	                	LOGGER.error("短信发送失败，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
+	                	LOGGER.error("短信发送失败，短信内容：您已成功注册好知客会员，用户名及密码均为"+telephone);	
 	                }
 	                
 				}else{
@@ -241,9 +241,9 @@ public class DrmReqReleaseController extends BaseController {
 						if(StringUtils.checkEmail(email)){
 							LOGGER.debug("发送邮件"+email);
 							String un = (user==null)?"":(user.getNickname()==null)?"":user.getNickname();
-							mailSender.sendMail("好职客用户有偿咨询服务请求", 
-									"<h1>尊敬的好职客用户，您好；</h1><br/><h3>    好职客用户:"+un+"  向您咨询["
-										+req.getCompanyShotname()+"]的情况，愿向您支付诚意金["+req.getPrice()+"元]，请访问<a href=\"http://www.haozhike.cn\">好职客 www.haozhike.cn</a> 接单！</h3><br/><br/><h2>感谢在成长的道路上有您的帮助和指导！</h2>", 
+							mailSender.sendMail("好知客用户有偿咨询服务请求", 
+									"<h1>尊敬的好知客用户，您好；</h1><br/><h3>    好知客用户:"+un+"  向您咨询["
+										+req.getCompanyShotname()+"]的情况，愿向您支付诚意金["+req.getPrice()+"元]，请访问<a href=\"http://www.haozhike.cn\">好知客 www.haozhike.cn</a> 接单！</h3><br/><br/><h2>感谢在成长的道路上有您的帮助和指导！</h2>", 
 										email, "发布需求第一步", null, null, null, null);
 						}
 					}
@@ -266,7 +266,7 @@ public class DrmReqReleaseController extends BaseController {
 					}
 				}
 				// 向匹配成功的用户发送短信
-				smsSender.sendSms(phoneBuf.toString(), "好职客会员向您咨询"+req.getCompanyShotname()+"(公司)情况，诚意金"+req.getPrice()+"元，请登录查看http://www.haozhike.cn");
+				smsSender.sendSms(phoneBuf.toString(), "好知客会员向您咨询"+req.getCompanyShotname()+"(公司)情况，诚意金"+req.getPrice()+"元，请登录查看http://www.haozhike.cn");
 								
 //				request.getSession().setAttribute("match_success", 1);// 匹配成功标志
 				match_user_count = receiveUserIds.size();

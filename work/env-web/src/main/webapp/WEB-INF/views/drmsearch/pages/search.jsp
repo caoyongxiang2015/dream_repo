@@ -55,7 +55,7 @@
             <div class="col-xs-3 col-sm-4 search-result-reference">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="glyphicon glyphicon-new-window"></i>提醒好职客团队收录该公司</h3>
+                        <h3 class="panel-title"><i class="glyphicon glyphicon-new-window"></i>提醒好知客团队收录该公司</h3>
                     </div>
                     <div class="panel-body"><button class="btn btn-lg btn-success btn-block tellMe" >通知收录该公司及内部员工</button></div>
                 </div>
@@ -268,7 +268,7 @@
 			url:'${ctx}/collnotice/save?colltype=收录公司&companyname=${companyname}',
 			type:'post',
 			success:function(data){
-				alert("您的信息我们已经收到，好职客团队会尽快为您服务，感谢您使用好职客!")
+				alert("您的信息我们已经收到，好知客团队会尽快为您服务，感谢您使用好知客!")
 			},
 			error:function(data){
 				alert("-1");
@@ -286,7 +286,7 @@
 			url:'${ctx}/collnotice/save?colltype=收录员工&companyname=${companyname}',
 			type:'post',
 			success:function(data){
-				alert("您的信息我们已经收到，好职客团队会尽快为您服务，感谢您使用好职客!")
+				alert("您的信息我们已经收到，好知客团队会尽快为您服务，感谢您使用好知客!")
 			},
 			error:function(data){
 				alert("-1");

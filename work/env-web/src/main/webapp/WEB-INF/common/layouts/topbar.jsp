@@ -6,13 +6,13 @@
     <header class="navbar-fixed-top">
     	<div class="container clearfix">
     		<div class="logo left">
-	    		<a href="${ctx}" class="logo-link">
+	    		<a href="${ctx}/" class="logo-link">
 	    			<h1>好知客</h1>
 	    			<img src="${static_common}/hzk/images/haozhike2.png" alt="好知客">
 	    		</a>
     		</div>
     		<ul class="nav navbar-nav left" role="navigator">
-    			<li class="active"><a href="${ctx }">首页</a></li>
+    			<li class="active"><a href="${ctx }/">首页</a></li>
     			<%
 				PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
 				if(null!=user){// 已经登录%>
