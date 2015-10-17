@@ -88,7 +88,7 @@ public class MobileValidateCodeUtil {
      * @since [产品/模块版本](可选)
      */
     public static final MobileValidateCodeCheckResult checkMobileValidateCode(HttpSession session, String code) {
-    	System.out.println("验证手机验证码，当前时间"+ (new Date()) );
+//    	System.out.println("验证手机验证码，当前时间"+ (new Date()) );
         MobileValidateCode mobileValidateCode = (MobileValidateCode) session.getAttribute(MOBILE_VALIDATE_CODE_KEY);
         if (null == mobileValidateCode) {
             return MobileValidateCodeCheckResult.CODE_NULL;

@@ -7,8 +7,8 @@
     	<div class="container clearfix">
     		<div class="logo left">
 	    		<a href="${ctx}/" class="logo-link">
-	    			<h1>好知客</h1>
-	    			<img src="${static_common}/hzk/images/haozhike2.png" alt="好知客">
+	    			<h1>好职客</h1>
+	    			<img src="${static_common}/hzk/images/logo_haozhike24.png">
 	    		</a>
     		</div>
     		<ul class="nav navbar-nav left" role="navigator">

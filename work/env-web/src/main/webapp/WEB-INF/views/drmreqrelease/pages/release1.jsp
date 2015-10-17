@@ -61,7 +61,7 @@
 							<label class="col-xs-3 control-label" for="price">金额</label>
 							<div class="col-xs-7">
     							<div class="form-group form-group-lg">
-		    						<input type="text" id="price" name="price" placeholder="金额" class="form-control">
+		    						<input type="text" id="price" name="price" placeholder="请填写数字" class="form-control">
 		    					</div>
 							</div>
 							<div class="col-xs-2">
@@ -128,9 +128,10 @@
 					</div>
 					<div class="col-xs-3">
 						<div class="col-explain fn-left">
-    						<p class="help-block">1、请附上您的诚意金，金额范围一般是您期望薪资的5‰-15‰，单位人民币</p>
-    						<p class="help-block">2、您不需要立即托管诚意金，当有人接受了您的请求信息之后，需要您将诚意金托管到本平台，待服务结束后，再将金额转入对方账户</p>
+    						<p class="help-block">1、请附上您的诚意金(人民币)，金额范围一般是您期望薪资的5‰-20‰</p>
+    						<p class="help-block">2、您不需要立即托管诚意金，当有人接受了您的请求信息之后，需要您将诚意金托管到本平台，待服务结束满意后，再将金额转给对方</p>
     						<p class="help-block">3、金额多少不代表信息的价值</p>
+    						<p class="help-block">4、需要特殊说明的情况，可以在'备注'中说明</p>
     					</div>
     				</div>
     			</div>

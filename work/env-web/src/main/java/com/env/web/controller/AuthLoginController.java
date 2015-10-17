@@ -35,6 +35,7 @@ import com.env.dto.PtRoleUser;
 import com.env.dto.PtUser;
 import com.env.service.intf.IPtRoleUserService;
 import com.env.service.intf.IPtUserService;
+import com.env.util.D1SmsSender;
 import com.env.util.MobileValidateCodeUtil;
 import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
@@ -54,7 +55,8 @@ public class AuthLoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthLoginController.class);
 
     @Autowired
-    SmsSender smsSender;
+//    private SmsSender smsSender;
+	private D1SmsSender smsSender;
     
     @Autowired
     IPtUserService<PtUser> ptUserService;
@@ -297,13 +299,13 @@ public class AuthLoginController {
 	                StringBuffer content = new StringBuffer();
 	                switch (type) {
 	                    case 1:// 注册
-	                        content.append("您正在注册好知客会员,手机验证码").append(code).append(",有效期120秒");
+	                        content.append("尊敬的用户,您正在注册好职客会员,手机验证码").append(code).append(",有效期5分钟,请勿将验证码告知他人");//44个字
 	                        break;
 	                    case 2:// 找回密码
-	                        content.append("您正在找回密码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
+	                        content.append("尊敬的用户,您正在找回密码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
 	                        break;
 	                    case 3:// 修改手机号码
-	                        content.append("您正在修改手机号码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
+	                        content.append("尊敬的用户,您正在修改手机号码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
 	                        break;
 	                    default:
 	                        break;

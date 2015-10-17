@@ -197,13 +197,13 @@
 	                        <div class="contact-message">您已申请退款。祝您工作顺利！</div>
 	                    </c:if>
 	                    <c:if test="${nt.req.acceptState==5}">
-	                        <div class="contact-message">好知客感谢您的支持，很遗憾对方已主动放弃该帮助。</div>
+	                        <div class="contact-message">好职客感谢您的支持，很遗憾对方已主动放弃该帮助。</div>
 	                    </c:if>
 	                    <c:if test="${nt.req.acceptState==6}">
 	                        <div class="contact-message">双方咨询已经完成！您已确认将诚意金转给对方。祝您工作顺利！</div>
 	                    </c:if>
 	                    <c:if test="${nt.req.acceptState==7}">
-	                        <div class="contact-message">好知客感谢您的支持，遗憾对方已主动放弃该帮助。</div>
+	                        <div class="contact-message">好职客感谢您的支持，遗憾对方已主动放弃该帮助。</div>
 	                    </c:if>
 	                    
                         </div>
@@ -303,8 +303,8 @@
                                 <a class="J-giveup-help" onclick="giveup('${req.id}');">放弃帮助</a>
                             </div>
                             <div class="accept-message" style="display: none;">TA已经开放了联系方式${req.openContact }，待您诚意金托管后可见。</div>
-                            <div class="accept-message" style="display: none;">我们的支付宝账号是:xxxxx
-								<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好知客感谢您的支持！')">诚意金托管完成，通知客服审核</button> --%>
+                            <div class="accept-message" style="display: none;">好职客支付宝账号:cyx_shzu@163.com
+								<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好职客感谢您的支持！')">诚意金托管完成，通知客服审核</button> --%>
 								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="depositMoney('${req.id}')">诚意金托管完成，通知客服审核</button>
                             </div>
 	                    </c:if>
@@ -335,7 +335,7 @@
 	                    	<div class="send-message">
 	                    		<a href="${ctx}/release/fifth/${req.id}">您好，双方咨询已经完成！通知客服将诚意金转给对方，祝您好运！</a>
 	                    	<!-- pay_notice -->
-	                    		<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好知客感谢您的支持！')">请将诚意金转给对方</button> --%>
+	                    		<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好职客感谢您的支持！')">请将诚意金转给对方</button> --%>
 	                    		<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="payMoney('${req.id}');">请将诚意金转给对方</button>
 	                    	</div>
 	                    </c:if>  
@@ -454,7 +454,7 @@
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-body">
-					转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好知客感谢您的支持！
+					转账信息已经通知客服，客服两个工作日内转账给对方！<br/>好职客感谢您的支持！
 				</div>
 				<div class="modal-footer text-center">
 			        <button type="button" class="btn btn-primary btn-lg J-payMoney-confirm" data-dismiss="modal">确定</button>
@@ -469,7 +469,7 @@
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-body">
-					请点击确定按钮，通知客服诚意金已经托管完成，平台客服24小时内会审核您的付款情况；会尽快使您与公司员工取得联系！好知客感谢您的支持！
+					请点击确定按钮，通知客服诚意金已经托管完成，平台客服24小时内会审核您的付款情况；会尽快使您与公司员工取得联系！好职客感谢您的支持！
 				</div>
 				<div class="modal-footer text-center">
 			        <button type="button" class="btn btn-primary btn-lg J-depositMoney-confirm" data-dismiss="modal">确定</button>
@@ -627,7 +627,7 @@
 				url:'${ctx}/drmreq/tip/'+$(this).attr('data'),
 				type:'POST',
 				success : function(data) {
-					alert("\n重新发送成功;\n\n您也可以通过下方的‘意见反馈’把问题反馈给客服人员；请加好知客的客服QQ号419792519");
+					alert("\n重新发送成功;\n\n您也可以通过下方的‘意见反馈’把问题反馈给客服人员；请加好职客的客服QQ号419792519");
 				},
 				error:function(data) {
 					alert("发送失败，刷新后重试");

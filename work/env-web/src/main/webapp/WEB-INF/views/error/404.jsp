@@ -9,6 +9,7 @@
 <body>
 404 <br>
 抱歉，您访问的页面不存在
-<a href="javascript:window.location.href='${ctx}/env-web'">返回首页</a>
+<a href="javascript:window.location.href='${ctx}/'">返回首页</a>&nbsp;
+<a href="javascript:window.location.href='${ctx}/ptfeedback'">问题反馈</a>
 </body>
 </html>

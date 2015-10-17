@@ -30,6 +30,7 @@ import com.env.dto.DrmLetter;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmLetterService;
 import com.env.service.intf.IPtUserService;
+import com.env.util.D1SmsSender;
 //import com.env.util.Sender;
 import com.env.util.SmsSender;
 
@@ -47,7 +48,9 @@ import com.env.util.SmsSender;
 public class DrmLetterController extends BaseController {
 
     @Autowired
-    SmsSender smsSender;
+//    private SmsSender smsSender;
+	private D1SmsSender smsSender;
+    
 	/**
 	 * 自动注入DrmLetter业务层实现
 	 */
@@ -120,7 +123,7 @@ public class DrmLetterController extends BaseController {
 		return "redirect:/drmletter";
 	}
 
-	
+	/*
 	// TODO test
 	@ResponseBody
 	@RequestMapping(value="/send")
@@ -133,7 +136,7 @@ public class DrmLetterController extends BaseController {
         }
 		return "发送失败fail";
 	}
-
+*/
 
 	
 }
