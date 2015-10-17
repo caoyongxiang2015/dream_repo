@@ -62,7 +62,7 @@
 	    				<div class="next-btn">
 							<button class="btn btn-link" data-toggle="modal" data-target="#complainHim">投诉TA</button>
 	    				</div>
-	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
+	    				<p class="help-me text-danger"><!-- 亲，给本平台提提意见或建议吧，有机会赢取大奖哦！ --></p>
 	    			</div>
     				
     				</c:if>
@@ -74,7 +74,7 @@
 		    				<br>
 		    				您给TA的评分是${req.evalScore }分，您给TA的评价:${req.evalContent }
 		    				<br>
-		    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
+		    				<p class="help-me text-danger"><!-- 亲，给本平台提提意见或建议吧，有机会赢取大奖哦！ --></p>
 						</div>	    			
     				</c:if>
     				

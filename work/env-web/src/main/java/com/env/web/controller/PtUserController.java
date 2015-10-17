@@ -39,6 +39,7 @@ import com.env.dao.api.Page;
 import com.env.dao.api.QueryParams;
 import com.env.dto.PtUser;
 import com.env.service.intf.IPtUserService;
+import com.env.util.D1SmsSender;
 import com.env.util.MobileValidateCodeUtil;
 import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
@@ -61,7 +62,8 @@ public class PtUserController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PtUserController.class);
 
     @Autowired
-    SmsSender smsSender;
+//    private SmsSender smsSender;
+	private D1SmsSender smsSender;
     
 	/**
 	 * 自动注入PtUser业务层实现

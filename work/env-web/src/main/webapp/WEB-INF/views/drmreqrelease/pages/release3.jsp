@@ -36,7 +36,7 @@
 	    					<%-- <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" style="display: none;" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快让您与${req.companyShotname }的员工取得联系！好知客愿为您提供最优质的服务！谢谢！')">付款完成并通知客服审核</button> --%>
 	    					<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" style="display: none;" onclick="depositMoney('${req.id}')">诚意金托管完成，通知客服审核</button>
     					</div>
-	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
+	    				<p class="help-me text-danger"><!-- 亲，给本平台提提意见或建议吧，有机会赢取大奖哦！ --></p>
 	    			</div>
     			</div>
     		</div>

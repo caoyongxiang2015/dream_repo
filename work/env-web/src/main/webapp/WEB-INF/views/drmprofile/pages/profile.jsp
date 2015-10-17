@@ -9,6 +9,22 @@
 </head>
 <body>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	if("${save_profile_success}"== 1){
+		
+		var src = '${ctx}/profile/sendMailTip/' +$("#companyShotname").val()+ '/' + $("input[name='entity2.companyShotname']").val();
+		
+		$.ajax({
+			url:src,
+			type:'post',
+			success:function(){
+				
+			}
+		});
+	}
+});
+</script>
 
 	<!-- [[ 主体部分 -->
 	<div class="container" style="margin-top: 15px;">
@@ -321,7 +337,7 @@
 								</div>
 							</div>
 							<div class="col-xs-5 col-md-4">
-								<p class="help-block">除了电话外，还可以提供QQ联系方式，方便求职者联系您</p>
+								<p class="help-block">请提供QQ联系方式，方便求职者联系您</p>
 							</div>
 						</div>
 						<div class="row">

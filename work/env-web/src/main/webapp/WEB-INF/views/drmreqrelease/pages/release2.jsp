@@ -49,7 +49,7 @@ function wait_hide() {
 	    				<div class="next-btn">
 							&nbsp;
 	    				</div>
-	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
+	    				<p class="help-me text-danger"><!-- 亲，给本平台提提意见或建议吧，有机会赢取大奖哦！ --></p>
 	    		</div>
 	    			
     		</c:if>
@@ -86,7 +86,7 @@ function wait_hide() {
 	    				<div class="next-btn">
 							&nbsp;
 	    				</div>
-	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
+	    				<p class="help-me text-danger"><!-- 亲，给本平台提提意见或建议吧，有机会赢取大奖哦！ --></p>
 	    			</div>
     			</div>
     		</div>

@@ -52,7 +52,7 @@
 	    					<%-- <a onclick="backMoney('${req.id}');">申请退款</a> --%>
 							<!-- <button class="btn btn-link" data-toggle="modal" data-target="#sendPriviteMessage">给TA发私信</button> -->
 	    				</div>
-	    				<p class="help-me text-danger">亲，给本平台提提意见或建议吧，有机会赢取大奖哦！</p>
+	    				<p class="help-me text-danger"><!-- 亲，给本平台提提意见或建议吧，有机会赢取大奖哦！ --></p>
 	    			</div>
     			</div>
     		</div>

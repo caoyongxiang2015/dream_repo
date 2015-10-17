@@ -35,6 +35,7 @@ import com.env.dto.PtRoleUser;
 import com.env.dto.PtUser;
 import com.env.service.intf.IPtRoleUserService;
 import com.env.service.intf.IPtUserService;
+import com.env.util.D1SmsSender;
 import com.env.util.MobileValidateCodeUtil;
 import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
@@ -54,7 +55,8 @@ public class AuthLoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthLoginController.class);
 
     @Autowired
-    SmsSender smsSender;
+//    private SmsSender smsSender;
+	private D1SmsSender smsSender;
     
     @Autowired
     IPtUserService<PtUser> ptUserService;

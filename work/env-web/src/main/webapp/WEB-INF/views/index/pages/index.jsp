@@ -28,7 +28,7 @@
 		    <div class="item active">
 			    <div class="container">
 			        <h2>只为帮您选择一个理想职业</h2>
-					<p style="font-size: 28px;">已收录1500+(南京)公司信息 — IT/互联网/通信</p>
+					<p style="font-size: 28px;">已收录1500+公司信息 — IT/互联网/通信 (南京)</p>
 					<p><a class="btn btn-purple btn-lg seek-advice" href="javascript:window.location.href='${ctx}/release/first'" role="button">找人咨询</a></p>
 
 		      </div>
@@ -36,7 +36,7 @@
 		    <div class="item">
 			    <div class="container">
 		        <h2>只为让您掌握的信息产生价值</h2>
-				<p style="font-size: 28px;">只为让您帮助更多的人</p>
+				<p style="font-size: 28px;">其实您可以帮助更多的人</p>
 				<!-- <p><a class="btn btn-purple btn-lg seek-advice" style="color: orange;" href="#" role="button">收到一条请求信息</a></p> -->
 		      </div>
 		    </div>
@@ -173,31 +173,31 @@
 	    		<div class="panel-heading">
 	    			<h3 class="panel-title">1 需求发布</h3>
 	    		</div>
-	    		<div class="panel-body">您可以发布需求，寻找该公司的内部员工；只要输入公司名称的简称即可，平台系统会通过后台大数据分析匹配相应的内部员工</div>
+	    		<div class="panel-body">您可以发布需求，寻找该公司的内部员工；只要输入公司名称即可，好知客通过后台大数据分析匹配相应的内部员工</div>
 	    	</div>
 	    	<div class="col-5 panel panel-primary">
 	    		<div class="panel-heading">
 	    			<h3 class="panel-title">2 等待应答</h3>
 	    		</div>
-	    		<div class="panel-body">需求发布之后，会将您的需求通知公司的内部员工，等待TA的回应</div>
+	    		<div class="panel-body">需求发布之后，会将您的需求通知公司的内部员工，等待他们回应</div>
 	    	</div>
 	    	<div class="col-5 panel panel-primary">
 	    		<div class="panel-heading">
 	    			<h3 class="panel-title">3 诚意金托管</h3>
 	    		</div>
-	    		<div class="panel-body">公司内部员工接受您的请求后，需要支付给对方的诚意金先托管在本平台，服务结束满意后，平台再将资金转给对方，服务过程中本平台不收取任何费用</div>
+	    		<div class="panel-body">当公司内部员工接受您的请求后，需要您将诚意金先托管在好知客，服务结束满意后，好知客再将资金转给对方，服务过程中好知客不收取任何费用</div>
 	    	</div>
 	    	<div class="col-5 panel panel-primary">
 	    		<div class="panel-heading">
 	    			<h3 class="panel-title">4 服务</h3>
 	    		</div>
-	    		<div class="panel-body">对方会开放联系方式给您，您可以通过手机号、邮箱、站内信或者QQ号向TA咨询公司的信息</div>
+	    		<div class="panel-body">对方会开放联系方式(QQ号/邮箱/手机号/站内信)给您，您可以通过对方提供的联系方式向TA咨询目标公司的信息</div>
 	    	</div>
 	    	<div class="col-5 panel panel-primary">
 	    		<div class="panel-heading">
 	    			<h3 class="panel-title">5 评价并结束</h3>
 	    		</div>
-	    		<div class="panel-body">咨询完成后，您可以对TA或者对提供的信息作出评价，并结束流程</div>
+	    		<div class="panel-body">咨询完成后，您可以对TA或对好知客作出评价，并结束流程</div>
 	    	</div>
 	    </div>
 	    <div class="section-title">
@@ -207,19 +207,19 @@
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
 	    			<h4 class="question">好知客是个什么样的网站？</h4>
-	    			<p class="answer">白领在换工作时，往往对公司信息把握不够，导致工作不满意。好知客旨在帮助白领在换工作之前能够准确的把握目标公司的信息，不打无准备的仗，提高白领与企业之间的信息对等性</p>
+	    			<p class="answer">白领在换工作时，往往对公司信息把握不够，导致工作不满意。好知客旨在帮助白领在换工作之前能够准确的把握目标公司的信息，降低换工作付出的代价，提高白领与企业之间的信息对等性。好知客是白领职场经验知识交流平台。</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
 	    			<h4 class="question">我在好知客能得到什么？</h4>
-	    			<p class="answer">可以直接在好知客找到企业的内部员工，通过他们了解最真实最新的公司信息；可以为他人提供自己所在公司的信息，帮助他人同时赚取一定费用，也可以为别人推荐工作，还可以认识到同行业的朋友</p>
+	    			<p class="answer">可以直接在好知客找到企业的内部员工，通过他们了解最真实最新的公司信息；可以为他人提供自己所在公司的信息，帮助他人同时赚取一定费用，也可以为别人推荐工作，还可以认识到同行的朋友</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
 	    			<h4 class="question">我想了解的公司没有搜索到怎么办？</h4>
-	    			<p class="answer">好知客平台首先会收集搜索频率较高的公司信息，然后也尽可能多的收集搜索频率不高的公司信息，但难免会有很多公司信息当前没有收集到，如果您没有搜索到，可以通知我们，我们在第一时间搜集该公司信息</p>
+	    			<p class="answer">好知客平台首先会收集搜索频率较高或发布需求较多的公司信息，也尽可能多的收集搜索频率不高的公司信息，但难免会有很多公司信息当前没有收集到，如果您没有搜索到，可以通知我们，我们在第一时间搜集该公司信息</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
