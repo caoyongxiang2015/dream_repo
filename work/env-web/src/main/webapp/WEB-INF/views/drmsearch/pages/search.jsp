@@ -321,7 +321,7 @@
 				}
 			},
 			error:function(data){
-				alert("-1");
+				alert("登录出现异常，请刷新重试，如果仍不能登录请联系客服，或通过底部意见反馈！");
 			}
 		});
 	}
@@ -335,8 +335,29 @@
 	</script>
 	
 	
-	
     	<script type="text/javascript">
+	
+	
+var InterValObj; //timer变量，控制时间
+var count = 120; //间隔函数，1秒执行
+var curCount;//当前剩余秒数
+	
+	
+
+//timer处理函数
+function SetRemainTime() {
+          if (curCount == 0) {                
+              window.clearInterval(InterValObj);//停止计时器
+              $("#getCodeSMS").removeAttr("disabled");//启用按钮
+              $("#getCodeSMS").text("重新发送验证码");
+          }
+          else {
+              curCount--;
+              $("#getCodeSMS").text("请" + curCount + "秒内输入验证码");
+
+          }
+}
+
 		//获取手机验证码
 		$("#getCodeSMS").on('click',function(){
 			$("#regiditmsg").hide();
@@ -351,13 +372,25 @@
 				url:'${ctx}/auth/register/getCode?type=1&pwd=1&phone='+$("#inputPhone").val(),
 				type:'post',
 				success : function(data) {
-					alert(data.message);
+					//alert(data.message);
+					if(data.result==false){
+						$("div.alert-failure").text(data.message);
+						$("div.alert-failure").show();
+					}else{
+						curCount = count;
+						//设置button效果，开始计时
+					     $("#getCodeSMS").attr("disabled", "true");
+					     $("#getCodeSMS").text("请" + curCount + "秒内输入验证码");
+					     InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+					}
 				},
 				error:function(){
 					alert("手机验证码获取失败");
 				}  
 			});
 		})
+		
+		
 		
 		// 注册
 		$(".registerUser").on('click',function(){
@@ -380,7 +413,7 @@
 				return ;
 			}
 			if(''==authCode){
-				$("#regiditmsg").text("请填写手机号验证码");
+				$("#regiditmsg").text("请填写手机验证码");
 				$("#regiditmsg").show();
 				return ;
 			}

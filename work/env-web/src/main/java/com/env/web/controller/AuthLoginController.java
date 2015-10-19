@@ -299,7 +299,7 @@ public class AuthLoginController {
 	                StringBuffer content = new StringBuffer();
 	                switch (type) {
 	                    case 1:// 注册
-	                        content.append("尊敬的用户,您正在注册好职客会员,手机验证码").append(code).append(",有效期5分钟,请勿将验证码告知他人");//44个字
+	                        content.append("尊敬的用户,您正在注册好职客会员,手机验证码").append(code).append(",有效期120秒,请勿将验证码告知他人");//44个字
 	                        break;
 	                    case 2:// 找回密码
 	                        content.append("尊敬的用户,您正在找回密码，手机动态密码").append(code).append("，有效期120秒(工作人员不会向您索要，请勿向任何人泄露)");
@@ -353,7 +353,7 @@ public class AuthLoginController {
                 }*/
             	if (ptUserService.isExistLoginid(phone)) {
                     map.put("key", "phone");
-                    map.put("message", "手机号码已存在");
+                    map.put("message", "手机号码已存在,请直接登录");
                     return map;
                 }
             } else {

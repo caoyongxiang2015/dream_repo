@@ -18,7 +18,7 @@
 	<div class="jumbotron">
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 		  <!-- Indicators -->
-		  <ol class="carousel-indicators">
+		  <ol class="carousel-indicators" style="width: 50%">
 		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 		    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 		    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
@@ -302,7 +302,7 @@
 	<script type="text/javascript">
 
 var InterValObj; //timer变量，控制时间
-var count = 300;//120; //间隔函数，1秒执行
+var count = 120; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
 
      

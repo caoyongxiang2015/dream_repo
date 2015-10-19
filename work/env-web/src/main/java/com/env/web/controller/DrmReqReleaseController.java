@@ -139,7 +139,7 @@ public class DrmReqReleaseController extends BaseController {
 	                ruService.save(ru);
 	                
 					// TODO smsSender 新增用户成功，发送短信告知账号及登录密码
-	                if (smsSender.sendSms(telephone, "您已成功注册好职客会员，用户名及密码默认为"+telephone+"，请及时修改密码" )) {
+	                if (smsSender.sendSms(telephone, "尊敬的用户,您好:您已成功注册好职客会员,用户名及密码均为"+telephone+",请您及时修改密码" )) {//49个字
 	                	LOGGER.debug("短信发送成功，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
 	                }else{
 	                	LOGGER.error("短信发送失败，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
@@ -266,7 +266,7 @@ public class DrmReqReleaseController extends BaseController {
 					}
 				}
 				// 向匹配成功的用户发送短信
-				smsSender.sendSms(phoneBuf.toString(), "好职客会员向您咨询"+req.getCompanyShotname()+"(公司)情况，诚意金"+req.getPrice()+"元，请登录查看http://www.haozhike.cn");
+				smsSender.sendSms(phoneBuf.toString(), "好职客会员向您咨询"+req.getCompanyShotname()+"(公司)情况，诚意金"+req.getPrice()+"元，请登录查看http://www.haozhike.cn:8888");
 								
 //				request.getSession().setAttribute("match_success", 1);// 匹配成功标志
 				match_user_count = receiveUserIds.size();
