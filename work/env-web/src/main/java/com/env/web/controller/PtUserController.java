@@ -41,7 +41,6 @@ import com.env.dto.PtUser;
 import com.env.service.intf.IPtUserService;
 import com.env.util.D1SmsSender;
 import com.env.util.MobileValidateCodeUtil;
-import com.env.util.SmsSender;
 import com.env.util.bean.MobileValidateCodeCheckResult;
 import com.env.vo.PtUserVo;
 import com.google.gson.Gson;

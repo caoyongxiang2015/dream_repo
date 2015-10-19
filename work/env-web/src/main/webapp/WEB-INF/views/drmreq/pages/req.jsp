@@ -304,7 +304,6 @@
                             </div>
                             <div class="accept-message" style="display: none;">TA已经开放了联系方式${req.openContact }，待您诚意金托管后可见。</div>
                             <div class="accept-message" style="display: none;">好职客支付宝账号:cyx_shzu@163.com
-								<%-- <button class="btn btn-lg btn-primary" data-toggle="modal" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快使您与${req.companyShotname }公司员工取得联系！好职客感谢您的支持！')">诚意金托管完成，通知客服审核</button> --%>
 								<button class="btn btn-lg btn-primary" data-toggle="modal" onclick="depositMoney('${req.id}')">诚意金托管完成，通知客服审核</button>
                             </div>
 	                    </c:if>

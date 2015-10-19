@@ -331,10 +331,8 @@ public class DrmReqController extends BaseController {
 			// 邮件通知好职客
 			MailSender mailSender = new MailSender();
 			mailSender.sendMail("[好职客]提醒：诚意金托管完成通知,托管人id="+old.getSendUserId()+",reqid="+reqid, "", "haozhike@yeah.net", "需求-资金托管完成通知客服", null, null, null, null);
-			
 			// 短信通知
 			//smsSender.sendSms(D1SmsSender.CUSTOMER_PHONE, "提醒:资金托管通知reqid="+reqid+",托管人id="+old.getSendUserId());
-			
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
