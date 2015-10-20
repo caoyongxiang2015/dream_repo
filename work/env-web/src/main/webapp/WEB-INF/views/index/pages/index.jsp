@@ -28,7 +28,7 @@
 		    <div class="item active">
 			    <div class="container">
 			        <h2>只为帮您选择一个理想职业</h2>
-					<p style="font-size: 28px;">已收录(南京)<font style="font-size: 32px;color: orange;">1,5</font><font style="font-size: 24px;color: orange;">00+</font>公司信息 — IT/互联网/通信 </p>
+					<p style="font-size: 28px;">已收录(南京)<font style="font-size: 32px;color: orange;">1,5</font><font style="font-size: 24px;color: orange;">00+</font>公司的员工 — IT/互联网/通信 </p>
 					<p><a class="btn btn-purple btn-lg seek-advice" href="javascript:window.location.href='${ctx}/release/first'" role="button">找人咨询</a></p>
 
 		      </div>
@@ -213,7 +213,7 @@
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
 	    		<div class="qa-text">
 	    			<h4 class="question">我在好职客能得到什么？</h4>
-	    			<p class="answer">可以直接在好职客找到企业的内部员工，通过他们了解最真实最新的公司信息；可以为他人提供自己所在公司的信息，帮助他人同时赚取一定费用，也可以为别人推荐工作，还可以认识到同行的朋友</p>
+	    			<p class="answer">1、可以直接在好职客找到企业的内部员工，通过他们了解最真实最新的公司内部信息；2、可以为他人提供自己所在公司的信息，帮助他人同时赚取一定费用；3、可以找同行为自己推荐工作，也可为别人推荐工作，同时认识到同行的朋友</p>
 	    		</div>
 	    	</div>
 	    	<div class="col-sm-12 col-md-6 col-lg-6">
