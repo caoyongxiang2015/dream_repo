@@ -32,6 +32,15 @@
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
+		    		<div class="col-xs-4">咨询的公司：南京维数软件技术有限公司</div>
+		    		<div class="col-xs-2">昵称：高女士</div>
+		    		<div class="col-xs-3">联系方式：133********</div>
+		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
+		    	</div>
+		    	<div class="judgement">我在维数软件工作很久了，怎么说呢，既有优点也有缺点吧，如果想了解维数软件的情况，可以来好职客找到我，我会客观的把她好的一面，不好的一面分析给您。我也看了网上的评价，很多也有失客观。</div>
+	    	</div>
+		    <div class="example-item">
+		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：苏宁易购</div>
 		    		<div class="col-xs-2">用户：孟女士</div>
 		    		<div class="col-xs-3">联系方式：150****6293</div>
@@ -88,46 +97,19 @@
 		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：南京优玛软件科技有限公司</div>
 		    		<div class="col-xs-2">昵称：张先生</div>
-		    		<div class="col-xs-3">联系方式：130********</div>
+		    		<div class="col-xs-3">联系方式：130****4560</div>
 		    		<div class="col-xs-3">2015-10-31 18:55:23</div>
 		    	</div>
-		    	<div class="judgement"></div>
-	    	</div>
-		    <div class="example-item">
-		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：南京维数软件技术有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
-		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
-		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
-	    	</div>
-		    <div class="example-item">
-		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：南京熙泰信息技术有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
-		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
-		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
-	    	</div>
-		    <div class="example-item">
-		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：南京鸿美信息技术有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
-		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
-		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
+		    	<div class="judgement">上天接到优玛的offer，一直在纠结要不要去，网上搜索的信息还是不太可信。在好职客上找了两个内部员工，他们的说法基本上差不多，所以就更坚定了我的想法，非常感谢他们。</div>
 	    	</div>
 		    <div class="example-item">
 		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：江苏连邦信息技术有限公司</div>
-		    		<div class="col-xs-2">昵称：XXXXX</div>
-		    		<div class="col-xs-3">联系方式：188********</div>
+		    		<div class="col-xs-2">昵称：夏日之雪</div>
+		    		<div class="col-xs-3">联系方式：186****6329</div>
 		    		<div class="col-xs-3">2015-08-31 20:00:00</div>
 		    	</div>
-		    	<div class="judgement">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
+		    	<div class="judgement">很早之前就听过连邦，公司挺大的，之前就想去，一直没机会，偶然在微博上看到好职客网站，就在上面找到了连邦里的一个朋友，他人蛮好的，最后还帮我内推了一下，非常感谢他。其实钱也不多，重要的是认识到了同行的朋友。</div>
 	    	</div>
     	</div>
 	</div>
