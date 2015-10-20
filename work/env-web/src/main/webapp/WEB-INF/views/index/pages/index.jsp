@@ -28,7 +28,7 @@
 		    <div class="item active">
 			    <div class="container">
 			        <h2>只为帮您选择一个理想职业</h2>
-					<p style="font-size: 28px;">已收录1500+公司信息 — IT/互联网/通信 (南京)</p>
+					<p style="font-size: 28px;">已收录(南京)<font style="font-size: 32px;color: orange;">1,5</font><font style="font-size: 24px;color: orange;">00+</font>公司信息 — IT/互联网/通信 </p>
 					<p><a class="btn btn-purple btn-lg seek-advice" href="javascript:window.location.href='${ctx}/release/first'" role="button">找人咨询</a></p>
 
 		      </div>
