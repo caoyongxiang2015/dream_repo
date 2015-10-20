@@ -30,7 +30,7 @@
 	    			<div class="send-respond">
 	    				<p class="text-success"><i class="glyphicon glyphicon-ok"></i>恭喜您，您发布的请求帮助信息已有人应答！</p>
 	    				<div class="help-block">${req.companyShotname }内部员工接受了您的请求，请您托诚意金到本平台，待服务结束后，好职客再将诚意金转给对方，谢谢</div>
-	    				<div class="help-block text-center J-account-info" style="display: none;">本平台支付宝帐号是：xxxxxx，转账请联系客服</div>
+	    				<div class="help-block text-center J-account-info" style="display: none;">好知客支付宝帐号：cyx_shzu@163.com，转完账后请联系客服QQ 419792519</div>
 	    				<div class="next-btn">
 		    				<button class="btn btn-primary btn-lg btn-block J-sendMoney">托管赏金</button>
 	    					<%-- <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" style="display: none;" onclick="nn.returnStatus('付款完成信息已经通知客服，平台客服24小时内会审核您的付款情况；会尽快让您与${req.companyShotname }的员工取得联系！好职客愿为您提供最优质的服务！谢谢！')">付款完成并通知客服审核</button> --%>
