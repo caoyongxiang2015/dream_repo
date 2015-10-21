@@ -22,13 +22,14 @@
 		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 		    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 		    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
 		  </ol>
 		  <!-- Wrapper for slides -->
 		  <div class="carousel-inner" role="listbox">
 		    <div class="item active">
 			    <div class="container">
 			        <h2>只为帮您选择一个理想职业</h2>
-					<p style="font-size: 28px;">已收录(南京)<font style="font-size: 32px;color: orange;">1,5</font><font style="font-size: 24px;color: orange;">00+</font>公司的员工 — IT/互联网/通信 </p>
+					<p style="font-size: 28px;">已收录(南京)<font style="font-size: 36px;color: orange;">1,5</font><font style="font-size: 24px;color: orange;">00+</font>公司的员工 — IT/互联网/通信 </p>
 					<p><a class="btn btn-purple btn-lg seek-advice" href="javascript:window.location.href='${ctx}/release/first'" role="button">找人咨询</a></p>
 
 		      </div>
@@ -36,15 +37,19 @@
 		    <div class="item">
 			    <div class="container">
 		        <h2>只为让您掌握的信息产生价值</h2>
-				<p style="font-size: 28px;">其实您可以帮助更多的人</p>
-				<!-- <p><a class="btn btn-purple btn-lg seek-advice" style="color: orange;" href="#" role="button">收到一条请求信息</a></p> -->
+				<p style="font-size: 28px;">其实您可以帮助更多的人，还能赚取<font style="font-size: 36px;color: orange;"><i>收益</i></font></p>
 		      </div>
 		    </div>
 		    <div class="item">
 			    <div class="container">
 		        <h2>面试是一个不对等的双向选择</h2>
-				<p style="font-size: 28px;">解决您与企业之间的信息不对等</p>
-				<p></p>
+				<p style="font-size: 28px;">邀请内部员工为您提供<font style="font-size: 36px;color: orange;"><i>多对一</i></font>的咨询服务</p>
+		      </div>
+		    </div>
+		    <div class="item">
+			    <div class="container">
+		        <h2>为您架起沟通的桥梁</h2>
+				<p style="font-size: 28px;">您可以认识更多更优秀的同行<font style="font-size: 36px;color: orange;"><i>朋友</i></font></p>
 		      </div>
 		    </div>
 		  </div>
