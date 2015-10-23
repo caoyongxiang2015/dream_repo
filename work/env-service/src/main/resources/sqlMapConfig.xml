@@ -18,6 +18,7 @@
 	
 	<sqlMap resource="ibatis/DrmDept.xml" />
 	<sqlMap resource="ibatis/DrmCompany.xml" />
+	<sqlMap resource="ibatis/DrmCompanyContent.xml" />
 	<sqlMap resource="ibatis/DrmCompanyLib.xml" />
 	<sqlMap resource="ibatis/DrmComplain.xml" />
 	<sqlMap resource="ibatis/DrmHelpInfo.xml" />

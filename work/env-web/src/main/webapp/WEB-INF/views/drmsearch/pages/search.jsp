@@ -14,7 +14,7 @@
     <div class="container" style="margin-top: 15px;">
     	<section class="search-result row">
     	
-    	<c:if test="${null==company}">
+    	<c:if test="${null == company}">
     	
     	
             <div class="col-xs-9 col-sm-8 panel">
@@ -64,7 +64,7 @@
             </c:if>
             
             
-    	<c:if test="${null!=company}">
+    	<c:if test="${null != company}">
             <div class="col-xs-9 col-sm-8 panel">
                 <div class="search-result-info panel-body">
                     <div class="row">
@@ -101,13 +101,26 @@
                         </div>
                     </div>
                     
-                    
             		
             		<c:if test="${hascurcompany==1 && usercount<1}">
                     <div class="row">
                         <div class="col-xs-2"></div>
                         <div class="col-xs-10 company-introduce" style="color: green">
                         		非常抱歉，我们目前还没有收录 [${companyname}] 内部员工信息，如果您想找到${companyname}内部员工，请点击右侧按钮，我们会尽快为您服务，谢谢！
+                        </div>
+                    </div>
+                    </c:if>
+                    
+            		<c:if test="${usercount > 0 && company_content.size()>0}">
+                    <div class="row">
+                        <div class="col-xs-2">内部员工可提供的信息</div>
+                        <div class="col-xs-10 great-area">
+                        	<c:forEach var="ct" items="${company_content }" varStatus="status">
+                        		
+	                        	<span class='label <c:if test="${status.index==0}">label-success </c:if> <c:if test="${status.index==1}">label-primary </c:if> <c:if test="${status.index==2}">label-warning </c:if> <c:if test="${status.index==3}">label-info </c:if> <c:if test="${status.index>=4}">label-success </c:if>'   >
+	                        	${ct}
+	                        	</span>
+                        	</c:forEach>
                         </div>
                     </div>
                     </c:if>

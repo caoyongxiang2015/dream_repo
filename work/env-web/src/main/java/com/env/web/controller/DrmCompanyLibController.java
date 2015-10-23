@@ -13,6 +13,7 @@
  */
 package com.env.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.env.constant.Constants;
 import com.env.dto.DrmCompany;
+import com.env.dto.DrmCompanyContent;
 import com.env.dto.DrmCompanyLib;
 import com.env.dto.DrmSearchRecord;
 import com.env.dto.PtUser;
+import com.env.service.intf.IDrmCompanyContentService;
 import com.env.service.intf.IDrmCompanyLibService;
 import com.env.service.intf.IDrmCompanyService;
 import com.env.service.intf.IDrmSearchRecordService;
@@ -51,6 +54,8 @@ public class DrmCompanyLibController extends BaseController {
 
 	@Autowired
 	private IDrmCompanyService<DrmCompany> drmCompanyService;
+	@Autowired
+	private IDrmCompanyContentService<DrmCompanyContent> drmCompanyContentService;
 
 	@Autowired
 	private IDrmSearchRecordService<DrmSearchRecord> drmSearchRecordService;
@@ -76,15 +81,29 @@ public class DrmCompanyLibController extends BaseController {
 		if(libs!=null && libs.size()>0 && libs.get(0)!=null && libs.get(0).getContactUsernum()!=null){
 			contactUsernum = libs.get(0).getContactUsernum();
 		}
-				
+		DrmCompanyLib lib = (libs==null||libs.size()<1)?null:libs.get(0);
     	request.setAttribute("usercount", contactUsernum);
     	request.setAttribute("companyname", name);
-    	request.setAttribute("company", (libs==null||libs.size()<1)?null:libs.get(0));
+    	request.setAttribute("company", lib);
     	
     	PtUser user = (PtUser) request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
     	request.setAttribute("logined", (user==null)?0:1);// logined:未登录，1已登录
     	
-    	// TODO 没有填写自己所在公司 or 没有登录的 ： 提醒用户登录并完善信息
+    	// 查询用户搜索的公司，会员提供的信息
+    	if(null!=lib){
+    		List<DrmCompanyContent> contents = drmCompanyContentService.getByCompanyLibId(lib.getId());
+    		String ct = (contents==null||contents.size()<1) ? null:contents.get(0).getCotent();
+    		List contentList = new ArrayList();
+    		if(null!=ct && !"".equals(ct)){
+    			String []cts = ct.split("，");
+    			for(int i=0;i<cts.length;i++){
+    				contentList.add(cts[i]);
+    			}
+    		}
+			request.setAttribute("company_content", contentList);// 
+    	}
+    	
+    	// 没有填写自己所在公司 or 没有登录的 ： 提醒用户登录并完善信息
     	
     	if(null!=user){// 已经登录
     		if(null==user.getCurCompanyName() || "".equals(user.getCurCompanyName())){

@@ -104,6 +104,15 @@
 	    	</div>
 		    <div class="example-item">
 		    	<div class="row">
+		    		<div class="col-xs-4">咨询的公司：南京索亚软件有限公司</div>
+		    		<div class="col-xs-2">昵称：王女士</div>
+		    		<div class="col-xs-3">联系方式：130********</div>
+		    		<div class="col-xs-3">2015-10-31 17:02:19</div>
+		    	</div>
+		    	<div class="judgement">希望好职客还是需要把网站做的好看些，呵呵，使用过程中出了一点小小的问题，不过客服蛮耐心的。希望越来越好吧。。。</div>
+	    	</div>
+		    <div class="example-item">
+		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：江苏连邦信息技术有限公司</div>
 		    		<div class="col-xs-2">昵称：夏日之雪</div>
 		    		<div class="col-xs-3">联系方式：186****6329</div>
