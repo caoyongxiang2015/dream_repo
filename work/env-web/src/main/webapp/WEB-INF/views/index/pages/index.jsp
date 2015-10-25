@@ -314,8 +314,13 @@
     
 	<!-- 登录窗口 [[ -->
 	<div class="modal fade" id="xuanchuanModel" role="dialog" aria-labelledby="xuanchuanModel" style="text-align: center;margin-top: 30px;">
-							<a href="javascript:;" class="posa" style="font-size: 24px;">关闭</a> 
+							<span class="daojishi_xc" style="font-size: 14px;color: #fff">13秒后自动关闭</span>
+							<div>
 								<img alt="" src="${static_common }/hzk/images/xuanchuanye.png" style="">
+							<span>
+							<a href="javascript:;" class="posa xuanchuanye_close" style="font-size: 24px;color: #fff">关闭</a> 
+							</span>
+							</div>
 	</div>
 	<!-- 登录窗口 ]]-->
 	
@@ -332,15 +337,34 @@
 <script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
 
 <script type="text/javascript">
+
+var InterValObj_xc; //timer变量，控制时间
+var curCount_xc=130;// 当前剩余秒数
+
+
 $(document).ready(function(){
 	$("#xuanchuanModel").modal("show");
 	
-	// 13秒钟自动隐藏
-	setTimeout("hideXuanchuanModel()",1000*13);
+	InterValObj_xc = window.setInterval(SetRemainTime_xc, 1000); //启动计时器，1秒执行一次
+	
+	$(".xuanchuanye_close").on('click',function(){
+		$("#xuanchuanModel").modal("hide");
+	});
 });
-function hideXuanchuanModel(){
-	$("#xuanchuanModel").modal("hide");
+
+
+//timer处理函数
+function SetRemainTime_xc() {
+     if (curCount_xc == 0) {                
+		window.clearInterval(InterValObj_xc);//停止计时器
+		$("#xuanchuanModel").modal("hide");
+     }
+     else {
+         curCount_xc--;
+		$(".daojishi_xc").text(curCount_xc + "秒后自动关闭");
+     }
 }
+
 </script>
 
 	<script type="text/javascript">
