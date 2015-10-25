@@ -313,10 +313,10 @@
     
     
 	<!-- 登录窗口 [[ -->
-	<div class="modal fade" id="xuanchuanModel" role="dialog" aria-labelledby="xuanchuanModel" style="text-align: center;margin-top: 30px;">
+	<div class="modal fade" id="xuanchuanModel" role="dialog" aria-labelledby="xuanchuanModel" style="text-align: center;margin-top:15px;">
 							<span class="daojishi_xc" style="font-size: 14px;color: #fff">13秒后自动关闭</span>
 							<div>
-								<img alt="" src="${static_common }/hzk/images/xuanchuanye.png" style="">
+								<img alt="" src="${static_common }/hzk/images/xuanchuanye.png" style="width:70%">
 							<span>
 							<a href="javascript:;" class="posa xuanchuanye_close" style="font-size: 24px;color: #fff">关闭</a> 
 							</span>
