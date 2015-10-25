@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmCompanyContent">
+
+	<typeAlias alias="drmCompanyContentEntity" type="com.env.dto.DrmCompanyContent" />
+	<resultMap id="drmCompanyContent" class="com.env.dto.DrmCompanyContent">
+		<result property="id" column="id" />
+		<result property="cotent" column="cotent" />
+		<result property="companyLibId" column="company_lib_id" />
+		<result property="disabled" column="disabled" />
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmCompanyContent.columns">
+	    <![CDATA[
+        id, company_lib_id, disabled, cotent
+	    ]]>
+	</sql>
+
+	<select id="getByCompanyLibId" resultMap="drmCompanyContent">
+		SELECT
+		<include refid="drmCompanyContent.columns" />
+	    <![CDATA[
+	        FROM drm_company_content 
+	        WHERE 
+		        company_lib_id = #companyLibId#
+	    ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmCompanyContent">
+		SELECT
+		<include refid="drmCompanyContent.columns" />
+	    <![CDATA[
+		    FROM drm_company_lib
+	    ]]>
+	</select>
+	
+	
+</sqlMap>
