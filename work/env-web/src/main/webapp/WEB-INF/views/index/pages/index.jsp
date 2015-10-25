@@ -318,7 +318,7 @@
 							<div>
 								<img alt="" src="${static_common }/hzk/images/xuanchuanye.png" style="width:70%">
 							<span>
-							<a href="javascript:;" class="posa xuanchuanye_close" style="font-size: 24px;color: #fff">关闭</a> 
+							<a href="javascript:;" class="posa xuanchuanye_close" style="font-size: 24px;color: #ff7f27">关闭</a> 
 							</span>
 							</div>
 	</div>
