@@ -314,7 +314,7 @@
     
 	<!-- 登录窗口 [[ -->
 	<div class="modal fade" id="xuanchuanModel" role="dialog" aria-labelledby="xuanchuanModel" style="text-align: center;margin-top:15px;">
-							<span class="daojishi_xc" style="font-size: 14px;color: #fff">13秒后自动关闭</span>
+							<span class="daojishi_xc" style="font-size: 14px;color: #fff">14秒后自动关闭</span>
 							<div>
 								<img alt="" src="${static_common }/hzk/images/xuanchuanye.png" style="width:70%">
 							<span>
@@ -339,7 +339,7 @@
 <script type="text/javascript">
 
 var InterValObj_xc; //timer变量，控制时间
-var curCount_xc=130;// 当前剩余秒数
+var curCount_xc=14;// 当前剩余秒数
 
 
 $(document).ready(function(){
