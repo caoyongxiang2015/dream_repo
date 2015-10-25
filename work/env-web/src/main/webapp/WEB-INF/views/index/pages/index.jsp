@@ -309,12 +309,39 @@
     	</div>
     </div>
     
+    
+    
+    
+	<!-- 登录窗口 [[ -->
+	<div class="modal fade" id="xuanchuanModel" role="dialog" aria-labelledby="xuanchuanModel" style="text-align: center;margin-top: 30px;">
+							<a href="javascript:;" class="posa" style="font-size: 24px;">关闭</a> 
+								<img alt="" src="${static_common }/hzk/images/xuanchuanye.png" style="">
+	</div>
+	<!-- 登录窗口 ]]-->
+	
+    
+    
+    
+    
+    
+    
+    
 <script src="${static_common}/hzk/js/jquery.min.js"></script>
 
 <script type="text/javascript" src="${static_common}/hzk/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
 
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#xuanchuanModel").modal("show");
+	
+	// 13秒钟自动隐藏
+	setTimeout("hideXuanchuanModel()",1000*13);
+});
+function hideXuanchuanModel(){
+	$("#xuanchuanModel").modal("hide");
+}
+</script>
 
 	<script type="text/javascript">
 
