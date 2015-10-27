@@ -41,8 +41,8 @@ import com.env.vo.PtPermissionVo;
  * @see
  * @since 1.0
  */
-@Controller
-@RequestMapping("/ptpermission")
+//@Controller
+//@RequestMapping("/ptpermission")
 public class PtPermissionController extends BaseController {
 
 	/**

@@ -35,7 +35,7 @@ import com.env.service.intf.IDrmPayNoticeService;
 import com.env.service.intf.IDrmReqNoticeService;
 import com.env.service.intf.IDrmReqService;
 import com.env.service.intf.IPtUserService;
-import com.env.util.D1SmsSender;
+//import com.env.util.D1SmsSender;
 import com.env.vo.DrmReqVo;
 import com.env.web.util.MailSender;
 
@@ -56,9 +56,9 @@ public class DrmReqController extends BaseController {
 	 * 自动注入需求业务层实现
 	 */
 
-    @Autowired
+//    @Autowired
 //    private SmsSender smsSender;
-	private D1SmsSender smsSender;
+//	private D1SmsSender smsSender;
 
 	@Autowired
 	private IPtUserService<PtUser> ptUserService;

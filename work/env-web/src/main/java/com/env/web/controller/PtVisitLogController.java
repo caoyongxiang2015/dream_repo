@@ -41,8 +41,8 @@ import com.env.vo.PtVisitLogVo;
  * @see
  * @since 1.0
  */
-@Controller
-@RequestMapping("/ptvisitlog")
+//@Controller
+//@RequestMapping("/ptvisitlog")
 public class PtVisitLogController extends BaseController {
 
 	/**

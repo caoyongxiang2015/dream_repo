@@ -41,8 +41,8 @@ import com.env.vo.PtRoleUserVo;
  * @see
  * @since 1.0
  */
-@Controller
-@RequestMapping("/ptroleuser")
+//@Controller
+//@RequestMapping("/ptroleuser")
 public class PtRoleUserController extends BaseController {
 
 	/**

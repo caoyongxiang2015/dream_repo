@@ -47,9 +47,9 @@ import com.env.util.SmsSender;
 @RequestMapping("/drmletter")
 public class DrmLetterController extends BaseController {
 
-    @Autowired
+//    @Autowired
 //    private SmsSender smsSender;
-	private D1SmsSender smsSender;
+//	private D1SmsSender smsSender;
     
 	/**
 	 * 自动注入DrmLetter业务层实现

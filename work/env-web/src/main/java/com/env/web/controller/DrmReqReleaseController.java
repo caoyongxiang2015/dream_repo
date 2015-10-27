@@ -266,7 +266,7 @@ public class DrmReqReleaseController extends BaseController {
 					}
 				}
 				// 向匹配成功的用户发送短信
-				smsSender.sendSms(phoneBuf.toString(), "好职客会员向您咨询"+req.getCompanyShotname()+"(公司)情况，诚意金"+req.getPrice()+"元，请登录查看http://www.haozhike.cn:8888");
+				smsSender.sendSms(phoneBuf.toString(), "好职客会员向您咨询"+req.getCompanyShotname()+"(公司)情况,诚意金"+req.getPrice()+"元,请登录查看http://www.haozhike.cn:8888");
 								
 //				request.getSession().setAttribute("match_success", 1);// 匹配成功标志
 				match_user_count = receiveUserIds.size();
