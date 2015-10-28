@@ -336,6 +336,10 @@
 <script type="text/javascript" src="${static_common}/hzk/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${static_common}/hzk/js/jquery-validate.bootstrap-tooltip.js"></script>
 
+<%
+if(null == curUser){
+	%>
+	
 <script type="text/javascript">
 
 var InterValObj_xc; //timer变量，控制时间
@@ -350,6 +354,8 @@ $(document).ready(function(){
 	$(".xuanchuanye_close").on('click',function(){
 		$("#xuanchuanModel").modal("hide");
 	});
+	
+	
 });
 
 
@@ -366,6 +372,10 @@ function SetRemainTime_xc() {
 }
 
 </script>
+
+	<%
+}
+%>
 
 	<script type="text/javascript">
 

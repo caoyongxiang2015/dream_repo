@@ -52,7 +52,7 @@ public class D1SmsSender {
      * @param content
      * @return
      */
-    public boolean sendSms2(String receiver,String content) {
+    public boolean sendSms1(String receiver,String content) {
     	return true;
     }
     
