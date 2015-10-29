@@ -131,14 +131,14 @@
             	<c:if test="${hascurcompany==1 && usercount>0}">
 	            	<div class="panel panel-default">
 	                    <div class="panel-heading">
-	                        <h3 class="panel-title"><i class="glyphicon glyphicon-new-window"></i>已收录该公司${usercount}位员工</h3>
+	                        <h3 class="panel-title"><i class="glyphicon glyphicon-new-window"></i>已收录该公司<font style="color:red">${usercount}</font>位员工</h3>
 	                    </div>
 	                    <div class="panel-body"><button class="btn btn-lg btn-success btn-block" onclick="javascript:window.location.href='${ctx}/release/first?name=${companyname}'">向他们了解公司内部信息</button></div>
 	                </div>
 	                
 	                <div class="panel panel-default">
 	                    <div class="panel-heading">
-	                        <h3 class="panel-title"><!-- <i class="glyphicon glyphicon-new-window"></i> -->已有<c:if test="${company.remark==null || company.remark==''}">1</c:if><c:if test="${company.remark!=null && company.remark!=''}">${company.remark }</c:if>位小伙伴成功通过他们了解该公司</h3>
+	                        <h3 class="panel-title"><!-- <i class="glyphicon glyphicon-new-window"></i> -->已有<font style="color:red"><c:if test="${company.remark==null || company.remark==''}">1</c:if><c:if test="${company.remark!=null && company.remark!=''}">${company.remark }</c:if></font>位小伙伴成功通过他们了解该公司</h3>
 	                    </div>
 	                    <!-- <div class="panel-body"><button class="btn btn-lg btn-success btn-block">查看</button></div> -->
 	                </div>
