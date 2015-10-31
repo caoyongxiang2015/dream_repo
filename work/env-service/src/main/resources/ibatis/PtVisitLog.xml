@@ -30,7 +30,6 @@
 	<insert id="save" parameterClass="ptVisitLogEntity">
 	    <![CDATA[
 	        INSERT INTO pt_visit_log (
-	        	id, 
 	        	visit_ip, 
 	        	visit_time, 
 	        	visit_url, 
@@ -38,9 +37,8 @@
 	        	visit_username, 
 	        	remark
 	        ) VALUES (
-	        	#id#, 
 	        	#visitIp#, 
-	        	#visitTime#, 
+	        	now(), 
 	        	#visitUrl#, 
 	        	#visitUserid#, 
 	        	#visitUsername#, 

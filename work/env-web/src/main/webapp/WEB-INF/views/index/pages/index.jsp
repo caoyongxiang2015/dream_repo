@@ -356,6 +356,14 @@ $(document).ready(function(){
 	});
 	
 	
+	// 记录日志
+	$.ajax({
+		url:'${ctx}/ptvisitlog/save?access_url=/',
+		type:'post',
+		success:function(data){
+			
+		}
+	});
 });
 
 

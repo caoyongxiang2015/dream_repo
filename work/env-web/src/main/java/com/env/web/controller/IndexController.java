@@ -40,54 +40,57 @@ public class IndexController {
 
     @RequestMapping("/")
 	public String index(HttpServletRequest request){
-    	System.out.println("IndexController");
 
-    	PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
-    	if(null!=user){
-    		// 已登录的用户
-	    	// ================ 我收到的需求 ====================
-	    	DrmReqNotice notice = new DrmReqNotice();
-	    	
-	    	notice.setReceiveUserId(user.getId());
-	    	// TODO 
-	    	// 1 drm_req_notice  我接收到的需求
-	    	// 2 drm_req 需求的信息：如金额，公司名称
-	    	List<DrmReqNotice> tempNotices = drmReqNoticeService.queryByParams(notice);
-	    	List<DrmReqNotice> notices = new ArrayList<DrmReqNotice> ();
-	    	
-	    	//未被应答
-	    	for(DrmReqNotice n : tempNotices){
-	    		DrmReq r = n.getReq();
-	    		if(r!=null&&r.getAcceptState()!=null){
-		    		if(r.getAcceptState().intValue()==0){
-		    			notices.add(n);
+    	try{
+    		PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
+	    	if(null!=user){
+	    		// 已登录的用户
+		    	// ================ 我收到的需求 ====================
+		    	DrmReqNotice notice = new DrmReqNotice();
+		    	
+		    	notice.setReceiveUserId(user.getId());
+		    	// TODO 
+		    	// 1 drm_req_notice  我接收到的需求
+		    	// 2 drm_req 需求的信息：如金额，公司名称
+		    	List<DrmReqNotice> tempNotices = drmReqNoticeService.queryByParams(notice);
+		    	List<DrmReqNotice> notices = new ArrayList<DrmReqNotice> ();
+		    	
+		    	//未被应答
+		    	for(DrmReqNotice n : tempNotices){
+		    		DrmReq r = n.getReq();
+		    		if(r!=null&&r.getAcceptState()!=null){
+			    		if(r.getAcceptState().intValue()==0){
+			    			notices.add(n);
+			    		}
 		    		}
-	    		}
+		    	}
+		    	
+		    	request.setAttribute("cur_userid", user.getId());
+		    	request.setAttribute("notices", notices);
+	    	
+		    	// 赏金待托管
+		    	notice.setReceiveUserId(null);
+		    	notice.setSendUserId(user.getId());// 我发出的需求
+		    	List<DrmReqNotice> tuoguanTempNotices = drmReqNoticeService.queryByParams(notice);
+		    	List<DrmReqNotice> tuoguanNotices = new ArrayList<DrmReqNotice> ();
+		    	List<DrmReqNotice> serviceCompleteNotices = new ArrayList<DrmReqNotice> ();
+	
+		    	for(DrmReqNotice n : tuoguanTempNotices){
+		    		DrmReq r = n.getReq();
+		    		if(r!=null&&r.getAcceptState()!=null){
+			    		if(r.getAcceptState().intValue()==1){// 已应答=待托管
+			    			tuoguanNotices.add(n);
+			    		}
+			    		if(r.getAcceptState().intValue()==2){// 2赏金已托管3服务已完成
+			    			serviceCompleteNotices.add(n);
+			    		}
+		    		}
+		    	}
+		    	request.setAttribute("tuoguanNotices", tuoguanNotices);
+		    	request.setAttribute("serviceCompleteNotices", serviceCompleteNotices);
 	    	}
-	    	
-	    	request.setAttribute("cur_userid", user.getId());
-	    	request.setAttribute("notices", notices);
-    	
-	    	// 赏金待托管
-	    	notice.setReceiveUserId(null);
-	    	notice.setSendUserId(user.getId());// 我发出的需求
-	    	List<DrmReqNotice> tuoguanTempNotices = drmReqNoticeService.queryByParams(notice);
-	    	List<DrmReqNotice> tuoguanNotices = new ArrayList<DrmReqNotice> ();
-	    	List<DrmReqNotice> serviceCompleteNotices = new ArrayList<DrmReqNotice> ();
-
-	    	for(DrmReqNotice n : tuoguanTempNotices){
-	    		DrmReq r = n.getReq();
-	    		if(r!=null&&r.getAcceptState()!=null){
-		    		if(r.getAcceptState().intValue()==1){// 已应答=待托管
-		    			tuoguanNotices.add(n);
-		    		}
-		    		if(r.getAcceptState().intValue()==2){// 2赏金已托管3服务已完成
-		    			serviceCompleteNotices.add(n);
-		    		}
-	    		}
-	    	}
-	    	request.setAttribute("tuoguanNotices", tuoguanNotices);
-	    	request.setAttribute("serviceCompleteNotices", serviceCompleteNotices);
+    	}catch(Exception e){
+    		e.printStackTrace();
     	}
 		return "index/pages/index";
 	}

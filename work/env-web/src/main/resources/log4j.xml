@@ -37,41 +37,41 @@
 	<!-- 设置类名限制输出的通道（springframework） -->
 	<!--  -->
 	<logger name="org.springframework" additivity="false">
-		<level value="WARN" />
+		<level value="ERROR" />
 		<appender-ref ref="console" />
 		<appender-ref ref="app_filelog" />
 	</logger>
 
 	<!-- 设置类名限制输出的通道（Connection） -->
 	<logger name="java.sql.Connection" additivity="false">
-		<level value="WARN" />
+		<level value="ERROR" />
 		<appender-ref ref="other_console" />
 		<appender-ref ref="app_filelog" />
 	</logger>
 
 	<!-- 设置类名限制输出的通道（Statement） -->
 	<logger name="java.sql.Statement" additivity="false">
-		<level value="WARN" />
+		<level value="ERROR" />
 		<appender-ref ref="other_console" />
 		<appender-ref ref="app_filelog" />
 	</logger>
 
 	<!-- 设置类名限制输出的通道（PreparedStatement） -->
 	<logger name="java.sql.PreparedStatement" additivity="false">
-		<level value="WARN" />
+		<level value="ERROR" />
 		<appender-ref ref="other_console" />
 		<appender-ref ref="app_filelog" />
 	</logger>
 
 	<!-- 设置类名限制输出的通道（ResultSet） -->
 	<logger name="java.sql.ResultSet" additivity="false">
-		<level value="WARN" />
+		<level value="ERROR" />
 		<appender-ref ref="other_console" />
 		<appender-ref ref="app_filelog" />
 	</logger>
 	<!-- 设置接收所有输出的通道 -->
 	<root>
-		<level value="WARN" />
+		<level value="ERROR" />
 		<appender-ref ref="console" />
 	</root>
 	

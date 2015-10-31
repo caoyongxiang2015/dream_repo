@@ -244,6 +244,21 @@ function SetRemainTime() {
 $(".deploy").on("click",function(){
 })
 
+
+
+$(document).ready(function(){
+	
+	// 记录日志
+	$.ajax({
+		url:'${ctx}/ptvisitlog/save?access_url=/release/first',
+		type:'post',
+		success:function(data){
+			
+		}
+	});
+});
+
+
 </script>
 
 </body>
