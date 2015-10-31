@@ -262,7 +262,7 @@
 		    		<div class="col-xs-4">咨询的公司：南京擎天科技</div>
 		    		<div class="col-xs-2">昵称：天使的城</div>
 		    		<div class="col-xs-3">联系方式：186****5268</div>
-		    		<div class="col-xs-3">2015-11-07 20:37:11</div>
+		    		<div class="col-xs-3">2015-11-01 09:02:11</div>
 		    	</div>
 		    	<div class="judgement">收到擎天的面试通知，由于不知道擎天怎么样，就在网上查找这个公司的信息，有说好的，也有说不好的，各种说法都有，也不知道真假，
 		    	偶然看到好职客网，就试了下，果然找到了一位已经在擎天工作四年的朋友，感觉对方很友善，优缺点都帮我分析了下，出差的情况啊，加班啊，福利待遇啊，里面员工的情况领导的情况啊，
@@ -271,10 +271,19 @@
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
+		    		<div class="col-xs-4">咨询的公司：南京维数软件技术有限公司</div>
+		    		<div class="col-xs-2">昵称：高女士</div>
+		    		<div class="col-xs-3">联系方式：133********</div>
+		    		<div class="col-xs-3">2015-10-31 20:00:00</div>
+		    	</div>
+		    	<div class="judgement">我在维数软件工作很久了，怎么说呢，既有优点也有缺点吧，如果想了解维数软件的情况，可以来好职客找到我，我会客观的把她好的一面，不好的一面分析给您。我也看了网上的评价，很多也有失客观。</div>
+	    	</div>
+		    <div class="example-item">
+		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：苏宁易购</div>
 		    		<div class="col-xs-2">用户：孟女士</div>
 		    		<div class="col-xs-3">联系方式：150****6293</div>
-		    		<div class="col-xs-3">2015-11-05 12:55:09</div>
+		    		<div class="col-xs-3">2015-10-31 12:55:09</div>
 		    	</div>
 		    	<div class="judgement">之前听说苏宁的加班文化，不知道是真是假，就在好职客上找到一位苏宁易购的朋友，咨询了一下，基本了解了里面的情况，总比道听途说的好，咨询费也没白花</div>
 		    </div>
@@ -283,28 +292,19 @@
 		    		<div class="col-xs-4">咨询的公司：南京唐尧网络科技有限公司</div>
 		    		<div class="col-xs-2">昵称：jackchen</div>
 		    		<div class="col-xs-3">联系方式：133********</div>
-		    		<div class="col-xs-3">2015-11-05 19:50:27</div>
+		    		<div class="col-xs-3">2015-10-31 10:50:27</div>
 		    	</div>
-		    	<div class="judgement">在百度贴吧里看到了好职客网站，就注册了一下试试，没想到这么快就有人咨询我们公司的信息，收了几十块钱，虽然不多，能帮人就帮下吧，大家找好工作也都不容易，想了解唐尧的信息可以找我哈</div>
+		    	<div class="judgement">在百度贴吧里看到了好职客网站，就注册了一下试试，没想到这么快就有人咨询我们公司的信息，收了五十块钱，虽然不多，能帮人就帮下吧，大家找好工作也都不容易，想了解唐尧的信息可以找我哈</div>
 		    </div>
 		    <div class="example-item">
 		    	<div class="row">
 		    		<div class="col-xs-4">咨询的公司：南京睿翊腾信息技术有限公司</div>
 		    		<div class="col-xs-2">昵称：遥远的尽头</div>
 		    		<div class="col-xs-3">联系方式：138********</div>
-		    		<div class="col-xs-3">2015-11-02 19:20:03</div>
+		    		<div class="col-xs-3">2015-10-29 19:20:03</div>
 		    	</div>
 		    	<div class="judgement">我在这工作了一两年了，还算比较熟悉睿翊腾的情况，如果来我们公司面试或者想了解的情况的亲们可以问我哈，可以先通过站内信，QQ或者打电话也行哈</div>
 		    </div>
-		    <div class="example-item">
-		    	<div class="row">
-		    		<div class="col-xs-4">咨询的公司：江苏智通交通科技有限公司</div>
-		    		<div class="col-xs-2">昵称：张先生</div>
-		    		<div class="col-xs-3">联系方式：130****5623</div>
-		    		<div class="col-xs-3">2015-11-01 21:16:22</div>
-		    	</div>
-		    	<div class="judgement">上周一去面试的，在网上查的信息也不是很多，面试官问了很多技术问题，面试的情况还可以，公司感觉还可以，不知道具体怎么样，今天在好职客发了个需求，向里面的员工咨询了下，他们反馈的肯定都是真实的；有时候面试官说的也不是很全面或者很含蓄，拿捏不准，花一百块钱也值得，免得被蒙了</div>
-	    	</div>
 	    	<a href="${ctx }/drmeval">查看更多&gt;&gt;</a>
     	</div>
     </div>
