@@ -120,7 +120,7 @@
 						<div class="row">
 							<div class="col-xs-7 col-xs-offset-3">
 								<div class="form-group">
-    								<button type="submit" class="btn btn-lg btn-primary btn-block deploy">查找内部员工</button>
+    								<button type="button" class="btn btn-lg btn-primary btn-block deploy">查找内部员工</button>
 								</div>
 							</div>
 						</div>
@@ -242,6 +242,8 @@ function SetRemainTime() {
 	}
 	
 $(".deploy").on("click",function(){
+	$(this).attr("disabled","disabled");
+	$("#releaseDemand").submit();
 })
 
 

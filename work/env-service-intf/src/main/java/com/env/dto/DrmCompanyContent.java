@@ -28,7 +28,7 @@ import com.env.core.domain.DomainObject;
  */
 public class DrmCompanyContent extends DomainObject{
 	private static final long serialVersionUID = 1L;
-	private java.lang.String companyLibId;
+	private java.lang.Integer companyLibId;
 	private java.lang.String cotent;
 	private java.lang.Integer disabled;
 
@@ -39,13 +39,16 @@ public class DrmCompanyContent extends DomainObject{
 				+ cotent + ", disabled=" + disabled + "]";
 	}
 
-	public java.lang.String getCompanyLibId() {
+
+	public java.lang.Integer getCompanyLibId() {
 		return companyLibId;
 	}
 
-	public void setCompanyLibId(java.lang.String companyLibId) {
+
+	public void setCompanyLibId(java.lang.Integer companyLibId) {
 		this.companyLibId = companyLibId;
 	}
+
 
 	public java.lang.String getCotent() {
 		return cotent;

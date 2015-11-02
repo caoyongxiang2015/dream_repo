@@ -22,11 +22,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
 import com.env.dto.PtUser;
 import com.env.dto.PtVisitLog;
 import com.env.service.intf.IPtVisitLogService;
-
 
 /**
  * url访问日志控制器<br>
@@ -48,29 +48,46 @@ public class PtVisitLogController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "save")
-	public String save (HttpServletRequest request){
+	public String save(HttpServletRequest request) {
 		Integer id = -1;
-		try{
+		try {
 			PtVisitLog log = new PtVisitLog();
-			
 
-	    	PtUser user = (PtUser)request.getSession().getAttribute(Constants.SESSION_LOGINUSER);
-	    	log.setVisitUrl(request.getParameter("access_url"));
-	    	String ip = InetAddress.getLocalHost().getHostAddress();
-	    	log.setVisitIp(ip);
-	    	
-	    	if(null!=user){
-		    	log.setVisitUserid(user.getId());
-		    	log.setVisitUsername(user.getNickname());
-		    	log.setRemark(user.getPhone());
-	    	}
-	    	
+			PtUser user = (PtUser) request.getSession().getAttribute(
+					Constants.SESSION_LOGINUSER);
+			log.setVisitUrl(request.getParameter("access_url"));
+			String ip = InetAddress.getLocalHost().getHostAddress(); // request.getRemoteAddr();// getIp(request);//
+			log.setVisitIp(ip);
+
+			if (null != user) {
+				log.setVisitUserid(user.getId());
+				log.setVisitUsername(user.getNickname());
+				log.setRemark(user.getPhone());
+			}
+
 			id = ptVisitLogService.save(log);
-		}
-		catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return ""+id;
+		return "" + id;
+	}
+
+	public static String getIp(HttpServletRequest request) {
+		String ip = request.getHeader("X-Forwarded-For");
+		if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+			// 多次反向代理后会有多个ip值，第一个ip才是真实ip
+			int index = ip.indexOf(",");
+			if (index != -1) {
+				return ip.substring(0, index);
+			} else {
+				return ip;
+			}
+		}
+		ip = request.getHeader("X-Real-IP");
+		if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+			return ip;
+		}
+		return request.getRemoteAddr();
 	}
 
 }

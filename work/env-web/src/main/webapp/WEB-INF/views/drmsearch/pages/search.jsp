@@ -117,7 +117,7 @@
                         <div class="col-xs-10 great-area">
                         	<c:forEach var="ct" items="${company_content }" varStatus="status">
                         		
-	                        	<span class='label <c:if test="${status.index==0}">label-success </c:if> <c:if test="${status.index==1}">label-primary </c:if> <c:if test="${status.index==2}">label-warning </c:if> <c:if test="${status.index==3}">label-info </c:if> <c:if test="${status.index>=4}">label-success </c:if>'   >
+	                        	<span class='label <c:if test="${status.index<=2 && status.index>=0}">label-success </c:if> <c:if test="${status.index<=6 && status.index>=3}">label-primary </c:if> <c:if test="${status.index<=9 && status.index>=7}">label-warning </c:if> <c:if test="${status.index<=12 && status.index>=10}">label-info </c:if> <c:if test="${status.index<=15 && status.index>=13}">label-primary </c:if><c:if test="${status.index>=16}">label-success </c:if>'   >
 	                        	${ct}
 	                        	</span>
                         	</c:forEach>

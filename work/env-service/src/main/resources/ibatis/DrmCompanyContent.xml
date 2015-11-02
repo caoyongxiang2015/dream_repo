@@ -19,6 +19,27 @@
 	    ]]>
 	</sql>
 
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmCompanyContentEntity">
+	    <![CDATA[
+	        INSERT INTO drm_company_content (
+	        	company_lib_id, 
+	        	cotent, 
+	        	disabled
+	        ) VALUES (
+	        	#companyLibId#, 
+	        	#cotent#, 
+	        	0
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+
+
 	<select id="getByCompanyLibId" resultMap="drmCompanyContent">
 		SELECT
 		<include refid="drmCompanyContent.columns" />

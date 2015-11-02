@@ -356,14 +356,6 @@ $(document).ready(function(){
 	});
 	
 	
-	// 记录日志
-	$.ajax({
-		url:'${ctx}/ptvisitlog/save?access_url=/',
-		type:'post',
-		success:function(data){
-			
-		}
-	});
 });
 
 
@@ -550,6 +542,17 @@ function SetRemainTime() {
 		})
 	</script>
 	
+	
+	<script type="text/javascript">
+		// 记录日志
+		$.ajax({
+			url:'${ctx}/ptvisitlog/save?access_url=/',
+			type:'post',
+			success:function(data){
+				
+			}
+		});
+	</script>
 	
 	
 </body>

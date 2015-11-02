@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.env.dto.DrmCompanyContent;
 import com.env.service.intf.IDrmCompanyContentService;
 
-@Controller
-@RequestMapping("/sample")
+//@Controller
+//@RequestMapping("/sample")
 public class SampleController extends BaseController{
 
 	/**
@@ -62,7 +62,7 @@ public class SampleController extends BaseController{
 		for(int x=21;x<1200;x++){
 			Random rand = new Random();
 			int i = rand.nextInt(); //int范围类的随机数
-			i = rand.nextInt(9); //生成0-100以内的随机数
+			i = rand.nextInt(8); //生成0-100以内的随机数
 			StringBuffer buf = new StringBuffer();
 			switch (i){
 				case 1:buf.append("公司规模，部门情况，公司文化，项目业务方向，使用技术，核心技术，团队文化，福利待遇，加薪频率，加薪幅度，工资一般范围，福利政策，团队活动，出差情况，加班情况，男女员工比例，领导情况，工作时间制度，事假病假婚假制度，晋升情况，员工相处情况");break;
@@ -73,11 +73,10 @@ public class SampleController extends BaseController{
 				case 6:buf.append("公司规模，团队文化，使用技术，核心技术，福利待遇，加薪频率，加薪幅度，项目业务方向，出差情况，加班情况，工资一般范围，福利政策，男女员工比例，领导情况，工作时间制度，事假病假婚假制度，晋升情况，公司小道消息");break;
 				case 7:buf.append("团队文化，项目业务方向，使用技术，核心技术，福利待遇，加薪频率，加薪幅度，出差情况，加班情况，领导情况，福利政策，团队活动，工作时间制度，部门情况，公司文化，晋升情况，员工相处情况，公司小道消息");break;
 				case 8:buf.append("团队文化，项目业务方向，使用技术，福利待遇，加薪频率，出差情况，加班情况，工资一般范围，领导情况，工作时间制度");break;
-				case 9:buf.append("");break;
 			}
 			
 			DrmCompanyContent c = new DrmCompanyContent();
-			c.setCompanyLibId(""+x);
+			c.setCompanyLibId( x);
 			c.setCotent(buf.toString());
 			System.out.println(c);
 			cs.save(c);
