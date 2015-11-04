@@ -367,7 +367,7 @@ public class AuthLoginController {
             return map;
         }
         
-        if (StringUtils.isNotBlank(password)) {
+        if (null!=password && !"".equals(password.trim()) ) {
             /*if (RegExpValidatorUtils.isPassWrod(password)) {
                 if (RegExpValidatorUtils.isPassWrod(newPassword)) {
                     if (!newPassword.equals(password)) {
@@ -387,7 +387,7 @@ public class AuthLoginController {
             }*/
         } else {
             map.put("key", "password");
-            map.put("message", "密码为空");
+            map.put("message", "请填写密码");
             return map;
         }
         

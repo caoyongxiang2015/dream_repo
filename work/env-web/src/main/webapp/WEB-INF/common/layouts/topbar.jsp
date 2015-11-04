@@ -138,8 +138,10 @@
 			}
 			//修改
 			$.ajax({
-				url:'${ctx}/ptuser/modifypwd?oldpwd='+oldp+'&newpwd='+newp+'&confirmpwd='+conp,
+				//url:'${ctx}/ptuser/modifypwd?oldpwd='+oldp+'&newpwd='+newp+'&confirmpwd='+conp,
+				url:'${ctx}/ptuser/modifypwd',
 				type:'post',
+				data: {oldpwd:oldp,newpwd:newp,confirmpwd:conp} ,
 				success:function(data){
 					if(data.success==false){
 						$("#modifypwdmsg").text(data.msg);

@@ -400,8 +400,10 @@ var curCount;//当前剩余秒数
 		
 					//向后台发送处理数据
 		$.ajax({
-			url:'${ctx}/auth/register/getCode?type=1&pwd=1&phone='+$("#phone").val(),
+			//url:'${ctx}/auth/register/getCode?type=1&pwd=1&phone='+$("#phone").val(),
+			url:'${ctx}/auth/register/getCode',
 			type:'post',
+			data: {type:1, phone:$("#phone").val(), pwd:$("#pwd").val()} ,
 			success : function(data) {
 				//alert(data.message);
 				if(data.result==false){
@@ -475,8 +477,10 @@ function SetRemainTime() {
 
 			// 登录
 			$.ajax({
-				url:'${ctx}/auth/ajaxlogin?username='+une+'&password='+pwd,
+				//url:'${ctx}/auth/ajaxlogin?username='+une+'&password='+pwd,
+				url:'${ctx}/auth/ajaxlogin',
 				type:'post',
+				data: {username:une, password:pwd} ,
 				success : function(data) {
 					if(data.loginSuccess == '0'){
 						$("div.loginmsg").text(data.loginMsg);
@@ -522,8 +526,10 @@ function SetRemainTime() {
 			
 			
 			$.ajax({
-				url:'${ctx}/auth/register/userRegister'+'?phone='+phone+'&pwd='+pwd+'&authCode='+authCode+'&n='+new Date(),
+				//url:'${ctx}/auth/register/userRegister'+'?phone='+phone+'&pwd='+pwd+'&authCode='+authCode+'&n='+new Date(),
+				url:'${ctx}/auth/register/userRegister',
 				type:'post',
+				data: {phone:phone, pwd:pwd,authCode:authCode,n:new Date()} ,
 				success : function(data) {
 					if(data.result==false){
 						//alert(data.message);
