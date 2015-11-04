@@ -1,7 +1,9 @@
 package com.env.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.env.constant.Constants;
+import com.env.dto.DrmLetter;
 import com.env.dto.DrmPayNotice;
 import com.env.dto.DrmReq;
 import com.env.dto.DrmReqNotice;
 import com.env.dto.PtUser;
+import com.env.service.intf.IDrmLetterService;
 import com.env.service.intf.IDrmPayNoticeService;
 import com.env.service.intf.IDrmReqNoticeService;
 import com.env.service.intf.IPtUserService;
@@ -33,7 +37,9 @@ public class IndexController {
 
 	@Autowired
 	private IPtUserService<PtUser> ptUserService;
-	
+
+	@Autowired
+	private IDrmLetterService<DrmLetter> drmLetterService;
 	
 	public IndexController() {
 	}
@@ -66,7 +72,7 @@ public class IndexController {
 		    	}
 		    	
 		    	request.setAttribute("cur_userid", user.getId());
-		    	request.setAttribute("notices", notices);
+		    	request.setAttribute("notices", notices);// 需求通知
 	    	
 		    	// 赏金待托管
 		    	notice.setReceiveUserId(null);
@@ -86,8 +92,16 @@ public class IndexController {
 			    		}
 		    		}
 		    	}
-		    	request.setAttribute("tuoguanNotices", tuoguanNotices);
-		    	request.setAttribute("serviceCompleteNotices", serviceCompleteNotices);
+		    	
+		    	request.setAttribute("tuoguanNotices", tuoguanNotices);// 托管赏金消息
+		    	request.setAttribute("serviceCompleteNotices", serviceCompleteNotices);// 服务完成消息
+		    	
+		    	// 系统消息
+		    	Map params = new HashMap();
+		    	params.put("receiveUserid", user.getId());
+		    	List<DrmLetter> sysletters = drmLetterService.getSysletter(params);
+		    	request.setAttribute("sysletters", sysletters);// 
+		    	
 	    	}
     	}catch(Exception e){
     		e.printStackTrace();

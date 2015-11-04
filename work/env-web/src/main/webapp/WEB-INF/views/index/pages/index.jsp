@@ -75,12 +75,22 @@
 						<h3 class="panel-title"><%=curUser.getLoginId() %>，欢迎回来</h3>
 					</div>
 					<div class="panel-body">
+					<!-- 系统消息 -->
+					<c:if test="${ sysletters!=null && sysletters.size()>0 }">
+						<c:forEach items="sysletters" var="letr">
+							<a href="${ctx}/sysletter">您收到一条系统消息，请查看</a>
+						</c:forEach>
+					</c:if>
+					
 					<!-- 收到的请求消息 -->
+					
+						<c:if test="${ sysletters==null || sysletters.size()<1 }">
 						<c:if test="${  notices==null || notices.size()<1  }">
-						<c:if test="${ tuoguanNotices==null || tuoguanNotices.size()<1  }">
-						<c:if test="${ serviceCompleteNotices==null || serviceCompleteNotices.size()<1  }">
-							您暂无新消息
-						</c:if>
+							<c:if test="${ tuoguanNotices==null || tuoguanNotices.size()<1  }">
+								<c:if test="${ serviceCompleteNotices==null || serviceCompleteNotices.size()<1  }">
+									您暂无新消息
+								</c:if>
+							</c:if>
 						</c:if>
 						</c:if>
 						<c:if test="${notices!=null && notices.size()>0 }">
@@ -305,7 +315,7 @@
 		    	</div>
 		    	<div class="judgement">我在这工作了一两年了，还算比较熟悉睿翊腾的情况，如果来我们公司面试或者想了解的情况的亲们可以问我哈，可以先通过站内信，QQ或者打电话也行哈</div>
 		    </div>
-	    	<a href="${ctx }/drmeval">查看更多&gt;&gt;</a>
+	    	<%-- <a href="${ctx }/drmeval">查看更多&gt;&gt;</a> --%>
     	</div>
     </div>
     
@@ -539,6 +549,14 @@ function SetRemainTime() {
 					if(data.result==true){
 						alert("注册成功，将跳转到个人资料页面，请完善您的基本资料，谢谢！");
 						window.location.href="${ctx}/profile";
+						
+						// 发一条系统消息
+						$.ajax({
+							url:'${ctx}/sysletter/send',
+							type:'post',
+							success : function(data) {
+								}
+							});
 					}
 				},
 				error:function(){

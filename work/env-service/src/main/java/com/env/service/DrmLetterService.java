@@ -61,4 +61,9 @@ public class DrmLetterService<T extends DrmLetter> extends DefaultServiceImpl<T>
 		return drmLetterDao.letterDetail(params);
 	}
 
+	@Override
+	public List<DrmLetter> getSysletter(Map params) {
+		return drmLetterDao.getSysletter(params);
+	}
+
 }

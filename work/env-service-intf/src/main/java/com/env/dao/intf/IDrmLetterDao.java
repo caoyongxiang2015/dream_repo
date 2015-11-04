@@ -30,4 +30,5 @@ import com.env.dto.DrmLetter;
 public interface IDrmLetterDao<T extends DrmLetter> extends Dao<T> {
 	List<DrmLetter> queryLetter(Map params);
 	List<DrmLetter> letterDetail(Map params);
+	List<DrmLetter> getSysletter(Map params);
 }

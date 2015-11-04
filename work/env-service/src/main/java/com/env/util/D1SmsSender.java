@@ -52,11 +52,11 @@ public class D1SmsSender {
      * @param content
      * @return
      */
-    public boolean sendSms1(String receiver,String content) {
+    public boolean sendSms(String receiver,String content) {
     	return true;
     }
     
-    public boolean sendSms(String receiver,String content) {
+    public boolean sendSms1(String receiver,String content) {
     	boolean sendSuccess = false;
     	
     	if (StringUtils.isBlank(receiver)) {

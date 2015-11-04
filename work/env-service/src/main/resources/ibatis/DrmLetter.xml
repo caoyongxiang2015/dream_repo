@@ -39,7 +39,6 @@
 	<insert id="save" parameterClass="drmLetterEntity">
 	    <![CDATA[
 	        INSERT INTO drm_letter (
-	        	id, 
 	        	title, 
 	        	content, 
 	        	send_userid, 
@@ -51,11 +50,8 @@
 	        	version, 
 	        	disabled, 
 	        	create_userid, 
-	        	create_time, 
-	        	update_userid, 
-	        	update_time
+	        	create_time
 	        ) VALUES (
-	        	#id#, 
 	        	#title#, 
 	        	#content#, 
 	        	#sendUserid#, 
@@ -63,13 +59,11 @@
 	        	#receiveUserid#, 
 	        	#receiveUsername#, 
 	        	now(), 
-	        	#readed#, 
+	        	0, 
 	        	#version#, 
 	        	0, 
 	        	#createUserid#, 
-	        	now(), 
-	        	#updateUserid#, 
-	        	#updateTime#
+	        	now()
 	        )
 	    ]]>
 		<selectKey resultClass="java.lang.Integer" type="post"
@@ -104,8 +98,10 @@
 	<!-- 通过ID删除 -->
 	<delete id="delete">
 	    <![CDATA[
-	        DELETE FROM drm_letter WHERE
-	        id = #id#
+	        UPDATE drm_letter SET
+		        readed = 1, 
+		        update_time = now()
+	        WHERE receive_userid = #id#
 	    ]]>
 	</delete>
 
@@ -242,18 +238,28 @@
 	<select id="letterDetail" resultMap="drmLetter">
 		  
 		SELECT *  from drm_letter l
-		where ( l.send_userid = #myUserId# and l.receive_userid = #yourUserId#) 
+		where /* -1就是系统消息 */
+		l.send_userid != -1  and (
+		( l.send_userid = #myUserId# and l.receive_userid = #yourUserId#) 
 		or 
 		( l.send_userid = #yourUserId# and l.receive_userid = #myUserId# )
+		)
 		 ORDER BY l.send_time 
  
 	</select>
 	<select id="queryLetter" resultMap="drmLetter1">
 		SELECT DISTINCT l.receive_userid   ,l.receive_username    from drm_letter l
-		where l.send_userid = #userId#
+		where  l.send_userid!=-1 and l.send_userid = #userId#
 		UNION
 		SELECT  DISTINCT l.send_userid   ,l.send_username   from drm_letter l
-		where l.receive_userid = #userId#
+		where  l.send_userid!=-1 and l.receive_userid = #userId#
+	</select>
+	
+	<select id="getSysletter" resultMap="drmLetter">
+		SELECT *
+		from drm_letter l 
+		where  l.send_userid =-1 and l.readed = 0
+		and l.receive_userid = #receiveUserid#
 	</select>
 	
 	

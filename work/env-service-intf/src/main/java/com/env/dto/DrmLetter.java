@@ -41,7 +41,7 @@ public class DrmLetter extends DomainObject{
 	 * id
 	 */
 	//
-	private java.lang.Integer id;
+//	private java.lang.Integer id;
 	
 	/**
 	 * 私信标题
@@ -144,17 +144,17 @@ public class DrmLetter extends DomainObject{
 	 * 设置id
 	 * @param id id
 	 */
-	public void setId(java.lang.Integer id) {
-		this.id = id;
-	}
-
-	/**
-	 * 获取id
-	 * @return id
-	 */
-	public java.lang.Integer getId() {
-		return this.id;
-	}
+//	public void setId(java.lang.Integer id) {
+//		this.id = id;
+//	}
+//
+//	/**
+//	 * 获取id
+//	 * @return id
+//	 */
+//	public java.lang.Integer getId() {
+//		return this.id;
+//	}
 
 	/**
 	 * 设置私信标题

@@ -227,22 +227,27 @@ function SetRemainTime() {
 						flag = false;
 						$("div.alert-failure").text(data.message);
 						$("div.alert-msg").show();
+
+						//$(".deploy").attr("disabled","");
 					}else {
 						flag = true;
+						//$(".deploy").attr("disabled","disabled");
 					}
 				},
 				error:function(data){
 					alert("校验验证码失败")
+					//$(".deploy").attr("disabled","");
 				}
 			})
 		}else{
 			flag = true;
+			//$(".deploy").attr("disabled","disabled");
 		}
 		return flag;
 	}
 	
 $(".deploy").on("click",function(){
-	$(this).attr("disabled","disabled");
+	//$(this).attr("disabled","disabled");
 	$("#releaseDemand").submit();
 })
 

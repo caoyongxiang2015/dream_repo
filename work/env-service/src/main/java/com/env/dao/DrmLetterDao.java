@@ -42,4 +42,8 @@ public class DrmLetterDao extends DefaultDaoImpl<DrmLetter> implements IDrmLette
 	public List<DrmLetter> letterDetail(Map params) {
 		return this.query(getStatement(), params);
 	}
+
+	@Override
+	public List<DrmLetter> getSysletter(Map params) {
+		return this.query(getStatement(), params);}
 }

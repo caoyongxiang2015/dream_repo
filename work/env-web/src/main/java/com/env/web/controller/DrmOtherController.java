@@ -13,8 +13,19 @@
  */
 package com.env.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.enums.LetterCodedLabeledEnum;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.env.constant.Constants;
+import com.env.dto.DrmLetter;
+import com.env.dto.PtUser;
+import com.env.service.intf.IDrmLetterService;
 
 
 /**
@@ -29,6 +40,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping()
 public class DrmOtherController extends BaseController {
 
+	@Autowired
+	private IDrmLetterService<DrmLetter> drmLetterService;
+	
 	/**
 	 * 去新增意见反馈
 	 * 
@@ -41,6 +55,38 @@ public class DrmOtherController extends BaseController {
 	@RequestMapping("/terms")
 	public String terms(){
 		return "other/pages/terms";
+	}
+	@RequestMapping("/sysletter")
+	public String sysletter(HttpServletRequest request){
+		HttpSession session = request.getSession();
+        PtUser curUser = (PtUser) session.getAttribute(Constants.SESSION_LOGINUSER);
+        if(curUser==null){
+        	return "redirect:/";
+        }
+        request.setAttribute("curUser", curUser);
+		return "other/pages/sysletter";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/sysletter/send")
+	public String sysletterSave(HttpServletRequest request){
+		HttpSession session = request.getSession();
+        PtUser curUser = (PtUser) session.getAttribute(Constants.SESSION_LOGINUSER);
+        DrmLetter entity = new DrmLetter();
+        entity.setReceiveUserid(curUser.getId());
+        entity.setSendUserid(-1);
+		drmLetterService.save(entity);
+		
+		return "1";
+	}
+	@ResponseBody
+	@RequestMapping("/sysletter/read")
+	public String sysletterRead(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		PtUser curUser = (PtUser) session.getAttribute(Constants.SESSION_LOGINUSER);
+		drmLetterService.delete(curUser.getId());
+		
+		return "1";
 	}
 	
 

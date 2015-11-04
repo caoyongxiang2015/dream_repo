@@ -37,6 +37,7 @@ import com.env.commons.utils.StringUtils;
 import com.env.constant.Constants;
 import com.env.dto.DrmCompany;
 import com.env.dto.DrmCompanyLib;
+import com.env.dto.DrmLetter;
 import com.env.dto.DrmReq;
 import com.env.dto.DrmReqNotice;
 import com.env.dto.DrmSearchCompany;
@@ -44,6 +45,7 @@ import com.env.dto.PtRoleUser;
 import com.env.dto.PtUser;
 import com.env.service.intf.IDrmCompanyLibService;
 import com.env.service.intf.IDrmCompanyService;
+import com.env.service.intf.IDrmLetterService;
 import com.env.service.intf.IDrmReqNoticeService;
 import com.env.service.intf.IDrmReqService;
 import com.env.service.intf.IDrmSearchCompanyService;
@@ -97,7 +99,10 @@ public class DrmReqReleaseController extends BaseController {
 
     @Autowired
     IPtRoleUserService<PtRoleUser> ruService;
-    
+
+	@Autowired
+	private IDrmLetterService<DrmLetter> drmLetterService;
+	
 	/**
 	 * 发布需求
 	 * 涉及用户默认注册
@@ -128,7 +133,7 @@ public class DrmReqReleaseController extends BaseController {
 				// 判断该手机号是否已经注册过了
 				List<PtUser> users = ptUserService.queryAllByParams(user);
 				if(null==users || users.size()==0){
-					// 未注册过了
+					// 未注册过
 					user.setPwd(telephone);// 登录密码默认手机号
 					curUserId = ptUserService.save(user);
 	                // 赋予权限
@@ -138,9 +143,15 @@ public class DrmReqReleaseController extends BaseController {
 	                ru.setUserId(curUserId);
 	                ruService.save(ru);
 	                
+	                // 发送一条系统消息
+	                DrmLetter entity = new DrmLetter();
+	                entity.setReceiveUserid(curUserId);
+	                entity.setSendUserid(-1);// -1 代表系统发送
+	        		drmLetterService.save(entity);
+	        		
 					// TODO smsSender 新增用户成功，发送短信告知账号及登录密码
 	                if (smsSender.sendSms(telephone, "尊敬的用户,您好:您已成功注册好职客会员,用户名及密码均为"+telephone+",请您及时修改密码" )) {//49个字
-	                	LOGGER.debug("短信发送成功，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
+	                	System.out.println("短信发送成功，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);
 	                }else{
 	                	LOGGER.error("短信发送失败，短信内容：您已成功注册好职客会员，用户名及密码均为"+telephone);	
 	                }

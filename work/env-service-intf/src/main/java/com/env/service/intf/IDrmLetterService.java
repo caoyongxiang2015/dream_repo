@@ -36,4 +36,6 @@ public interface IDrmLetterService<T extends DrmLetter> extends Service<T> {
 	 * @return
 	 */
 	public List<DrmLetter> letterDetail(Integer myUserId,Integer yourUserId);
+
+	public List<DrmLetter> getSysletter(Map params);
 }
