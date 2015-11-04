@@ -78,7 +78,7 @@
 					<!-- 系统消息 -->
 					<c:if test="${ sysletters!=null && sysletters.size()>0 }">
 						<c:forEach items="sysletters" var="letr">
-							<a href="${ctx}/sysletter">您收到一条系统消息，请查看</a>
+							<a href="${ctx}/sysletter">您收到一条系统消息，请查看</a><br/>
 						</c:forEach>
 					</c:if>
 					
