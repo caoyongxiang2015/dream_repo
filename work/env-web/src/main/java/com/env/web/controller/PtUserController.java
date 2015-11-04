@@ -54,8 +54,8 @@ import com.google.gson.Gson;
  * @see
  * @since 1.0
  */
-//@Controller
-//@RequestMapping("/ptuser")
+@Controller
+@RequestMapping("/ptuser")
 public class PtUserController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PtUserController.class);

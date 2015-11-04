@@ -14,6 +14,7 @@
 package com.env.web.controller;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,7 +57,7 @@ public class PtVisitLogController extends BaseController {
 			PtUser user = (PtUser) request.getSession().getAttribute(
 					Constants.SESSION_LOGINUSER);
 			log.setVisitUrl(request.getParameter("access_url"));
-			String ip = InetAddress.getLocalHost().getHostAddress(); // request.getRemoteAddr();// getIp(request);//
+			String ip = getClientIp(request);//InetAddress.getLocalHost().getHostAddress(); // request.getRemoteAddr();// getIp(request);//
 			log.setVisitIp(ip);
 
 			if (null != user) {
@@ -89,5 +90,28 @@ public class PtVisitLogController extends BaseController {
 		}
 		return request.getRemoteAddr();
 	}
-
+	
+	public static String getClientIp(HttpServletRequest request) {
+        String clientIp = request.getHeader("x-forwarded-for");
+        if (clientIp == null || clientIp.length() == 0 || "unknown".equalsIgnoreCase(clientIp)) {
+            clientIp = request.getHeader("Proxy-Client-IP");
+        }
+        if (clientIp == null || clientIp.length() == 0 || "unknown".equalsIgnoreCase(clientIp)) {
+            clientIp = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (clientIp == null || clientIp.length() == 0 || "unknown".equalsIgnoreCase(clientIp)) {
+            clientIp = request.getRemoteAddr();
+            if ("127.0.0.1".equals(clientIp) || "0:0:0:0:0:0:0:1".equals(clientIp)) {
+                InetAddress inetAddress = null;
+                try {
+                    inetAddress = InetAddress.getLocalHost();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+                clientIp = inetAddress.getHostAddress();
+            }
+  
+        }
+		return clientIp;
+	}
 }
