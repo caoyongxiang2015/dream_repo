@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.env.dto.DrmNetfriendComment">
+
+	<typeAlias alias="drmNetfriendCommentEntity" type="com.env.dto.DrmNetfriendComment" />
+	<resultMap id="drmNetfriendComment" class="com.env.dto.DrmNetfriendComment">
+		<!-- jdbcType="int" javaType="java.lang.Integer" -->
+		<!-- jdbcType="varchar" javaType="java.lang.String" -->
+		<!-- jdbcType="datetime" javaType="java.util.Date" -->
+		<result property="id" column="id" />
+		<result property="companyLibId" column="company_lib_id" />
+		<result property="companyName" column="company_name" />
+		<result property="advantage" column="advantage" />
+		<result property="weakness" column="weakness" />
+		<result property="suggestion" column="suggestion" />
+		<result property="title" column="title" />
+		<result property="disabled" column="disabled" />
+		<result property="friendType" column="friend_type" />
+		<result property="score" column="score" />
+		
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="drmNetfriendComment.columns">
+	    <![CDATA[
+        id, company_lib_id, company_name, advantage, weakness, suggestion, title, disabled, friend_type, score
+	    ]]>
+	</sql>
+
+	<!-- 新增记录 -->
+	<insert id="save" parameterClass="drmNetfriendCommentEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_NETFRIEND_COMMENT (
+	        	id, 
+	        	company_lib_id, 
+	        	company_name, 
+	        	advantage, 
+	        	weakness, 
+	        	suggestion, 
+	        	title, 
+	        	disabled, 
+	        	friend_type, 
+	        	score
+	        ) VALUES (
+	        	#id#, 
+	        	#companyLibId#, 
+	        	#companyName#, 
+	        	#advantage#, 
+	        	#weakness#, 
+	        	#suggestion#, 
+	        	#title#, 
+	        	#disabled#, 
+	        	#friendType#, 
+	        	#score#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 新增记录 -->
+	<insert id="insert" parameterClass="drmNetfriendCommentEntity">
+	    <![CDATA[
+	        INSERT INTO DRM_NETFRIEND_COMMENT (
+	        	id, 
+	        	company_lib_id, 
+	        	company_name, 
+	        	advantage, 
+	        	weakness, 
+	        	suggestion, 
+	        	title, 
+	        	disabled, 
+	        	friend_type, 
+	        	score
+	        ) VALUES (
+	        	#id#, 
+	        	#companyLibId#, 
+	        	#companyName#, 
+	        	#advantage#, 
+	        	#weakness#, 
+	        	#suggestion#, 
+	        	#title#, 
+	        	#disabled#, 
+	        	#friendType#, 
+	        	#score#
+	        )
+	    ]]>
+		<selectKey resultClass="java.lang.Integer" type="post"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 通过ID修改 -->
+	<update id="update" parameterClass="drmNetfriendCommentEntity">
+	    <![CDATA[
+	        UPDATE DRM_NETFRIEND_COMMENT SET
+		        company_lib_id = #companyLibId#, 
+		        company_name = #companyName#, 
+		        advantage = #advantage#, 
+		        weakness = #weakness#, 
+		        suggestion = #suggestion#, 
+		        title = #title#, 
+		        disabled = #disabled#, 
+		        friend_type = #friendType#, 
+		        score = #score#
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</update>
+
+	<!-- 通过ID删除 -->
+	<delete id="delete">
+	    <![CDATA[
+	        DELETE FROM DRM_NETFRIEND_COMMENT WHERE
+	        id = #id#
+	    ]]>
+	</delete>
+
+	<!-- 通过ID列表批量删除 -->
+	<delete id="deleteByIds" parameterClass="java.lang.String">
+	    <![CDATA[
+	        DELETE FROM DRM_NETFRIEND_COMMENT WHERE
+	        id IN ($ids$)
+	    ]]>
+	</delete>
+
+	<!-- 通过ID查询 -->
+	<select id="getById" resultMap="drmNetfriendComment">
+		SELECT
+		<include refid="drmNetfriendComment.columns" />
+	    <![CDATA[
+	        FROM DRM_NETFRIEND_COMMENT 
+	        WHERE 
+		        id = #id#
+	    ]]>
+	</select>
+
+	<!-- 用于分页查询抽取的公共的条件 -->
+	<sql id="drmNetfriendComment.queryPage">
+		<dynamic prepend="WHERE">
+		    <isNotNull property="entity">
+				<isNotEmpty prepend="AND" property="entity.id">
+		            <![CDATA[
+					id = #entity.id#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyLibId">
+		            <![CDATA[
+					company_lib_id = #entity.companyLibId#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.companyName">
+		            <![CDATA[
+					company_name = #entity.companyName#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.advantage">
+		            <![CDATA[
+					advantage = #entity.advantage#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.weakness">
+		            <![CDATA[
+					weakness = #entity.weakness#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.suggestion">
+		            <![CDATA[
+					suggestion = #entity.suggestion#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.title">
+		            <![CDATA[
+					title = #entity.title#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.disabled">
+		            <![CDATA[
+					disabled = #entity.disabled#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.friendType">
+		            <![CDATA[
+					friend_type = #entity.friendType#
+		            ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="entity.score">
+		            <![CDATA[
+					score = #entity.score#
+		            ]]>
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</sql>
+
+	<!-- 为分页查询符合条件的记录数 -->
+	<select id="queryByPage_count" resultClass="int">
+		SELECT count(*) FROM DRM_NETFRIEND_COMMENT
+		<include refid="drmNetfriendComment.queryPage" />
+	</select>
+
+	<!-- 分页查询指定页记录 -->
+	<select id="queryByPage" resultMap="drmNetfriendComment">
+		SELECT
+		<include refid="drmNetfriendComment.columns" />
+	    <![CDATA[
+	        FROM DRM_NETFRIEND_COMMENT 
+	    ]]>
+		<include refid="drmNetfriendComment.queryPage" />
+		<![CDATA[
+		    LIMIT #paging.startRecord#, #paging.pageSize#
+        ]]>
+	</select>
+
+	<!-- 查询所有记录 -->
+	<select id="queryAll" resultMap="drmNetfriendComment">
+		SELECT
+		<include refid="drmNetfriendComment.columns" />
+	    <![CDATA[
+		    FROM DRM_NETFRIEND_COMMENT
+	    ]]>
+	</select>
+</sqlMap>

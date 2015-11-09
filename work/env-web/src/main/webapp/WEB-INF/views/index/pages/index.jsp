@@ -28,8 +28,8 @@
 		  <div class="carousel-inner" role="listbox">
 		    <div class="item active">
 			    <div class="container">
-			        <h2>只为帮您选择一个理想职业</h2>
-					<p style="font-size: 28px;">已收录(南京)<font style="font-size: 36px;color: orange;">1,5</font><font style="font-size: 24px;color: orange;">00+</font>公司的员工 — <font style="font-size: 30px;color: orange;">IT/互联网/通信</font> </p>
+			        <h2>只为帮您选择一个理想职业  <font style="font-size: 26px;color: orange;">--- IT/互联网/通信 </font> </h2>
+					<p style="font-size: 28px;">已收录(<font style="font-size: 36px;color: #FECB48;">南京</font>)<font style="font-size: 36px;color: orange;">1,5</font><font style="font-size: 24px;color: orange;">00+</font>公司的员工  </p>
 					<p><a class="btn btn-purple btn-lg seek-advice" href="javascript:window.location.href='${ctx}/release/first'" role="button">找人咨询</a></p>
 
 		      </div>
