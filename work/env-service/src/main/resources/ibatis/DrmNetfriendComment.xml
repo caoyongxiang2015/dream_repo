@@ -13,18 +13,20 @@
 		<result property="weakness" column="weakness" />
 		<result property="suggestion" column="suggestion" />
 		<result property="title" column="title" />
+		<result property="remark" column="remark" />
 		<result property="disabled" column="disabled" />
 		<result property="friendType" column="friend_type" />
 		<result property="score" column="score" />
 		<result property="userId" column="user_id" />
 		<result property="userName" column="user_name" />
+		<result property="userPost" column="user_post" />
 		
 	</resultMap>
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmNetfriendComment.columns">
 	    <![CDATA[
-        id, company_lib_id, company_name, advantage, weakness, suggestion, title, disabled, friend_type, score,user_id,user_name
+        id, company_lib_id, company_name, advantage, weakness, suggestion, title,remark, disabled, friend_type, score,user_id,user_name,user_post
 	    ]]>
 	</sql>
 

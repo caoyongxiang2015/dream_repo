@@ -44,6 +44,7 @@ public class DrmNetfriendComment extends DomainObject{
 	private java.lang.Integer id;
 	private java.lang.Integer userId;
 	private java.lang.String userName;
+	private java.lang.String userPost;
 	
 	/**
 	 * companyLibId
@@ -80,6 +81,7 @@ public class DrmNetfriendComment extends DomainObject{
 	 */
 	//@Length(max=1000)
 	private java.lang.String title;
+	private java.lang.String remark;
 	
 	/**
 	 * disabled
@@ -287,6 +289,24 @@ public class DrmNetfriendComment extends DomainObject{
 
 	public void setUserName(java.lang.String userName) {
 		this.userName = userName;
+	}
+
+	
+	public java.lang.String getRemark() {
+		return remark;
+	}
+
+	
+	public java.lang.String getUserPost() {
+		return userPost;
+	}
+
+	public void setUserPost(java.lang.String userPost) {
+		this.userPost = userPost;
+	}
+
+	public void setRemark(java.lang.String remark) {
+		this.remark = remark;
 	}
 
 	/**
