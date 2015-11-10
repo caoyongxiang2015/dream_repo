@@ -13,9 +13,12 @@
  */
 package com.env.dao;
 
-import org.springframework.stereotype.Repository;
-import com.env.dao.impl.DefaultDaoImpl;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import com.env.dao.impl.DefaultDaoImpl;
 import com.env.dao.intf.IDrmNetfriendCommentDao;
 import com.env.dto.DrmNetfriendComment;
 
@@ -28,5 +31,11 @@ import com.env.dto.DrmNetfriendComment;
  * @since 1.0
  */
 @Repository("drmNetfriendCommentDao")
-public class DrmNetfriendCommentDao extends DefaultDaoImpl<DrmNetfriendComment> implements IDrmNetfriendCommentDao<DrmNetfriendComment> {
+public class DrmNetfriendCommentDao extends DefaultDaoImpl<DrmNetfriendComment>
+		implements IDrmNetfriendCommentDao<DrmNetfriendComment> {
+
+	@Override
+	public List<DrmNetfriendComment> getByLibId(Map params) {
+		return this.query(getStatement(), params);
+	}
 }

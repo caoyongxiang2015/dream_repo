@@ -13,8 +13,10 @@
  */
 package com.env.dao.intf;
 
-import com.env.dao.api.Dao;
+import java.util.List;
+import java.util.Map;
 
+import com.env.dao.api.Dao;
 import com.env.dto.DrmNetfriendComment;
 
 /**
@@ -26,4 +28,5 @@ import com.env.dto.DrmNetfriendComment;
  * @since 1.0
  */
 public interface IDrmNetfriendCommentDao<T extends DrmNetfriendComment> extends Dao<T> {
+	List<DrmNetfriendComment> getByLibId(Map params);
 }

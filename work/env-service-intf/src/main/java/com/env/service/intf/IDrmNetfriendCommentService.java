@@ -13,8 +13,10 @@
  */
 package com.env.service.intf;
 
-import com.env.service.impl.Service;
+import java.util.List;
+
 import com.env.dto.DrmNetfriendComment;
+import com.env.service.impl.Service;
 
 /**
  * DrmNetfriendComment业务接口<br>
@@ -25,4 +27,5 @@ import com.env.dto.DrmNetfriendComment;
  * @since 1.0
  */
 public interface IDrmNetfriendCommentService<T extends DrmNetfriendComment> extends Service<T> {
+	List<DrmNetfriendComment> getByLibId(Integer libId);
 }

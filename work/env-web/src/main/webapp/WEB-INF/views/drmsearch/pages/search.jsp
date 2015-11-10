@@ -102,6 +102,7 @@
                     </div>
                     
             		
+                    
             		<c:if test="${hascurcompany==1 && usercount<1}">
                     <div class="row">
                         <div class="col-xs-2"></div>
@@ -124,9 +125,22 @@
                         </div>
                     </div>
                     </c:if>
+                
+                
+                    
+                </div>
+                
+                <div class="search-result-info panel-body">
+                
+                    <div class="row">
+                        <!-- <div class="col-xs-2">搜索到的网友评价</div> -->
+                        <div class="col-xs-12 company-introduce net_friend_comment">
+                        
+                        </div>
+                    </div>
                 </div>
             </div>
-            
+                
             <div class="col-xs-3 col-sm-4 search-result-reference">
             	<c:if test="${hascurcompany==1 && usercount>0}">
 	            	<div class="panel panel-default">
@@ -451,6 +465,11 @@ function SetRemainTime() {
 				} 
 			});
 		})
+		
+		
+		$(document).ready(function(){
+			$("div.net_friend_comment").load("${ctx}/drmnetfriendcomment/commentSection/${company.id }");
+		});
 	</script>
 	
 	

@@ -6,9 +6,6 @@
 
 	<typeAlias alias="drmNetfriendCommentEntity" type="com.env.dto.DrmNetfriendComment" />
 	<resultMap id="drmNetfriendComment" class="com.env.dto.DrmNetfriendComment">
-		<!-- jdbcType="int" javaType="java.lang.Integer" -->
-		<!-- jdbcType="varchar" javaType="java.lang.String" -->
-		<!-- jdbcType="datetime" javaType="java.util.Date" -->
 		<result property="id" column="id" />
 		<result property="companyLibId" column="company_lib_id" />
 		<result property="companyName" column="company_name" />
@@ -19,13 +16,15 @@
 		<result property="disabled" column="disabled" />
 		<result property="friendType" column="friend_type" />
 		<result property="score" column="score" />
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
 		
 	</resultMap>
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="drmNetfriendComment.columns">
 	    <![CDATA[
-        id, company_lib_id, company_name, advantage, weakness, suggestion, title, disabled, friend_type, score
+        id, company_lib_id, company_name, advantage, weakness, suggestion, title, disabled, friend_type, score,user_id,user_name
 	    ]]>
 	</sql>
 
@@ -33,7 +32,6 @@
 	<insert id="save" parameterClass="drmNetfriendCommentEntity">
 	    <![CDATA[
 	        INSERT INTO DRM_NETFRIEND_COMMENT (
-	        	id, 
 	        	company_lib_id, 
 	        	company_name, 
 	        	advantage, 
@@ -42,9 +40,10 @@
 	        	title, 
 	        	disabled, 
 	        	friend_type, 
-	        	score
+	        	score,
+	        	user_id,
+	        	user_name
 	        ) VALUES (
-	        	#id#, 
 	        	#companyLibId#, 
 	        	#companyName#, 
 	        	#advantage#, 
@@ -53,7 +52,9 @@
 	        	#title#, 
 	        	#disabled#, 
 	        	#friendType#, 
-	        	#score#
+	        	#score#,
+	        	#userId#,
+	        	#userName#
 	        )
 	    ]]>
 		<selectKey resultClass="java.lang.Integer" type="post"
@@ -66,7 +67,6 @@
 	<insert id="insert" parameterClass="drmNetfriendCommentEntity">
 	    <![CDATA[
 	        INSERT INTO DRM_NETFRIEND_COMMENT (
-	        	id, 
 	        	company_lib_id, 
 	        	company_name, 
 	        	advantage, 
@@ -75,9 +75,10 @@
 	        	title, 
 	        	disabled, 
 	        	friend_type, 
-	        	score
+	        	score,
+	        	user_id,
+	        	user_name
 	        ) VALUES (
-	        	#id#, 
 	        	#companyLibId#, 
 	        	#companyName#, 
 	        	#advantage#, 
@@ -86,7 +87,9 @@
 	        	#title#, 
 	        	#disabled#, 
 	        	#friendType#, 
-	        	#score#
+	        	#score#,
+	        	#userId#,
+	        	#userName#
 	        )
 	    ]]>
 		<selectKey resultClass="java.lang.Integer" type="post"
@@ -107,7 +110,9 @@
 		        title = #title#, 
 		        disabled = #disabled#, 
 		        friend_type = #friendType#, 
-		        score = #score#
+		        score = #score#,
+		        user_id = #userId#
+		        user_name = #userName#
 	        WHERE 
 		        id = #id#
 	    ]]>
@@ -137,6 +142,15 @@
 	        FROM DRM_NETFRIEND_COMMENT 
 	        WHERE 
 		        id = #id#
+	    ]]>
+	</select>
+	<select id="getByLibId" resultMap="drmNetfriendComment">
+		SELECT
+		<include refid="drmNetfriendComment.columns" />
+	    <![CDATA[
+	        FROM DRM_NETFRIEND_COMMENT 
+	        WHERE 
+		        company_lib_id = #libId#
 	    ]]>
 	</select>
 
@@ -225,4 +239,6 @@
 		    FROM DRM_NETFRIEND_COMMENT
 	    ]]>
 	</select>
+	
+	
 </sqlMap>

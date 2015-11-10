@@ -42,6 +42,8 @@ public class DrmNetfriendComment extends DomainObject{
 	 */
 	//
 	private java.lang.Integer id;
+	private java.lang.Integer userId;
+	private java.lang.String userName;
 	
 	/**
 	 * companyLibId
@@ -270,7 +272,24 @@ public class DrmNetfriendComment extends DomainObject{
 		return this.score;
 	}
 
-    /**
+	
+    public java.lang.Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(java.lang.Integer userId) {
+		this.userId = userId;
+	}
+
+	public java.lang.String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(java.lang.String userName) {
+		this.userName = userName;
+	}
+
+	/**
      * 实体的toString方法
      * @return 实体字符串
      */

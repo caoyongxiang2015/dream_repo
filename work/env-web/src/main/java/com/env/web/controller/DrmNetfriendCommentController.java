@@ -49,8 +49,16 @@ public class DrmNetfriendCommentController extends BaseController {
 	 * 自动注入DrmNetfriendComment业务层实现
 	 */
 	@Autowired
-	private IDrmNetfriendCommentService drmNetfriendCommentService;
+	private IDrmNetfriendCommentService<DrmNetfriendComment> drmNetfriendCommentService;
 
+	@RequestMapping(value = "commentSection/{libId}")
+	public String getComment(@PathVariable("libId") Integer libId,HttpServletRequest request){
+		
+		List<DrmNetfriendComment> libs = drmNetfriendCommentService.getByLibId(libId);
+		request.setAttribute("libs", libs);
+		
+		return "drmsearch/pages/comment";
+	}
 
 	/**
 	 * 去列表页面
